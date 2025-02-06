@@ -1,0 +1,20 @@
+{
+	"extends": "@react-native/typescript-config/tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@src/*": ["./src/*"],
+			"@image/*": ["./src/assets/image/*"],
+			"@svg/*": ["./src/assets/svg/*"],
+			"@lottie/*": ["./src/assets/lottie/*"],
+			"@network/*": ["./src/network/*"],
+			"@commonStyles/*": ["./src/common/styles/*"],
+			"@components/*": ["./src/common/components/*"],
+			"@utils/*": ["./src/common/utils/*"],
+			"@storage/*": ["./src/common/storage/*"],
+			"@constants/*": ["./src/common/constants/*"],
+			"@reducers/*": ["./src/redux/reducers/*"],
+			"@store/*": ["./src/redux/store/*"]
+		}
+	}
+}

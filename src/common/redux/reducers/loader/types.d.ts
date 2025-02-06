@@ -1,0 +1,3 @@
+type Loader = {
+  isFullScreenLoading: boolean;
+};
