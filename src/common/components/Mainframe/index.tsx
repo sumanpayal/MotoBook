@@ -11,7 +11,7 @@ export default function MainFrame(props: MainFrameProps) {
 	const { children, barStyle = 'light-content', isHeader = false, title = '', backOnPress } = props
 
 	return (
-		<SafeAreaView edges={['left', 'right', 'top', 'bottom']} style={{ ...commonFlexStyles.flex1, backgroundColor: colors.background }}>
+		<SafeAreaView edges={['left', 'right', 'top', 'bottom']} style={{ ...commonFlexStyles.flex1, backgroundColor: colors.backgroundColor }}>
 			<StatusBar barStyle={barStyle} backgroundColor={'transparent'} translucent />
 			{isHeader && <HeaderNavigation title={title} backOnPress={backOnPress} />}
 			{children}

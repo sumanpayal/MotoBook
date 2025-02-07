@@ -9,8 +9,9 @@ import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import SelectModal from './components/SelectModal'
 import BrandItem from './components/BrandItem'
 import { styles } from './styles'
+import { spacing } from '@src/common/styles/values'
 
-const brandsData = [
+export const brandsData = [
 	{
 		id: 1,
 		title: 'AUDI'
@@ -151,7 +152,7 @@ const SelectBrand = () => {
 				<View style={commonMarginStyles.marginVerticalM}>
 					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} />
 				</View>
-				<FlatList data={searchedBrandsData} renderItem={RenderBrandItem} keyExtractor={(item: any) => item?.id} numColumns={4} columnWrapperStyle={{ gap: scaleWidthPX(16) }} contentContainerStyle={searchedBrandsData.length === 0 && styles.center} ListEmptyComponent={NoRecordFound} />
+				<FlatList data={searchedBrandsData} renderItem={RenderBrandItem} keyExtractor={(item: any) => item?.id} numColumns={4} columnWrapperStyle={{ gap: scaleWidthPX(spacing.m) }} contentContainerStyle={searchedBrandsData.length === 0 && styles.center} ListEmptyComponent={NoRecordFound} />
 			</View>
 			{isModalVisible && (
 				<SelectModal
@@ -162,7 +163,10 @@ const SelectBrand = () => {
 					onClose={() => {
 						setIsModalVisible(false)
 					}}
-					setSelectedItem={() => {}}
+					setSelectedItem={(item: any) => {
+						setIsModalVisible(false)
+						navigation.navigate('VehicleForm')
+					}}
 					data={brandsData}
 				/>
 			)}

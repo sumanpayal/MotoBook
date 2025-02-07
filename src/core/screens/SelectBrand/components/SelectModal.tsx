@@ -22,7 +22,7 @@ type SelectModalProps = {
 }
 
 const SelectModal = (props: SelectModalProps) => {
-	const { visible, onClose = () => {}, data, title, modalProps, subHeaderTitle } = props
+	const { visible, onClose = () => {}, data, title, modalProps, subHeaderTitle, setSelectedItem } = props
 
 	const [searchText, setSearchText] = useState<string>('')
 	const [flatListData, setFlatListData] = useState<any[]>(data)
@@ -62,7 +62,7 @@ const SelectModal = (props: SelectModalProps) => {
 	}
 
 	const RenderBrandItem = ({ item }: { item: any }) => {
-		return <BrandItem item={item} onPress={() => {}} />
+		return <BrandItem item={item} onPress={() => setSelectedItem(item)} />
 	}
 
 	return (

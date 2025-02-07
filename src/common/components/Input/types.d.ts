@@ -14,8 +14,7 @@ interface CustomInputProps {
 	secureTextEntry?: boolean
 	isMultiline?: boolean
 	isRightIcon?: boolean
-	RightIcon?: any
 	keyboardType?: KeyboardType
 	maxLength?: number
-	rightIconOnPress?: () => void
+	iconName?: any
 }

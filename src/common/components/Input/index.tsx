@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Animated, Pressable, TextInput, View } from 'react-native'
+import { Animated, TextInput, View } from 'react-native'
 import { CustomInputProps } from './types'
 import { scaleFontSize, scaleHeightPX } from '@utils/responsiveStyle'
 import commonFontStyles from '@commonStyles/commonFontStyles'
@@ -7,12 +7,12 @@ import { inputStyles } from './styles'
 import { useTheme } from '@react-navigation/native'
 import { fontSize } from '@commonStyles/values'
 import commonFlexStyles from '@commonStyles/commonFlexStyles'
-import CustomText from '@components/Text'
+import Icon from 'react-native-vector-icons/AntDesign'
 
 export default function CustomInput(props: CustomInputProps) {
 	const { colors } = useTheme()
 
-	const { viewStyle = {}, value = '', onFocus, onBlur, onChangeText, inputRef, label, inputStyle = {}, editable = true, isRequired = false, secureTextEntry = false, isMultiline = false, isRightIcon = false, keyboardType = 'default', maxLength = 100, rightIconOnPress } = props
+	const { viewStyle = {}, value = '', onFocus, onBlur, onChangeText, inputRef, label, inputStyle = {}, editable = true, isRequired = false, secureTextEntry = false, isMultiline = false, isRightIcon = false, keyboardType = 'default', maxLength = 100, iconName = 'down' } = props
 
 	const styles = inputStyles(colors)
 
@@ -76,6 +76,21 @@ export default function CustomInput(props: CustomInputProps) {
 		})
 	}
 
+	const floatingLabelStyleRequired = {
+		top: floatingLabelAnimation.interpolate({
+			inputRange: [0, 1],
+			outputRange: [isMultiline ? scaleHeightPX(12) : scaleHeightPX(22), scaleHeightPX(8)]
+		}),
+		fontSize: floatingLabelAnimation.interpolate({
+			inputRange: [0, 1],
+			outputRange: [scaleFontSize(fontSize.l), scaleFontSize(fontSize.xs)]
+		}),
+		color: floatingLabelAnimation.interpolate({
+			inputRange: [0, 1],
+			outputRange: [colors.alertRed, colors.alertRed]
+		})
+	}
+
 	const handleOnChangeText = (val: string) => {
 		setText(val)
 		if (inputRef != null) inputRef!.current!.context = val
@@ -87,17 +102,13 @@ export default function CustomInput(props: CustomInputProps) {
 			<View style={commonFlexStyles.flex1}>
 				<Animated.Text style={[commonFontStyles.fontRegular, floatingLabelStyle]}>
 					{label}
-					{isRequired ? ' *' : ''}
+					{isRequired ? <Animated.Text style={[commonFontStyles.fontRegular, floatingLabelStyleRequired]}>{' *'}</Animated.Text> : ''}
 				</Animated.Text>
 				<View style={styles.inputView}>
 					<TextInput ref={inputRef} style={[styles.input, isMultiline && styles.inputMultiline, inputStyle]} value={text} placeholderTextColor={colors.inputPlaceholder} onChangeText={handleOnChangeText} onFocus={handleFocus} onBlur={handleBlur} editable={editable} secureTextEntry={secureTextEntry} multiline={isMultiline} keyboardType={keyboardType} maxLength={maxLength} pointerEvents={editable ? 'auto' : 'none'} />
 				</View>
 			</View>
-			{isRightIcon && (
-				<Pressable onPress={() => rightIconOnPress && rightIconOnPress()}>
-					<CustomText>{'RightIcon'}</CustomText>
-				</Pressable>
-			)}
+			{isRightIcon && <Icon name={iconName} size={22} color={colors.textColor} />}
 		</View>
 	)
 }
