@@ -13,30 +13,31 @@ import React, { useMemo } from 'react'
 import { Pressable, StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
 import { CustomButtonProps } from './types'
 import { ButtonLoader } from '@src/assets/lottie'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default function CustomButton(props: CustomButtonProps) {
 	const { colors } = useTheme()
 
-	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, textColor = colors.textColor, isLoading = false, isHorizontal = false, iconSize = 16, isFlex = false } = props
+	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, textColor = colors.textColor, isLoading = false, isHorizontal = false, iconSize = 24, isFlex = false, isCircleRadius = true } = props
 
 	const buttonStyle: ViewStyle = useMemo(() => {
 		switch (buttonType) {
 			case BUTTON_TYPES.PRIMARY:
 				return {
 					backgroundColor: backgroundColor ? backgroundColor : colors.primary,
-					height: scaleHeightPX(isHorizontal ? 48 : 60),
+					height: scaleHeightPX(48),
 					width: width ? width : '100%'
 				}
 			case BUTTON_TYPES.SECONDARY:
 				return {
 					backgroundColor: backgroundColor ? backgroundColor : colors.textColor,
-					height: scaleHeightPX(isHorizontal ? 48 : 60),
+					height: scaleHeightPX(48),
 					width: width ? width : '100%'
 				}
 			default:
 				return {
 					backgroundColor: backgroundColor ? backgroundColor : colors.primary,
-					height: scaleHeightPX(isHorizontal ? 48 : 60),
+					height: scaleHeightPX(48),
 					width: width ? width : '100%'
 				}
 		}
@@ -49,6 +50,15 @@ export default function CustomButton(props: CustomButtonProps) {
 			return {}
 		}
 	}, [isFlex])
+
+	const borderStyle = useMemo(() => {
+		if (isCircleRadius) {
+			return commonBorderRadiusStyles.borderRadiusCircle
+		}
+		else {
+			return { borderRadius: 8}
+		}
+	}, [isCircleRadius])
 
 	const textStyle: TextStyle = useMemo(() => {
 		switch (buttonType) {
@@ -74,12 +84,12 @@ export default function CustomButton(props: CustomButtonProps) {
 	}, [buttonType, textColor])
 
 	return isLoading ? (
-		<View style={[styles.button, buttonStyle]}>
+		<View style={[styles.button, buttonStyle, borderStyle]}>
 			<LottieView source={ButtonLoader} style={{ width: scaleWidthPX(109), height: scaleHeightPX(32) }} autoPlay loop />
 		</View>
 	) : (
-		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
-			{showIcon && <SVGIcon width={scaleWidthPX(iconSize)} height={scaleWidthPX(iconSize)} />}
+		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
+			{showIcon && <Icon name={SVGIcon} size={iconSize} color={textColor} />}
 			<CustomText style={textStyle}>{title}</CustomText>
 		</Pressable>
 	)

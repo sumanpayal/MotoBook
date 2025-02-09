@@ -14,4 +14,5 @@ interface CustomButtonProps {
   isLoading?: boolean;
   isHorizontal?: boolean;
   isFlex?: boolean;
+  isCircleRadius?: boolean
 }

@@ -13,7 +13,7 @@ const BottomTabs = () => {
 	const { colors } = useTheme()
 	const styles = createStyles()
 	return (
-		<Tab.Navigator backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true }}>
+		<Tab.Navigator initialRouteName='First' backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true }}>
 			<Tab.Screen
 				name='First'
 				children={() => <HomeStack />}
