@@ -6,6 +6,7 @@ import Demo from '../screens'
 import SelectBrand from '../screens/SelectBrand'
 import VehicleForm from '../screens/VehicleForm'
 import AddAddress from '../screens/AddAddress'
+import BottomTabs from './BottomTabs'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,10 +14,11 @@ export default function RootStack() {
 	return (
 		<>
 			<Stack.Navigator
-				initialRouteName='SelectBrand'
+				initialRouteName='Home'
 				screenOptions={{
 					headerShown: false
 				}}>
+				<Stack.Screen name='Home' component={BottomTabs} />
 				<Stack.Screen name='Demo' component={Demo} />
 				<Stack.Screen name='SelectBrand' component={SelectBrand} />
 				<Stack.Screen name='VehicleForm' component={VehicleForm} />

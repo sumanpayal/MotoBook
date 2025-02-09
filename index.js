@@ -1,3 +1,7 @@
+if (__DEV__) {
+	require('./ReactotronConfig')
+}
+
 import { AppRegistry, Text, TextInput } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
