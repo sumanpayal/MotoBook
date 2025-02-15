@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import commonFlexStyles from '@src/common/styles/commonFlexStyles'
 import commonAlignStyles from '@src/common/styles/commonAlignStyles'
@@ -22,14 +22,14 @@ type SelectModalProps = {
 }
 
 const SelectModal = (props: SelectModalProps) => {
-	const { visible, onClose = () => {}, data, title, modalProps, subHeaderTitle, setSelectedItem } = props
+	const { visible, onClose = () => { }, data, title, modalProps, subHeaderTitle, setSelectedItem } = props
 
 	const [searchText, setSearchText] = useState<string>('')
 	const [flatListData, setFlatListData] = useState<any[]>(data)
 
 	const searchData = (text: string) => {
 		const search = text.toLowerCase()
-		const filterData = data?.filter((item: any) => `${item?.title}`.toLowerCase().includes(search))
+		const filterData = data?.filter((item: any) => `${item?.name}`.toLowerCase().includes(search))
 		setFlatListData(filterData)
 	}
 
@@ -69,7 +69,18 @@ const SelectModal = (props: SelectModalProps) => {
 		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} subHeaderTitle={subHeaderTitle} hederCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false}>
 			<View style={styles.main}>
 				{listHeaderComponent()}
-				<FlatList data={flatListData} renderItem={RenderBrandItem} keyExtractor={(item: any) => item?.id} numColumns={4} columnWrapperStyle={{ gap: scaleWidthPX(16) }} contentContainerStyle={flatListData.length === 0 && styles.center} ListEmptyComponent={NoRecordFound} />
+				<ScrollView>
+					{flatListData?.length > 0 && <View style={styles.container}>
+						{flatListData?.map((item: any) => {
+							return (
+								<View key={item?._id}>
+									<RenderBrandItem item={item} />
+								</View>
+							)
+						})}
+					</View>}
+				</ScrollView>
+				{flatListData?.length === 0 && <View style={styles.center}><NoRecordFound /></View>}
 			</View>
 		</BottomModal>
 	)
@@ -82,12 +93,17 @@ const styles = StyleSheet.create({
 		...commonMarginStyles.marginHorizontalM,
 		...commonFlexStyles.flex1
 	},
+	container: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		gap: scaleWidthPX(16)
+	},
 	center: {
 		...commonAlignStyles.justifyCenter,
 		...commonAlignStyles.alignCenter,
 		...commonFlexStyles.flex1
 	},
 	containerStyle: {
-		minHeight: '90%'
+		minHeight: '60%'
 	}
 })

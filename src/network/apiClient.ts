@@ -1,4 +1,4 @@
-import {CONFIG} from '@constants/config';
+import { CONFIG } from '@constants/config';
 import { ENVIRONMENT } from '@src/common/constants/constants';
 import axios from 'axios';
 
@@ -9,12 +9,12 @@ const getToken = async () => {
 };
 
 const APIClient = axios.create({
-  baseURL: CONFIG?.ENV?.phoenix.baseUrl,
+  baseURL: CONFIG[`${ENV}`]?.baseUrl,
 });
 
 APIClient.interceptors.request.use(
   async config => {
-    if (config?.url !== '/token') {
+    if (config?.url?.indexOf('/token') === -1) {
       const token = await getToken();
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;

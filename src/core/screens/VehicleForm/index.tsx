@@ -1,7 +1,7 @@
 import { Pressable, View } from 'react-native'
 import React, { useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
 import CustomInput from '@src/common/components/Input'
 import CustomButton from '@src/common/components/Button'
@@ -16,6 +16,33 @@ const VehicleForm = () => {
 	const { colors } = useTheme()
 	const styles = createStyle(colors)
 
+	const route = useRoute()
+
+	const { carCompany, carModal }: any = route?.params
+
+	const sampleCarCompany = {
+		image: "image/Maruti_Suzuki.png",
+		isDeleted: false,
+		isSuspended: false,
+		name: "Maruti Suzuki",
+		_id: "67b0593852db745bb439eea5"
+	}
+
+	const sampleCarModal = {
+		car_type_id: {
+			isDeleted : false,
+			isSuspended: false,
+			name: "Hatchback",
+			_id: "677a8304569a769a13cac4e1",
+		},
+		company_id: "67b0593852db745bb439eea5",
+		image: "image/model.png",
+		isDeleted: false,
+		isSuspended: false,
+		name: "Swift",
+		_id: "67b06c2b52db745bb439eeb2"
+	}
+	
 	const [isColorShow, setIsColorShow] = useState<boolean>(false)
 
 	const onPressColor = () => {
@@ -26,7 +53,7 @@ const VehicleForm = () => {
 		navigation.navigate('AddAddress')
 	}
 
-	const onPressSave = () => {}
+	const onPressSave = () => { }
 
 	const RenderBrandItem = ({ item }: { item: any }) => {
 		return (
@@ -52,17 +79,17 @@ const VehicleForm = () => {
 	const renderForm = () => {
 		return (
 			<View style={styles.form}>
-				<CustomInput label='Brand' onChangeText={() => {}} value={''} editable={false} />
-				<CustomInput label='Model' onChangeText={() => {}} value={''} editable={false} />
-				<CustomInput label='Category' onChangeText={() => {}} value={''} editable={false} />
+				<CustomInput label='Brand' onChangeText={() => { }} value={carCompany?.name} editable={false} />
+				<CustomInput label='Model' onChangeText={() => { }} value={carModal?.name} editable={false} />
+				<CustomInput label='Category' onChangeText={() => { }} value={carModal?.car_type_id?.name} editable={false} />
 				<View>
 					<Pressable onPress={onPressColor}>
-						<CustomInput label='Color' onChangeText={() => {}} value={''} isRightIcon editable={false} iconName={isColorShow ? 'up' : 'down'} />
+						<CustomInput label='Color' onChangeText={() => { }} value={''} isRightIcon editable={false} iconName={isColorShow ? 'up' : 'down'} />
 					</Pressable>
 					{isColorShow && renderColors()}
 				</View>
-				<CustomInput label='Registration Number' onChangeText={() => {}} value={''} />
-				<CustomInput label='Address' onChangeText={() => {}} value={''} />
+				<CustomInput label='Registration Number' onChangeText={() => { }} value={''} />
+				<CustomInput label='Address' onChangeText={() => { }} value={''} />
 				<Pressable style={styles.addAddress} onPress={onPressAddAddress}>
 					<Icon name='pluscircleo' size={22} color={colors.primary} />
 					<CustomText textType='semi-bold' style={{ color: colors.primary }}>
