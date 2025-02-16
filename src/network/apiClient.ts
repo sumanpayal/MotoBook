@@ -23,7 +23,7 @@ APIClient.interceptors.request.use(
     if (getAuthURLs(config)) {
       const token = await getToken();
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `${token}`;
       }
     }
     return config;
