@@ -3,25 +3,24 @@ import CustomAlert from '@src/common/components/Alert'
 import React from 'react'
 import FullScreenLoader from '@src/common/components/FullScreenLoader'
 import Demo from '../screens'
-import SelectBrand from '../screens/SelectBrand'
-import VehicleForm from '../screens/VehicleForm'
-import AddAddress from '../screens/AddAddress'
 import BottomTabs from './BottomTabs'
+import { useSelector } from 'react-redux'
+import { RootState } from '@src/common/redux/store/store'
+import AddAddress from '../screens/Address/AddAddress'
 
 const Stack = createNativeStackNavigator()
 
 export default function RootStack() {
+	const isLoggedIn: boolean = useSelector((state: RootState) => state.root.currentUser.isLoggedIn)
 	return (
 		<>
 			<Stack.Navigator
-				initialRouteName='Home'
+				initialRouteName={isLoggedIn ? 'Home' : 'Demo'}
 				screenOptions={{
 					headerShown: false
 				}}>
 				<Stack.Screen name='Home' component={BottomTabs} />
 				<Stack.Screen name='Demo' component={Demo} />
-				<Stack.Screen name='SelectBrand' component={SelectBrand} />
-				<Stack.Screen name='VehicleForm' component={VehicleForm} />
 				<Stack.Screen name='AddAddress' component={AddAddress} />
 			</Stack.Navigator>
 			<CustomAlert />

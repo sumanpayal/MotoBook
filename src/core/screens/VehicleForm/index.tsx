@@ -9,6 +9,7 @@ import CustomText from '@src/common/components/Text'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { createStyle } from './styles'
+import { colorsList } from '@src/common/constants/constants'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -30,7 +31,7 @@ const VehicleForm = () => {
 
 	const sampleCarModal = {
 		car_type_id: {
-			isDeleted : false,
+			isDeleted: false,
 			isSuspended: false,
 			name: "Hatchback",
 			_id: "677a8304569a769a13cac4e1",
@@ -42,7 +43,7 @@ const VehicleForm = () => {
 		name: "Swift",
 		_id: "67b06c2b52db745bb439eeb2"
 	}
-	
+
 	const [isColorShow, setIsColorShow] = useState<boolean>(false)
 
 	const onPressColor = () => {
@@ -59,7 +60,7 @@ const VehicleForm = () => {
 		return (
 			<View style={styles.colorItemView}>
 				<View style={styles.colorItem} />
-				<CustomText>{'name'}</CustomText>
+				<CustomText>{item?.name}</CustomText>
 			</View>
 		)
 	}
@@ -68,8 +69,8 @@ const VehicleForm = () => {
 			<View style={styles.colorOuter}>
 				<CustomText>{'Color'}</CustomText>
 				<View style={styles.colorInner}>
-					{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item: any) => {
-						return <RenderBrandItem item={item} />
+					{colorsList.map((item: any) => {
+						return <RenderBrandItem item={item} key={item?.id} />
 					})}
 				</View>
 			</View>

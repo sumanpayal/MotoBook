@@ -1,11 +1,11 @@
-import { API_RESPONSE } from '@src/common/constants/constants';
-import { getApiService } from '../apiService';
-import { GET_CAR_MODALS, GET_COMPANIES } from './endpoints';
+import { API_RESPONSE } from "@src/common/constants/constants";
+import { getApiService, postApiService } from "../apiService";
+import { ADDRESS_LIST, ADD_ADDRESS } from "./endpoints";
 
-export const getCompaniesListAPI = (
+export const getAddressListAPI = (
     callBack: (response: API_RESPONSE) => void,
 ) => {
-    getApiService(GET_COMPANIES)
+    getApiService(ADDRESS_LIST)
         .then(async (res: any) => {
             if (res?.status === 200) {
                 callBack({
@@ -20,23 +20,23 @@ export const getCompaniesListAPI = (
             }
         })
         .catch((err: any) => {
-            console.error(err);
+            console.error(err?.message);
             callBack({
                 data: undefined,
-                error: err,
+                error: err?.message,
             });
         });
 };
 
-export const getCarModalsListAPIForCompanyID = (
-    company_id: any,
+export const postAddAddressAPI = (
+    params: any,
     callBack: (response: API_RESPONSE) => void,
 ) => {
-    getApiService(GET_CAR_MODALS(company_id))
+    postApiService(ADD_ADDRESS, params)
         .then(async (res: any) => {
             if (res?.status === 200) {
                 callBack({
-                    data: res?.data,
+                    data: res?.message,
                     error: undefined,
                 });
             } else {
@@ -47,10 +47,10 @@ export const getCarModalsListAPIForCompanyID = (
             }
         })
         .catch((err: any) => {
-            console.error(err);
+            console.error(err?.message);
             callBack({
                 data: undefined,
-                error: err,
+                error: err?.message,
             });
         });
 };

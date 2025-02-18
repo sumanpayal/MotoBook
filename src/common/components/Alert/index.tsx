@@ -37,7 +37,7 @@ export default function CustomAlert() {
 				style={{
 					minHeight: scaleHeightPX(51),
 					width: isTabletMode ? '65%' : SCREEN_WIDTH - scaleWidthPX(spacing['m']),
-					backgroundColor: alertData.type === 'error' ? colors.alertRed : colors.warning,
+					backgroundColor: alertData.type === 'error' ? colors.alertRed : alertData.type === 'warning' ? colors.warning : colors.alertGreen,
 					position: 'absolute',
 					bottom: scaleHeightPX(32),
 					...commonAlignStyles.alignSelfCenter,

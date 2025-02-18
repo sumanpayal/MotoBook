@@ -10,7 +10,7 @@ export const postMobileLogin = (
 ) => {
     postApiService(MOBILE_LOGIN, params, { headers: headers })
         .then(async (res: any) => {
-            if (res?.status === 200 || res?.status === '200') {
+            if (res?.status === 200) {
                 callBack({
                     data: res?.message,
                     error: undefined,
@@ -38,7 +38,7 @@ export const postVerifyOTP = (
 ) => {
     postApiService(VERIFY_OTP, params, { headers: headers })
         .then(async (res: any) => {
-            if (res?.status === 200 || res?.status === '200') {
+            if (res?.status === 200) {
                 storeAnonymousData(TOKEN, res?.data?.token)
                 storeData(USER, res?.data?.user)
                 callBack({
@@ -69,7 +69,7 @@ export const postAddDetailsUser = (
 ) => {
     postApiService(ADD_DETAIL, params, { headers: headers })
         .then(async (res: any) => {
-            if (res?.status === 200 || res?.status === '200') {
+            if (res?.status === 200) {
                 callBack({
                     data: res?.data,
                     error: undefined,

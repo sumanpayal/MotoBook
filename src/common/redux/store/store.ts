@@ -7,7 +7,7 @@ import {reduxStorage} from '@src/common/storage/mmkvStorage';
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
-  whitelist: ['currentUser', 'syncQueue'],
+  whitelist: ['currentUser'],
   debug: __DEV__,
 };
 

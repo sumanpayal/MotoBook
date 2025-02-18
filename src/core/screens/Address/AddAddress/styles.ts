@@ -1,7 +1,6 @@
 import commonFlexStyles from '@src/common/styles/commonFlexStyles'
 import commonAlignStyles from '@src/common/styles/commonAlignStyles'
 import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import { spacing } from '@src/common/styles/values'
 import commonPaddingStyles from '@src/common/styles/commonPaddingStyles'
 import commonBorderWidthStyles from '@src/common/styles/commonBorderWidthStyles'
 import commonBorderRadiusStyles from '@src/common/styles/commonBorderRadiusStyles'
@@ -16,27 +15,25 @@ export const createStyles = (colors: any) => {
 			...commonMarginStyles.marginM
 		},
 		countryOuter: {
-			gap: scaleWidthPX(spacing.m),
+			gap: scaleWidthPX(16),
 			...commonFlexStyles.flexRow
 		},
 		addessOuter: {
 			...commonFlexStyles.flex1,
-			gap: scaleHeightPX(spacing.m)
+			gap: scaleHeightPX(16)
 		},
 		scrollView: {
 			...commonFlexStyles.flexRow,
-			gap: scaleWidthPX(spacing['3xs'])
+			gap: scaleWidthPX(12)
 		},
 		saveAddressAs: {
-			gap: scaleHeightPX(spacing['5xs'])
+			gap: scaleHeightPX(8)
 		},
 		addressItem: {
-			...commonBorderWidthStyles.borderWidthM,
 			...commonBorderRadiusStyles.borderRadiusS,
 			backgroundColor: colors.inputPlaceholder,
 			...commonAlignStyles.justifyCenter,
 			...commonAlignStyles.alignCenter,
-			gap: scaleWidthPX(spacing['3xs']),
 			...commonPaddingStyles.padding3XS
 		}
 	})

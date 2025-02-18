@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux';
 import loader from './loader';
 import alert from './alert';
+import currentUser from './currentUser';
 
 const appReducer = combineReducers({
   loader,
   alert,
+  currentUser,
 });
 
 // Define Root Reducer

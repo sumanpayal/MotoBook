@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeStack from './HomeStack'
+import { HomeStack, SecondStack } from './HomeStack'
 import CustomText from '@src/common/components/Text'
 import { createStyles } from './styles'
 import { useTheme } from '@react-navigation/native'
@@ -13,9 +13,9 @@ const BottomTabs = () => {
 	const { colors } = useTheme()
 	const styles = createStyles()
 	return (
-		<Tab.Navigator initialRouteName='First' backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true }}>
+		<Tab.Navigator initialRouteName='HomeStack' backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true }}>
 			<Tab.Screen
-				name='First'
+				name='HomeStack'
 				children={() => <HomeStack />}
 				options={{
 					headerShown: false,
@@ -27,7 +27,7 @@ const BottomTabs = () => {
 			/>
 			<Tab.Screen
 				name='Second'
-				children={() => <HomeStack />}
+				children={() => <SecondStack />}
 				options={{
 					headerShown: false,
 					tabBarLabelPosition: 'below-icon',
@@ -38,7 +38,7 @@ const BottomTabs = () => {
 			/>
 			<Tab.Screen
 				name='Third'
-				children={() => <HomeStack />}
+				children={() => <SecondStack />}
 				options={{
 					headerShown: false,
 					tabBarLabelPosition: 'below-icon',

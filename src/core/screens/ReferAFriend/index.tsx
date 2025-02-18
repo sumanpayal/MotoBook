@@ -1,5 +1,5 @@
 import { Pressable, Share, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
 import CustomButton from '@src/common/components/Button'
@@ -9,7 +9,7 @@ import { createStyles } from './styles'
 import Clipboard from "@react-native-community/clipboard";
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
-import { postAddDetailsUser, postMobileLogin, postVerifyOTP } from '@src/network/login'
+import { postAddDetailsUser } from '@src/network/login'
 import { API_RESPONSE } from '@src/common/constants/constants'
 
 const ReferAFriend = () => {
@@ -27,37 +27,6 @@ const ReferAFriend = () => {
   Here's the link to join: 🚀 https://apps.apple.com/in/app/`
 
 	const dispatch = useDispatch()
-
-	useEffect(() => {
-		checkLogin()
-	}, [])
-
-	const checkLogin = async () => {
-		postLoginAPICall()
-	}
-
-	const postLoginAPICall = async () => {
-		const params = {
-			"phoneNumber": "1234567891"
-		}
-		postMobileLogin({}, params, (res: API_RESPONSE) => {
-			if (res?.data) {
-				verifyOTPAPICall()
-			}
-		})
-	}
-
-	const verifyOTPAPICall = () => {
-		const params = {
-			"otp": "1234",
-			"phoneNumber": "1234567891"
-		}
-		postVerifyOTP({}, params, (res: API_RESPONSE) => {
-			if (res?.data) {
-				addDetailUserAPICall(res?.data?.user)
-			}
-		})
-	}
 
 	const addDetailUserAPICall = (user: any) => {
 		let params = {
@@ -83,7 +52,6 @@ const ReferAFriend = () => {
 			}
 		})
 	}
-
 
 	const RenderCountView = ({ label, value }: { label: string; value: any }) => {
 		return (

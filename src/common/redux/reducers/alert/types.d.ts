@@ -1,6 +1,6 @@
 type AlertData = {
   isShown: boolean;
-  type: 'error' | 'warning';
+  type: 'error' | 'warning' | 'success';
   label: string;
 };
 
