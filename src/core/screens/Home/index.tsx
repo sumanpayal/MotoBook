@@ -20,6 +20,7 @@ const HomeScreen = () => {
                 <CustomButton title='Logout' onPress={logoutOnPress} />
                 <CustomButton title='Add Address' onPress={() => navigation.navigate('AddAddress')} />
                 <CustomButton title='Address List' onPress={() => navigation.navigate('AddressList')} />
+                <CustomButton title='Add Vehicle Details' onPress={() => navigation.navigate('SelectBrand')} />
             </View>
         </MainFrame>
     )

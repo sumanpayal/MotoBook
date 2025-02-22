@@ -2,8 +2,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import ReferAFriend from '../screens/ReferAFriend'
 import HomeScreen from '../screens/Home'
-import SelectBrand from '../screens/SelectBrand'
-import VehicleForm from '../screens/VehicleForm'
 
 const Stack = createNativeStackNavigator()
 
@@ -15,8 +13,6 @@ export function HomeStack() {
 				headerShown: false
 			}}>
 			<Stack.Screen name='HomeScreen' component={HomeScreen} />
-			<Stack.Screen name='SelectBrand' component={SelectBrand} />
-			<Stack.Screen name='VehicleForm' component={VehicleForm} />
 		</Stack.Navigator>
 	)
 }

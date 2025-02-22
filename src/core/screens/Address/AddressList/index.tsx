@@ -28,10 +28,23 @@ const AddressList = () => {
 		})
 	}
 
+	const renderAddressItem = ({item}: {item: any}) => {
+		return (
+			<View>
+				<CustomText>{"Landmark: "}{item?.landmark}</CustomText>
+				<CustomText>{"City: "}{item?.city}</CustomText>
+				<CustomText>{"State: "}{item?.state}</CustomText>
+				<CustomText>{"Country: "}{item?.country}</CustomText>
+				<CustomText>{"Postal Code: "}{item?.postalCode}</CustomText>
+				<CustomText>{"Address Type: "}{item?.addressType}</CustomText>
+			</View>
+		)
+	}
+
 	return (
 		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address List'>
 			<View style={styles.main}>
-				<FlatList data={allAddressData} renderItem={({ item }) => <CustomText>{item?.city}</CustomText>} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16)}} />}/>
+				<FlatList data={allAddressData} renderItem={renderAddressItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} />
 			</View>
 		</MainFrame>
 	)

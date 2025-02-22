@@ -16,4 +16,5 @@ type SingleSelectionModalProps = {
   isSearch?: boolean;
   noRecordViewProps?: NoRecordFoundProps;
   modalProps?: BottomModalProps;
+  children?: any;
 };

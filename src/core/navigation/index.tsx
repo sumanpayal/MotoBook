@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@src/common/redux/store/store'
 import AddAddress from '../screens/Address/AddAddress'
 import AddressList from '../screens/Address/AddressList'
+import SelectBrand from '../screens/SelectBrand'
+import VehicleForm from '../screens/VehicleForm'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +26,8 @@ export default function RootStack() {
 				<Stack.Screen name='Demo' component={Demo} />
 				<Stack.Screen name='AddAddress' component={AddAddress} />
 				<Stack.Screen name='AddressList' component={AddressList} />
+				<Stack.Screen name='SelectBrand' component={SelectBrand} />
+				<Stack.Screen name='VehicleForm' component={VehicleForm} />
 			</Stack.Navigator>
 			<CustomAlert />
 			<FullScreenLoader />

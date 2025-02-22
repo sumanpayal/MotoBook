@@ -70,6 +70,11 @@ const SelectBrand = () => {
 		setIsModalVisible(false)
 	}
 
+	const selectModalAndNavigateToAddVehicle = (item: any) => {
+		navigation.navigate('VehicleForm', { carModal: item, carCompany: selectedCarCompany })
+		onCloseCarModal()
+	}
+
 	const RenderBrandItem = ({ item }: { item: any }) => {
 		return <BrandItem item={item} onPress={() => onPressItem(item)} />
 	}
@@ -100,10 +105,7 @@ const SelectBrand = () => {
 					subHeaderTitle={selectedCarCompany?.name}
 					visible={isModalVisible}
 					onClose={onCloseCarModal}
-					setSelectedItem={(item: any) => {
-						navigation.navigate('VehicleForm', { carModal: item, carCompany: selectedCarCompany })
-						onCloseCarModal()
-					}}
+					setSelectedItem={selectModalAndNavigateToAddVehicle}
 					data={carModalsData}
 				/>
 			)}
