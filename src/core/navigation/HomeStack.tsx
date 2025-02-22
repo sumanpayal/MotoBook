@@ -17,7 +17,19 @@ export function HomeStack() {
 	)
 }
 
-export function SecondStack() {
+export function ReferStack() {
+	return (
+		<Stack.Navigator
+			initialRouteName='ReferAFriend'
+			screenOptions={{
+				headerShown: false
+			}}>
+			<Stack.Screen name='ReferAFriend' component={ReferAFriend} />
+		</Stack.Navigator>
+	)
+}
+
+export function MoreStack() {
 	return (
 		<Stack.Navigator
 			initialRouteName='ReferAFriend'

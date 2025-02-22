@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeStack, SecondStack } from './HomeStack'
+import { HomeStack, MoreStack, ReferStack } from './HomeStack'
 import CustomText from '@src/common/components/Text'
 import { createStyles } from './styles'
 import { useTheme } from '@react-navigation/native'
@@ -26,19 +26,19 @@ const BottomTabs = () => {
 				}}
 			/>
 			<Tab.Screen
-				name='Second'
-				children={() => <SecondStack />}
+				name='Refer'
+				children={() => <ReferStack />}
 				options={{
 					headerShown: false,
 					tabBarLabelPosition: 'below-icon',
 					tabBarLabelStyle: styles.textStyle,
 					tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<Icon name='home' size={22} color={colors.inputPlaceholder} />} focusedImage={<Icon name='home' size={22} color={colors.primary} />} />,
-					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Home' />
+					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Refer' />
 				}}
 			/>
 			<Tab.Screen
-				name='Third'
-				children={() => <SecondStack />}
+				name='More'
+				children={() => <MoreStack />}
 				options={{
 					headerShown: false,
 					tabBarLabelPosition: 'below-icon',
