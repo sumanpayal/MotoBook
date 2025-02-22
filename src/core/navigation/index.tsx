@@ -7,6 +7,7 @@ import BottomTabs from './BottomTabs'
 import { useSelector } from 'react-redux'
 import { RootState } from '@src/common/redux/store/store'
 import AddAddress from '../screens/Address/AddAddress'
+import AddressList from '../screens/Address/AddressList'
 
 const Stack = createNativeStackNavigator()
 
@@ -22,6 +23,7 @@ export default function RootStack() {
 				<Stack.Screen name='Home' component={BottomTabs} />
 				<Stack.Screen name='Demo' component={Demo} />
 				<Stack.Screen name='AddAddress' component={AddAddress} />
+				<Stack.Screen name='AddressList' component={AddressList} />
 			</Stack.Navigator>
 			<CustomAlert />
 			<FullScreenLoader />
