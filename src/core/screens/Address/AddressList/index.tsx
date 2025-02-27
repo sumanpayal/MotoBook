@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getAddressListAPI } from '@src/network/address'
 import { API_RESPONSE } from '@src/common/constants/constants'
@@ -7,6 +7,7 @@ import { useNavigation, useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { NoRecordFound } from '@src/common/components/NoRecordFound'
 
 const AddressList = () => {
 	const navigation = useNavigation()
@@ -44,7 +45,7 @@ const AddressList = () => {
 	return (
 		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address List'>
 			<View style={styles.main}>
-				<FlatList data={allAddressData} renderItem={renderAddressItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} />
+				<FlatList data={allAddressData} renderItem={renderAddressItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListEmptyComponent={NoRecordFound} />
 			</View>
 		</MainFrame>
 	)

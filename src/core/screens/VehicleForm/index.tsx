@@ -16,6 +16,7 @@ import { getAddressListAPI } from '@src/network/address'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
+import { postVehicleDetailsAPI } from '@src/network/car'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -32,29 +33,6 @@ const VehicleForm = () => {
 	const [allAddressList, setAllAddressList] = useState<any>([])
 	const [selectedAddress, setSelectedAddress] = useState<any | null>(null)
 	const [registrationNumber, setRegistrationNumber] = useState<string>('')
-
-	const sampleCarCompany = {
-		image: 'image/Maruti_Suzuki.png',
-		isDeleted: false,
-		isSuspended: false,
-		name: 'Maruti Suzuki',
-		_id: '67b0593852db745bb439eea5'
-	}
-
-	const sampleCarModal = {
-		car_type_id: {
-			isDeleted: false,
-			isSuspended: false,
-			name: 'Hatchback',
-			_id: '677a8304569a769a13cac4e1'
-		},
-		company_id: '67b0593852db745bb439eea5',
-		image: 'image/model.png',
-		isDeleted: false,
-		isSuspended: false,
-		name: 'Swift',
-		_id: '67b06c2b52db745bb439eeb2'
-	}
 
 	const [isColorShow, setIsColorShow] = useState<boolean>(false)
 	const [isAddressModalVisible, setIsAddressModalVisible] = useState<boolean>(false)
@@ -121,10 +99,28 @@ const VehicleForm = () => {
 		}
 		return true
 	}
-	
+
 	const onPressSave = () => {
 		if (validateForm()) {
 			// call api
+			const params = {
+				model_id: carModal?._id,
+				address_id: selectedAddress?._id,
+				carNumber: registrationNumber,
+				color: selectedColor?.name
+			}
+			postVehicleDetailsAPI(params, (response: API_RESPONSE) => {
+				dispatch(
+					setAlertData({
+						isShown: true,
+						type: 'success',
+						label: response.data
+					})
+				)
+				setTimeout(() => {
+					navigation.popToTop()
+				}, 500)
+			})
 		}
 	}
 
