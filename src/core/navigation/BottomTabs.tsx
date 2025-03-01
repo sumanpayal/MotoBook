@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeStack, MoreStack, ReferStack } from './HomeStack'
+import { HomeStack, SettingsStack, ReferStack, SubscriptionsStack } from './HomeStack'
 import CustomText from '@src/common/components/Text'
 import { createStyles } from './styles'
 import { useTheme } from '@react-navigation/native'
@@ -26,6 +26,17 @@ const BottomTabs = () => {
 				}}
 			/>
 			<Tab.Screen
+				name='Subscriptions'
+				children={() => <SubscriptionsStack />}
+				options={{
+					headerShown: false,
+					tabBarLabelPosition: 'below-icon',
+					tabBarLabelStyle: styles.textStyle,
+					tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<Icon name='home' size={22} color={colors.inputPlaceholder} />} focusedImage={<Icon name='home' size={22} color={colors.primary} />} />,
+					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Subscriptions' />
+				}}
+			/>
+			<Tab.Screen
 				name='Refer'
 				children={() => <ReferStack />}
 				options={{
@@ -33,18 +44,18 @@ const BottomTabs = () => {
 					tabBarLabelPosition: 'below-icon',
 					tabBarLabelStyle: styles.textStyle,
 					tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<Icon name='home' size={22} color={colors.inputPlaceholder} />} focusedImage={<Icon name='home' size={22} color={colors.primary} />} />,
-					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Refer' />
+					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Refer a friend' />
 				}}
 			/>
 			<Tab.Screen
-				name='More'
-				children={() => <MoreStack />}
+				name='Settings'
+				children={() => <SettingsStack />}
 				options={{
 					headerShown: false,
 					tabBarLabelPosition: 'below-icon',
 					tabBarLabelStyle: styles.textStyle,
 					tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<Icon name='home' size={22} color={colors.inputPlaceholder} />} focusedImage={<Icon name='home' size={22} color={colors.primary} />} />,
-					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Home' />
+					tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='Settings' />
 				}}
 			/>
 		</Tab.Navigator>

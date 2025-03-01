@@ -24,7 +24,7 @@ export const navigationStyles = (Colors: any) => {
       ...commonAlignStyles.alignCenter,
     },
     titleStyle: {
-      ...commonFontStyles.fontSizeL,
+      ...commonFontStyles.fontSizeXL,
       color: Colors.textColor,
     },
   });

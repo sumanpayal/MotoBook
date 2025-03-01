@@ -10,6 +10,8 @@ import AddAddress from '../screens/Address/AddAddress'
 import AddressList from '../screens/Address/AddressList'
 import SelectBrand from '../screens/SelectBrand'
 import VehicleForm from '../screens/VehicleForm'
+import MySubscriptions from '../screens/MySubscriptions'
+import MySubscriptionDetails from '../screens/MySubscriptionDetails'
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +30,8 @@ export default function RootStack() {
 				<Stack.Screen name='AddressList' component={AddressList} />
 				<Stack.Screen name='SelectBrand' component={SelectBrand} />
 				<Stack.Screen name='VehicleForm' component={VehicleForm} />
+				<Stack.Screen name='MySubscriptions' component={MySubscriptions} />
+				<Stack.Screen name='MySubscriptionDetails' component={MySubscriptionDetails} />
 			</Stack.Navigator>
 			<CustomAlert />
 			<FullScreenLoader />

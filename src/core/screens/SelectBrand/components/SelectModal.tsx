@@ -66,7 +66,7 @@ const SelectModal = (props: SelectModalProps) => {
 	}
 
 	return (
-		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} subHeaderTitle={subHeaderTitle} hederCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false}>
+		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} subHeaderTitle={subHeaderTitle} headerCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false}>
 			<View style={styles.main}>
 				{listHeaderComponent()}
 				<ScrollView>

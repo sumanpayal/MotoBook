@@ -7,22 +7,28 @@ import { selectionModalStyles } from './styles'
 import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import SearchComponent from '../SearchComponent'
 import { NoRecordFound } from '../NoRecordFound'
-import { SingleSelectionModalProps } from './types'
+import { MultiSelectionModalProps } from './types'
 import commonFlexStyles from '@src/common/styles/commonFlexStyles'
+import Icon from 'react-native-vector-icons/AntDesign'
 
-const SingleSelectionModal = (props: SingleSelectionModalProps) => {
-	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, selectedItem, setSelectedItem, isSearch = true, noRecordViewProps, modalProps, children } = props
+const MultiSelectionModal = (props: MultiSelectionModalProps) => {
+	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, isSearch = true, noRecordViewProps, modalProps, children, setSelectedItem } = props
 
 	const { colors } = useTheme()
 	const styles = selectionModalStyles(colors)
 
 	const [searchText, setSearchText] = useState<string>('')
 	const [flatListData, setFlatListData] = useState<any[]>(data)
+	const [allData, setAllData] = useState<any[]>(data)
 
 	const searchData = (text: string) => {
 		const search = text.toLowerCase()
 		const filterData = data?.filter((item: any) => `${item[titleItem]}`.toLowerCase().includes(search))
 		setFlatListData(filterData)
+	}
+
+	const onPressSelectDone = () => {
+		setSelectedItem(allData)
 	}
 
 	const onPressClose = () => {
@@ -36,23 +42,24 @@ const SingleSelectionModal = (props: SingleSelectionModalProps) => {
 	}, [data])
 
 	const onPressSelectItem = (item: any) => {
-		setSelectedItem(item)
+		const newData = flatListData?.map((i: any) => (i?.[idItem]?.toString() === item?.[idItem]?.toString() ? { ...i, isSelected: !i?.isSelected } : i))
+		const newData1 = allData?.map((i: any) => (i?.[idItem]?.toString() === item?.[idItem]?.toString() ? { ...i, isSelected: !i?.isSelected } : i))
 		setSearchText('')
-		setFlatListData(data)
+		setFlatListData([...newData])
+		setAllData([...newData1])
 	}
 
 	const renderItem = ({ item }: { item: any }) => {
-		const Icon = isIcon && item?.icon
-		const selected = selectedItem?.[idItem]?.toString() === item?.[idItem]?.toString()
+		const IconLeft = isIcon && item?.icon
 		return (
 			<Pressable style={styles.itemContent} onPress={() => onPressSelectItem(item)}>
 				<View style={[styles.itemLeft, isIconIsImage && styles.itemLeftImage]}>
 					{children && children(item)}
-					{isIcon && (isIconIsImage ? <Image source={{ uri: Icon }} style={styles.itemImage} /> : <Icon />)}
+					{isIcon && (isIconIsImage ? <Image source={{ uri: IconLeft }} style={styles.itemImage} /> : <IconLeft />)}
 					<CustomText style={styles.itemLabel}>{item[titleItem]}</CustomText>
 				</View>
 				<View style={styles.itemRight}>
-					<View style={styles.selectedViewOuter}>{selected && <View style={styles.selectedViewInner} />}</View>
+					<View style={styles.selectedViewOuter}>{item?.isSelected && <Icon name='check' size={16} color={colors.textColor} />}</View>
 				</View>
 			</Pressable>
 		)
@@ -81,11 +88,11 @@ const SingleSelectionModal = (props: SingleSelectionModalProps) => {
 	}
 
 	return (
-		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={isSearch ? styles.containerStyle : {}} {...modalProps} hideOnBackdropPress={false}>
+		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={isSearch ? styles.containerStyle : {}} {...modalProps} hideOnBackdropPress={false} isLeftIcon headerLeftOnPress={onPressSelectDone}>
 			{isSearch && listHeaderComponent()}
 			<FlatList data={flatListData} renderItem={renderItem} keyExtractor={(item) => `${item[idItem]}`} ItemSeparatorComponent={listSeperatorComponent} ListEmptyComponent={() => <NoRecordFound {...noRecordViewProps} />} contentContainerStyle={[styles.listStyle, flatListData?.length === 0 && styles.listStyleEmpty, flatListData?.length === 0 && !isSearch && commonMarginStyles.marginTop2XL, flatListData?.length === 0 && isSearch && commonFlexStyles.flex1]} />
 		</BottomModal>
 	)
 }
 
-export default SingleSelectionModal
+export default MultiSelectionModal

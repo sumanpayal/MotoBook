@@ -1,7 +1,7 @@
 import { Pressable, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
 import CustomInput from '@src/common/components/Input'
 import CustomButton from '@src/common/components/Button'
@@ -18,6 +18,7 @@ import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
 import { getSubscriptionPlansList, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
 import { RootState } from '@src/common/redux/store/store'
+import MultiSelectionModal from '@src/common/components/MultiSelectionModal'
 import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 
@@ -48,16 +49,17 @@ const VehicleForm = () => {
 	const [subscriptionTimeSlotsData, setSubscriptionTimeSlotsData] = useState<any[]>([])
 
 	const [selectedSubscriptionPlan, setSelectedSubscriptionPlan] = useState<any>(null)
-	const [selectedSubscriptionTimeSlot, setSelectedSubscriptionTimeSlot] = useState<any>(null)
 
 	const [colorsList, setColorsList] = useState<any[]>([])
 
-	useEffect(() => {
-		getAddressList()
-		getSubscriptionPlansListFromAPI()
-		getSubscriptionTimeSlotsFromAPI()
-		getColorsListFromAPI()
-	}, [])
+	useFocusEffect(
+		useCallback(() => {
+			getAddressList()
+			getSubscriptionPlansListFromAPI()
+			getSubscriptionTimeSlotsFromAPI()
+			getColorsListFromAPI()
+		}, [])
+	)
 
 	const getColorsListFromAPI = () => {
 		getColorsList((res: API_RESPONSE) => {
@@ -73,8 +75,9 @@ const VehicleForm = () => {
 				const data = res?.data?.map((item: any, index: number) => {
 					return {
 						...item,
+						isSelected: false,
 						id: index,
-						name: `${item?.start} - ${item?.end}`
+						title: `${item?.start} - ${item?.end}`
 					}
 				})
 				setSubscriptionTimeSlotsData(data)
@@ -144,7 +147,7 @@ const VehicleForm = () => {
 			)
 			return false
 		}
-		if (selectedSubscriptionTimeSlot === null) {
+		if (selectedTimeSlots?.length === 0) {
 			dispatch(
 				setAlertData({
 					isShown: true,
@@ -175,10 +178,12 @@ const VehicleForm = () => {
 				address_id: selectedAddress?._id,
 				carNumber: registrationNumber,
 				plan_id: selectedSubscriptionPlan?._id,
-				timeSlot: {
-					start: selectedSubscriptionTimeSlot?.start,
-					end: selectedSubscriptionTimeSlot?.end
-				},
+				timeSlot: selectedTimeSlots?.map((item: any) => {
+					return {
+						start: item?.start,
+						end: item?.end
+					}
+				}),
 				color_id: selectedColor?._id
 			}
 			postSubscriptionDetailsAPI(params, (response: API_RESPONSE) => {
@@ -220,8 +225,8 @@ const VehicleForm = () => {
 		setIsColorShow(false)
 	}
 
-	const onPressSelectTimeSlots = (data: any) => {
-		setSelectedSubscriptionTimeSlot(data)
+	const onPressSelectTimeSlots = (data: any[]) => {
+		setSubscriptionTimeSlotsData(data)
 		setIsTimeSlotsModalVisible(false)
 	}
 
@@ -229,6 +234,10 @@ const VehicleForm = () => {
 		setSelectedAddress(item)
 		setIsAddressModalVisible(false)
 	}
+
+	const selectedTimeSlots = useMemo(() => {
+		return subscriptionTimeSlotsData?.filter((item: any) => item?.isSelected)
+	}, [subscriptionTimeSlotsData])
 
 	const renderForm = () => {
 		return (
@@ -257,7 +266,7 @@ const VehicleForm = () => {
 					</CustomText>
 				</Pressable>
 				<Pressable onPress={onPressSubscriptionTimeSlot}>
-					<CustomInput label='Time Slots' onChangeText={() => {}} value={selectedSubscriptionTimeSlot?.name} isRightIcon editable={false} iconName={'down'} />
+					<CustomInput label='Time Slots' onChangeText={() => {}} value={`${selectedTimeSlots?.length} selected`} isRightIcon editable={false} iconName={'down'} />
 				</Pressable>
 				<View style={{ gap: scaleHeightPX(16) }}>
 					<CustomText style={{ marginTop: scaleHeightPX(8), ...commonFontStyles.fontSizeL }} textType='bold'>
@@ -289,7 +298,7 @@ const VehicleForm = () => {
 			</View>
 			{isColorShow && <SingleSelectionModal data={colorsList} visible={isColorShow} onClose={() => setIsColorShow(false)} title='Select Color' titleItem='name' idItem='_id' selectedItem={selectedColor} setSelectedItem={onPressSelectColor} children={renderColorsItem} />}
 			{isAddressModalVisible && <SingleSelectionModal data={allAddressList} visible={isAddressModalVisible} onClose={() => setIsAddressModalVisible(false)} title='Select Address' titleItem='address' idItem='_id' selectedItem={selectedAddress} setSelectedItem={onPressSelectAddress} />}
-			{isTimeSlotsModalVisible && <SingleSelectionModal data={subscriptionTimeSlotsData} visible={isTimeSlotsModalVisible} onClose={() => setIsTimeSlotsModalVisible(false)} title='Select Time Slot' titleItem='name' idItem='id' selectedItem={selectedSubscriptionTimeSlot} setSelectedItem={onPressSelectTimeSlots} />}
+			{isTimeSlotsModalVisible && <MultiSelectionModal data={subscriptionTimeSlotsData} visible={isTimeSlotsModalVisible} onClose={() => setIsTimeSlotsModalVisible(false)} title='Select Time Slots' setSelectedItem={onPressSelectTimeSlots} />}
 		</MainFrame>
 	)
 }

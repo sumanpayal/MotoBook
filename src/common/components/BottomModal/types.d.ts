@@ -7,8 +7,10 @@ interface BottomModalProps {
 	onModalHide?: () => void
 	containerStyle?: ViewStyle
 	headerTitle?: string
-	hederCloseOnPress?: () => void
+	headerCloseOnPress?: () => void
 	hideOnBackdropPress?: boolean
 	isHeader?: boolean
 	subHeaderTitle?: string
+	isLeftIcon?: boolean
+	headerLeftOnPress?: () => void
 }

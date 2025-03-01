@@ -2,6 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import ReferAFriend from '../screens/ReferAFriend'
 import HomeScreen from '../screens/Home'
+import MySubscriptions from '../screens/MySubscriptions'
+import MySettings from '../screens/Settings'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,6 +15,18 @@ export function HomeStack() {
 				headerShown: false
 			}}>
 			<Stack.Screen name='HomeScreen' component={HomeScreen} />
+		</Stack.Navigator>
+	)
+}
+
+export function SubscriptionsStack() {
+	return (
+		<Stack.Navigator
+			initialRouteName='MySubscriptions'
+			screenOptions={{
+				headerShown: false
+			}}>
+			<Stack.Screen name='MySubscriptions' component={MySubscriptions} />
 		</Stack.Navigator>
 	)
 }
@@ -29,14 +43,14 @@ export function ReferStack() {
 	)
 }
 
-export function MoreStack() {
+export function SettingsStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='ReferAFriend'
+			initialRouteName='MySettings'
 			screenOptions={{
 				headerShown: false
 			}}>
-			<Stack.Screen name='ReferAFriend' component={ReferAFriend} />
+			<Stack.Screen name='MySettings' component={MySettings} />
 		</Stack.Navigator>
 	)
 }

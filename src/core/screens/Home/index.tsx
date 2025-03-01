@@ -1,29 +1,41 @@
-import { useNavigation } from '@react-navigation/native'
-import CustomButton from '@src/common/components/Button'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import MainFrame from '@src/common/components/Mainframe'
-import { setUserData } from '@src/common/redux/reducers/currentUser'
-import React, { useCallback } from 'react'
-import { View } from 'react-native'
-import { useDispatch } from 'react-redux'
+import CustomText from '@src/common/components/Text'
+import commonFlexStyles from '@src/common/styles/commonFlexStyles'
+import React from 'react'
+import { Pressable, View } from 'react-native'
+import { useSelector } from 'react-redux'
+import { createStyles } from './styles'
+import commonFontStyles from '@src/common/styles/commonFontStyles'
+import { RootState } from '@src/common/redux/store/store'
 
 const HomeScreen = () => {
-    const dispatch = useDispatch()
-    const navigation: any = useNavigation()
+	const navigation: any = useNavigation()
 
-    const logoutOnPress = useCallback(() => {
-        dispatch(setUserData(null))
-    }, [])
+	const { colors } = useTheme()
+	const styles = createStyles(colors)
 
-    return (
-        <MainFrame>
-            <View style={{ gap: 16, flex: 1, alignItems: 'center', justifyContent: 'center', margin: 16 }}>
-                <CustomButton title='Logout' onPress={logoutOnPress} />
-                <CustomButton title='Add Address' onPress={() => navigation.navigate('AddAddress')} />
-                <CustomButton title='Address List' onPress={() => navigation.navigate('AddressList')} />
-                <CustomButton title='Add Vehicle Details' onPress={() => navigation.navigate('SelectBrand')} />
-            </View>
-        </MainFrame>
-    )
+	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
+
+	const renderMyCarsButton = () => {
+		return (
+			<Pressable style={styles.carsButton} onPress={() => navigation.navigate('MySubscriptions')}>
+				<CustomText textType='bold'>{'Cars'}</CustomText>
+			</Pressable>
+		)
+	}
+
+	return (
+		<MainFrame>
+			<View style={commonFlexStyles.flex1}>
+				<View style={styles.userView}>
+					<View style={styles.userImageView} />
+					<CustomText style={commonFontStyles.fontSizeXL} textType='semi-bold'>{`Hello ${userData?.fullName || ''}`}</CustomText>
+				</View>
+				{renderMyCarsButton()}
+			</View>
+		</MainFrame>
+	)
 }
 
 export default HomeScreen

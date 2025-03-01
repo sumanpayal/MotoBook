@@ -22,7 +22,8 @@ const styles = (colors: any) =>
 			...commonFlexStyles.flexRow,
 			...commonBorderWidthStyles.borderBottomWidthM,
 			borderBottomColor: colors.inputPlaceholder,
-			...commonPaddingStyles.paddingM
+			...commonPaddingStyles.paddingM,
+			gap: scaleWidthPX(16)
 		},
 		headerStyleCloseView: {
 			width: scaleWidthPX(32),

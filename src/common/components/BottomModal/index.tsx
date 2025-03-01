@@ -12,7 +12,7 @@ const BottomModal = (props: BottomModalProps) => {
 	const { colors } = useTheme()
 	const styles1 = styles(colors)
 
-	const { children, visible = false, onDrop, containerStyle, isHeader = false, headerTitle = '', hederCloseOnPress, hideOnBackdropPress = true, subHeaderTitle = '' } = props
+	const { children, visible = false, onDrop, containerStyle, isHeader = false, headerTitle = '', headerCloseOnPress, hideOnBackdropPress = true, subHeaderTitle = '', isLeftIcon = false, headerLeftOnPress } = props
 
 	return (
 		<Modal transparent visible={visible} animationType='fade' onRequestClose={() => onDrop && onDrop()}>
@@ -21,13 +21,18 @@ const BottomModal = (props: BottomModalProps) => {
 				<SafeAreaView style={[styles1.container, containerStyle]}>
 					{isHeader && (
 						<View style={styles1.headerStyle}>
+							{isLeftIcon && (
+								<Pressable onPress={headerLeftOnPress} style={styles1.headerStyleCloseView}>
+									<Icon name='check' size={22} color={colors.textColor} />
+								</Pressable>
+							)}
 							<View style={[styles1.headerStyleMiddleView, commonMarginStyles.marginRightM]}>
 								{subHeaderTitle?.length > 0 && <CustomText style={styles1.subTitleStyle}>{subHeaderTitle}</CustomText>}
 								<CustomText textType='medium' style={styles1.titleStyle}>
 									{headerTitle}
 								</CustomText>
 							</View>
-							<Pressable onPress={hederCloseOnPress} style={styles1.headerStyleCloseView}>
+							<Pressable onPress={headerCloseOnPress} style={styles1.headerStyleCloseView}>
 								<Icon name='close' size={22} color={colors.textColor} />
 							</Pressable>
 						</View>
