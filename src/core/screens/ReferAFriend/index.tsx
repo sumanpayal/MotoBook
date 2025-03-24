@@ -1,16 +1,18 @@
-import { Pressable, Share, View } from 'react-native'
+import { Share, View } from 'react-native'
 import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
-import CustomButton from '@src/common/components/Button'
 import { useTheme } from '@react-navigation/native'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { createStyles } from './styles'
-import Clipboard from "@react-native-community/clipboard";
+import Clipboard from '@react-native-community/clipboard'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
-import { postAddDetailsUser } from '@src/network/login'
-import { API_RESPONSE } from '@src/common/constants/constants'
+import { Image } from 'react-native'
+import { ReferImage } from '@src/assets/image'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import CustomInput from '@src/common/components/Input'
+import { CopySVG } from '@src/assets/svg'
 
 const ReferAFriend = () => {
 	const { colors } = useTheme()
@@ -28,92 +30,46 @@ const ReferAFriend = () => {
 
 	const dispatch = useDispatch()
 
-	const addDetailUserAPICall = (user: any) => {
-		let params = {
-			"fullName": user?.fullName,
-			"addressLine1": user?.addressLine1,
-			"addressLine2": user?.addressLine2,
-			"landmark": user?.landmark,
-			"addressType": user?.addressType,
-			"city": user?.city,
-			"state": user?.state,
-			"country": user?.country,
-			"postalCode": user?.postalCode,
-			"model_id": "",
-			"carNumber": "",
-			"lat": 0,
-			"long": 0,
-			"plan_id": "",
-			"timeSlot": []
-		}
-		postAddDetailsUser({}, params, (res: API_RESPONSE) => {
-			if (res?.data) {
-
-			}
-		})
-	}
-
-	const RenderCountView = ({ label, value }: { label: string; value: any }) => {
-		return (
-			<View style={styles.subContainer}>
-				<CustomText style={{ ...commonFontStyles.fontSizeS }}>{label}</CustomText>
-				<View style={styles.subView}>
-					<CustomText textType='medium' style={{ color: colors.backgroundColor }}>
-						{value}
-					</CustomText>
-				</View>
-			</View>
-		)
-	}
-
 	const onPressCopy = async () => {
 		await Clipboard.setString(shareText)
-		dispatch(setAlertData({
-			isShown: true,
-			type: 'warning',
-			label: 'copied to clipboard'
-		}))
+		dispatch(
+			setAlertData({
+				isShown: true,
+				type: 'warning',
+				label: 'copied to clipboard'
+			})
+		)
 	}
 
 	const referToFreiendOnPress = async () => {
 		try {
 			await Share.share({
-				message: shareText,
-			});
+				message: shareText
+			})
 		} catch (error: any) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: error.message
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: error.message
+				})
+			)
 		}
-	};
+	}
 
 	return (
-		<MainFrame>
+		<MainFrame isHeader title='Refer A Friend' isNotifications isBack={false} notificationOnPress={() => {}}>
 			<View style={styles.main}>
-				<View style={styles.imageOuterView} />
-				<View style={styles.topView}>
-					<CustomText>{'Refer A Friend'}</CustomText>
-					<View style={styles.codeView}>
-						<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeL }}>
-							{code}
-						</CustomText>
-						<Pressable onPress={onPressCopy}>
-							<CustomText textType='bold' style={{ color: colors.primary }}>
-								{'copy'}
-							</CustomText>
-						</Pressable>
-					</View>
+				<CustomText textType='bold' style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center', marginTop: scaleHeightPX(30) }}>
+					{'Share With Friends'}
+				</CustomText>
+				<CustomText lineHeight style={{ marginTop: scaleHeightPX(16), textAlign: 'center' }}>
+					{'Invite Your Friends To Washwoosh And\n Enjoy 10% Off When They Complete Their First\n Purchase. Your Friend Also Gets 10% Off As A\nWelcome Bonus.'}
+				</CustomText>
+				<View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: scaleHeightPX(44) }}>
+					<Image style={{ width: scaleWidthPX(238), height: scaleHeightPX(165) }} source={{ uri: ReferImage }} resizeMode='contain' />
 				</View>
-				<CustomButton title='Refer friends now' onPress={referToFreiendOnPress} isCircleRadius={false} showIcon SVGIcon={'share-outline'} />
-				<View style={styles.bottomView}>
-					<View style={styles.container}>
-						<RenderCountView label='Refer code' value={'0'} />
-						<RenderCountView label='Subscription' value={'0'} />
-						<RenderCountView label='Coupon claim' value={'0'} />
-					</View>
-				</View>
+				<CustomInput label='Referral Code' onChangeText={() => {}} editable={false} value={code} isRightIcon RightIcon={CopySVG} rightIconOnPress={onPressCopy} />
 			</View>
 		</MainFrame>
 	)

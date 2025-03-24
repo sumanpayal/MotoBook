@@ -16,7 +16,7 @@ export const isValidEmail = (email: string) => {
  * @returns `true` if the phone number is valid, otherwise `false`.
  */
 export function validatePhoneNumber(phoneNumber: string): boolean {
-  const phoneRegex = /^\+?[1-9]\d{7,14}$/; // E.164 format
+  const phoneRegex = /^\+?[1-9]\d{9}$/; // E.164 format
   return phoneRegex.test(phoneNumber.trim());
 }
 

@@ -7,13 +7,15 @@ import CustomInput from '@src/common/components/Input'
 import CustomButton from '@src/common/components/Button'
 import CustomText from '@src/common/components/Text'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
 import { createStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
 import { postAddAddressAPI } from '@src/network/address'
 import { API_RESPONSE } from '@src/common/constants/constants'
+import commonFontStyles from '@src/common/styles/commonFontStyles'
+import { UseLocationSVG } from '@src/assets/svg'
+import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 enum ADDRESS_KEYS {
 	addressType = 'addressType',
@@ -56,12 +58,12 @@ const AddAddress = () => {
 	]
 
 	const [addressData, setAddressData] = useState<{
-		addressType: any,
-		address: string,
-		landmark: string,
-		country: string,
-		state: string,
-		city: string,
+		addressType: any
+		address: string
+		landmark: string
+		country: string
+		state: string
+		city: string
 		postalCode: string
 	}>({
 		addressType: null,
@@ -77,64 +79,80 @@ const AddAddress = () => {
 
 	const isValidateForm = () => {
 		if (!addressData?.addressType) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please select Address Type'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please select Address Type'
+				})
+			)
 			return false
 		}
 		if (isEmpty(addressData?.address)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter Address'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please enter Address'
+				})
+			)
 			return false
 		}
 		if (isEmpty(addressData?.landmark)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter Landmark'
-			}))
-			return false
+			dispatch(
+				setAlertData({
+					isShown: false,
+					type: 'error',
+					label: 'Please enter Landmark'
+				})
+			)
+			return true
 		}
 		if (isEmpty(addressData?.country)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter Country'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please enter Country'
+				})
+			)
 			return false
 		}
 		if (isEmpty(addressData?.state)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter State'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please enter State'
+				})
+			)
 			return false
 		}
 		if (isEmpty(addressData?.city)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter District'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please enter District'
+				})
+			)
 			return false
 		}
 		if (isEmpty(addressData?.postalCode)) {
-			dispatch(setAlertData({
-				isShown: true,
-				type: 'error',
-				label: 'Please enter Pincode'
-			}))
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: 'Please enter Pincode'
+				})
+			)
 			return false
 		}
 
 		return true
 	}
+
+	const useMyLocationOnPress = () => {}
 
 	const onPressSaveAddress = () => {
 		if (isValidateForm()) {
@@ -145,32 +163,35 @@ const AddAddress = () => {
 	const addAddressAPICall = () => {
 		setIsLoading(true)
 		const params = {
-			"city": addressData?.city,
-			"state": addressData?.state,
-			"landmark": addressData?.landmark,
-			"addressType": addressData?.addressType?.value,
-			"country": addressData?.country,
-			"postalCode": addressData?.postalCode
+			city: addressData?.city,
+			state: addressData?.state,
+			landmark: addressData?.landmark,
+			addressType: addressData?.addressType?.value,
+			country: addressData?.country,
+			postalCode: addressData?.postalCode
 		}
 		postAddAddressAPI(params, (res: API_RESPONSE) => {
 			if (res.data) {
-				dispatch(setAlertData({
-					isShown: true,
-					type: 'success',
-					label: res?.data,
-				}))
+				dispatch(
+					setAlertData({
+						isShown: true,
+						type: 'success',
+						label: res?.data
+					})
+				)
 				setTimeout(() => {
 					setIsLoading(false)
 					navigation.goBack()
 				}, 100)
-			}
-			else {
+			} else {
 				setIsLoading(false)
-				dispatch(setAlertData({
-					isShown: true,
-					type: 'error',
-					label: res?.error
-				}))
+				dispatch(
+					setAlertData({
+						isShown: true,
+						type: 'error',
+						label: res?.error
+					})
+				)
 			}
 		})
 	}
@@ -185,8 +206,10 @@ const AddAddress = () => {
 	const RenderAddressItem = ({ item }: { item: any }) => {
 		const isSelected = addressData?.addressType?.id === item?.id
 		return (
-			<Pressable style={[styles.addressItem, isSelected && { borderWidth: 1, borderColor: colors.primary }]} onPress={() => setAddressDetaills(ADDRESS_KEYS.addressType, item)}>
-				<CustomText textType={isSelected ? 'bold' : 'regular'}>{item?.name}</CustomText>
+			<Pressable style={[styles.addressItem, isSelected && { borderWidth: 1, borderColor: colors.primary, backgroundColor: colors.primary }]} onPress={() => setAddressDetaills(ADDRESS_KEYS.addressType, item)}>
+				<CustomText textType={'semi-bold'} style={{ color: isSelected ? colors.backgroundColor : colors.white }}>
+					{item?.name}
+				</CustomText>
 			</Pressable>
 		)
 	}
@@ -194,8 +217,8 @@ const AddAddress = () => {
 	const renderSaveAsAddress = () => {
 		return (
 			<View style={styles.saveAddressAs}>
-				<CustomText textType='medium'>
-					{'Save Address as '}
+				<CustomText textType='medium' style={commonFontStyles.fontSizeXL}>
+					{'Save Address As '}
 					<CustomText style={{ color: colors.alertRed }}>{'*'}</CustomText>
 				</CustomText>
 				<ScrollView horizontal contentContainerStyle={styles.scrollView} showsHorizontalScrollIndicator={false}>
@@ -225,10 +248,10 @@ const AddAddress = () => {
 						setAddressDetaills(ADDRESS_KEYS.landmark, text)
 					}}
 					value={addressData?.landmark}
-					isRequired
+					isRequired={false}
 				/>
 				<View style={styles.countryOuter}>
-					<View style={commonFlexStyles.flex1}>
+					<View style={{ flex: 1 }}>
 						<CustomInput
 							label='Country'
 							onChangeText={(text: string) => {
@@ -238,7 +261,7 @@ const AddAddress = () => {
 							isRequired
 						/>
 					</View>
-					<View style={commonFlexStyles.flex1}>
+					<View style={{ flex: 1 }}>
 						<CustomInput
 							label='State'
 							onChangeText={(text: string) => {
@@ -267,6 +290,10 @@ const AddAddress = () => {
 					maxLength={6}
 					keyboardType='number-pad'
 				/>
+				<Pressable style={{ flexDirection: 'row', gap: scaleWidthPX(16), alignItems: 'center' }} onPress={useMyLocationOnPress}>
+					<UseLocationSVG />
+					<CustomText style={commonFontStyles.fontSizeL}>{'Use My Location'}</CustomText>
+				</Pressable>
 			</View>
 		)
 	}

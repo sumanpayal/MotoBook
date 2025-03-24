@@ -43,14 +43,14 @@ export function ReferStack() {
 	)
 }
 
-export function SettingsStack() {
+export function AccountStack() {
 	return (
 		<Stack.Navigator
-			initialRouteName='MySettings'
+			initialRouteName='Account'
 			screenOptions={{
 				headerShown: false
 			}}>
-			<Stack.Screen name='MySettings' component={MySettings} />
+			<Stack.Screen name='Account' component={MySettings} />
 		</Stack.Navigator>
 	)
 }

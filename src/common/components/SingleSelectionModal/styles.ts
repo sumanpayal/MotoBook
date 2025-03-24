@@ -1,8 +1,4 @@
-import commonAlignStyles from '@commonStyles/commonAlignStyles'
-import commonFlexStyles from '@commonStyles/commonFlexStyles'
-import commonPaddingStyles from '@commonStyles/commonPaddingStyles'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import { scaleHeightPX, scaleWidthPX } from '@utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
 
@@ -14,15 +10,15 @@ export const selectionModalStyles = (colors: any) =>
 		},
 		itemContent: {
 			columnGap: scaleWidthPX(8),
-			...commonPaddingStyles.paddingVertical3XS,
-			...commonAlignStyles.alignCenter,
-			...commonAlignStyles.justifyBetween,
-			...commonFlexStyles.flexRow
+			paddingVertical: scaleHeightPX(8),
+			alignItems: 'center',
+			justifyContent: 'space-between',
+			flexDirection: 'row'
 		},
 		itemLeft: {
-			...commonFlexStyles.flexRow,
-			...commonFlexStyles.flex1,
-			...commonAlignStyles.alignCenter,
+			flexDirection: 'row',
+			flex: 1,
+			alignItems: 'center',
 			columnGap: scaleWidthPX(8)
 		},
 		itemLeftImage: {
@@ -37,22 +33,22 @@ export const selectionModalStyles = (colors: any) =>
 			...commonFontStyles.fontSizeM
 		},
 		itemRight: {
-			...commonPaddingStyles.paddingLeft3XS,
-			...commonPaddingStyles.paddingVertical3XS
+			paddingVertical: scaleHeightPX(8),
+			paddingLeft: scaleWidthPX(8)
 		},
 		listStyle: {
-			...commonMarginStyles.marginHorizontalM
+			marginHorizontal: scaleWidthPX(16)
 		},
 		listStyleEmpty: {
-			...commonAlignStyles.alignCenter,
-			...commonAlignStyles.justifyCenter
+			alignItems: 'center',
+			justifyContent: 'center'
 		},
 		containerStyle: {
 			minHeight: '60%'
 		},
 		search: {
-			...commonMarginStyles.marginVertical2XL,
-			...commonMarginStyles.marginHorizontalM
+			marginVertical: scaleHeightPX(22),
+			marginHorizontal: scaleWidthPX(16)
 		},
 		selectedViewOuter: {
 			width: scaleWidthPX(20),
@@ -61,12 +57,12 @@ export const selectionModalStyles = (colors: any) =>
 			borderRadius: scaleWidthPX(20),
 			justifyContent: 'center',
 			alignItems: 'center',
-			borderColor: colors.textColor
+			borderColor: colors.white
 		},
 		selectedViewInner: {
 			width: scaleWidthPX(12),
 			height: scaleWidthPX(12),
-			backgroundColor: colors.textColor,
+			backgroundColor: colors.white,
 			borderRadius: scaleWidthPX(12)
 		}
 	})

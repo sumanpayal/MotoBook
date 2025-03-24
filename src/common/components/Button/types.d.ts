@@ -10,9 +10,8 @@ interface CustomButtonProps {
   backgroundColor?: string;
   width?: any;
   buttonType?: BUTTON_TYPES;
-  textColor?: string;
+  white?: string;
   isLoading?: boolean;
-  isHorizontal?: boolean;
   isFlex?: boolean;
   isCircleRadius?: boolean
 }

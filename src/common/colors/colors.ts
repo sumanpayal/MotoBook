@@ -9,24 +9,29 @@ const COLORS_LIGHT: ExtendedTheme = {
 	...DefaultTheme,
 	dark: false,
 	colors: {
-		textColor: '#FFFFFF',
-		backgroundColor: 'rgb(4,4,4)',
-		primary: 'rgb(72,190,192)',
+		white: '#FFFFFF',
+		backgroundColor: '#10192A',
+		primary: '#00E39C',
 		secondary: 'rgb(9,56,114)',
 		grayBg: 'rgb(26,26,24)',
-		alertRed: '#FF3759',
+		alertRed: '#DB5757',
 		alertGreen: '#19AC56',
 		black: '#000000',
 		borderColor: '#B9C6DE',
 		borderColorInputFocused: '#333333',
 		borderColorInputDisabled: '#8596B8',
-		inputPlaceholder: '#63606D',
+		inputPlaceholder: '#555F71',
 		searchBackground: '#F0F2F6',
 		uploadFileSuccessBg: '#F3FFFA',
 		otpBackground: '#000C2ACC',
 		inputDisabledBackground: '#DFE6F4',
 		warning: '#FFEA6A',
-		shadowColor: '#1A2A61'
+		shadowColor: '#1A2A61',
+		inputBackground: '#1B3044',
+		labelColor: '#9BA6B8',
+		planBg: '#A5D5FA',
+		planText: '#2D4B82',
+		inActiveDot: '#A7A7A7'
 	}
 }
 

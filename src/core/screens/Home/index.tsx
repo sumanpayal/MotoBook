@@ -1,13 +1,17 @@
 import { useNavigation, useTheme } from '@react-navigation/native'
-import MainFrame from '@src/common/components/Mainframe'
-import CustomText from '@src/common/components/Text'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
-import React from 'react'
-import { Pressable, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { Pressable, ScrollView, View } from 'react-native'
 import { createStyles } from './styles'
-import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { RootState } from '@src/common/redux/store/store'
+import { AddCarSVG } from '@src/assets/svg'
+import Carousel from '@src/common/components/Carousel'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
+import SearchComponent from '@src/common/components/SearchComponent'
+import { HeaderLeftComponent } from './components/HeaderLeft'
+import { DailyCarPlans } from './components/DailyCarPlans'
+import { HowItWorks } from './components/HowItWorks'
+import { InteriorCleaning, PlanDetails } from './components/PlanDetails'
 
 const HomeScreen = () => {
 	const navigation: any = useNavigation()
@@ -15,26 +19,53 @@ const HomeScreen = () => {
 	const { colors } = useTheme()
 	const styles = createStyles(colors)
 
-	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
+	const [searchText, setSearchText] = useState<string>('')
 
 	const renderMyCarsButton = () => {
 		return (
-			<Pressable style={styles.carsButton} onPress={() => navigation.navigate('MySubscriptions')}>
-				<CustomText textType='bold'>{'Cars'}</CustomText>
+			<Pressable style={styles.carsButton} onPress={() => navigation.navigate('MyCars', { fromCars: true })}>
+				<AddCarSVG />
 			</Pressable>
 		)
 	}
 
-	return (
-		<MainFrame>
-			<View style={commonFlexStyles.flex1}>
-				<View style={styles.userView}>
-					<View style={styles.userImageView} />
-					<CustomText style={commonFontStyles.fontSizeXL} textType='semi-bold'>{`Hello ${userData?.fullName || ''}`}</CustomText>
+	const renderHeaderLeft = () => {
+		return <HeaderLeftComponent />
+	}
+
+	const renderHeader = () => {
+		return (
+			<View style={styles.header}>
+				<SafeAreaView edges={['top']} />
+				<HeaderNavigation isCustom children={renderHeaderLeft()} isNotifications />
+				<View style={styles.search}>
+					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} />
 				</View>
-				{renderMyCarsButton()}
 			</View>
-		</MainFrame>
+		)
+	}
+
+	return (
+		<View style={{ flex: 1 }}>
+			{renderHeader()}
+			<View style={styles.carousel}>
+				<Carousel
+					data={[
+						{ id: 0, color: '#FF6A61' },
+						{ id: 1, color: '#4DC8AF' }
+					]}
+				/>
+			</View>
+			<ScrollView showsVerticalScrollIndicator={false} style={{ marginBottom: scaleHeightPX(24) }}>
+				<View style={styles.container}>
+					<DailyCarPlans />
+					<PlanDetails />
+					<InteriorCleaning />
+					<HowItWorks />
+				</View>
+			</ScrollView>
+			{renderMyCarsButton()}
+		</View>
 	)
 }
 

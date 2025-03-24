@@ -1,9 +1,4 @@
-import commonAlignStyles from '@commonStyles/commonAlignStyles'
-import commonBorderRadiusStyles from '@commonStyles/commonBorderRadiusStyles'
-import commonFlexStyles from '@commonStyles/commonFlexStyles'
 import commonFontStyles from '@commonStyles/commonFontStyles'
-import commonPaddingStyles from '@commonStyles/commonPaddingStyles'
-import { spacing } from '@commonStyles/values'
 import CustomText from '@components/Text'
 import { BUTTON_TYPES } from '@constants/constants'
 import { useTheme } from '@react-navigation/native'
@@ -18,26 +13,26 @@ import Icon from 'react-native-vector-icons/Ionicons'
 export default function CustomButton(props: CustomButtonProps) {
 	const { colors } = useTheme()
 
-	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, textColor = colors.textColor, isLoading = false, isHorizontal = false, iconSize = 24, isFlex = false, isCircleRadius = true } = props
+	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, white = colors.backgroundColor, isLoading = false, iconSize = 24, isFlex = false, isCircleRadius = false } = props
 
 	const buttonStyle: ViewStyle = useMemo(() => {
 		switch (buttonType) {
 			case BUTTON_TYPES.PRIMARY:
 				return {
 					backgroundColor: backgroundColor ? backgroundColor : colors.primary,
-					height: scaleHeightPX(48),
+					height: scaleHeightPX(60),
 					width: width ? width : '100%'
 				}
 			case BUTTON_TYPES.SECONDARY:
 				return {
-					backgroundColor: backgroundColor ? backgroundColor : colors.textColor,
-					height: scaleHeightPX(48),
+					backgroundColor: backgroundColor ? backgroundColor : colors.white,
+					height: scaleHeightPX(60),
 					width: width ? width : '100%'
 				}
 			default:
 				return {
 					backgroundColor: backgroundColor ? backgroundColor : colors.primary,
-					height: scaleHeightPX(48),
+					height: scaleHeightPX(60),
 					width: width ? width : '100%'
 				}
 		}
@@ -45,7 +40,7 @@ export default function CustomButton(props: CustomButtonProps) {
 
 	const buttonFlexStyle: ViewStyle = useMemo(() => {
 		if (isFlex) {
-			return commonFlexStyles.flex1
+			return { flex: 1 }
 		} else {
 			return {}
 		}
@@ -53,10 +48,9 @@ export default function CustomButton(props: CustomButtonProps) {
 
 	const borderStyle = useMemo(() => {
 		if (isCircleRadius) {
-			return commonBorderRadiusStyles.borderRadiusCircle
-		}
-		else {
-			return { borderRadius: 8}
+			return { borderRadius: 100 }
+		} else {
+			return { borderRadius: 15 }
 		}
 	}, [isCircleRadius])
 
@@ -65,23 +59,23 @@ export default function CustomButton(props: CustomButtonProps) {
 			case BUTTON_TYPES.PRIMARY:
 				return {
 					...commonFontStyles.fontSemiBold,
-					...commonFontStyles.fontSizeL,
-					color: textColor
+					...commonFontStyles.fontSizeXL,
+					color: white
 				}
 			case BUTTON_TYPES.SECONDARY:
 				return {
 					...commonFontStyles.fontSemiBold,
-					...commonFontStyles.fontSizeL,
+					...commonFontStyles.fontSizeXL,
 					color: colors.backgroundColor
 				}
 			default:
 				return {
 					...commonFontStyles.fontSemiBold,
-					...commonFontStyles.fontSizeL,
-					color: textColor
+					...commonFontStyles.fontSizeXL,
+					color: white
 				}
 		}
-	}, [buttonType, textColor])
+	}, [buttonType, white])
 
 	return isLoading ? (
 		<View style={[styles.button, buttonStyle, borderStyle]}>
@@ -89,7 +83,7 @@ export default function CustomButton(props: CustomButtonProps) {
 		</View>
 	) : (
 		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
-			{showIcon && <Icon name={SVGIcon} size={iconSize} color={textColor} />}
+			{showIcon && <Icon name={SVGIcon} size={iconSize} color={white} />}
 			<CustomText style={textStyle}>{title}</CustomText>
 		</Pressable>
 	)
@@ -97,11 +91,11 @@ export default function CustomButton(props: CustomButtonProps) {
 
 const styles = StyleSheet.create({
 	button: {
-		...commonAlignStyles.alignCenter,
-		...commonAlignStyles.justifyCenter,
-		...commonBorderRadiusStyles.borderRadiusCircle,
-		...commonPaddingStyles.paddingHorizontalXS,
-		...commonFlexStyles.flexRow,
-		gap: scaleWidthPX(spacing.m)
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRadius: 100,
+		paddingHorizontal: scaleWidthPX(12),
+		flexDirection: 'row',
+		gap: scaleWidthPX(16)
 	}
 })

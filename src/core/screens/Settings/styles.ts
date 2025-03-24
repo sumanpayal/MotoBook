@@ -5,20 +5,45 @@ export const createStyles = (colors: any) => {
 	return StyleSheet.create({
 		main: {
 			flex: 1,
-			paddingHorizontal: scaleWidthPX(16)
+			backgroundColor: colors.backgroundColor
 		},
 		item: {
 			flexDirection: 'row',
 			gap: scaleWidthPX(16),
-			borderRadius: 12,
-			padding: 16,
+			paddingHorizontal: scaleWidthPX(16),
 			alignItems: 'center',
-			justifyContent: 'space-between'
+			justifyContent: 'space-between',
+			borderBottomWidth: 1,
+			borderBottomColor: '#1B2F44',
+			height: scaleHeightPX(70)
 		},
-		seperator: {
-			height: 1,
-			backgroundColor: colors.inputPlaceholder,
-			marginVertical: scaleHeightPX(8)
+		itemInner: {
+			flexDirection: 'row',
+			gap: scaleWidthPX(12),
+			alignItems: 'center'
+		},
+		image: {
+			width: '100%',
+			height: scaleHeightPX(248)
+		},
+		profileView: {
+			width: scaleWidthPX(126),
+			height: scaleWidthPX(126),
+			borderRadius: 100,
+			backgroundColor: colors.inputBackground,
+			alignSelf: 'center',
+			marginTop: scaleHeightPX(-100),
+			marginBottom: scaleHeightPX(16),
+			justifyContent: 'center',
+			alignItems: 'center'
+		},
+		edit: {
+			borderRadius: 100,
+			width: scaleWidthPX(30),
+			height: scaleWidthPX(30),
+			backgroundColor: colors.white,
+			justifyContent: 'center',
+			alignItems: 'center'
 		}
 	})
 }

@@ -1,4 +1,9 @@
 interface HeaderNavigationProps {
-  title?: string;
-  backOnPress?: () => void;
+	title?: string
+	isBack?: boolean
+	backOnPress?: () => void
+	isNotifications?: boolean
+	notificationOnPress?: () => void
+	isCustom?: boolean
+	children?: React.ReactNode | undefined
 }

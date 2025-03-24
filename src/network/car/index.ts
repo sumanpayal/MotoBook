@@ -21,7 +21,7 @@ export const getCompaniesListAPI = (callBack: (response: API_RESPONSE) => void) 
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }
@@ -45,7 +45,7 @@ export const getCarModalsListAPIForCompanyID = (company_id: any, callBack: (resp
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }
@@ -69,7 +69,7 @@ export const getMySubscriptionList = (pageNo: number, callBack: (response: API_R
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }
@@ -93,7 +93,7 @@ export const getMySubscriptionDetails = (subscription_id: number, callBack: (res
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }
@@ -110,7 +110,7 @@ export const getSubscriptionPlansList = (car_type_id: number, callBack: (respons
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }
@@ -134,7 +134,7 @@ export const getSubscriptionTimeSlotsList = (callBack: (response: API_RESPONSE) 
 			console.error(err)
 			callBack({
 				data: undefined,
-				error: err
+				error: err?.message
 			})
 		})
 }

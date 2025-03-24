@@ -26,7 +26,7 @@ export const postMobileLogin = (
             console.error(err);
             callBack({
                 data: undefined,
-                error: err,
+                error: err?.message,
             });
         });
 };
@@ -56,7 +56,7 @@ export const postVerifyOTP = (
             console.error(err);
             callBack({
                 data: undefined,
-                error: err,
+                error: err?.message,
             });
         });
 };
@@ -85,7 +85,7 @@ export const postAddDetailsUser = (
             console.error(err);
             callBack({
                 data: undefined,
-                error: err,
+                error: err?.message,
             });
         });
 };

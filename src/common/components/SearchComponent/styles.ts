@@ -1,47 +1,40 @@
-import commonAlignStyles from '@commonStyles/commonAlignStyles'
-import commonBorderRadiusStyles from '@commonStyles/commonBorderRadiusStyles'
-import commonFlexStyles from '@commonStyles/commonFlexStyles'
 import commonFontStyles from '@commonStyles/commonFontStyles'
-import commonPaddingStyles from '@commonStyles/commonPaddingStyles'
-import { spacing } from '@commonStyles/values'
-import commonBorderWidthStyles from '@src/common/styles/commonBorderWidthStyles'
-import commonTextStyles from '@src/common/styles/commonTextStyles'
 import { scaleHeightPX, scaleWidthPX } from '@utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
 
 const styles = (colors: any) =>
 	StyleSheet.create({
 		container: {
-			...commonAlignStyles.alignCenter,
-			...commonAlignStyles.justifyBetween,
-			...commonFlexStyles.flexRow,
+			alignItems: 'center',
+			justifyContent: 'space-between',
+			flexDirection: 'row',
 			width: '100%'
 		},
 		input: {
-			...commonFontStyles.fontSizeM,
+			...commonFontStyles.fontSizeL,
 			...commonFontStyles.fontSemiBold,
-			...commonPaddingStyles.paddingVerticalM,
-			...commonFlexStyles.flex1,
-			color: colors.textColor,
-			...commonTextStyles.textLeft
+			paddingVertical: scaleHeightPX(16),
+			flex: 1,
+			color: colors.white,
+			textAlign: 'left'
 		},
 		inputPlaceholder: {
-			...commonFontStyles.fontSizeS,
-			...commonFontStyles.fontRegular
+			...commonFontStyles.fontSizeL
 		},
 		searchContainer: {
-			...commonAlignStyles.alignCenter,
-			...commonBorderRadiusStyles.borderRadiusCircle,
-			...commonFlexStyles.flexRow,
-			...commonPaddingStyles.paddingHorizontalM,
-			height: scaleHeightPX(56),
-			columnGap: scaleWidthPX(spacing.m),
+			alignItems: 'center',
+			borderRadius: 15,
+			flexDirection: 'row',
+			paddingLeft: scaleWidthPX(16),
+			paddingRight: scaleWidthPX(10),
+			height: scaleHeightPX(50),
+			columnGap: scaleWidthPX(16),
 			borderColor: colors.inputPlaceholder,
-			...commonBorderWidthStyles.borderWidthM
+			borderWidth: 1
 		},
 		clearButton: {
-			...commonPaddingStyles.padding4XS
-		},
+			padding: scaleWidthPX(6)
+		}
 	})
 
 export default styles

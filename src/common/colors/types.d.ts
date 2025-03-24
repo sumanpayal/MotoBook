@@ -4,7 +4,7 @@ declare module '@react-navigation/native' {
 	export type ExtendedTheme = {
 		dark: boolean
 		colors: {
-			textColor: string
+			white: string
 			backgroundColor: string
 			primary: string
 			secondary: string
@@ -22,6 +22,11 @@ declare module '@react-navigation/native' {
 			inputDisabledBackground: string
 			warning: string
 			shadowColor: string
+			inputBackground: string
+			labelColor: string
+			planBg: string
+			planText: string,
+			inActiveDot: string
 		}
 	}
 	export function useTheme(): ExtendedTheme

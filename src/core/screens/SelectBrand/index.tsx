@@ -3,16 +3,13 @@ import React, { useEffect, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useNavigation } from '@react-navigation/native'
 import SearchComponent from '@src/common/components/SearchComponent'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import SelectModal from './components/SelectModal'
 import BrandItem from './components/BrandItem'
 import { styles } from './styles'
 import { getCarModalsListAPIForCompanyID, getCompaniesListAPI } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
-
-import DummyImage from '../../../../audi-logo.webp'
-export const vhicleImage = Image.resolveAssetSource(DummyImage).uri
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
 const SelectBrand = () => {
 	const navigation: any = useNavigation()
@@ -45,8 +42,8 @@ const SelectBrand = () => {
 		const data =
 			allBrandsData?.length > 0
 				? allBrandsData?.filter((item: any) => {
-					return searchText?.length > 0 ? item?.name?.toLowerCase().includes(searchText?.toLowerCase()) : true
-				})
+						return searchText?.length > 0 ? item?.name?.toLowerCase().includes(searchText?.toLowerCase()) : true
+				  })
 				: allBrandsData
 		setSearchedBrandsData(data)
 	}
@@ -57,8 +54,7 @@ const SelectBrand = () => {
 			if (res.data) {
 				setCardModalsData(res.data)
 				setIsModalVisible(true)
-			}
-			else {
+			} else {
 				setSelectedCarCompany(null)
 			}
 		})
@@ -75,40 +71,28 @@ const SelectBrand = () => {
 		onCloseCarModal()
 	}
 
-	const RenderBrandItem = ({ item }: { item: any }) => {
-		return <BrandItem item={item} onPress={() => onPressItem(item)} />
-	}
-
 	return (
 		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Select Your Brand'>
 			<View style={styles.main}>
-				<View style={commonMarginStyles.marginVerticalM}>
-					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} />
+				<View style={{ marginVertical: scaleHeightPX(16) }}>
+					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} placeholder='Search By Name Or Model' />
 				</View>
 				<ScrollView>
-					{searchedBrandsData?.length > 0 && <View style={styles.container}>
-						{searchedBrandsData?.map((item: any) => {
-							return (
-								<View key={item?._id}>
-									<RenderBrandItem item={item} />
-								</View>
-							)
-						})}
-					</View>}
+					{searchedBrandsData?.length > 0 && (
+						<View style={styles.container}>
+							{searchedBrandsData?.map((item: any) => (
+								<BrandItem key={item?._id} item={item} onPress={() => onPressItem(item)} selected={selectedCarCompany} />
+							))}
+						</View>
+					)}
 				</ScrollView>
-				{searchedBrandsData?.length === 0 && <View style={styles.center}><NoRecordFound /></View>}
+				{searchedBrandsData?.length === 0 && (
+					<View style={styles.center}>
+						<NoRecordFound />
+					</View>
+				)}
 			</View>
-			{isModalVisible && carModalsData?.length > 0 && (
-				<SelectModal
-					selectedItem={null}
-					title='Select Modal'
-					subHeaderTitle={selectedCarCompany?.name}
-					visible={isModalVisible}
-					onClose={onCloseCarModal}
-					setSelectedItem={selectModalAndNavigateToAddVehicle}
-					data={carModalsData}
-				/>
-			)}
+			{isModalVisible && carModalsData?.length > 0 && <SelectModal selectedItem={null} title={`Select ${selectedCarCompany?.name} Modal`} visible={isModalVisible} onClose={onCloseCarModal} setSelectedItem={selectModalAndNavigateToAddVehicle} data={carModalsData} />}
 		</MainFrame>
 	)
 }

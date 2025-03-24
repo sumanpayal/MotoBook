@@ -1,40 +1,35 @@
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
-import commonAlignStyles from '@src/common/styles/commonAlignStyles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import commonPaddingStyles from '@src/common/styles/commonPaddingStyles'
-import commonBorderWidthStyles from '@src/common/styles/commonBorderWidthStyles'
-import commonBorderRadiusStyles from '@src/common/styles/commonBorderRadiusStyles'
 import { StyleSheet } from 'react-native'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const createStyles = (colors: any) => {
 	return StyleSheet.create({
 		main: {
-			...commonFlexStyles.flex1,
-			...commonAlignStyles.justifyBetween,
-			...commonMarginStyles.marginM
+			flex: 1,
+			justifyContent: 'space-between',
+			marginHorizontal: scaleWidthPX(16),
+			marginTop: scaleHeightPX(24)
 		},
 		countryOuter: {
 			gap: scaleWidthPX(16),
-			...commonFlexStyles.flexRow
+			flexDirection: 'row'
 		},
 		addessOuter: {
-			...commonFlexStyles.flex1,
+			flex: 1,
 			gap: scaleHeightPX(16)
 		},
 		scrollView: {
-			...commonFlexStyles.flexRow,
+			flexDirection: 'row',
 			gap: scaleWidthPX(12)
 		},
 		saveAddressAs: {
 			gap: scaleHeightPX(8)
 		},
 		addressItem: {
-			...commonBorderRadiusStyles.borderRadiusS,
-			backgroundColor: colors.inputPlaceholder,
-			...commonAlignStyles.justifyCenter,
-			...commonAlignStyles.alignCenter,
-			...commonPaddingStyles.padding3XS
+			borderRadius: 8,
+			backgroundColor: colors.inputBackground,
+			justifyContent: 'center',
+			alignItems: 'center',
+			padding: scaleWidthPX(8)
 		}
 	})
 }

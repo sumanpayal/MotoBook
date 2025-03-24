@@ -1,22 +1,18 @@
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
-import commonAlignStyles from '@src/common/styles/commonAlignStyles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import commonPaddingStyles from '@src/common/styles/commonPaddingStyles'
-import commonBorderRadiusStyles from '@src/common/styles/commonBorderRadiusStyles'
 import { StyleSheet } from 'react-native'
+import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const createStyles = (colors: any) => {
 	return StyleSheet.create({
 		main: {
-			...commonFlexStyles.flex1,
-			...commonMarginStyles.marginM
+			flex: 1,
+			margin: scaleWidthPX(16)
 		},
 		addressItem: {
-			...commonBorderRadiusStyles.borderRadiusS,
+			borderRadius: 8,
 			backgroundColor: colors.inputPlaceholder,
-			...commonAlignStyles.justifyCenter,
-			...commonAlignStyles.alignCenter,
-			...commonPaddingStyles.padding3XS
+			justifyContent: 'center',
+			alignItems: 'center',
+			padding: scaleWidthPX(8)
 		}
 	})
 }

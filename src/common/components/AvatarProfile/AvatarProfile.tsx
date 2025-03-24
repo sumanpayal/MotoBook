@@ -1,6 +1,4 @@
-import commonBorderRadiusStyles from '@commonStyles/commonBorderRadiusStyles'
 import { useTheme } from '@react-navigation/native'
-import commonAlignStyles from '@src/common/styles/commonAlignStyles'
 import getInitials from '@src/common/utils/getInitials'
 import { scaleWidthPX } from '@utils/responsiveStyle'
 import { isEmpty } from 'lodash'
@@ -8,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import { Image, View } from 'react-native'
 import CustomText from '../Text'
 import { DefaultProfileImage } from '@src/assets/image'
-import commonBorderWidthStyles from '@src/common/styles/commonBorderWidthStyles'
 
 export default function AvatarProfile({ size = scaleWidthPX(64), url, showInitials = false, name = '' }: IAvatarProfile) {
 	const { colors } = useTheme()
@@ -32,13 +29,13 @@ export default function AvatarProfile({ size = scaleWidthPX(64), url, showInitia
 				width: scaleWidthPX(size),
 				height: scaleWidthPX(size),
 				backgroundColor: colors.backgroundColor,
-				borderColor: colors.textColor,
-				...commonBorderRadiusStyles.borderRadiusCircle,
-				...commonAlignStyles.alignCenter,
-				...commonAlignStyles.justifyCenter,
-				...commonBorderWidthStyles.borderWidthM
+				borderColor: colors.white,
+				borderRadius: 100,
+				alignItems: 'center',
+				justifyContent: 'center',
+				borderWidth: 1
 			}}>
-			<CustomText textType={'semi-bold'} style={{ color: colors.textColor }}>
+			<CustomText textType={'semi-bold'} style={{ color: colors.white }}>
 				{getInitials(name)}
 			</CustomText>
 		</View>
@@ -48,7 +45,7 @@ export default function AvatarProfile({ size = scaleWidthPX(64), url, showInitia
 			style={{
 				width: scaleWidthPX(size),
 				height: scaleWidthPX(size),
-				...commonBorderRadiusStyles.borderRadiusCircle,
+				borderRadius: 100,
 				backgroundColor: colors.backgroundColor
 			}}
 			resizeMode='cover'

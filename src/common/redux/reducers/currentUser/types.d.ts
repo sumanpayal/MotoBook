@@ -1,4 +1,4 @@
 type CurrentUser = {
-    userData: any;
-    isLoggedIn: boolean
-};
+	userData: any
+	isLoggedIn: boolean
+}

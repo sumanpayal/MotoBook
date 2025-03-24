@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
-import commonAlignStyles from '@src/common/styles/commonAlignStyles'
-import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import BottomModal from '@src/common/components/BottomModal'
 import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import SearchComponent from '@src/common/components/SearchComponent'
 import { BottomModalProps } from '@src/common/components/BottomModal/types'
 import BrandItem from './BrandItem'
+import { useTheme } from '@react-navigation/native'
 
 type SelectModalProps = {
 	data: any[]
@@ -18,11 +16,12 @@ type SelectModalProps = {
 	selectedItem: any | null
 	setSelectedItem: (item: any) => void
 	modalProps?: BottomModalProps
-	subHeaderTitle?: string
 }
 
 const SelectModal = (props: SelectModalProps) => {
-	const { visible, onClose = () => { }, data, title, modalProps, subHeaderTitle, setSelectedItem } = props
+	const {colors} = useTheme()
+
+	const { visible, onClose = () => {}, data, title, modalProps, setSelectedItem } = props
 
 	const [searchText, setSearchText] = useState<string>('')
 	const [flatListData, setFlatListData] = useState<any[]>(data)
@@ -45,7 +44,7 @@ const SelectModal = (props: SelectModalProps) => {
 
 	const listHeaderComponent = () => {
 		return (
-			<View style={commonMarginStyles.marginVerticalM}>
+			<View style={{ marginBottom: scaleHeightPX(16) }}>
 				<SearchComponent
 					searchText={searchText}
 					handleSearch={(text: string) => {
@@ -61,26 +60,24 @@ const SelectModal = (props: SelectModalProps) => {
 		)
 	}
 
-	const RenderBrandItem = ({ item }: { item: any }) => {
-		return <BrandItem item={item} onPress={() => setSelectedItem(item)} />
-	}
-
 	return (
-		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} subHeaderTitle={subHeaderTitle} headerCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false}>
+		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false} headerChildren={<View style={{ backgroundColor: colors.inputBackground, width: scaleWidthPX(64), height: scaleWidthPX(64), borderRadius: 100, marginTop: scaleHeightPX(8) }} />}>
 			<View style={styles.main}>
 				{listHeaderComponent()}
 				<ScrollView>
-					{flatListData?.length > 0 && <View style={styles.container}>
-						{flatListData?.map((item: any) => {
-							return (
-								<View key={item?._id}>
-									<RenderBrandItem item={item} />
-								</View>
-							)
-						})}
-					</View>}
+					{flatListData?.length > 0 && (
+						<View style={styles.container}>
+							{flatListData?.map((item: any) => (
+								<BrandItem item={item} onPress={() => setSelectedItem(item)} key={item?._id} isModal />
+							))}
+						</View>
+					)}
 				</ScrollView>
-				{flatListData?.length === 0 && <View style={styles.center}><NoRecordFound /></View>}
+				{flatListData?.length === 0 && (
+					<View style={styles.center}>
+						<NoRecordFound />
+					</View>
+				)}
 			</View>
 		</BottomModal>
 	)
@@ -90,20 +87,21 @@ export default SelectModal
 
 const styles = StyleSheet.create({
 	main: {
-		...commonMarginStyles.marginHorizontalM,
-		...commonFlexStyles.flex1
+		marginHorizontal: scaleWidthPX(20),
+		flex: 1
 	},
 	container: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		gap: scaleWidthPX(16)
+		gap: scaleWidthPX(18),
+		marginTop: scaleHeightPX(8)
 	},
 	center: {
-		...commonAlignStyles.justifyCenter,
-		...commonAlignStyles.alignCenter,
-		...commonFlexStyles.flex1
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 1
 	},
 	containerStyle: {
-		minHeight: '60%'
+		height: '78%'
 	}
 })

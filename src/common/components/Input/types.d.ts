@@ -16,5 +16,10 @@ interface CustomInputProps {
 	isRightIcon?: boolean
 	keyboardType?: KeyboardType
 	maxLength?: number
-	iconName?: any
+	RightIcon?: any
+	rightIconOnPress?: () => void
+	handleFocus?: any
+	handleBlur?: any
+	isLeftSideMobileView?: boolean
+	placeholder?: string
 }

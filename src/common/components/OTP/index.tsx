@@ -1,81 +1,67 @@
-import React, {useState, useRef} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import commonAlignStyles from '@commonStyles/commonAlignStyles';
-import commonFlexStyles from '@commonStyles/commonFlexStyles';
-import commonMarginStyles from '@commonStyles/commonMarginStyles';
-import commonFontStyles from '@commonStyles/commonFontStyles';
-import commonBorderRadiusStyles from '@commonStyles/commonBorderRadiusStyles';
-import commonBorderWidthStyles from '@commonStyles/commonBorderWidthStyles';
-import {scaleWidthPX} from '@utils/responsiveStyle';
-import {useTheme} from '@react-navigation/native';
-import {isTabletMode} from '@src/common/utils/deviceInformation';
+import React, { useState, useRef } from 'react'
+import { View, TextInput, StyleSheet } from 'react-native'
+import commonFontStyles from '@commonStyles/commonFontStyles'
+import { scaleHeightPX, scaleWidthPX } from '@utils/responsiveStyle'
+import { useTheme } from '@react-navigation/native'
 
-export default function PinInput({numInputs = 6, onChange}: PinInputProps) {
-  const [pin, setPin] = useState<string[]>(Array(numInputs).fill('')); // State to hold pin values
+interface CustomOTPProps {
+	numInputs?: number
+	onChange?: (value: string) => void
+}
 
-  const {colors} = useTheme();
-  const styles = Styles(colors);
-  const inputRefs = useRef<(TextInput | null)[]>([]);
+export default function CustomOTP({ numInputs = 4, onChange }: CustomOTPProps) {
+	const [pin, setPin] = useState<string[]>(Array(numInputs).fill('')) // State to hold pin values
 
-  const handleChange = (value: string, index: number): void => {
-    const newPin = [...pin];
-    const isDeleting = value === '' && pin[index] !== ''; // Detect backspace
-    newPin[index] = value.slice(-1); // Allow only one digit per box
-    setPin(newPin);
+	const { colors } = useTheme()
+	const styles = Styles(colors)
+	const inputRefs = useRef<(TextInput | null)[]>([])
 
-    if (onChange) {
-      onChange(newPin.join(''));
-    }
+	const handleChange = (value: string, index: number): void => {
+		const newPin = [...pin]
+		const isDeleting = value === '' && pin[index] !== '' // Detect backspace
+		newPin[index] = value.slice(-1) // Allow only one digit per box
+		setPin(newPin)
 
-    if (value && !isDeleting && index < numInputs - 1) {
-      // Move to the next input if adding a character
-      inputRefs.current[index + 1]?.focus();
-    } else if (isDeleting && index > 0) {
-      // Move to the previous input if deleting and the input is empty
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
+		if (onChange) {
+			onChange(newPin.join(''))
+		}
 
-  const renderInputs = (): JSX.Element[] =>
-    pin.map((value, index) => (
-      <TextInput
-        key={index}
-        ref={el => (inputRefs.current[index] = el)}
-        style={[styles.input, value !== '' && styles.inputFilled]}
-        keyboardType="number-pad"
-        maxLength={1}
-        onChangeText={text => handleChange(text, index)}
-        value={value}
-        placeholder="∘"
-        placeholderTextColor={colors.backgroundColor + 'CC'}
-        returnKeyType="done"
-      />
-    ));
+		if (value && !isDeleting && index < numInputs - 1) {
+			// Move to the next input if adding a character
+			inputRefs.current[index + 1]?.focus()
+		} else if (isDeleting && index > 0) {
+			// Move to the previous input if deleting and the input is empty
+			inputRefs.current[index - 1]?.focus()
+		}
+	}
 
-  return <View style={styles.container}>{renderInputs()}</View>;
+	const renderInputs = (): JSX.Element[] => pin.map((value, index) => <TextInput key={index} ref={(el) => (inputRefs.current[index] = el)} style={[styles.input, value !== '' && styles.inputFilled]} keyboardType='number-pad' maxLength={1} onChangeText={(text) => handleChange(text, index)} value={value} placeholder='∘' placeholderTextColor={colors.inputPlaceholder} returnKeyType='done' />)
+
+	return <View style={styles.container}>{renderInputs()}</View>
 }
 
 const Styles = (colors: any) =>
-  StyleSheet.create({
-    container: {
-      ...commonFlexStyles.flexRow,
-      ...commonAlignStyles.justifyBetween,
-      ...commonAlignStyles.alignCenter,
-    },
-    input: {
-      width: isTabletMode ? scaleWidthPX(60) : scaleWidthPX(50),
-      height: isTabletMode ? scaleWidthPX(60) : scaleWidthPX(50),
-      ...commonMarginStyles.marginHorizontal5XS,
-      ...commonBorderWidthStyles.borderWidthM,
-      ...commonBorderRadiusStyles.borderRadiusS,
-      backgroundColor: colors.backgroubackgroundColorndBg + '26',
-      borderColor: colors.backgroundColor + '00',
-      textAlign: 'center',
-      textAlignVertical: 'center',
-      ...commonFontStyles.fontSemiBold,
-      ...commonFontStyles.fontSize2XL,
-    },
-    inputFilled: {
-      color: colors.backgroundColor,
-    },
-  });
+	StyleSheet.create({
+		container: {
+			flexDirection: 'row',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			height: scaleHeightPX(80),
+			width: '100%'
+		},
+		input: {
+			width: scaleWidthPX(80),
+			height: scaleWidthPX(80),
+			marginHorizontal: scaleWidthPX(4),
+			borderRadius: 15,
+			backgroundColor: colors.inputBackground,
+			borderColor: colors.backgroundColor + '00',
+			textAlign: 'center',
+			textAlignVertical: 'center',
+			...commonFontStyles.fontSemiBold,
+			...commonFontStyles.fontSizeXL
+		},
+		inputFilled: {
+			color: colors.white
+		}
+	})

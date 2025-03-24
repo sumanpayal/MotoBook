@@ -4,12 +4,11 @@ import { useTheme } from '@react-navigation/native'
 import BottomModal from '../BottomModal'
 import CustomText from '../Text'
 import { selectionModalStyles } from './styles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import SearchComponent from '../SearchComponent'
 import { NoRecordFound } from '../NoRecordFound'
 import { MultiSelectionModalProps } from './types'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
 const MultiSelectionModal = (props: MultiSelectionModalProps) => {
 	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, isSearch = true, noRecordViewProps, modalProps, children, setSelectedItem } = props
@@ -59,7 +58,7 @@ const MultiSelectionModal = (props: MultiSelectionModalProps) => {
 					<CustomText style={styles.itemLabel}>{item[titleItem]}</CustomText>
 				</View>
 				<View style={styles.itemRight}>
-					<View style={styles.selectedViewOuter}>{item?.isSelected && <Icon name='check' size={16} color={colors.textColor} />}</View>
+					<View style={styles.selectedViewOuter}>{item?.isSelected && <Icon name='check' size={16} color={colors.white} />}</View>
 				</View>
 			</Pressable>
 		)
@@ -90,7 +89,7 @@ const MultiSelectionModal = (props: MultiSelectionModalProps) => {
 	return (
 		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={isSearch ? styles.containerStyle : {}} {...modalProps} hideOnBackdropPress={false} isLeftIcon headerLeftOnPress={onPressSelectDone}>
 			{isSearch && listHeaderComponent()}
-			<FlatList data={flatListData} renderItem={renderItem} keyExtractor={(item) => `${item[idItem]}`} ItemSeparatorComponent={listSeperatorComponent} ListEmptyComponent={() => <NoRecordFound {...noRecordViewProps} />} contentContainerStyle={[styles.listStyle, flatListData?.length === 0 && styles.listStyleEmpty, flatListData?.length === 0 && !isSearch && commonMarginStyles.marginTop2XL, flatListData?.length === 0 && isSearch && commonFlexStyles.flex1]} />
+			<FlatList data={flatListData} renderItem={renderItem} keyExtractor={(item) => `${item[idItem]}`} ItemSeparatorComponent={listSeperatorComponent} ListEmptyComponent={() => <NoRecordFound {...noRecordViewProps} />} contentContainerStyle={[styles.listStyle, flatListData?.length === 0 && styles.listStyleEmpty, flatListData?.length === 0 && !isSearch && { marginTop: scaleHeightPX(22) }, flatListData?.length === 0 && isSearch && { flex: 1 }]} />
 		</BottomModal>
 	)
 }
