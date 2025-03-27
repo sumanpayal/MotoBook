@@ -3,7 +3,7 @@ export const CONFIG: any = {
     anonymousStorageKey: 'cg1nD09L0T6xXMlnH',
     userStorageKey: 'lMDMXqAqrevpiAP4T',
     reduxStorageKey: 'c93AECAN02RiwcYTB',
-    baseUrl: 'http://65.0.154.119:4000/'//'https://motor-api-pp3m.onrender.com',
+    baseUrl: 'https://motor-api-pp3m.onrender.com',
   },
   QA: {
     anonymousStorageKey: 'cg1nD09L0T6xXMlnH',
