@@ -9,6 +9,8 @@ import { createStyles } from '../styles'
 export const HeaderLeftComponent = () => {
 	const { colors } = useTheme()
 	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
+	// console.log({userData});
+	
 	const styles = createStyles(colors)
 	return (
 		<View style={styles.headerLeft}>

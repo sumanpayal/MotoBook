@@ -77,7 +77,7 @@ const Login = () => {
 	return (
 		<MainFrame isHeader backOnPress={() => navigation.goBack()}>
 			<View style={styles.container}>
-				<CustomInput label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftSideMobileView keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
+				<CustomInput label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
 				<CustomButton onPress={onPressSendOTP} title='Send OTP' />
 			</View>
 		</MainFrame>

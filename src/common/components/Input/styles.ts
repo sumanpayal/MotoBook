@@ -16,7 +16,7 @@ export const inputStyles = (colors: any) =>
 		},
 		inputView: {
 			columnGap: scaleWidthPX(16),
-			paddingHorizontal: scaleWidthPX(16),
+			paddingRight: scaleWidthPX(16),
 			flexDirection: 'row',
 			alignItems: 'center',
 			borderWidth: 1,
@@ -38,7 +38,8 @@ export const inputStyles = (colors: any) =>
 			height: scaleHeightPX(44),
 			color: colors.white,
 			...commonFontStyles.fontSizeL,
-			flex: 1
+			flex: 1,
+			paddingLeft: scaleWidthPX(16)
 		},
 		inputMultiline: {
 			textAlignVertical: 'top',

@@ -34,17 +34,16 @@ export const createStyles = (colors: any) =>
 		container: {
 			marginTop: scaleHeightPX(4),
 			gap: scaleHeightPX(24),
-			marginHorizontal: scaleWidthPX(24)
 		},
 		interiorView: {
 			backgroundColor: '#00585B',
 			height: scaleHeightPX(32),
 			borderRadius: 2,
 			justifyContent: 'center',
-			paddingHorizontal: scaleWidthPX(12)
+			paddingHorizontal: scaleWidthPX(12),
+			marginHorizontal: scaleWidthPX(22)
 		},
 		carousel: {
-			marginHorizontal: scaleWidthPX(22),
 			marginTop: scaleHeightPX(24)
 		},
 		header: {
@@ -66,7 +65,7 @@ export const createStyles = (colors: any) =>
 		},
 		carPlanInner: {
 			height: '100%',
-			flex: 0.3,
+			flex: 0.33,
 			backgroundColor: '#1F355F',
 			borderRadius: 15,
 			paddingTop: scaleHeightPX(16),
@@ -74,7 +73,8 @@ export const createStyles = (colors: any) =>
 		},
 		carPlanImage: {
 			width: '90%',
-			height: scaleHeightPX(70)
+			height: scaleHeightPX(60),
+			alignSelf: 'center'
 		},
 		carPlanBottom: {
 			backgroundColor: '#465A82',
@@ -103,13 +103,14 @@ export const createStyles = (colors: any) =>
 		howItWorksOuter: {
 			gap: scaleHeightPX(24),
 			marginTop: scaleHeightPX(24),
-			marginBottom: scaleHeightPX(70)
+			marginBottom: scaleHeightPX(70),
+			marginHorizontal: scaleWidthPX(20)
 		},
 		howItWorksInner: {
 			flexDirection: 'row',
 			flex: 1,
 			justifyContent: 'space-between',
-			gap: scaleWidthPX(16),
+			gap: scaleWidthPX(6),
 			marginBottom: scaleHeightPX(16),
 			alignItems: 'center'
 		},
@@ -129,7 +130,8 @@ export const createStyles = (colors: any) =>
 		},
 		planOuter: {
 			gap: scaleHeightPX(16),
-			marginTop: scaleHeightPX(8)
+			marginTop: scaleHeightPX(8),
+			marginHorizontal: scaleWidthPX(22)
 		},
 		planInner: {
 			gap: scaleWidthPX(12),

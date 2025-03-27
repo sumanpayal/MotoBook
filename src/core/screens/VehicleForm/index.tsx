@@ -9,7 +9,6 @@ import CustomText from '@src/common/components/Text'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { createStyle } from './styles'
 import { API_RESPONSE } from '@src/common/constants/constants'
-import SingleSelectionModal from '@src/common/components/SingleSelectionModal'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { getAddressListAPI, getColorsList } from '@src/network/address'
 import { useDispatch } from 'react-redux'
@@ -17,10 +16,10 @@ import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
 import { getSubscriptionPlansList, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { AddSVG, InformationSVG, TickSVG } from '@src/assets/svg'
-import InformationModal from '@src/common/components/InformationModal'
+import { AddSVG } from '@src/assets/svg'
 import CustomDropdown from '@src/common/components/Dropdown'
-import { SubscriptionPlanItem } from './SubscriptionItem'
+import { RenderSubscritionPlans } from './SubscriptionPlans'
+import RenderModals from './Modals'
 
 export const interiorCleaningAmount = 149
 
@@ -168,7 +167,7 @@ const VehicleForm = () => {
 				setAlertData({
 					isShown: true,
 					type: 'error',
-					label: 'Please select Time Slots'
+					label: 'Please pick your daily car cleaning slot'
 				})
 			)
 			return false
@@ -253,42 +252,35 @@ const VehicleForm = () => {
 		setIsInfoModalOpen(true)
 	}
 
-	const renderSubscritionPlans = () => {
+	const InputChildren = () => {
 		return (
-			<View style={{ gap: scaleHeightPX(10), marginTop: scaleHeightPX(16) }}>
-				<View style={{ gap: scaleWidthPX(2), alignItems: 'center', flexDirection: 'row' }}>
-					<CustomText style={commonFontStyles.fontSizeL}>{'Your Daily Car Cleaning Plan Details'}</CustomText>
-					<Pressable onPress={openInformationModal} style={{ width: scaleWidthPX(32), alignItems: 'center', height: scaleHeightPX(24), justifyContent: 'center' }}>
-						<InformationSVG />
-					</Pressable>
-				</View>
-				<View style={{ flexDirection: 'row', gap: scaleWidthPX(12), alignItems: 'center', marginBottom: scaleHeightPX(4) }}>
-					<Pressable onPress={() => setIsInteriorCleaning(!isInteriorCleaning)} style={{ borderWidth: 1, borderColor: colors.white, borderRadius: 5, width: scaleWidthPX(20), height: scaleWidthPX(20), justifyContent: 'center', alignItems: 'center' }}>
-						{isInteriorCleaning && <TickSVG fill={colors.white} width={scaleWidthPX(20)} height={scaleWidthPX(20)} />}
-					</Pressable>
-					<CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeXS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
-				</View>
-				<View style={{ gap: scaleHeightPX(16), marginBottom: scaleHeightPX(32) }}>
-					{subscriptionPlansData?.map((item: any) => {
-						return <SubscriptionPlanItem key={item?._id} selectedSubscriptionPlan={selectedSubscriptionPlan} item={item} setSelectedSubscriptionPlan={setSelectedSubscriptionPlan} isInteriorCleaning={isInteriorCleaning} />
-					})}
-				</View>
+			<View style={{ width: scaleWidthPX(57), height: '100%', backgroundColor: colors.primary, borderTopLeftRadius: 15, borderBottomLeftRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+				<CustomText textType='semi-bold' style={commonFontStyles.fontSizeL}>{'IND'}</CustomText>
 			</View>
 		)
-	}
-
-	const renderSubscriptionPlanItem = (item: any) => {
-		return
 	}
 
 	const renderForm = () => {
 		return (
 			<View style={styles.form}>
-				<CustomInput label='Brand' onChangeText={() => {}} value={carCompany?.name} editable={false} />
-				<CustomInput label='Model' onChangeText={() => {}} value={carModal?.name} editable={false} />
-				<CustomInput label='Category' onChangeText={() => {}} value={carModal?.car_type_id?.name} editable={false} />
-				<CustomDropdown label='Color' onPress={onPressColor} value={selectedColor?.name} />
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, gap: scaleWidthPX(16) }}>
+					<View style={{ flex: 0.5 }}>
+						<CustomInput label='Brand' onChangeText={() => { }} value={carCompany?.name} editable={false} />
+					</View>
+					<View style={{ flex: 0.5 }}>
+						<CustomInput label='Model' onChangeText={() => { }} value={carModal?.name} editable={false} />
+					</View>
+				</View>
+				<View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, gap: scaleWidthPX(16) }}>
+					<View style={{ flex: 0.5 }}>
+						<CustomInput label='Category' onChangeText={() => { }} value={carModal?.car_type_id?.name} editable={false} />
+					</View>
+					<View style={{ flex: 0.5 }}>
+						<CustomDropdown label='Color' onPress={onPressColor} value={selectedColor?.name} />
+					</View>
+				</View>
 				<CustomInput
+					leftChildren={<InputChildren />}
 					label='Registration Number'
 					onChangeText={(text: string) => {
 						setRegistrationNumber(text)
@@ -311,13 +303,17 @@ const VehicleForm = () => {
 					value={referralCode}
 				/>
 				<CustomDropdown label='Pick Your Daily Car Cleaning Slot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
-				{renderSubscritionPlans()}
+				<RenderSubscritionPlans
+					openInformationModal={openInformationModal}
+					setIsInteriorCleaning={setIsInteriorCleaning}
+					isInteriorCleaning={isInteriorCleaning}
+					interiorCleaningAmount={interiorCleaningAmount}
+					subscriptionPlansData={subscriptionPlansData}
+					selectedSubscriptionPlan={selectedSubscriptionPlan}
+					setSelectedSubscriptionPlan={setSelectedSubscriptionPlan}
+				/>
 			</View>
 		)
-	}
-
-	const renderColorsItem = (item: any) => {
-		return <View style={{ borderWidth: 1, borderColor: item?.title ?? colors.inputPlaceholder, width: scaleWidthPX(24), height: scaleWidthPX(24), borderRadius: scaleWidthPX(12), justifyContent: 'center', alignItems: 'center', marginRight: scaleWidthPX(8), backgroundColor: item?.title }} />
 	}
 
 	return (
@@ -328,10 +324,25 @@ const VehicleForm = () => {
 				</KeyboardAwareScrollView>
 				<CustomButton title='Submut Request' onPress={onPressSave} />
 			</View>
-			{isColorShow && <SingleSelectionModal data={colorsList} visible={isColorShow} onClose={() => setIsColorShow(false)} title='Select Color' titleItem='name' idItem='_id' selectedItem={selectedColor} setSelectedItem={onPressSelectColor} children={renderColorsItem} />}
-			{isAddressModalVisible && <SingleSelectionModal data={allAddressList} visible={isAddressModalVisible} onClose={() => setIsAddressModalVisible(false)} title='Select Address' titleItem='address' idItem='_id' selectedItem={selectedAddress} setSelectedItem={onPressSelectAddress} />}
-			{isTimeSlotsModalVisible && <SingleSelectionModal data={subscriptionTimeSlotsData} visible={isTimeSlotsModalVisible} onClose={() => setIsTimeSlotsModalVisible(false)} title='Select Time Slot' titleItem='name' idItem='id' selectedItem={selectedSubscriptionTimeSlot} setSelectedItem={onPressSelectTimeSlots} />}
-			{isInfoModalOpen && <InformationModal visible={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} description={`You don't need to pay upfront-your subscription fee is collected at the end of each month after you've enjoyed the service. Pay easily via cash or any UPI method.`} />}
+			<RenderModals
+				isColorShow={isColorShow}
+				colorsList={colorsList}
+				setIsColorShow={setIsColorShow}
+				selectedColor={selectedColor}
+				onPressSelectColor={onPressSelectColor}
+				isAddressModalVisible={isAddressModalVisible}
+				allAddressList={allAddressList}
+				setIsAddressModalVisible={setIsAddressModalVisible}
+				selectedAddress={selectedAddress}
+				onPressSelectAddress={onPressSelectAddress}
+				isTimeSlotsModalVisible={isTimeSlotsModalVisible}
+				subscriptionTimeSlotsData={subscriptionTimeSlotsData}
+				setIsTimeSlotsModalVisible={setIsTimeSlotsModalVisible}
+				selectedSubscriptionTimeSlot={selectedSubscriptionTimeSlot}
+				onPressSelectTimeSlots={onPressSelectTimeSlots}
+				isInfoModalOpen={isInfoModalOpen}
+				setIsInfoModalOpen={setIsInfoModalOpen}
+			/>
 		</MainFrame>
 	)
 }

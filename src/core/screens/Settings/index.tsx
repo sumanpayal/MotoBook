@@ -10,6 +10,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AccountBgImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -110,7 +111,7 @@ const MySettings = () => {
 		navigation.navigate('PreLogin')
 	}
 
-	const onPressEditProfileImageOnPress = () => {}
+	const onPressEditProfileImageOnPress = () => { }
 
 	return (
 		<View style={styles.main}>
@@ -123,7 +124,7 @@ const MySettings = () => {
 					<EditSVG />
 				</Pressable>
 			</View>
-			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} />
+			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} />
 		</View>
 	)
 }

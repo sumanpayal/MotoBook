@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
 	main: {
-		marginHorizontal: scaleWidthPX(20),
+		marginHorizontal: scaleWidthPX(16),
 		flex: 1
 	},
 	container: {

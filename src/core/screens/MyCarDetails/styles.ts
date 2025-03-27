@@ -3,26 +3,35 @@ import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const createStyles = (colors: any) =>
 	StyleSheet.create({
+		container: {
+			flex: 1,
+			backgroundColor: colors.backgroundColor
+		},
 		main: {
 			flex: 1,
 			backgroundColor: colors.backgroundColor
 		},
 		topView: {
-			backgroundColor: '#162F48',
 			width: '100%',
-			borderBottomLeftRadius: 60,
-			borderBottomRightRadius: 60,
-			paddingBottom: scaleHeightPX(16)
 		},
 		topInner: {
 			alignItems: 'center',
 			marginTop: scaleHeightPX(16),
 			gap: scaleHeightPX(16)
 		},
+		topBottom: {
+			backgroundColor: '#1A2D41',
+			borderTopLeftRadius: 20,
+			borderTopRightRadius: 20,
+			paddingVertical: scaleHeightPX(32),
+			paddingHorizontal: scaleHeightPX(20),
+			gap: scaleHeightPX(32)
+		},
 		package: {
 			backgroundColor: colors.primary,
 			height: scaleHeightPX(40),
 			borderRadius: 9,
+			width: '60%',
 			justifyContent: 'center',
 			alignItems: 'center',
 			paddingHorizontal: scaleWidthPX(16)
@@ -32,7 +41,7 @@ export const createStyles = (colors: any) =>
 		},
 		vehicleDetails: {
 			height: scaleHeightPX(120),
-			width: '92%',
+			width: '100%',
 			flexDirection: 'row',
 			gap: scaleWidthPX(16),
 			justifyContent: 'space-between',

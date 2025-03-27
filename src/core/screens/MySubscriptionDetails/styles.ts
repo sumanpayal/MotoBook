@@ -63,7 +63,8 @@ export const createStyles = (colors: any) =>
 		planDetailsOuter: {
 			marginHorizontal: scaleWidthPX(25),
 			marginTop: scaleHeightPX(24),
-			gap: scaleHeightPX(16)
+			gap: scaleHeightPX(16),
+			flex: 1
 		},
 		planDetailsInner: {
 			borderWidth: 1,
@@ -73,7 +74,8 @@ export const createStyles = (colors: any) =>
 			borderRadius: 15,
 			justifyContent: 'space-between',
 			paddingHorizontal: scaleWidthPX(16),
-			borderColor: colors.white
+			borderColor: colors.white,
+			marginHorizontal: scaleWidthPX(20)
 		},
 		planLeft: {
 			flexDirection: 'row',

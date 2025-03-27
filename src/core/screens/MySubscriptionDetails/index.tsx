@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native'
 import { getMySubscriptionDetails } from '@src/network/car'
@@ -11,6 +11,7 @@ import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { PlanDateSVG, PlanDurationSVG, PlanPriceSVG, PlanStatusSVG, PlanTypeSVG } from '@src/assets/svg'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
 const MySubscriptionDetails = () => {
 	const navigation: any = useNavigation()
@@ -25,8 +26,41 @@ const MySubscriptionDetails = () => {
 
 	const [subscriptionDetails, setSubscriptionDetails] = useState<any[]>([])
 
+	const data = [
+		{
+			id: 0,
+			name: 'Plan Type',
+			value: 'Basic Plan',
+			image: PlanTypeSVG
+		},
+		{
+			id: 1,
+			name: 'Duration',
+			value: 'Monthly',
+			image: PlanDurationSVG
+		},
+		{
+			id: 2,
+			name: 'Status',
+			value: 'Active',
+			image: PlanStatusSVG
+		},
+		{
+			id: 3,
+			name: 'Renewal Date',
+			value: '20th January',
+			image: PlanDateSVG
+		},
+		{
+			id: 4,
+			name: 'Amount',
+			value: 'Rs 799',
+			image: PlanPriceSVG
+		},
+	]
+
 	useEffect(() => {
-		getMySubscriptionDetailsFromAPI()
+		// getMySubscriptionDetailsFromAPI()
 	}, [])
 
 	const getMySubscriptionDetailsFromAPI = () => {
@@ -43,20 +77,6 @@ const MySubscriptionDetails = () => {
 				setSubscriptionDetails(response.data)
 			}
 		})
-	}
-
-	const renderPlanDetails = (label: any, Icon: any, value: any) => {
-		return (
-			<View style={styles.planDetailsInner}>
-				<View style={styles.planLeft}>
-					<Icon />
-					<CustomText style={commonFontStyles.fontSizeL}>{label}</CustomText>
-				</View>
-				<View style={styles.planRight}>
-					<CustomText style={commonFontStyles.fontSizeL}>{value}</CustomText>
-				</View>
-			</View>
-		)
 	}
 
 	const renderVehicleDetails = (label: any, value: any, isColor: boolean = false) => {
@@ -82,6 +102,21 @@ const MySubscriptionDetails = () => {
 		)
 	}
 
+	const renderItem = ({ item }: any) => {
+		const Icon = item?.image
+		return (
+			<View style={styles.planDetailsInner}>
+				<View style={styles.planLeft}>
+					<Icon />
+					<CustomText style={commonFontStyles.fontSizeL}>{item?.name}</CustomText>
+				</View>
+				<View style={styles.planRight}>
+					<CustomText style={commonFontStyles.fontSizeL}>{item?.value}</CustomText>
+				</View>
+			</View>
+		)
+	}
+
 	return (
 		<View style={styles.main}>
 			<View style={styles.topView}>
@@ -102,15 +137,8 @@ const MySubscriptionDetails = () => {
 					{renderVehicleAddress('Vehicle Address', 'RJ14-GJ3400')}
 				</View>
 			</View>
-			<ScrollView showsVerticalScrollIndicator={false}>
-				<View style={styles.planDetailsOuter}>
-					{renderPlanDetails('Plan Type', PlanTypeSVG, 'Basi Plan')}
-					{renderPlanDetails('Duration', PlanDurationSVG, 'Monthly')}
-					{renderPlanDetails('Status', PlanStatusSVG, 'Active')}
-					{renderPlanDetails('Renewal Date', PlanDateSVG, '20th January')}
-					{renderPlanDetails('Amount', PlanPriceSVG, 'Rs 799')}
-				</View>
-			</ScrollView>
+			<FlatList data={data} renderItem={renderItem} keyExtractor={(item) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} ListHeaderComponent={() => <View style={{ marginVertical: scaleHeightPX(12) }} />} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16), }} />} />
+			<SafeAreaView edges={['bottom']} />
 		</View>
 	)
 }

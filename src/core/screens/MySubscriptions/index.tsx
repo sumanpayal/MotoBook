@@ -98,7 +98,7 @@ const MySubscriptions = () => {
 	return (
 		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} isNotifications backOnPress={() => navigation.goBack()} title={fromCars ? 'My Car' : 'My Subscriptions'}>
 			<View style={styles.main}>
-				<FlatList data={[1, 2, 3]} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length > 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
+				<FlatList data={[1]} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length > 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
 				{renderAddCarButton()}
 			</View>
 		</MainFrame>

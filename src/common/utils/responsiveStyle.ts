@@ -1,5 +1,5 @@
-import {Platform} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import { Platform } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import {
   isTabletMode,
   isZoomed,

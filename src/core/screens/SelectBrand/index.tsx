@@ -10,9 +10,12 @@ import { styles } from './styles'
 import { getCarModalsListAPIForCompanyID, getCompaniesListAPI } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { useDispatch } from 'react-redux'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 const SelectBrand = () => {
 	const navigation: any = useNavigation()
+	const dispatch = useDispatch()
 
 	const [searchText, setSearchText] = useState<string>('')
 
@@ -26,10 +29,16 @@ const SelectBrand = () => {
 	const [selectedCarCompany, setSelectedCarCompany] = useState<any | null>(null)
 
 	useEffect(() => {
+		dispatch(setIsFullScreenLoading(true))
 		getCompaniesListAPI((res: API_RESPONSE) => {
+			dispatch(setIsFullScreenLoading(false))
 			if (res.data) {
 				setAllBrandsData(res.data)
 				setSearchedBrandsData(res.data)
+			}
+			else {
+				setAllBrandsData([])
+				setSearchedBrandsData([])
 			}
 		})
 	}, [])

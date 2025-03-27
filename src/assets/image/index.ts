@@ -74,3 +74,6 @@ export const PlanDetails5Image = Image.resolveAssetSource(PlanDetails5Img).uri
 
 import PlanIconImg from './PlanIcon/PlanIcon.png'
 export const PlanIconImage = Image.resolveAssetSource(PlanIconImg).uri
+
+import CarImageImg from './CarImage/CarImage.png'
+export const CarImageImage = Image.resolveAssetSource(CarImageImg).uri

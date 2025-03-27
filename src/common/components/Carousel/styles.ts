@@ -14,7 +14,8 @@ export const carouselStyles = (colors: any) =>
 			alignItems: 'center',
 			marginVertical: scaleHeightPX(20),
 			columnGap: scaleWidthPX(8),
-			alignSelf: 'flex-start'
+			alignSelf: 'flex-start',
+			marginHorizontal: scaleWidthPX(16)
 		},
 		dot: {
 			width: scaleWidthPX(10),

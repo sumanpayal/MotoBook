@@ -1,7 +1,7 @@
 import { Alert, Pressable, ScrollView, View } from 'react-native'
 import React, { useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
 import CustomInput from '@src/common/components/Input'
 import CustomButton from '@src/common/components/Button'
@@ -57,6 +57,17 @@ const AddAddress = () => {
 		}
 	]
 
+	const { params }: any = useRoute()
+
+	const isEdit = params?.isEdit ?? false
+	const addressDetails = params?.addressDetails ?? null
+
+	const addressTypesData1 = addressDetails?.addressType ? addressTypesData?.find((item: any) => item?.value === addressDetails?.addressType) : null
+
+	// 	console.log({addressDetails});
+	// 	_id:67e5333c1f7ddcd49cc13e45
+	// user_id:67e527300481f4f184d6aa7c
+
 	const [addressData, setAddressData] = useState<{
 		addressType: any
 		address: string
@@ -66,13 +77,13 @@ const AddAddress = () => {
 		city: string
 		postalCode: string
 	}>({
-		addressType: null,
-		address: '',
-		landmark: '',
-		country: '',
-		state: '',
-		city: '',
-		postalCode: ''
+		addressType: addressTypesData1,
+		address: addressDetails?.addressType ?? '',
+		landmark: addressDetails?.landmark ?? '',
+		country: addressDetails?.country ?? '',
+		state: addressDetails?.state ?? '',
+		city: addressDetails?.city ?? '',
+		postalCode: addressDetails?.postalCode ?? ''
 	})
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -152,7 +163,7 @@ const AddAddress = () => {
 		return true
 	}
 
-	const useMyLocationOnPress = () => {}
+	const useMyLocationOnPress = () => { }
 
 	const onPressSaveAddress = () => {
 		if (isValidateForm()) {
@@ -162,6 +173,7 @@ const AddAddress = () => {
 
 	const addAddressAPICall = () => {
 		setIsLoading(true)
+		// TODO: add conditions for isEdit
 		const params = {
 			city: addressData?.city,
 			state: addressData?.state,

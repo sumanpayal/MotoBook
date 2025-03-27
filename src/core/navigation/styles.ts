@@ -6,12 +6,13 @@ export const styles = StyleSheet.create({
 	tabBarStyle: {
 		height: scaleHeightPX(70),
 		backgroundColor: '#1B2F44',
-		marginHorizontal: scaleWidthPX(22),
+		marginHorizontal: scaleWidthPX(16),
 		marginBottom: scaleHeightPX(16),
 		borderRadius: 20,
 	},
 	textStyle: {
-		...commonFontStyles.fontSize2XS
+		...commonFontStyles.fontSize2XS,
+		textAlign: 'center',
 	},
 	labelView: {
 		justifyContent: 'center',
