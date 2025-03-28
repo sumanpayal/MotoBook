@@ -1,9 +1,8 @@
 import { useTheme } from '@react-navigation/native'
-import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import React, { useRef, useState } from 'react'
 import { FlatList, View } from 'react-native'
 import CarousalIndicator from './CarousalIndicator'
-import CarousalItem from './CarousalItem'
 import { carouselStyles } from './styles'
 import { SCREEN_WIDTH } from '@src/common/utils/deviceInformation'
 
@@ -32,7 +31,13 @@ const CustomCarousel: React.FC<CarouselProps> = ({ data = [] }) => {
 	return (
 		<View style={styles.container}>
 			{/* Carousel */}
-			<FlatList ItemSeparatorComponent={() => <View style={{ width: scaleWidthPX(20) }} />} ref={flatListRef} horizontal data={data} renderItem={({ item }) => <CarousalItem item={item} />} keyExtractor={(item) => item?.id} showsHorizontalScrollIndicator={false} pagingEnabled onScroll={onScroll} decelerationRate={'fast'} snapToInterval={scaleWidthPX(CAROUSAL_WIDTH + 2 * 16)} snapToAlignment='center' scrollEventThrottle={16} />
+			<FlatList ItemSeparatorComponent={() => <View style={{ width: scaleWidthPX(20) }} />} ref={flatListRef} horizontal data={data} renderItem={({ item }) => <View style={{
+				height: scaleHeightPX(160),
+				width: scaleWidthPX(CAROUSAL_WIDTH),
+				justifyContent: 'center',
+				alignItems: 'center',
+				borderRadius: 15, backgroundColor: item?.color ?? 'transparent', borderWidth: 1, borderColor: item?.color ?? 'transparent'
+			}} />} keyExtractor={(item) => item?.id} showsHorizontalScrollIndicator={false} pagingEnabled onScroll={onScroll} decelerationRate={'fast'} snapToInterval={scaleWidthPX(CAROUSAL_WIDTH + 2 * 16)} snapToAlignment='center' scrollEventThrottle={16} />
 			{/* Dots */}
 			<View style={styles.dotsContainer}>{data.length > 0 && data.map((_, index) => <CarousalIndicator index={index} key={index} selectedIndex={selectedIndex} />)}</View>
 		</View>

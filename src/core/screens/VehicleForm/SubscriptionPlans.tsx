@@ -1,11 +1,12 @@
 import { useTheme } from "@react-navigation/native"
-import { InformationSVG, TickSVG } from "@src/assets/svg"
+import { InformationSVG } from "@src/assets/svg"
 import CustomText from "@src/common/components/Text"
 import commonFontStyles from "@src/common/styles/commonFontStyles"
 import { scaleHeightPX, scaleWidthPX } from "@src/common/utils/responsiveStyle"
 import { Pressable, StyleSheet, View } from "react-native"
 import { SubscriptionPlanItem } from "./SubscriptionItem"
 import React from "react"
+import { CheckBox } from "@src/common/components/MultiSelectionModal"
 
 interface RenderSubscritionPlansProps {
     openInformationModal: () => void;
@@ -30,9 +31,7 @@ export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
                 </Pressable>
             </View>
             {interiorCleaningAmount > 0 && <View style={styles.middle}>
-                <Pressable onPress={() => setIsInteriorCleaning(!isInteriorCleaning)} style={{ ...styles.check, borderColor: colors.white }}>
-                    {isInteriorCleaning && <TickSVG fill={colors.white} width={scaleWidthPX(20)} height={scaleWidthPX(20)} />}
-                </Pressable>
+                <CheckBox setIsSelected={() => setIsInteriorCleaning(!isInteriorCleaning)} isSelected={isInteriorCleaning} />
                 <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeXS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
             </View>}
             <View style={styles.bottom}>
@@ -65,14 +64,6 @@ const styles = StyleSheet.create({
         gap: scaleWidthPX(12),
         alignItems: 'center',
         marginBottom: scaleHeightPX(4)
-    },
-    check: {
-        borderWidth: 1,
-        borderRadius: 5,
-        width: scaleWidthPX(20),
-        height: scaleWidthPX(20),
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     bottom: {
         gap: scaleHeightPX(16),

@@ -61,8 +61,9 @@ const HomeScreen = () => {
 			<View style={styles.carousel}>
 				<CustomCarousel
 					data={[
-						{ id: 0, color: '#FF6A61' },
-						{ id: 1, color: '#4DC8AF' },
+						{ id: 0, color: colors.primary },
+						{ id: 1, color: colors.alertRed },
+						{ id: 2, color: colors.secondary }
 					]}
 				/>
 			</View>
