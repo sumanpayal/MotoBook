@@ -1,5 +1,5 @@
 import { Pressable, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
@@ -14,14 +14,13 @@ import { getAddressListAPI, getColorsList } from '@src/network/address'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
-import { getSubscriptionPlansList, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
+import { getCarModalDetailsFromAPI, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AddSVG } from '@src/assets/svg'
 import CustomDropdown from '@src/common/components/Dropdown'
 import { RenderSubscritionPlans } from './SubscriptionPlans'
 import RenderModals from './Modals'
-
-export const interiorCleaningAmount = 149
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -56,14 +55,42 @@ const VehicleForm = () => {
 
 	const [colorsList, setColorsList] = useState<any[]>([])
 
+	const [interiorCleaningAmount, setInteriorCleaningAmount] = useState<number>(0)
+
 	useFocusEffect(
 		React.useCallback(() => {
 			getAddressList()
-			getSubscriptionPlansListFromAPI()
-			getSubscriptionTimeSlotsFromAPI()
-			getColorsListFromAPI()
 		}, [])
 	)
+
+	useEffect(() => {
+		getSubscriptionTimeSlotsFromAPI()
+		getColorsListFromAPI()
+		getCarModalDetailsAPI()
+	}, [])
+
+	const getCarModalDetailsAPI = () => {
+		getCarModalDetailsFromAPI(carModal?._id, (res: API_RESPONSE) => {
+			if (res.data) {
+				if (res?.data?.subscriptionPlans) {
+					setSubscriptionPlansData(res?.data?.subscriptionPlans)
+				}
+				else {
+					setSubscriptionPlansData([])
+				}
+				if (res?.data?.interiorCleaningAmount) {
+					setInteriorCleaningAmount(res?.data?.interiorCleaningAmount)
+				}
+				else {
+					setInteriorCleaningAmount(0)
+				}
+			}
+			else {
+				setSubscriptionPlansData([])
+				setInteriorCleaningAmount(0)
+			}
+		})
+	}
 
 	const getColorsListFromAPI = () => {
 		getColorsList((res: API_RESPONSE) => {
@@ -90,17 +117,6 @@ const VehicleForm = () => {
 				setSubscriptionTimeSlotsData(data)
 			} else {
 				setSubscriptionTimeSlotsData([])
-			}
-		})
-	}
-
-	const getSubscriptionPlansListFromAPI = () => {
-		getSubscriptionPlansList(carModal?.car_type_id?._id, (res: API_RESPONSE) => {
-			setSelectedSubscriptionPlan(null)
-			if (res.data) {
-				setSubscriptionPlansData(res.data)
-			} else {
-				setSubscriptionPlansData([])
 			}
 		})
 	}
@@ -188,6 +204,10 @@ const VehicleForm = () => {
 	const onPressSave = () => {
 		if (validateForm()) {
 			// call api
+			dispatch(setIsFullScreenLoading(true))
+			let interiorCleanAmount = interiorCleaningAmount > 0 ? isInteriorCleaning ? {
+				interiorCleaningAmount: interiorCleaningAmount
+			} : {} : {}
 			const params = {
 				model_id: carModal?._id,
 				address_id: selectedAddress?._id,
@@ -197,9 +217,11 @@ const VehicleForm = () => {
 					start: selectedSubscriptionTimeSlot?.start,
 					end: selectedSubscriptionTimeSlot?.end
 				},
-				color_id: selectedColor?._id
+				color_id: selectedColor?._id,
+				...interiorCleanAmount
 			}
 			postSubscriptionDetailsAPI(params, (response: API_RESPONSE) => {
+				dispatch(setIsFullScreenLoading(false))
 				if (response.error) {
 					dispatch(
 						setAlertData({

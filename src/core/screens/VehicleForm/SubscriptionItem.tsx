@@ -3,6 +3,7 @@ import { PlanIconImage, PlanImage } from '@src/assets/image'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import React from 'react'
 import { Image, Pressable, View } from 'react-native'
 
 interface SubscriptionPlanItemProps {
@@ -17,8 +18,17 @@ export const SubscriptionPlanItem = (props: SubscriptionPlanItemProps) => {
 
 	const { selectedSubscriptionPlan, item, setSelectedSubscriptionPlan, isInteriorCleaning, interiorCleaningAmount } = props
 
+	const setSubscriptionPlan = (item: any) => {
+		if (selectedSubscriptionPlan?._id === item?._id) {
+			setSelectedSubscriptionPlan(null)
+		}
+		else {
+			setSelectedSubscriptionPlan(item)
+		}
+	}
+
 	return (
-		<Pressable style={{ backgroundColor: selectedSubscriptionPlan?._id === item?._id ? colors.primary : colors.planBg, padding: scaleWidthPX(16), borderRadius: 15, height: scaleHeightPX(110), justifyContent: 'center' }} onPress={() => setSelectedSubscriptionPlan(item)}>
+		<Pressable style={{ backgroundColor: selectedSubscriptionPlan?._id === item?._id ? colors.primary : colors.planBg, padding: scaleWidthPX(16), borderRadius: 15, height: scaleHeightPX(110), justifyContent: 'center' }} onPress={() => setSubscriptionPlan(item)}>
 			<View style={{ position: 'absolute', right: scaleWidthPX(8), }}>
 				<Image source={{ uri: PlanImage }} style={{ width: scaleWidthPX(140), height: scaleHeightPX(90) }} resizeMode='contain' />
 			</View>

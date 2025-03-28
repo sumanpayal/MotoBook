@@ -1,5 +1,5 @@
-import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { createStyles } from './styles';
 import { AddCarSVG } from '@src/assets/svg';
@@ -12,10 +12,6 @@ import { DailyCarPlans } from './components/DailyCarPlans';
 import { HowItWorks } from './components/HowItWorks';
 import { InteriorCleaning, PlanDetails } from './components/PlanDetails';
 import CustomCarousel from '@src/common/components/Carousel';
-import { getUserDetails } from '@src/network/login';
-import { API_RESPONSE } from '@src/common/constants/constants';
-import { useSelector } from 'react-redux';
-import { RootState } from '@src/common/redux/store/store';
 
 const HomeScreen = () => {
 	const navigation: any = useNavigation();
@@ -24,15 +20,6 @@ const HomeScreen = () => {
 	const styles = createStyles(colors);
 
 	const [searchText, setSearchText] = useState<string>('');
-
-	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
-
-	useFocusEffect(
-		useCallback(() => {
-			getUserDetails(userData?._id, (response: API_RESPONSE) => {
-
-			})
-		}, []))
 
 	const renderMyCarsButton = () => {
 		return (

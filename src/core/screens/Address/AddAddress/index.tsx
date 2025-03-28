@@ -1,4 +1,4 @@
-import { Alert, Pressable, ScrollView, View } from 'react-native'
+import { Pressable, ScrollView, View } from 'react-native'
 import React, { useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -11,7 +11,7 @@ import { createStyles } from './styles'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
-import { postAddAddressAPI } from '@src/network/address'
+import { postAddAddressAPI, postUpdateAddAddressAPI } from '@src/network/address'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { UseLocationSVG } from '@src/assets/svg'
@@ -173,7 +173,6 @@ const AddAddress = () => {
 
 	const addAddressAPICall = () => {
 		setIsLoading(true)
-		// TODO: add conditions for isEdit
 		const params = {
 			city: addressData?.city,
 			state: addressData?.state,
@@ -182,30 +181,58 @@ const AddAddress = () => {
 			country: addressData?.country,
 			postalCode: addressData?.postalCode
 		}
-		postAddAddressAPI(params, (res: API_RESPONSE) => {
-			if (res.data) {
-				dispatch(
-					setAlertData({
-						isShown: true,
-						type: 'success',
-						label: res?.data
-					})
-				)
-				setTimeout(() => {
+		if (isEdit) {
+			postUpdateAddAddressAPI(addressDetails?._id, params, (res: API_RESPONSE) => {
+				if (res.data) {
+					dispatch(
+						setAlertData({
+							isShown: true,
+							type: 'success',
+							label: res?.data
+						})
+					)
+					setTimeout(() => {
+						setIsLoading(false)
+						navigation.goBack()
+					}, 100)
+				} else {
 					setIsLoading(false)
-					navigation.goBack()
-				}, 100)
-			} else {
-				setIsLoading(false)
-				dispatch(
-					setAlertData({
-						isShown: true,
-						type: 'error',
-						label: res?.error
-					})
-				)
-			}
-		})
+					dispatch(
+						setAlertData({
+							isShown: true,
+							type: 'error',
+							label: res?.error
+						})
+					)
+				}
+			})
+		}
+		else {
+			postAddAddressAPI(params, (res: API_RESPONSE) => {
+				if (res.data) {
+					dispatch(
+						setAlertData({
+							isShown: true,
+							type: 'success',
+							label: res?.data
+						})
+					)
+					setTimeout(() => {
+						setIsLoading(false)
+						navigation.goBack()
+					}, 100)
+				} else {
+					setIsLoading(false)
+					dispatch(
+						setAlertData({
+							isShown: true,
+							type: 'error',
+							label: res?.error
+						})
+					)
+				}
+			})
+		}
 	}
 
 	const setAddressDetaills = (key: ADDRESS_KEYS, value: any) => {

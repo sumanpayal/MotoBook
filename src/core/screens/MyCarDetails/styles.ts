@@ -36,8 +36,13 @@ export const createStyles = (colors: any) =>
 			alignItems: 'center',
 			paddingHorizontal: scaleWidthPX(16)
 		},
+		vehicleCenter: {
+			gap: scaleHeightPX(4),
+			width: '90%',
+			alignItems: 'center'
+		},
 		vehicle: {
-			gap: scaleHeightPX(4)
+			gap: scaleHeightPX(4),
 		},
 		vehicleDetails: {
 			height: scaleHeightPX(120),

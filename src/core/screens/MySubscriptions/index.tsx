@@ -12,9 +12,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { NoSubscriptionImage, NoVehicleImage, SedanImage } from '@src/assets/image'
 import { CarDetailSVG, PlusSVG } from '@src/assets/svg'
-import { RootState } from '@src/common/redux/store/store'
 import { HeaderLeftComponent } from '../Home/components/HeaderLeft'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 const MySubscriptions = () => {
 	const navigation: any = useNavigation()
@@ -35,7 +35,9 @@ const MySubscriptions = () => {
 	)
 
 	const getMyCarsList = () => {
+		dispatch(setIsFullScreenLoading(true))
 		getMySubscriptionList(1, (response: API_RESPONSE) => {
+			dispatch(setIsFullScreenLoading(false))
 			if (response.error) {
 				dispatch(
 					setAlertData({
@@ -44,6 +46,7 @@ const MySubscriptions = () => {
 						label: response.error
 					})
 				)
+				setAllCarsData([])
 			} else {
 				setAllCarsData(response.data)
 			}
@@ -51,20 +54,21 @@ const MySubscriptions = () => {
 	}
 
 	const onPressItem = (item: any) => {
-		if (item?.paymentStatus === 'UNPAID') {
-			dispatch(
-				setAlertData({
-					isShown: true,
-					type: 'warning',
-					label: 'Please complete your payment to continue'
-				})
-			)
-		} else {
-			if (fromCars) {
-				navigation.navigate('MyCarDetails', { carDetails: item })
-			} else {
-				navigation.navigate('MySubscriptionDetails', { subscriptionDetails: item })
+		if (fromCars) {
+			navigation.navigate('MyCarDetails', { carDetails: item })
+		}
+		else {
+			if (item?.paymentStatus === 'UNPAID') {
+				dispatch(
+					setAlertData({
+						isShown: true,
+						type: 'warning',
+						label: 'Please complete your payment to continue'
+					})
+				)
+				return
 			}
+			navigation.navigate('MySubscriptionDetails', { subscriptionDetails: item })
 		}
 	}
 
@@ -76,8 +80,8 @@ const MySubscriptions = () => {
 					<CarDetailSVG />
 				</View>
 				<View>
-					<CustomText style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{item?.carmodel?.name ?? 'kia'}</CustomText>
-					<CustomText style={commonFontStyles.fontSizeXL}>{item?.carNumber ?? 'Sonet HTE (O)'}</CustomText>
+					<CustomText style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{item?.company?.name}</CustomText>
+					<CustomText style={commonFontStyles.fontSizeXL}>{item?.carmodel?.name}</CustomText>
 				</View>
 			</Pressable>
 		)
@@ -98,7 +102,7 @@ const MySubscriptions = () => {
 	return (
 		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} isNotifications backOnPress={() => navigation.goBack()} title={fromCars ? 'My Car' : 'My Subscriptions'}>
 			<View style={styles.main}>
-				<FlatList data={[1]} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length > 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
+				<FlatList data={allCarsData} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length === 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
 				{renderAddCarButton()}
 			</View>
 		</MainFrame>

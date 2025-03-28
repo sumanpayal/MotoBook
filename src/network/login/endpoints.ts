@@ -4,4 +4,4 @@ export const VERIFY_OTP = '/auth/verify-otp'
 
 export const ADD_DETAIL = '/auth/add-detail'
 
-export const GET_USER_DETAILS = (user_id: any) => `/Users/${user_id}`
+export const GET_USER_DETAILS = (user_id: any) => `/users/${user_id}`

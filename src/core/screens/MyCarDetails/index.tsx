@@ -12,6 +12,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { CarDetailBgSVG } from '@src/assets/svg'
 import { createStyles } from './styles'
 import { CarImageImage } from '@src/assets/image'
+import { VehicleAddress, VehicleDetails } from './VedicleDetails'
 
 const MyCarDetails = () => {
 	const navigation: any = useNavigation()
@@ -24,10 +25,10 @@ const MyCarDetails = () => {
 
 	const subscription_id = params?.carDetails?._id || 1
 
-	const [carDetails, setCarDetails] = useState<any[]>([])
+	const [carDetails, setCarDetails] = useState<any>(null)
 
 	useEffect(() => {
-		// getMyCardDetailsFromAPI()
+		getMyCardDetailsFromAPI()
 	}, [])
 
 	const getMyCardDetailsFromAPI = () => {
@@ -47,55 +48,32 @@ const MyCarDetails = () => {
 		})
 	}
 
-	const renderVehicleDetails = (label: any, value: any, isColor: boolean = false) => {
-		return (
-			<View style={styles.vehicleInner}>
-				<CustomText style={{ color: colors.labelColor }}>{label}</CustomText>
-				<View style={{ ...styles.vehicleImage, backgroundColor: isColor ? 'transparent' : colors.labelColor }}>{isColor && <View style={{ ...styles.vehicleColor, backgroundColor: 'red' }} />}</View>
-				<CustomText textType='bold'>{value}</CustomText>
-			</View>
-		)
-	}
-
-	const renderVehicleAddress = (label: any, value: any) => {
-		return (
-			<View style={styles.vehicle}>
-				<CustomText lineHeight style={{ color: colors.labelColor }}>
-					{label}
-				</CustomText>
-				<CustomText lineHeight textType='bold' style={commonFontStyles.fontSizeXL}>
-					{value}
-				</CustomText>
-			</View>
-		)
-	}
-
 	return (
 		<ScrollView style={styles.container}>
 			<View style={styles.main}>
-			<View style={styles.topView}>
-				<SafeAreaView edges={['top']} />
-				<HeaderNavigation title='Subscription' backOnPress={() => navigation.goBack()} />
-				<View style={styles.topInner}>
-					<CarDetailBgSVG />
-					<Image source={{ uri: CarImageImage }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
+				<View style={styles.topView}>
+					<SafeAreaView edges={['top']} />
+					<HeaderNavigation title='Car Details' backOnPress={() => navigation.goBack()} />
+					<View style={styles.topInner}>
+						<CarDetailBgSVG />
+						<Image source={{ uri: CarImageImage }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
+					</View>
+				</View>
+				<View style={styles.topBottom}>
+					<View style={styles.package}>
+						<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor, }}>
+							{carDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
+						</CustomText>
+					</View>
+					{VehicleAddress(false, 'Vehicle Number', carDetails?.carNumber)}
+					<View style={styles.vehicleDetails}>
+						{VehicleDetails('Vehicle Name', carDetails?.carmodel?.name)}
+						{VehicleDetails('Vehicle Type', carDetails?.company?.name)}
+						{VehicleDetails('Vehicle Color', carDetails?.color?.name, true, carDetails?.color?.title)}
+					</View>
+					{VehicleAddress(false, 'Vehicle Address', carDetails ? `${carDetails?.address?.landmark}, ${carDetails?.address?.state}, ${carDetails?.address?.city}, ${carDetails?.address?.country}, ${carDetails?.address?.postalCode}` : '')}
 				</View>
 			</View>
-			<View style={styles.topBottom}>
-				<View style={styles.package}>
-					<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor,  }}>
-						{'Standard Package'}
-					</CustomText>
-				</View>
-				{renderVehicleAddress('Vehicle Number', 'RJ14-GJ3400')}
-				<View style={styles.vehicleDetails}>
-					{renderVehicleDetails('Vehicle Name', 'Sedan')}
-					{renderVehicleDetails('Vehicle Type', 'Sedan')}
-					{renderVehicleDetails('Vehicle Color', 'Red', true)}
-				</View>
-				{renderVehicleAddress('Vehicle Address', 'RJ14-GJ3400')}
-			</View>
-		</View>
 		</ScrollView>
 	)
 }

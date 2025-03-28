@@ -5,6 +5,7 @@ import commonFontStyles from "@src/common/styles/commonFontStyles"
 import { scaleHeightPX, scaleWidthPX } from "@src/common/utils/responsiveStyle"
 import { Pressable, StyleSheet, View } from "react-native"
 import { SubscriptionPlanItem } from "./SubscriptionItem"
+import React from "react"
 
 interface RenderSubscritionPlansProps {
     openInformationModal: () => void;
@@ -28,12 +29,12 @@ export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
                     <InformationSVG />
                 </Pressable>
             </View>
-            <View style={styles.middle}>
+            {interiorCleaningAmount > 0 && <View style={styles.middle}>
                 <Pressable onPress={() => setIsInteriorCleaning(!isInteriorCleaning)} style={{ ...styles.check, borderColor: colors.white }}>
                     {isInteriorCleaning && <TickSVG fill={colors.white} width={scaleWidthPX(20)} height={scaleWidthPX(20)} />}
                 </Pressable>
                 <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeXS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
-            </View>
+            </View>}
             <View style={styles.bottom}>
                 {subscriptionPlansData?.map((item: any) => {
                     return <SubscriptionPlanItem key={item?._id} selectedSubscriptionPlan={selectedSubscriptionPlan} item={item} setSelectedSubscriptionPlan={setSelectedSubscriptionPlan} isInteriorCleaning={isInteriorCleaning} interiorCleaningAmount={interiorCleaningAmount} />

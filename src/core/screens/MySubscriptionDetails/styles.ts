@@ -27,9 +27,6 @@ export const createStyles = (colors: any) =>
 			alignItems: 'center',
 			paddingHorizontal: scaleWidthPX(16)
 		},
-		vehicle: {
-			gap: scaleHeightPX(4)
-		},
 		vehicleDetails: {
 			height: scaleHeightPX(120),
 			width: '92%',
@@ -37,28 +34,6 @@ export const createStyles = (colors: any) =>
 			gap: scaleWidthPX(16),
 			justifyContent: 'space-between',
 			marginTop: scaleHeightPX(4)
-		},
-		vehicleInner: {
-			flex: 0.33,
-			height: '100%',
-			backgroundColor: colors.backgroundColor,
-			borderRadius: 15,
-			alignItems: 'center',
-			paddingVertical: scaleHeightPX(16),
-			gap: scaleHeightPX(8)
-		},
-		vehicleImage: {
-			borderRadius: 100,
-			width: scaleWidthPX(34),
-			height: scaleWidthPX(34),
-			backgroundColor: colors.labelColor,
-			justifyContent: 'center',
-			alignItems: 'center'
-		},
-		vehicleColor: {
-			borderRadius: 100,
-			width: scaleWidthPX(20),
-			height: scaleWidthPX(20)
 		},
 		planDetailsOuter: {
 			marginHorizontal: scaleWidthPX(25),

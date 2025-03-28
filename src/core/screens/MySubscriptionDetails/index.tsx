@@ -12,6 +12,8 @@ import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { PlanDateSVG, PlanDurationSVG, PlanPriceSVG, PlanStatusSVG, PlanTypeSVG } from '@src/assets/svg'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import moment from 'moment'
+import { VehicleAddress, VehicleDetails } from '../MyCarDetails/VedicleDetails'
 
 const MySubscriptionDetails = () => {
 	const navigation: any = useNavigation()
@@ -24,43 +26,12 @@ const MySubscriptionDetails = () => {
 
 	const subscription_id = params?.subscriptionDetails?._id || 1
 
-	const [subscriptionDetails, setSubscriptionDetails] = useState<any[]>([])
+	const [subscriptionDetails, setSubscriptionDetails] = useState<any>(null)
 
-	const data = [
-		{
-			id: 0,
-			name: 'Plan Type',
-			value: 'Basic Plan',
-			image: PlanTypeSVG
-		},
-		{
-			id: 1,
-			name: 'Duration',
-			value: 'Monthly',
-			image: PlanDurationSVG
-		},
-		{
-			id: 2,
-			name: 'Status',
-			value: 'Active',
-			image: PlanStatusSVG
-		},
-		{
-			id: 3,
-			name: 'Renewal Date',
-			value: '20th January',
-			image: PlanDateSVG
-		},
-		{
-			id: 4,
-			name: 'Amount',
-			value: 'Rs 799',
-			image: PlanPriceSVG
-		},
-	]
+	const [planDetails, setPlanDetails] = useState<any[]>([])
 
 	useEffect(() => {
-		// getMySubscriptionDetailsFromAPI()
+		getMySubscriptionDetailsFromAPI()
 	}, [])
 
 	const getMySubscriptionDetailsFromAPI = () => {
@@ -75,31 +46,42 @@ const MySubscriptionDetails = () => {
 				)
 			} else {
 				setSubscriptionDetails(response.data)
+				let interiorCleaningAmount = response?.data?.interiorCleaningAmount ?? 0
+				const data = [
+					{
+						id: 0,
+						name: 'Plan Type',
+						value: response.data?.plan_detail?.type,
+						image: PlanTypeSVG
+					},
+					{
+						id: 1,
+						name: 'Duration',
+						value: `${response.data?.plan_detail?.duration ?? ''} Month(s)`,
+						image: PlanDurationSVG
+					},
+					{
+						id: 2,
+						name: 'Status',
+						value: response?.data?.requestStatus,
+						image: PlanStatusSVG
+					},
+					{
+						id: 3,
+						name: 'Renewal Date',
+						value: moment.unix(response?.data?.subscriptionExpireAt).format("DD MMMM"),
+						image: PlanDateSVG
+					},
+					{
+						id: 4,
+						name: 'Amount',
+						value: `Rs ${response.data?.plan_detail?.price + interiorCleaningAmount}`,
+						image: PlanPriceSVG
+					},
+				]
+				setPlanDetails(data)
 			}
 		})
-	}
-
-	const renderVehicleDetails = (label: any, value: any, isColor: boolean = false) => {
-		return (
-			<View style={styles.vehicleInner}>
-				<CustomText style={{ color: colors.labelColor }}>{label}</CustomText>
-				<View style={{ ...styles.vehicleImage, backgroundColor: isColor ? 'transparent' : colors.labelColor }}>{isColor && <View style={{ ...styles.vehicleColor, backgroundColor: 'red' }} />}</View>
-				<CustomText textType='bold'>{value}</CustomText>
-			</View>
-		)
-	}
-
-	const renderVehicleAddress = (label: any, value: any) => {
-		return (
-			<View style={styles.vehicle}>
-				<CustomText lineHeight style={{ color: colors.labelColor }}>
-					{label}
-				</CustomText>
-				<CustomText lineHeight textType='bold' style={commonFontStyles.fontSizeXL}>
-					{value}
-				</CustomText>
-			</View>
-		)
 	}
 
 	const renderItem = ({ item }: any) => {
@@ -125,19 +107,19 @@ const MySubscriptionDetails = () => {
 				<View style={styles.topInner}>
 					<View style={styles.package}>
 						<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor }}>
-							{'Standard Package'}
+							{subscriptionDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
 						</CustomText>
 					</View>
-					{renderVehicleAddress('Vehicle Number', 'RJ14-GJ3400')}
+					{VehicleAddress(true, 'Vehicle Number', subscriptionDetails?.carNumber)}
 					<View style={styles.vehicleDetails}>
-						{renderVehicleDetails('Vehicle Name', 'Sedan')}
-						{renderVehicleDetails('Vehicle Type', 'Sedan')}
-						{renderVehicleDetails('Vehicle Color', 'Red', true)}
+						{VehicleDetails('Vehicle Name', subscriptionDetails?.carmodel?.name)}
+						{VehicleDetails('Vehicle Type', subscriptionDetails?.company?.name)}
+						{VehicleDetails('Vehicle Color', subscriptionDetails?.color?.name, true, subscriptionDetails?.color?.title)}
 					</View>
-					{renderVehicleAddress('Vehicle Address', 'RJ14-GJ3400')}
+					{VehicleAddress(true, 'Vehicle Address', subscriptionDetails ? `${subscriptionDetails?.address?.landmark}, ${subscriptionDetails?.address?.state}, ${subscriptionDetails?.address?.city}, ${subscriptionDetails?.address?.country}, ${subscriptionDetails?.address?.postalCode}` : '')}
 				</View>
 			</View>
-			<FlatList data={data} renderItem={renderItem} keyExtractor={(item) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} ListHeaderComponent={() => <View style={{ marginVertical: scaleHeightPX(12) }} />} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16), }} />} />
+			<FlatList data={planDetails} renderItem={renderItem} keyExtractor={(item) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} ListHeaderComponent={() => <View style={{ marginVertical: scaleHeightPX(12) }} />} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16), }} />} />
 			<SafeAreaView edges={['bottom']} />
 		</View>
 	)

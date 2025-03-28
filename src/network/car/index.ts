@@ -1,6 +1,6 @@
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { getApiService, postApiService } from '../apiService'
-import { GET_CAR_MODALS, GET_COMPANIES, MY_SUBSCRIPTION_LIST, MY_SUBSCRIPTION_DETAILS, SUBSCRIPTION_PLANS, SUBSCRIPTION_TIME_SLOTS, POST_SUBSCRIPTION_DETAILS } from './endpoints'
+import { GET_CAR_MODALS, GET_COMPANIES, MY_SUBSCRIPTION_LIST, MY_SUBSCRIPTION_DETAILS, SUBSCRIPTION_PLANS, SUBSCRIPTION_TIME_SLOTS, POST_SUBSCRIPTION_DETAILS, CAR_MODALS } from './endpoints'
 
 export const getCompaniesListAPI = (callBack: (response: API_RESPONSE) => void) => {
 	getApiService(GET_COMPANIES)
@@ -40,6 +40,23 @@ export const getCarModalsListAPIForCompanyID = (company_id: any, callBack: (resp
 					error: res?.message
 				})
 			}
+		})
+		.catch((err: any) => {
+			console.error(err)
+			callBack({
+				data: undefined,
+				error: err?.message
+			})
+		})
+}
+
+export const getCarModalDetailsFromAPI = (car_modal_id: any, callBack: (response: API_RESPONSE) => void) => {
+	getApiService(CAR_MODALS(car_modal_id))
+		.then(async (res: any) => {
+			callBack({
+				data: res?.data,
+				error: undefined
+			})
 		})
 		.catch((err: any) => {
 			console.error(err)
