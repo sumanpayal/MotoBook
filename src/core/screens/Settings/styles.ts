@@ -14,7 +14,7 @@ export const createStyles = (colors: any) => {
 			alignItems: 'center',
 			justifyContent: 'space-between',
 			borderBottomWidth: 1,
-			borderBottomColor: '#1B2F44',
+			borderBottomColor: colors.borderColor,
 			height: scaleHeightPX(70)
 		},
 		itemInner: {
@@ -24,7 +24,7 @@ export const createStyles = (colors: any) => {
 		},
 		image: {
 			width: '100%',
-			height: scaleHeightPX(248)
+			height: scaleHeightPX(224)
 		},
 		profileView: {
 			width: scaleWidthPX(126),

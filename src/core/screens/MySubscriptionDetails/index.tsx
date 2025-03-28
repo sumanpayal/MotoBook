@@ -112,9 +112,9 @@ const MySubscriptionDetails = () => {
 					</View>
 					{VehicleAddress(true, 'Vehicle Number', subscriptionDetails?.carNumber)}
 					<View style={styles.vehicleDetails}>
-						{VehicleDetails('Vehicle Name', subscriptionDetails?.carmodel?.name)}
-						{VehicleDetails('Vehicle Type', subscriptionDetails?.company?.name)}
-						{VehicleDetails('Vehicle Color', subscriptionDetails?.color?.name, true, subscriptionDetails?.color?.title)}
+						<VehicleDetails label={'Vehicle Name'} value={subscriptionDetails?.carmodel?.name} image={subscriptionDetails?.carmodel?.image} />
+						<VehicleDetails label={'Vehicle Type'} value={subscriptionDetails?.company?.name} image={subscriptionDetails?.company?.image} />
+						<VehicleDetails label={'Vehicle Color'} value={subscriptionDetails?.color?.name} isColor color={subscriptionDetails?.color?.title} />
 					</View>
 					{VehicleAddress(true, 'Vehicle Address', subscriptionDetails ? `${subscriptionDetails?.address?.landmark}, ${subscriptionDetails?.address?.state}, ${subscriptionDetails?.address?.city}, ${subscriptionDetails?.address?.country}, ${subscriptionDetails?.address?.postalCode}` : '')}
 				</View>

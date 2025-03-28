@@ -20,7 +20,7 @@ export const createStyles = (colors: any) =>
 			gap: scaleHeightPX(16)
 		},
 		topBottom: {
-			backgroundColor: '#1A2D41',
+			backgroundColor: colors.carDetailBg,
 			borderTopLeftRadius: 20,
 			borderTopRightRadius: 20,
 			paddingVertical: scaleHeightPX(32),
@@ -65,7 +65,6 @@ export const createStyles = (colors: any) =>
 			borderRadius: 100,
 			width: scaleWidthPX(34),
 			height: scaleWidthPX(34),
-			backgroundColor: colors.labelColor,
 			justifyContent: 'center',
 			alignItems: 'center'
 		},

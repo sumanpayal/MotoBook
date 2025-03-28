@@ -6,7 +6,6 @@ import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import SearchComponent from '@src/common/components/SearchComponent'
 import { BottomModalProps } from '@src/common/components/BottomModal/types'
 import BrandItem from './BrandItem'
-import { useTheme } from '@react-navigation/native'
 
 type SelectModalProps = {
 	data: any[]
@@ -16,12 +15,11 @@ type SelectModalProps = {
 	selectedItem: any | null
 	setSelectedItem: (item: any) => void
 	modalProps?: BottomModalProps
+	headerChildren?: React.ReactNode | undefined
 }
 
 const SelectModal = (props: SelectModalProps) => {
-	const {colors} = useTheme()
-
-	const { visible, onClose = () => {}, data, title, modalProps, setSelectedItem } = props
+	const { visible, onClose = () => {}, data, title, modalProps, setSelectedItem, headerChildren } = props
 
 	const [searchText, setSearchText] = useState<string>('')
 	const [flatListData, setFlatListData] = useState<any[]>(data)
@@ -61,10 +59,10 @@ const SelectModal = (props: SelectModalProps) => {
 	}
 
 	return (
-		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false} headerChildren={<View style={{ backgroundColor: colors.inputBackground, width: scaleWidthPX(64), height: scaleWidthPX(64), borderRadius: 100, marginTop: scaleHeightPX(8) }} />}>
+		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={styles.containerStyle} {...modalProps} hideOnBackdropPress={false} headerChildren={headerChildren}>
 			<View style={styles.main}>
 				{listHeaderComponent()}
-				<ScrollView>
+				<ScrollView showsVerticalScrollIndicator={false}>
 					{flatListData?.length > 0 && (
 						<View style={styles.container}>
 							{flatListData?.map((item: any) => (

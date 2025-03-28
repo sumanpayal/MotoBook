@@ -1,9 +1,10 @@
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Image, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import { useTheme } from '@react-navigation/native'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
+import { BASE_URL } from '@src/network/apiClient'
 
 interface BrandItemProps {
 	onPress: () => void
@@ -18,7 +19,7 @@ const BrandItem = (props: BrandItemProps) => {
 	const styles = selectionModalStyles(colors)
 	return (
 		<Pressable onPress={onPress} style={{ ...styles.item, backgroundColor: selected?._id === item?._id ? colors.primary : colors.inputBackground }}>
-			<View style={[styles.image, isModal && styles.imageModal]} />
+			<Image style={[styles.image, isModal && styles.imageModal]} source={{ uri: `${BASE_URL}/${item?.image}` }} resizeMode='center' />
 			<CustomText numberOfLines={1} style={{ ...commonFontStyles.fontSizeL, textAlign: 'center', color: selected?._id === item?._id ? colors.backgroundColor : colors.white }}>
 				{item?.name}
 			</CustomText>
@@ -43,13 +44,11 @@ const selectionModalStyles = (colors: any) =>
 		image: {
 			width: scaleWidthPX(64),
 			height: scaleWidthPX(64),
-			borderRadius: 100,
-			backgroundColor: colors.backgroundColor
+			borderRadius: 100
 		},
 		imageModal: {
-			width: scaleWidthPX(103),
+			width: scaleWidthPX(100),
 			height: scaleHeightPX(58),
-			backgroundColor: colors.backgroundColor,
 			borderRadius: 0
 		}
 	})

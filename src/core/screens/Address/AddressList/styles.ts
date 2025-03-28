@@ -21,7 +21,7 @@ export const createStyles = (colors: any) => {
 		item: {
 			borderRadius: 15,
 			paddingHorizontal: scaleWidthPX(20),
-			backgroundColor: '#1B2F44',
+			backgroundColor: colors.borderColor,
 			paddingVertical: scaleHeightPX(16)
 		},
 		carImage: {

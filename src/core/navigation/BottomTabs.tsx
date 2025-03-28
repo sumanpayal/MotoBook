@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeStack, ReferStack, SubscriptionsStack, AccountStack } from './HomeStack'
 import CustomText from '@src/common/components/Text'
 import { useTheme } from '@react-navigation/native'
-import { styles } from './styles'
+import { createStyles } from './styles'
 import { HomeSVG } from '@src/assets/SvgJSX/Home'
 import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator()
 
 const BottomTabs = () => {
 	const { colors } = useTheme()
+	const styles = createStyles(colors)
 	return (
 		<View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
 			<Tab.Navigator initialRouteName='HomeStack' backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true, tabBarIconStyle: { marginTop: scaleHeightPX(6), marginBottom: scaleHeightPX(4) }, tabBarLabelStyle: styles.textStyle }}>
@@ -77,6 +78,7 @@ const TabIcon = React.memo((props: any) => {
 const TabLabel = React.memo((props: any) => {
 	const { focused, title } = props
 	const { colors } = useTheme()
+	const styles = createStyles(colors)
 	return (
 		<View style={styles.labelView}>
 			<CustomText textType='medium' style={{ ...styles.textStyle, color: focused ? colors.primary : `${colors.white}4D` }}>

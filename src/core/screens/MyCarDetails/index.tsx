@@ -11,8 +11,8 @@ import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { CarDetailBgSVG } from '@src/assets/svg'
 import { createStyles } from './styles'
-import { CarImageImage } from '@src/assets/image'
 import { VehicleAddress, VehicleDetails } from './VedicleDetails'
+import { BASE_URL } from '@src/network/apiClient'
 
 const MyCarDetails = () => {
 	const navigation: any = useNavigation()
@@ -56,7 +56,7 @@ const MyCarDetails = () => {
 					<HeaderNavigation title='Car Details' backOnPress={() => navigation.goBack()} />
 					<View style={styles.topInner}>
 						<CarDetailBgSVG />
-						<Image source={{ uri: CarImageImage }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
+						<Image source={{ uri: `${BASE_URL}/${carDetails?.carmodel?.image}` }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
 					</View>
 				</View>
 				<View style={styles.topBottom}>
@@ -67,9 +67,9 @@ const MyCarDetails = () => {
 					</View>
 					{VehicleAddress(false, 'Vehicle Number', carDetails?.carNumber)}
 					<View style={styles.vehicleDetails}>
-						{VehicleDetails('Vehicle Name', carDetails?.carmodel?.name)}
-						{VehicleDetails('Vehicle Type', carDetails?.company?.name)}
-						{VehicleDetails('Vehicle Color', carDetails?.color?.name, true, carDetails?.color?.title)}
+						<VehicleDetails label={'Vehicle Name'} value={carDetails?.carmodel?.name} image={carDetails?.carmodel?.image} />
+						<VehicleDetails label={'Vehicle Type'} value={carDetails?.company?.name} image={carDetails?.company?.image} />
+						<VehicleDetails label={'Vehicle Color'} value={carDetails?.color?.name} isColor color={carDetails?.color?.title} />
 					</View>
 					{VehicleAddress(false, 'Vehicle Address', carDetails ? `${carDetails?.address?.landmark}, ${carDetails?.address?.state}, ${carDetails?.address?.city}, ${carDetails?.address?.country}, ${carDetails?.address?.postalCode}` : '')}
 				</View>

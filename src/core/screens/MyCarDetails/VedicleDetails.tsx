@@ -1,17 +1,29 @@
-import { View } from "react-native"
+import { Image, View } from "react-native"
 import { createStyles } from "./styles"
 import { useTheme } from "@react-navigation/native"
 import React from "react"
 import CustomText from "@src/common/components/Text"
 import commonFontStyles from "@src/common/styles/commonFontStyles"
+import { BASE_URL } from "@src/network/apiClient"
 
-export const VehicleDetails = (label: any, value: any, isColor: boolean = false, color: any = 'red') => {
+interface VehicleDetailsProps {
+    label: any;
+    value: any;
+    isColor?: boolean;
+    color?: any
+    image?: any
+}
+
+export const VehicleDetails = (props: VehicleDetailsProps) => {
+    const { label, value, color = 'red', isColor = false, image } = props
     const { colors } = useTheme()
     const styles = createStyles(colors)
     return (
         <View style={styles.vehicleInner}>
             <CustomText style={{ color: colors.labelColor }}>{label}</CustomText>
-            <View style={{ ...styles.vehicleImage, backgroundColor: isColor ? 'transparent' : colors.labelColor }}>{isColor && <View style={{ ...styles.vehicleColor, backgroundColor: color }} />}</View>
+            {isColor ? <View style={styles.vehicleImage}>
+                <View style={{ ...styles.vehicleColor, backgroundColor: color }} />
+            </View> : <Image source={{ uri: `${BASE_URL}/${image}` }} style={styles.vehicleImage} resizeMode={'center'} />}
             <CustomText textType='bold'>{value}</CustomText>
         </View>
     )

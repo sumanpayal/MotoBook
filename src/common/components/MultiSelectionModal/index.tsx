@@ -7,11 +7,11 @@ import { selectionModalStyles } from './styles'
 import SearchComponent from '../SearchComponent'
 import { NoRecordFound } from '../NoRecordFound'
 import { MultiSelectionModalProps } from './types'
-import Icon from 'react-native-vector-icons/AntDesign'
-import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { TickSVG } from '@src/assets/svg'
 
 const MultiSelectionModal = (props: MultiSelectionModalProps) => {
-	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, isSearch = true, noRecordViewProps, modalProps, children, setSelectedItem } = props
+	const { visible, onClose = () => { }, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, isSearch = true, noRecordViewProps, modalProps, children, setSelectedItem } = props
 
 	const { colors } = useTheme()
 	const styles = selectionModalStyles(colors)
@@ -58,7 +58,7 @@ const MultiSelectionModal = (props: MultiSelectionModalProps) => {
 					<CustomText style={styles.itemLabel}>{item[titleItem]}</CustomText>
 				</View>
 				<View style={styles.itemRight}>
-					<View style={styles.selectedViewOuter}>{item?.isSelected && <Icon name='check' size={16} color={colors.white} />}</View>
+					<CheckBox isSelected={item?.isSelected} disabled={true} />
 				</View>
 			</Pressable>
 		)
@@ -95,3 +95,17 @@ const MultiSelectionModal = (props: MultiSelectionModalProps) => {
 }
 
 export default MultiSelectionModal
+
+
+export const CheckBox = (props: { isSelected: boolean, setIsSelected?: any; disabled?: boolean }) => {
+	const { colors } = useTheme()
+	const styles = selectionModalStyles(colors)
+
+	const { isSelected, setIsSelected, disabled = false } = props
+
+	return (
+		<Pressable disabled={disabled} onPress={() => setIsSelected && setIsSelected()} style={{ ...styles.check, borderColor: colors.white }}>
+			{isSelected && <TickSVG fill={colors.white} width={scaleWidthPX(20)} height={scaleWidthPX(20)} />}
+		</Pressable>
+	)
+}

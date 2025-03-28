@@ -6,6 +6,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { Image, View } from 'react-native'
 import { createStyles } from '../styles'
+import React from 'react'
 
 export const HowItWorks = () => {
 	const { colors } = useTheme()

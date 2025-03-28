@@ -83,9 +83,11 @@ const MySettings = () => {
 				// my account
 				break
 			case 1:
+				// my cars
 				navigation.navigate('MyCars', { fromCars: true })
 				break
 			case 2:
+				// address list
 				navigation.navigate('AddressList')
 				break
 			case 3:

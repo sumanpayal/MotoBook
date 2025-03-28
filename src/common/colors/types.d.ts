@@ -26,7 +26,13 @@ declare module '@react-navigation/native' {
 			labelColor: string
 			planBg: string
 			planText: string,
-			inActiveDot: string
+			inActiveDot: string,
+			interiorBg: string,
+			headerBg: string,
+			carInner: string,
+			carBottom: string,
+			carDetailBg: string,
+			carDetailsBgTop: string
 		}
 	}
 	export function useTheme(): ExtendedTheme

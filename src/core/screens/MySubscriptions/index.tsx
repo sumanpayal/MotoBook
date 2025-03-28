@@ -8,13 +8,14 @@ import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import { createStyles } from './styles'
 import { getMySubscriptionList } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
-import { NoSubscriptionImage, NoVehicleImage, SedanImage } from '@src/assets/image'
+import { NoSubscriptionImage, NoVehicleImage } from '@src/assets/image'
 import { CarDetailSVG, PlusSVG } from '@src/assets/svg'
 import { HeaderLeftComponent } from '../Home/components/HeaderLeft'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import { BASE_URL } from '@src/network/apiClient'
 
 const MySubscriptions = () => {
 	const navigation: any = useNavigation()
@@ -75,7 +76,7 @@ const MySubscriptions = () => {
 	const renderCarItem = ({ item }: { item: any }) => {
 		return (
 			<Pressable style={styles.item} onPress={() => onPressItem(item)}>
-				<Image source={{ uri: item?.carmodel?.image ?? SedanImage }} style={styles.carImage} />
+				<Image source={{ uri: `${BASE_URL}/${item?.carmodel?.image}` }} style={styles.carImage} />
 				<View style={styles.image}>
 					<CarDetailSVG />
 				</View>
@@ -100,7 +101,7 @@ const MySubscriptions = () => {
 	}
 
 	return (
-		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} isNotifications backOnPress={() => navigation.goBack()} title={fromCars ? 'My Car' : 'My Subscriptions'}>
+		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} isNotifications backOnPress={() => navigation.goBack()} title={fromCars ? 'My Cars' : 'My Subscriptions'}>
 			<View style={styles.main}>
 				<FlatList data={allCarsData} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length === 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
 				{renderAddCarButton()}

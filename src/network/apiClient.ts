@@ -4,6 +4,7 @@ import { getAnonymousStoreData } from '@src/common/storage/localStorage';
 import axios from 'axios';
 
 export const ENV = ENVIRONMENT.DEV;
+export const BASE_URL = CONFIG[`${ENV}`]?.baseUrl
 
 const getToken = async () => {
   const data = await getAnonymousStoreData(TOKEN)
@@ -11,7 +12,7 @@ const getToken = async () => {
 };
 
 const APIClient = axios.create({
-  baseURL: CONFIG[`${ENV}`]?.baseUrl,
+  baseURL: BASE_URL,
 });
 
 const getAuthURLs = (config: any) => {

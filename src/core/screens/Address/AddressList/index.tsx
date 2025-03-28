@@ -1,5 +1,5 @@
 import { View, FlatList, Pressable } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { getAddressListAPI } from '@src/network/address'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import MainFrame from '@src/common/components/Mainframe'
@@ -25,7 +25,7 @@ const AddressList = () => {
 	useFocusEffect(
 		useCallback(() => {
 			dispatch(setIsFullScreenLoading(true))
-		getAddressList()
+			getAddressList()
 		}, [])
 	)
 
@@ -42,7 +42,7 @@ const AddressList = () => {
 	}
 
 	const onPressItem = (item: any) => {
-		navigation.navigate('AddAddress', { isEdit: true, addressDetails: item})
+		navigation.navigate('AddAddress', { isEdit: true, addressDetails: item })
 	}
 
 	const renderAddressItem = ({ item }: { item: any }) => {

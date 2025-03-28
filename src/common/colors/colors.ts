@@ -17,7 +17,7 @@ const COLORS_LIGHT: ExtendedTheme = {
 		alertRed: '#DB5757',
 		alertGreen: '#19AC56',
 		black: '#000000',
-		borderColor: '#B9C6DE',
+		borderColor: '#1B2F44',
 		borderColorInputFocused: '#333333',
 		borderColorInputDisabled: '#8596B8',
 		inputPlaceholder: '#555F71',
@@ -31,7 +31,13 @@ const COLORS_LIGHT: ExtendedTheme = {
 		labelColor: '#9BA6B8',
 		planBg: '#A5D5FA',
 		planText: '#2D4B82',
-		inActiveDot: '#A7A7A7'
+		inActiveDot: '#A7A7A7',
+		interiorBg: '#00585B',
+		headerBg: '#0D2339',
+		carInner: '#1F355F',
+		carBottom: '#465A82',
+		carDetailBg: '#1A2D41',
+		carDetailsBgTop: '#162F48'
 	}
 }
 

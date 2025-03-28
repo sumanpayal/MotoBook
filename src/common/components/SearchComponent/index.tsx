@@ -2,7 +2,6 @@ import React from 'react'
 import { Pressable, TextInput, View } from 'react-native'
 import createStyles from './styles'
 import { useTheme } from '@react-navigation/native'
-import Icon from 'react-native-vector-icons/AntDesign'
 import { CloseSVG, SearchSVG } from '@src/assets/svg'
 
 export default function SearchComponent(props: SearchProps) {

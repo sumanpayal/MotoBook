@@ -8,7 +8,7 @@ export const createStyles = (colors: any) =>
 			backgroundColor: colors.backgroundColor
 		},
 		topView: {
-			backgroundColor: '#162F48',
+			backgroundColor: colors.carDetailsBgTop,
 			width: '100%',
 			borderBottomLeftRadius: 60,
 			borderBottomRightRadius: 60,

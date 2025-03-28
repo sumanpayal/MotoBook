@@ -33,7 +33,7 @@ const RequestSubmitted = () => {
 					<CustomText style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center' }} textType={'semi-bold'}>
 						{'Request Submitted'}
 					</CustomText>
-					<CustomText style={{ textAlign: 'center', ...commonFontStyles.fontSizeL }}>{`Your request has been submitted.\nour team will be in touch shortly     `}</CustomText>
+					<CustomText style={{ textAlign: 'center', ...commonFontStyles.fontSizeL }}>{`Your request has been submitted.\nour team will be in touch shortly`}</CustomText>
 					<CustomButton title='Got It' onPress={onPressGotIt} />
 				</View>
 			</View>

@@ -5,11 +5,11 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { createStyles } from '../styles'
+import React from 'react'
 
 export const HeaderLeftComponent = () => {
 	const { colors } = useTheme()
 	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
-	// console.log({userData});
 	
 	const styles = createStyles(colors)
 	return (

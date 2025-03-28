@@ -1,6 +1,7 @@
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
+import { styles } from '../SelectBrand/styles'
 
 export const createStyles = (colors: any) =>
 	StyleSheet.create({
@@ -36,7 +37,7 @@ export const createStyles = (colors: any) =>
 			gap: scaleHeightPX(24),
 		},
 		interiorView: {
-			backgroundColor: '#00585B',
+			backgroundColor: colors.interiorBg,
 			height: scaleHeightPX(32),
 			borderRadius: 2,
 			justifyContent: 'center',
@@ -47,7 +48,7 @@ export const createStyles = (colors: any) =>
 			marginTop: scaleHeightPX(24)
 		},
 		header: {
-			backgroundColor: '#0D2339',
+			backgroundColor: colors.headerBg,
 			borderBottomLeftRadius: 20,
 			borderBottomRightRadius: 20,
 			paddingBottom: scaleHeightPX(16)
@@ -66,7 +67,7 @@ export const createStyles = (colors: any) =>
 		carPlanInner: {
 			height: '100%',
 			flex: 0.33,
-			backgroundColor: '#1F355F',
+			backgroundColor: colors.carInner,
 			borderRadius: 15,
 			paddingTop: scaleHeightPX(16),
 			gap: scaleHeightPX(16)
@@ -77,7 +78,7 @@ export const createStyles = (colors: any) =>
 			alignSelf: 'center'
 		},
 		carPlanBottom: {
-			backgroundColor: '#465A82',
+			backgroundColor: colors.carBottom,
 			justifyContent: 'center',
 			alignItems: 'center',
 			position: 'absolute',

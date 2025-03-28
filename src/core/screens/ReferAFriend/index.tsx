@@ -2,9 +2,7 @@ import { Share, View } from 'react-native'
 import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
-import { useTheme } from '@react-navigation/native'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { createStyles } from './styles'
 import Clipboard from '@react-native-community/clipboard'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
@@ -13,10 +11,9 @@ import { ReferImage } from '@src/assets/image'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomInput from '@src/common/components/Input'
 import { CopySVG } from '@src/assets/svg'
+import { styles } from './styles'
 
 const ReferAFriend = () => {
-	const { colors } = useTheme()
-	const styles = createStyles(colors)
 
 	const code = '70Fz3sxY'
 	const shareText = `Hey 🚗✨
@@ -58,7 +55,7 @@ const ReferAFriend = () => {
 	}
 
 	return (
-		<MainFrame isHeader title='Refer A Friend' isNotifications isBack={false} notificationOnPress={() => {}}>
+		<MainFrame isHeader title='Refer A Friend' isNotifications isBack={false} notificationOnPress={() => { }}>
 			<View style={styles.main}>
 				<CustomText textType='bold' style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center', marginTop: scaleHeightPX(30) }}>
 					{'Share With Friends'}
@@ -69,7 +66,7 @@ const ReferAFriend = () => {
 				<View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: scaleHeightPX(44) }}>
 					<Image style={{ width: scaleWidthPX(238), height: scaleHeightPX(165) }} source={{ uri: ReferImage }} resizeMode='contain' />
 				</View>
-				<CustomInput label='Referral Code' onChangeText={() => {}} editable={false} value={code} isRightIcon RightIcon={CopySVG} rightIconOnPress={onPressCopy} />
+				<CustomInput label='Referral Code' onChangeText={() => { }} editable={false} value={code} isRightIcon RightIcon={CopySVG} rightIconOnPress={onPressCopy} />
 			</View>
 		</MainFrame>
 	)

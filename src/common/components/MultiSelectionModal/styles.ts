@@ -64,5 +64,13 @@ export const selectionModalStyles = (colors: any) =>
 			height: scaleWidthPX(12),
 			backgroundColor: colors.white,
 			borderRadius: scaleWidthPX(12)
-		}
+		},
+		check: {
+			borderWidth: 1,
+			borderRadius: 5,
+			width: scaleWidthPX(20),
+			height: scaleWidthPX(20),
+			justifyContent: 'center',
+			alignItems: 'center'
+		},
 	})

@@ -8,7 +8,6 @@ import React, { useMemo } from 'react'
 import { Pressable, StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
 import { CustomButtonProps } from './types'
 import { ButtonLoader } from '@src/assets/lottie'
-import Icon from 'react-native-vector-icons/Ionicons'
 
 export default function CustomButton(props: CustomButtonProps) {
 	const { colors } = useTheme()
@@ -83,7 +82,7 @@ export default function CustomButton(props: CustomButtonProps) {
 		</View>
 	) : (
 		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
-			{showIcon && <Icon name={SVGIcon} size={iconSize} color={white} />}
+			{showIcon && <SVGIcon />}
 			<CustomText style={textStyle}>{title}</CustomText>
 		</Pressable>
 	)

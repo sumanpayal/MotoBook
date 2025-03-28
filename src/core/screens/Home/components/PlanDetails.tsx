@@ -5,6 +5,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { Image, View } from 'react-native'
 import { createStyles } from '../styles'
+import React from 'react'
 
 export const PlanDetails = () => {
 	const { colors } = useTheme()
