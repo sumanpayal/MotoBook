@@ -9,7 +9,7 @@ export const createStyles = (colors: any) => {
 		},
 		carsButton: {
 			position: 'absolute',
-			bottom: scaleWidthPX(0),
+			bottom: scaleWidthPX(25),
 			right: scaleWidthPX(0),
 			width: scaleWidthPX(60),
 			height: scaleWidthPX(60),
@@ -28,7 +28,9 @@ export const createStyles = (colors: any) => {
 		carImage: {
 			width: scaleWidthPX(151),
 			height: scaleHeightPX(85),
-			marginBottom: scaleHeightPX(2)
+			marginBottom: scaleHeightPX(2),
+			backgroundColor: colors.backgroundColor,
+			borderRadius: 15,
 		},
 		itemInner: {
 			borderWidth: 1,

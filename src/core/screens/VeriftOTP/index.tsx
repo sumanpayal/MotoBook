@@ -119,10 +119,10 @@ const VerifyOTP = () => {
 			phoneNumber: mobileNumber
 		}
 		postVerifyOTP({}, params, (res: API_RESPONSE) => {
-            dispatch(setIsFullScreenLoading(false))
+			dispatch(setIsFullScreenLoading(false))
 			if (res?.data) {
 				dispatch(setUserData(res?.data?.user))
-                navigation.navigate('PostLogin')
+				navigation.navigate('PostLogin')
 			} else {
 				dispatch(
 					setAlertData({

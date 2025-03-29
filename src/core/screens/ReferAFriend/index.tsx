@@ -3,7 +3,7 @@ import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-clipboard/clipboard';
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { Image } from 'react-native'

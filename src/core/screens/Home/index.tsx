@@ -42,7 +42,6 @@ const HomeScreen = () => {
 				<HeaderNavigation
 					isCustom
 					children={renderHeaderLeft()}
-					isNotifications
 				/>
 				<View style={styles.search}>
 					<SearchComponent

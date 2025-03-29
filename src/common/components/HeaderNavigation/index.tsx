@@ -9,7 +9,7 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 	const { colors } = useTheme()
 	const styles = navigationStyles(colors)
 
-	const { backOnPress, title, isBack = true, isNotifications = false, notificationOnPress, isCustom = false, children } = props
+	const { backOnPress, title, isBack = true, isNotifications = true, notificationOnPress, isCustom = false, children } = props
 
 	return (
 		<View style={styles.container}>

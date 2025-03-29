@@ -3,11 +3,6 @@ import { scaleHeightPX, scaleWidthPX } from '@utils/responsiveStyle'
 
 export const carouselStyles = (colors: any) =>
 	StyleSheet.create({
-		container: {
-			justifyContent: 'center',
-			alignItems: 'center',
-			width: '100%'
-		},
 		dotsContainer: {
 			flexDirection: 'row',
 			justifyContent: 'center',
@@ -17,15 +12,16 @@ export const carouselStyles = (colors: any) =>
 			alignSelf: 'flex-start',
 			marginHorizontal: scaleWidthPX(16)
 		},
-		dot: {
+		activeDot: {
+			backgroundColor: colors.primary,
 			width: scaleWidthPX(10),
 			height: scaleWidthPX(10),
 			borderRadius: 100
 		},
-		activeDot: {
-			backgroundColor: colors.primary
-		},
 		inactiveDot: {
-			backgroundColor: colors.inActiveDot
+			backgroundColor: colors.inActiveDot,
+			width: scaleWidthPX(10),
+			height: scaleWidthPX(10),
+			borderRadius: 100
 		}
 	})

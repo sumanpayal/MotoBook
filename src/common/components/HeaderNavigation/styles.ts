@@ -9,7 +9,8 @@ export const navigationStyles = (Colors: any) => {
 			justifyContent: 'space-between',
 			paddingHorizontal: scaleWidthPX(16),
 			flexDirection: 'row',
-			alignItems: 'center'
+			alignItems: 'center',
+			paddingTop: scaleHeightPX(4)
 		},
 		leftView: {
 			flexDirection: 'row',

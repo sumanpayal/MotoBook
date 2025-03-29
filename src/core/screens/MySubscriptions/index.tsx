@@ -74,6 +74,9 @@ const MySubscriptions = () => {
 	}
 
 	const renderCarItem = ({ item }: { item: any }) => {
+		let image = `${BASE_URL}/${item?.carmodel?.image}`
+		console.log({ image });
+
 		return (
 			<Pressable style={styles.item} onPress={() => onPressItem(item)}>
 				<Image source={{ uri: `${BASE_URL}/${item?.carmodel?.image}` }} style={styles.carImage} />
@@ -101,7 +104,7 @@ const MySubscriptions = () => {
 	}
 
 	return (
-		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} isNotifications backOnPress={() => navigation.goBack()} title={fromCars ? 'My Cars' : 'My Subscriptions'}>
+		<MainFrame isCustom={!fromCars} childrenNav={renderHeader()} isHeader isBack={fromCars} backOnPress={() => navigation.goBack()} title={fromCars ? 'My Cars' : 'My Subscriptions'}>
 			<View style={styles.main}>
 				<FlatList data={allCarsData} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isImage imageSource={fromCars ? NoVehicleImage : NoSubscriptionImage} imageStyle={{ width: fromCars ? scaleWidthPX(194) : scaleWidthPX(113), height: fromCars ? scaleHeightPX(158) : scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length === 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
 				{renderAddCarButton()}

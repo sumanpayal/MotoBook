@@ -49,6 +49,7 @@ const selectionModalStyles = (colors: any) =>
 		imageModal: {
 			width: scaleWidthPX(100),
 			height: scaleHeightPX(58),
-			borderRadius: 0
+			borderRadius: 15,
+			backgroundColor: colors.backgroundColor
 		}
 	})

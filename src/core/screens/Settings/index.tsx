@@ -119,7 +119,7 @@ const MySettings = () => {
 		<View style={styles.main}>
 			<ImageBackground source={{ uri: AccountBgImage }} style={styles.image} resizeMode='contain'>
 				<SafeAreaView edges={['top']} />
-				<HeaderNavigation isBack={false} title='My Profile' isNotifications />
+				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
 			<View style={styles.profileView}>
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>

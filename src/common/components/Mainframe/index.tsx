@@ -7,7 +7,7 @@ import { useTheme } from '@react-navigation/native'
 export default function MainFrame(props: MainFrameProps) {
 	const { colors } = useTheme()
 
-	const { children, barStyle = 'light-content', isHeader = false, title = '', backOnPress, isNotifications = false, isBack = true, notificationOnPress, isCustom = false, childrenNav } = props
+	const { children, barStyle = 'light-content', isHeader = false, title = '', backOnPress, isNotifications = true, isBack = true, notificationOnPress, isCustom = false, childrenNav } = props
 
 	return (
 		<SafeAreaView edges={['left', 'right', 'top', 'bottom']} style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
