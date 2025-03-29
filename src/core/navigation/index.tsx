@@ -16,6 +16,7 @@ import { RootState } from '@src/common/redux/store/store'
 import Welcome from '../screens/Welcome'
 import RequestSubmitted from '../screens/RequestSubmitted'
 import MyCarDetails from '../screens/MyCarDetails'
+import InAppBrowser from '../screens/inAppBrowser'
 
 const Stack = createNativeStackNavigator()
 
@@ -47,6 +48,7 @@ const PreLoginStack = () => {
 			<Stack.Screen name='Welcome' component={Welcome} />
 			<Stack.Screen name='Login' component={Login} />
 			<Stack.Screen name='VerifyOTP' component={VerifyOTP} />
+			<Stack.Screen name='InAppBrowser' component={InAppBrowser} />
 		</Stack.Navigator>
 	)
 }
@@ -67,6 +69,7 @@ export const PostLoginStack = () => {
 			<Stack.Screen name='MySubscriptionDetails' component={MySubscriptionDetails} />
 			<Stack.Screen name='RequestSubmitted' component={RequestSubmitted} />
 			<Stack.Screen name='MyCarDetails' component={MyCarDetails} />
+			<Stack.Screen name='InAppBrowser' component={InAppBrowser} />
 		</Stack.Navigator>
 	)
 }

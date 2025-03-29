@@ -11,6 +11,7 @@ import { AccountBgImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { IN_APP_BROWSER_TYPE } from '../inAppBrowser'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -95,9 +96,11 @@ const MySettings = () => {
 				break
 			case 4:
 				// privacy policy
+				navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.PRIVACY, title: 'Privacy Policy' })
 				break
 			case 5:
 				// terms & conditions
+				navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.TERMS, title: 'Terms Of Service' })
 				break
 			case 6:
 				// logout

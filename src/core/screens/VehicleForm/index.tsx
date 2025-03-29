@@ -350,7 +350,7 @@ const VehicleForm = () => {
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton title='Submut Request' onPress={onPressSave} textChildren={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444'}}>{'prices are inclusive of GST'}</CustomText>} />
+				<CustomButton title='Submut Request' onPress={onPressSave} textChildren={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 			<RenderModals
 				isColorShow={isColorShow}

@@ -7,15 +7,18 @@ import CustomText from '@src/common/components/Text'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import CustomButton from '@src/common/components/Button'
+import { IN_APP_BROWSER_TYPE } from '../inAppBrowser'
 
 const Welcome = () => {
 	const { colors } = useTheme()
 
 	const navigation: any = useNavigation()
 
-	const onPressTermsAndConditions = () => { }
+	const onPressTermsAndConditions = () => { navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.TERMS, title: 'Terms and Conditions' }) }
 
-	const onPressPrivacyPolicy = () => { }
+	const onPressPrivacyPolicy = () => {
+		navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.PRIVACY, title: 'Privacy Policy' })
+	}
 
 	const onPressGetStarted = () => {
 		navigation.navigate('Login')
