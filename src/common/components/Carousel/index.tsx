@@ -36,7 +36,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ data = [] }) => {
 			<Carousel
 				ref={ref}
 				width={SCREEN_WIDTH}
-				height={scaleHeightPX(170)}
+				height={scaleHeightPX(140)}
 				data={data}
 				autoPlay
 				loop
@@ -49,7 +49,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ data = [] }) => {
 				}}
 				renderItem={({ item }) => (
 					<View style={{
-						height: scaleHeightPX(170),
+						height: scaleHeightPX(140),
 						width: scaleWidthPX(CAROUSAL_WIDTH),
 						justifyContent: 'center',
 						alignItems: 'center',

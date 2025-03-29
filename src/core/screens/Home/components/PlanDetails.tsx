@@ -15,7 +15,7 @@ export const PlanDetails = () => {
 			<CustomText textType='semi-bold' style={commonFontStyles.fontSizeXL}>
 				{'Plan Details'}
 			</CustomText>
-			<View style={{ gap: scaleHeightPX(8) }}>
+			<View style={{ gap: scaleHeightPX(10) }}>
 				{renderPlanDetailsItem(PlanDetails1Image, 'Police Verified Cleaners')}
 				{renderPlanDetailsItem(PlanDetails2Image, '25 Days Exterior Cleaning')}
 				{renderPlanDetailsItem(PlanDetails3Image, 'Cleaners Dress Code & ID Card')}

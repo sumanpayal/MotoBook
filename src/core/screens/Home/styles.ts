@@ -41,7 +41,7 @@ export const createStyles = (colors: any) =>
 			height: scaleHeightPX(32),
 			borderRadius: 2,
 			justifyContent: 'center',
-			paddingHorizontal: scaleWidthPX(12),
+			paddingHorizontal: scaleWidthPX(8),
 			marginHorizontal: scaleWidthPX(22)
 		},
 		carousel: {
@@ -137,6 +137,10 @@ export const createStyles = (colors: any) =>
 		planInner: {
 			gap: scaleWidthPX(12),
 			flexDirection: 'row',
-			alignItems: 'center'
+			alignItems: 'center',
+			backgroundColor: '#182632',
+			height: scaleHeightPX(50),
+			borderRadius: 5,
+			paddingHorizontal: scaleWidthPX(10)
 		}
 	})

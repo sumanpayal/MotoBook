@@ -12,6 +12,7 @@ import { postMobileLogin } from '@src/network/login'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { useNavigation } from '@react-navigation/native'
 import { validatePhoneNumber } from '@src/common/utils/inputValidation'
+import commonFontStyles from '@src/common/styles/commonFontStyles'
 
 const Login = () => {
 	const dispatch = useDispatch()
@@ -78,7 +79,7 @@ const Login = () => {
 		<MainFrame isHeader backOnPress={() => navigation.goBack()} isNotifications={false}>
 			<View style={styles.container}>
 				<CustomInput label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
-				<CustomButton onPress={onPressSendOTP} title='Send OTP' />
+				<CustomButton customTextStyles={commonFontStyles.fontSemiBold} onPress={onPressSendOTP} title='Send OTP' />
 			</View>
 		</MainFrame>
 	)

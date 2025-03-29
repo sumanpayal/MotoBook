@@ -16,7 +16,7 @@ import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
 import { getCarModalDetailsFromAPI, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { AddSVG } from '@src/assets/svg'
+import { AddSVG, RegistrationNoSVG } from '@src/assets/svg'
 import CustomDropdown from '@src/common/components/Dropdown'
 import { RenderSubscritionPlans } from './SubscriptionPlans'
 import RenderModals from './Modals'
@@ -276,8 +276,14 @@ const VehicleForm = () => {
 
 	const InputChildren = () => {
 		return (
-			<View style={{ width: scaleWidthPX(57), height: '100%', backgroundColor: colors.primary, borderTopLeftRadius: 15, borderBottomLeftRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
-				<CustomText textType='semi-bold' style={commonFontStyles.fontSizeL}>{'IND'}</CustomText>
+			<View style={{ width: scaleWidthPX(36), height: '100%', backgroundColor: '#010C22', borderTopLeftRadius: 15, borderBottomLeftRadius: 15, borderColor: '#010C22', borderWidth: 1, justifyContent: 'center', alignItems: 'center', gap: scaleHeightPX(4) }}>
+				<View style={{ width: scaleWidthPX(24), height: scaleWidthPX(24), justifyContent: 'center', alignItems: 'center' }}>
+					<View style={{ position: 'absolute' }}>
+						<RegistrationNoSVG width={scaleWidthPX(24)} height={scaleWidthPX(24)} />
+					</View>
+					<View style={{ width: scaleWidthPX(5), height: scaleWidthPX(5), backgroundColor: colors.white }} />
+				</View>
+				<CustomText textType='semi-bold' style={commonFontStyles.fontSize2XS}>{'IND'}</CustomText>
 			</View>
 		)
 	}
@@ -339,12 +345,12 @@ const VehicleForm = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Vehicle Form'>
+		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Vehicle Form' isNotifications={false}>
 			<View style={styles.main}>
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton title='Submut Request' onPress={onPressSave} />
+				<CustomButton title='Submut Request' onPress={onPressSave} textChildren={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444'}}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 			<RenderModals
 				isColorShow={isColorShow}

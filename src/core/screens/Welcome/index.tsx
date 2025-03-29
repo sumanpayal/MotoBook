@@ -13,9 +13,9 @@ const Welcome = () => {
 
 	const navigation: any = useNavigation()
 
-	const onPressTermsAndConditions = () => {}
+	const onPressTermsAndConditions = () => { }
 
-	const onPressPrivacyPolicy = () => {}
+	const onPressPrivacyPolicy = () => { }
 
 	const onPressGetStarted = () => {
 		navigation.navigate('Login')
@@ -34,7 +34,7 @@ const Welcome = () => {
 		<MainFrame isHeader={false}>
 			<View style={styles.main}>
 				<Image source={{ uri: WelcomeBgImage }} style={styles.imageView} resizeMode='contain' />
-				<CustomText lineHeight style={{ ...commonFontStyles.fontSize4XL, color: colors.primary, textAlign: 'center' }} textType={'semi-bold'}>
+				<CustomText lineHeight style={{ ...commonFontStyles.fontSize4XL, color: colors.white, textAlign: 'center' }} textType={'semi-bold'}>
 					{'Daily Car Cleaning\nat Your Doorstep'}
 				</CustomText>
 				<View style={styles.detailsOuter}>
@@ -52,9 +52,9 @@ const Welcome = () => {
 							{`Get Started`}
 						</CustomText>
 						<CustomText lineHeight>{`" confirms, you agree to our\n`}</CustomText>
-						<CustomText onPress={onPressTermsAndConditions} lineHeight style={{ color: colors.primary }}>{`Terms and Conditions `}</CustomText>
-						<CustomText lineHeight>{`and`}</CustomText>
-						<CustomText onPress={onPressPrivacyPolicy} lineHeight style={{ color: colors.primary }}>{` Privacy Policy`}</CustomText>
+						<CustomText onPress={onPressTermsAndConditions} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Terms and Conditions`}</CustomText>
+						<CustomText lineHeight>{` and `}</CustomText>
+						<CustomText onPress={onPressPrivacyPolicy} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Privacy Policy`}</CustomText>
 					</CustomText>
 				</View>
 			</View>

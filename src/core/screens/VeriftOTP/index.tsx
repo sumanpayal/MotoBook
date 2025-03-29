@@ -141,7 +141,7 @@ const VerifyOTP = () => {
 				<VeriftOTPSVG />
 				<View style={styles.textView}>
 					<CustomText lineHeight textType='semi-bold' style={commonFontStyles.fontSize3XL}>
-						{'Verify Code'}
+						{'Verify'}
 					</CustomText>
 					<CustomText lineHeight>{'Enter The Code We Just Sent To Phone No.'}</CustomText>
 					<CustomText lineHeight textType='bold' style={{ color: colors.primary }}>
@@ -161,7 +161,7 @@ const VerifyOTP = () => {
 							{timer > 0 && <CustomText>{`in ${formatTime(timer)}`}</CustomText>}
 						</View>
 					</View>
-					<CustomButton onPress={onPressVerifyOTP} title='Vefify' />
+					<CustomButton customTextStyles={commonFontStyles.fontRegular} onPress={onPressVerifyOTP} title='Vefify' />
 				</View>
 			</View>
 		</MainFrame>

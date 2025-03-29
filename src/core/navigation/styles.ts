@@ -11,7 +11,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
 		borderRadius: 20,
 	},
 	textStyle: {
-		...commonFontStyles.fontSize2XS,
+		...commonFontStyles.fontSize3XS,
 		textAlign: 'center',
 	},
 	labelView: {

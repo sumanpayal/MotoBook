@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native'
 import { scaleFontSize } from '@utils/responsiveStyle'
 
 const commonFontStyles = StyleSheet.create({
-	fontSize2XS: { fontSize: scaleFontSize(10) },
+	fontSize3XS: { fontSize: scaleFontSize(10) },
+	fontSize2XS: { fontSize: scaleFontSize(11) },
 	fontSizeXS: { fontSize: scaleFontSize(12) },
 	fontSizeS: { fontSize: scaleFontSize(14) },
 	fontSizeM: { fontSize: scaleFontSize(16) },

@@ -57,18 +57,18 @@ const HomeScreen = () => {
 	return (
 		<View style={{ flex: 1 }}>
 			{renderHeader()}
-			<View style={styles.carousel}>
-				<CustomCarousel
-					data={[
-						{ id: 0, color: colors.primary },
-						{ id: 1, color: colors.alertRed },
-						{ id: 2, color: colors.secondary }
-					]}
-				/>
-			</View>
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				style={{ marginBottom: scaleHeightPX(24) }}>
+				<View style={styles.carousel}>
+					<CustomCarousel
+						data={[
+							{ id: 0, color: colors.primary },
+							{ id: 1, color: colors.alertRed },
+							{ id: 2, color: colors.secondary }
+						]}
+					/>
+				</View>
 				<View style={styles.container}>
 					<DailyCarPlans />
 					<PlanDetails />

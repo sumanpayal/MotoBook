@@ -12,7 +12,7 @@ import { ButtonLoader } from '@src/assets/lottie'
 export default function CustomButton(props: CustomButtonProps) {
 	const { colors } = useTheme()
 
-	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, white = colors.backgroundColor, isLoading = false, iconSize = 24, isFlex = false, isCircleRadius = false } = props
+	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, textColor = colors.backgroundColor, isLoading = false, isFlex = false, isCircleRadius = false, customTextStyles, textChildren } = props
 
 	const buttonStyle: ViewStyle = useMemo(() => {
 		switch (buttonType) {
@@ -59,7 +59,7 @@ export default function CustomButton(props: CustomButtonProps) {
 				return {
 					...commonFontStyles.fontSemiBold,
 					...commonFontStyles.fontSizeXL,
-					color: white
+					color: textColor
 				}
 			case BUTTON_TYPES.SECONDARY:
 				return {
@@ -71,10 +71,10 @@ export default function CustomButton(props: CustomButtonProps) {
 				return {
 					...commonFontStyles.fontSemiBold,
 					...commonFontStyles.fontSizeXL,
-					color: white
+					color: textColor
 				}
 		}
-	}, [buttonType, white])
+	}, [buttonType, textColor])
 
 	return isLoading ? (
 		<View style={[styles.button, buttonStyle, borderStyle]}>
@@ -83,7 +83,10 @@ export default function CustomButton(props: CustomButtonProps) {
 	) : (
 		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
 			{showIcon && <SVGIcon />}
-			<CustomText style={textStyle}>{title}</CustomText>
+			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<CustomText style={{ ...textStyle, ...customTextStyles }}>{title}</CustomText>
+				{textChildren && textChildren}
+			</View>
 		</Pressable>
 	)
 }

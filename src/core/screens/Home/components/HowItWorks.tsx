@@ -33,12 +33,12 @@ const renderStage = (SelectedImage: any, label: any, stageImage: any) => {
 	return (
 		<View style={styles.howItem}>
 			<View style={styles.howItemLeft}>
-				<SelectedImage />
+				{/* <SelectedImage /> */}
 				<CustomText numberOfLines={2} style={styles.howItemText}>
 					{label}
 				</CustomText>
 			</View>
-			<Image source={{ uri: stageImage }} style={{ width: scaleWidthPX(100), height: scaleWidthPX(100) }} />
+			<Image source={{ uri: stageImage }} style={{ width: scaleWidthPX(99), height: scaleWidthPX(99), borderWidth: 1, borderColor: colors.white, borderRadius: 20 }} />
 		</View>
 	)
 }
