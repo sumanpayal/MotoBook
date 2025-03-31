@@ -30,10 +30,10 @@ const InAppBrowser = () => {
     useEffect(() => {
         switch (type) {
             case InAppBrowserType.privacy:
-                setsourceURL('https://motorwash.in/assets/pdf/PrivacyPolicy.pdf')
+                setsourceURL('https://docs.google.com/gview?embedded=true&url=https://motorwash.in/assets/pdf/PrivacyPolicy.pdf')
                 break
             case InAppBrowserType.terms:
-                setsourceURL('https://motorwash.in/assets/pdf/TermsAndCondition.pdf')
+                setsourceURL('https://docs.google.com/gview?embedded=true&url=https://motorwash.in/assets/pdf/TermsAndCondition.pdf')
                 break
             case InAppBrowserType.helpCenter:
                 setsourceURL('https://www.google.com')
