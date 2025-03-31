@@ -31,11 +31,11 @@ const RequestSubmitted = () => {
 			<View style={styles.main}>
 				<LottieView source={Success} style={styles.imageView} autoPlay loop />
 				<View style={{ width: '92%', gap: scaleHeightPX(28) }}>
-					<CustomText style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center' }} textType={'semi-bold'}>
+					<CustomText style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center' }} textType={'bold'}>
 						{'Request Submitted'}
 					</CustomText>
 					<CustomText style={{ textAlign: 'center', ...commonFontStyles.fontSizeL }}>{`Your request has been submitted.\nour team will be in touch shortly`}</CustomText>
-					<CustomButton title='Got It' onPress={onPressGotIt} />
+					<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Got It' onPress={onPressGotIt} />
 				</View>
 			</View>
 		</MainFrame>
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
 	},
 	imageView: {
 		width: scaleWidthPX(300),
-		height: scaleWidthPX(400)
+		height: scaleWidthPX(300)
 	}
 })

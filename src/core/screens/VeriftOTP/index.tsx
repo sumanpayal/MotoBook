@@ -162,7 +162,7 @@ const VerifyOTP = () => {
 							{timer > 0 && <CustomText>{`in ${formatTime(timer)}`}</CustomText>}
 						</View>
 					</View>
-					<CustomButton onPress={onPressVerifyOTP} title='Verify' />
+					<CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressVerifyOTP} title='Verify' />
 				</View>
 			</View>
 		</MainFrame>

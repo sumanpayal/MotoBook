@@ -14,7 +14,7 @@ import { useNavigation, useTheme } from '@react-navigation/native'
 import { validatePhoneNumber } from '@src/common/utils/inputValidation'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import LottieView from 'lottie-react-native'
-import { VerifyOTPGIF } from '@src/assets/lottie'
+import { PhoneGIF } from '@src/assets/lottie'
 
 const Login = () => {
 	const dispatch = useDispatch()
@@ -80,9 +80,9 @@ const Login = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()}>
+		<MainFrame isNotifications={false} isHeader backOnPress={() => navigation.goBack()}>
 			<View style={styles.container}>
-				<LottieView source={VerifyOTPGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
+				<LottieView source={PhoneGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
 				<CustomInput labelColor={colors.white} label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
 				<CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressSendOTP} title='Send OTP' />
 			</View>

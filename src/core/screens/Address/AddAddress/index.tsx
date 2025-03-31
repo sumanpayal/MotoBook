@@ -1,7 +1,7 @@
 import { Pressable, ScrollView, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from '@react-navigation/native'
 import CustomInput from '@src/common/components/Input'
 import CustomButton from '@src/common/components/Button'
@@ -16,6 +16,7 @@ import { API_RESPONSE } from '@src/common/constants/constants'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { UseLocationSVG } from '@src/assets/svg'
 import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 enum ADDRESS_KEYS {
 	addressType = 'addressType',
@@ -42,19 +43,19 @@ const AddAddress = () => {
 		},
 		{
 			id: 1,
-			name: 'Parent House',
+			name: `Parent's House`,
 			value: 'Parent_house'
+		},
+		{
+			id: 3,
+			name: 'Office',
+			value: 'Office'
 		},
 		{
 			id: 2,
 			name: 'Other',
 			value: 'Other'
 		},
-		{
-			id: 3,
-			name: 'Office',
-			value: 'Office'
-		}
 	]
 
 	const { params }: any = useRoute()
@@ -83,6 +84,10 @@ const AddAddress = () => {
 	})
 
 	const [isLoading, setIsLoading] = useState<boolean>(false)
+
+	useFocusEffect(useCallback(() => {
+		dispatch(setIsFullScreenLoading(false))
+	}, []))
 
 	const isValidateForm = () => {
 		if (!addressData?.addressType) {
@@ -252,15 +257,15 @@ const AddAddress = () => {
 	const renderSaveAsAddress = () => {
 		return (
 			<View style={styles.saveAddressAs}>
-				<CustomText textType='medium' style={commonFontStyles.fontSizeXL}>
+				<CustomText textType='bold' style={commonFontStyles.fontSizeXL}>
 					{'Save Address As '}
 					<CustomText style={{ color: colors.alertRed }}>{'*'}</CustomText>
 				</CustomText>
-				<ScrollView horizontal contentContainerStyle={styles.scrollView} showsHorizontalScrollIndicator={false}>
+				<View style={styles.scrollView}>
 					{addressTypesData.map((item: any) => {
 						return <RenderAddressItem key={item?.id} item={item} />
 					})}
-				</ScrollView>
+				</View>
 			</View>
 		)
 	}

@@ -19,7 +19,8 @@ export const createStyles = (colors: any) => {
 		},
 		scrollView: {
 			flexDirection: 'row',
-			gap: scaleWidthPX(10)
+			gap: scaleWidthPX(10),
+			justifyContent: 'space-between'
 		},
 		saveAddressAs: {
 			gap: scaleHeightPX(8)

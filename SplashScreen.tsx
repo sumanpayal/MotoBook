@@ -5,7 +5,7 @@ import { View } from 'react-native'
 
 export default function SplashScreen() {
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, backgroundColor: '#492128' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, backgroundColor: '#10192A' }}>
             <LottieView source={Splash} style={{ width: '100%', height: '100%' }} autoPlay loop />
         </View>
     )
