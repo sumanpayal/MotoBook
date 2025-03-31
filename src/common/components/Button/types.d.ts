@@ -1,4 +1,5 @@
 import {BUTTON_TYPES} from '@constants/constants';
+import { TextStyle } from 'react-native';
 
 interface CustomButtonProps {
   title?: string;
@@ -6,12 +7,13 @@ interface CustomButtonProps {
   disabled?: boolean;
   showIcon?: boolean;
   SVGIcon?: any;
-  iconSize?: number;
   backgroundColor?: string;
   width?: any;
   buttonType?: BUTTON_TYPES;
-  textColor?: string;
+  white?: string;
   isLoading?: boolean;
-  isHorizontal?: boolean;
   isFlex?: boolean;
+  isCircleRadius?: boolean
+  customLabelStyles?: TextStyle
+  childernButton?: React.ReactNode | undefined
 }

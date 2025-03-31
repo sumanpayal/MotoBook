@@ -1,8 +1,7 @@
-import { KeyboardType, TextInputProps, ViewStyle } from 'react-native'
+import { KeyboardType, ViewStyle } from 'react-native'
 
 interface CustomInputProps {
 	viewStyle?: ViewStyle
-	inputStyle?: TextInputProps
 	value: string
 	onFocus?: () => void
 	onBlur?: () => void
@@ -16,5 +15,12 @@ interface CustomInputProps {
 	isRightIcon?: boolean
 	keyboardType?: KeyboardType
 	maxLength?: number
-	iconName?: any
+	RightIcon?: any
+	rightIconOnPress?: () => void
+	handleFocus?: any
+	handleBlur?: any
+	isLeftChildren?: boolean
+	placeholder?: string
+	leftChildren?: any
+	labelColor?: any
 }

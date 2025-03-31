@@ -3,12 +3,6 @@ import CustomText from '@components/Text'
 import { useTheme } from '@react-navigation/native'
 import { resetAlert } from '@src/common/redux/reducers/alert'
 import { RootState } from '@src/common/redux/store/store'
-import commonAlignStyles from '@src/common/styles/commonAlignStyles'
-import commonBorderRadiusStyles from '@src/common/styles/commonBorderRadiusStyles'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import commonPaddingStyles from '@src/common/styles/commonPaddingStyles'
-import { spacing } from '@src/common/styles/values'
 import { isTabletMode, SCREEN_WIDTH } from '@src/common/utils/deviceInformation'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import React, { useEffect } from 'react'
@@ -36,25 +30,25 @@ export default function CustomAlert() {
 				exiting={FadeOutDown}
 				style={{
 					minHeight: scaleHeightPX(51),
-					width: isTabletMode ? '65%' : SCREEN_WIDTH - scaleWidthPX(spacing['m']),
-					backgroundColor: alertData.type === 'error' ? colors.alertRed : colors.warning,
+					width: isTabletMode ? '65%' : SCREEN_WIDTH - scaleWidthPX(16),
+					backgroundColor: alertData.type === 'error' ? colors.alertRed : alertData.type === 'warning' ? colors.warning : colors.alertGreen,
 					position: 'absolute',
 					bottom: scaleHeightPX(32),
-					...commonAlignStyles.alignSelfCenter,
-					...commonBorderRadiusStyles.borderRadiusM,
-					...commonFlexStyles.flexRow,
-					...commonAlignStyles.alignCenter,
-					...commonAlignStyles.justifyCenter,
-					...(isTabletMode ? commonPaddingStyles.paddingM : commonPaddingStyles.padding3XS)
+					alignSelf: 'center',
+					borderRadius: 8,
+					flexDirection: 'row',
+					alignItems: 'center',
+					justifyContent: 'center',
+					...(isTabletMode ? { paddingHorizontal: scaleWidthPX(16), paddingVertical: scaleHeightPX(16) } : { paddingHorizontal: scaleWidthPX(8), paddingVertical: scaleHeightPX(8) })
 				}}>
 				<CustomText
 					textType='medium'
 					lineHeight
 					style={{
 						...commonFontStyles.fontSizeS,
-						color: colors.textColor,
-						...commonMarginStyles.marginLeft4XS,
-						...commonFlexStyles.flex1
+						color: colors.white,
+						marginLeft: scaleWidthPX(8),
+						flex: 1
 					}}>
 					{alertData.label || ''}
 				</CustomText>

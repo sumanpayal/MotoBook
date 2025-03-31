@@ -2,27 +2,40 @@ import React from 'react'
 import { Pressable, View } from 'react-native'
 import { navigationStyles } from './styles'
 import CustomText from '../Text'
-import Icon from 'react-native-vector-icons/AntDesign'
 import { useTheme } from '@react-navigation/native'
+import { BackSVG, NotificationsSVG } from '@src/assets/svg'
 
 export const HeaderNavigation = (props: HeaderNavigationProps) => {
 	const { colors } = useTheme()
 	const styles = navigationStyles(colors)
 
-	const { backOnPress, title } = props
+	const { backOnPress, title, isBack = true, isNotifications = true, notificationOnPress, isCustom = false, children } = props
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.leftView}>
-				<Pressable onPress={() => backOnPress && backOnPress()}>
-					<Icon name='arrowleft' size={28} color={colors.textColor} />
-				</Pressable>
-				{title && (
-					<CustomText textType='semi-bold' style={styles.titleStyle}>
-						{title}
-					</CustomText>
+				{isCustom ? (
+					children
+				) : (
+					<>
+						{isBack && (
+							<Pressable onPress={() => backOnPress && backOnPress()}>
+								<BackSVG />
+							</Pressable>
+						)}
+						{title && (
+							<CustomText textType='semi-bold' style={styles.titleStyle}>
+								{title}
+							</CustomText>
+						)}
+					</>
 				)}
 			</View>
+			{isNotifications && (
+				<Pressable onPress={() => notificationOnPress && notificationOnPress()}>
+					<NotificationsSVG />
+				</Pressable>
+			)}
 		</View>
 	)
 }

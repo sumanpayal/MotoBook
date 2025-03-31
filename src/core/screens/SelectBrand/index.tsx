@@ -1,132 +1,50 @@
-import { View, FlatList } from 'react-native'
+import { View, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import SearchComponent from '@src/common/components/SearchComponent'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
-import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import SelectModal from './components/SelectModal'
 import BrandItem from './components/BrandItem'
 import { styles } from './styles'
-import { spacing } from '@src/common/styles/values'
-
-export const brandsData = [
-	{
-		id: 1,
-		title: 'AUDI'
-	},
-	{
-		id: 2,
-		title: 'AUDI 1'
-	},
-	{
-		id: 3,
-		title: 'AUDI 2'
-	},
-	{
-		id: 4,
-		title: 'AUDI dsjkf'
-	},
-	{
-		id: 5,
-		title: 'AUDI sdg'
-	},
-	{
-		id: 6,
-		title: 'AUDI fetry'
-	},
-	{
-		id: 7,
-		title: 'AUDI 7'
-	},
-	{
-		id: 8,
-		title: 'AUDI 8'
-	},
-	{
-		id: 9,
-		title: 'AUDI 9'
-	},
-	{
-		id: 10,
-		title: 'AUDI 10'
-	},
-	{
-		id: 11,
-		title: 'AUDI 11'
-	},
-	{
-		id: 12,
-		title: 'AUDI 12'
-	},
-	{
-		id: 13,
-		title: 'AUDI 13'
-	},
-	{
-		id: 14,
-		title: 'AUDI 14'
-	},
-	{
-		id: 16,
-		title: 'AUDI 15'
-	},
-	{
-		id: 17,
-		title: 'AUDI 15'
-	},
-	{
-		id: 18,
-		title: 'AUDI 15'
-	},
-	{
-		id: 19,
-		title: 'AUDI 15'
-	},
-	{
-		id: 20,
-		title: 'AUDI 15'
-	},
-	{
-		id: 21,
-		title: 'AUDI 15'
-	},
-	{
-		id: 22,
-		title: 'AUDI 15'
-	},
-	{
-		id: 23,
-		title: 'AUDI 15'
-	},
-	{
-		id: 24,
-		title: 'AUDI 15'
-	},
-	{
-		id: 25,
-		title: 'AUDI 15'
-	},
-	{
-		id: 26,
-		title: 'AUDI 15'
-	}
-]
+import { getCarModalsListAPIForCompanyID, getCompaniesListAPI } from '@src/network/car'
+import { API_RESPONSE } from '@src/common/constants/constants'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { useDispatch } from 'react-redux'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import { BASE_URL } from '@src/network/apiClient'
 
 const SelectBrand = () => {
 	const navigation: any = useNavigation()
+	const dispatch = useDispatch()
+
+	const { colors } = useTheme()
 
 	const [searchText, setSearchText] = useState<string>('')
 
 	const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
-	const [allBrandsData, setAllBrandsData] = useState<any[]>(brandsData)
-	const [searchedBrandsData, setSearchedBrandsData] = useState<any[]>(brandsData)
+	const [allBrandsData, setAllBrandsData] = useState<any[]>([])
+	const [searchedBrandsData, setSearchedBrandsData] = useState<any[]>([])
+
+	const [carModalsData, setCardModalsData] = useState<any[]>([])
+
+	const [selectedCarCompany, setSelectedCarCompany] = useState<any | null>(null)
 
 	useEffect(() => {
-		setAllBrandsData(brandsData)
-	})
+		dispatch(setIsFullScreenLoading(true))
+		getCompaniesListAPI((res: API_RESPONSE) => {
+			dispatch(setIsFullScreenLoading(false))
+			if (res.data) {
+				setAllBrandsData(res.data)
+				setSearchedBrandsData(res.data)
+			}
+			else {
+				setAllBrandsData([])
+				setSearchedBrandsData([])
+			}
+		})
+	}, [])
 
 	useEffect(() => {
 		searchItemLocally()
@@ -136,40 +54,63 @@ const SelectBrand = () => {
 		const data =
 			allBrandsData?.length > 0
 				? allBrandsData?.filter((item: any) => {
-						return searchText?.length > 0 ? item?.title?.toLowerCase().includes(searchText?.toLowerCase()) : true
-				  })
+					return searchText?.length > 0 ? item?.name?.toLowerCase().includes(searchText?.toLowerCase()) : true
+				})
 				: allBrandsData
 		setSearchedBrandsData(data)
 	}
 
-	const RenderBrandItem = ({ item }: { item: any }) => {
-		return <BrandItem item={item} onPress={() => setIsModalVisible(true)} />
+	const onPressItem = (item: any) => {
+		setSelectedCarCompany(item)
+		getCarModalsListAPIForCompanyID(item?._id, (res: API_RESPONSE) => {
+			if (res.data) {
+				setCardModalsData(res.data)
+				setIsModalVisible(true)
+			} else {
+				setSelectedCarCompany(null)
+			}
+		})
+	}
+
+	const onCloseCarModal = () => {
+		setSelectedCarCompany(null)
+		setCardModalsData([])
+		setIsModalVisible(false)
+	}
+
+	const renderHeaderChildren = () => {
+		return (
+			<Image source={{ uri: `${BASE_URL}/${selectedCarCompany?.image}` }} style={{ width: scaleWidthPX(64), height: scaleWidthPX(64), borderRadius: 100, marginTop: scaleHeightPX(8), backgroundColor: colors.inputBackground }} />
+		)
+	}
+
+	const selectModalAndNavigateToAddVehicle = (item: any) => {
+		navigation.navigate('VehicleForm', { carModal: item, carCompany: selectedCarCompany })
+		onCloseCarModal()
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Select Your Brand'>
+		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Select Your Brand' isNotifications={false}>
 			<View style={styles.main}>
-				<View style={commonMarginStyles.marginVerticalM}>
-					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} />
+				<View style={{ marginVertical: scaleHeightPX(16) }}>
+					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} placeholder='Search by brand' />
 				</View>
-				<FlatList data={searchedBrandsData} renderItem={RenderBrandItem} keyExtractor={(item: any) => item?.id} numColumns={4} columnWrapperStyle={{ gap: scaleWidthPX(spacing.m) }} contentContainerStyle={searchedBrandsData.length === 0 && styles.center} ListEmptyComponent={NoRecordFound} />
+				<ScrollView showsVerticalScrollIndicator={false}>
+					{searchedBrandsData?.length > 0 && (
+						<View style={styles.container}>
+							{searchedBrandsData?.map((item: any) => (
+								<BrandItem key={item?._id} item={item} onPress={() => onPressItem(item)} selected={selectedCarCompany} />
+							))}
+						</View>
+					)}
+				</ScrollView>
+				{searchedBrandsData?.length === 0 && (
+					<View style={styles.center}>
+						<NoRecordFound />
+					</View>
+				)}
 			</View>
-			{isModalVisible && (
-				<SelectModal
-					selectedItem={null}
-					title='Select Modal'
-					subHeaderTitle='Hyundai'
-					visible={isModalVisible}
-					onClose={() => {
-						setIsModalVisible(false)
-					}}
-					setSelectedItem={(item: any) => {
-						setIsModalVisible(false)
-						navigation.navigate('VehicleForm')
-					}}
-					data={brandsData}
-				/>
-			)}
+			{isModalVisible && carModalsData?.length > 0 && <SelectModal selectedItem={null} title={`Select ${selectedCarCompany?.name} Modal`} visible={isModalVisible} onClose={onCloseCarModal} setSelectedItem={selectModalAndNavigateToAddVehicle} data={carModalsData} headerChildren={renderHeaderChildren()} />}
 		</MainFrame>
 	)
 }

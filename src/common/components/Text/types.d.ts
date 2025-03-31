@@ -6,4 +6,5 @@ interface ISansTextProps {
 	style?: TextStyle
 	lineHeight?: boolean
 	numberOfLines?: number
+	onPress?: () => void
 }

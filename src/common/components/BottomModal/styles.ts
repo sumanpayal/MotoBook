@@ -1,11 +1,6 @@
-import commonBorderRadiusStyles from '@commonStyles/commonBorderRadiusStyles'
-import commonFlexStyles from '@commonStyles/commonFlexStyles'
-import commonAlignStyles from '@commonStyles/commonAlignStyles'
 import { scaleHeightPX, scaleWidthPX } from '@utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
-import commonPaddingStyles from '@commonStyles/commonPaddingStyles'
 import { isTabletMode } from '@src/common/utils/deviceInformation'
-import commonBorderWidthStyles from '@src/common/styles/commonBorderWidthStyles'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 
 const styles = (colors: any) =>
@@ -14,30 +9,28 @@ const styles = (colors: any) =>
 			width: isTabletMode ? scaleWidthPX(598) : '100%',
 			maxHeight: '85%',
 			backgroundColor: colors.backgroundColor,
-			...commonBorderRadiusStyles.borderTopLeftRadius2XL,
-			...commonBorderRadiusStyles.borderTopRightRadius2XL,
-			...commonAlignStyles.alignSelfCenter
+			borderTopLeftRadius: scaleWidthPX(20),
+			borderTopRightRadius: scaleWidthPX(20),
+			alignSelf: 'center'
 		},
 		headerStyle: {
-			...commonFlexStyles.flexRow,
-			...commonBorderWidthStyles.borderBottomWidthM,
-			borderBottomColor: colors.inputPlaceholder,
-			...commonPaddingStyles.paddingM
+			flexDirection: 'row',
+			borderBottomColor: colors.backgroundColor,
+			padding: scaleWidthPX(16),
+			gap: scaleWidthPX(16)
 		},
 		headerStyleCloseView: {
 			width: scaleWidthPX(32),
 			height: scaleHeightPX(32),
-			...commonAlignStyles.justifyCenter,
-			...commonAlignStyles.alignCenter,
-			alignSelf: 'center'
+			justifyContent: 'center',
+			alignItems: 'center'
 		},
 		headerStyleMiddleView: {
-			...commonFlexStyles.flex1,
+			flex: 1,
 			alignSelf: 'center'
 		},
 		titleStyle: {
-			...commonFontStyles.fontSemiBold,
-			...commonFontStyles.fontSizeL
+			...commonFontStyles.fontSizeXL
 		},
 		subTitleStyle: {
 			...commonFontStyles.fontSizeM

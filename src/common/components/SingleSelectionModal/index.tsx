@@ -4,14 +4,13 @@ import { useTheme } from '@react-navigation/native'
 import BottomModal from '../BottomModal'
 import CustomText from '../Text'
 import { selectionModalStyles } from './styles'
-import commonMarginStyles from '@src/common/styles/commonMarginStyles'
 import SearchComponent from '../SearchComponent'
 import { NoRecordFound } from '../NoRecordFound'
 import { SingleSelectionModalProps } from './types'
-import commonFlexStyles from '@src/common/styles/commonFlexStyles'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
 const SingleSelectionModal = (props: SingleSelectionModalProps) => {
-	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, selectedItem, setSelectedItem, isSearch = true, noRecordViewProps, modalProps } = props
+	const { visible, onClose = () => {}, data, title, titleItem = 'title', idItem = 'id', isSeperator = false, isIcon = false, isIconIsImage = false, selectedItem, setSelectedItem, isSearch = true, noRecordViewProps, modalProps, children } = props
 
 	const { colors } = useTheme()
 	const styles = selectionModalStyles(colors)
@@ -43,26 +42,16 @@ const SingleSelectionModal = (props: SingleSelectionModalProps) => {
 
 	const renderItem = ({ item }: { item: any }) => {
 		const Icon = isIcon && item?.icon
-		const selected = selectedItem?.[idItem]?.toString() === item[idItem]?.toString()
+		const selected = selectedItem?.[idItem]?.toString() === item?.[idItem]?.toString()
 		return (
 			<Pressable style={styles.itemContent} onPress={() => onPressSelectItem(item)}>
 				<View style={[styles.itemLeft, isIconIsImage && styles.itemLeftImage]}>
+					{children && children(item)}
 					{isIcon && (isIconIsImage ? <Image source={{ uri: Icon }} style={styles.itemImage} /> : <Icon />)}
 					<CustomText style={styles.itemLabel}>{item[titleItem]}</CustomText>
 				</View>
 				<View style={styles.itemRight}>
-					<View
-						style={{
-							width: 20,
-							height: 20,
-							borderWidth: 1,
-							borderRadius: 20,
-							justifyContent: 'center',
-							alignItems: 'center',
-							borderColor: colors.textColor
-						}}>
-						{selectedItem?.id === item?.id && <View style={{ width: 12, height: 12, backgroundColor: colors.textColor, borderRadius: 12 }} />}
-					</View>
+					<View style={styles.selectedViewOuter}>{selected && <View style={styles.selectedViewInner} />}</View>
 				</View>
 			</Pressable>
 		)
@@ -91,9 +80,9 @@ const SingleSelectionModal = (props: SingleSelectionModalProps) => {
 	}
 
 	return (
-		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} hederCloseOnPress={onPressClose} containerStyle={isSearch ? styles.containerStyle : {}} {...modalProps} hideOnBackdropPress={false}>
+		<BottomModal visible={visible} onDrop={onPressClose} isHeader headerTitle={title} headerCloseOnPress={onPressClose} containerStyle={isSearch ? styles.containerStyle : {}} {...modalProps} hideOnBackdropPress={false}>
 			{isSearch && listHeaderComponent()}
-			<FlatList data={flatListData} renderItem={renderItem} keyExtractor={(item) => `${item[idItem]}`} ItemSeparatorComponent={listSeperatorComponent} ListEmptyComponent={() => <NoRecordFound {...noRecordViewProps} />} contentContainerStyle={[styles.listStyle, flatListData?.length === 0 && styles.listStyleEmpty, flatListData?.length === 0 && !isSearch && commonMarginStyles.marginTop2XL, flatListData?.length === 0 && isSearch && commonFlexStyles.flex1]} />
+			<FlatList data={flatListData} renderItem={renderItem} keyExtractor={(item) => `${item[idItem]}`} ItemSeparatorComponent={listSeperatorComponent} ListEmptyComponent={() => <NoRecordFound {...noRecordViewProps} />} contentContainerStyle={[styles.listStyle, flatListData?.length === 0 && styles.listStyleEmpty, flatListData?.length === 0 && !isSearch && { marginTop: scaleHeightPX(22) }, flatListData?.length === 0 && isSearch && { flex: 1 }]} />
 		</BottomModal>
 	)
 }
