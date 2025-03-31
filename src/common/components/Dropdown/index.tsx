@@ -31,7 +31,7 @@ export default function CustomDropdown(props: DropdownProps) {
 					{isRequired ? <CustomText style={{ color: colors.alertRed }}>{' *'}</CustomText> : ''}
 				</CustomText>
 				<Pressable style={styles.inputView} onPress={onPress} disabled={disabled}>
-					<CustomText style={{ ...styles.input, color: isEmpty(value) ? colors.inputPlaceholder : colors.white }}>{value ?? placeholder}</CustomText>
+					<CustomText style={{ ...styles.input, color: isEmpty(value) ? colors.inputPlaceholder : colors.white }}>{value || placeholder}</CustomText>
 					<RightIcon />
 				</Pressable>
 			</View>

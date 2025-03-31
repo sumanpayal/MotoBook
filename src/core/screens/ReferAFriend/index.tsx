@@ -1,4 +1,4 @@
-import { Share, View } from 'react-native'
+import { ScrollView, Share, View } from 'react-native'
 import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
@@ -12,18 +12,12 @@ import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomInput from '@src/common/components/Input'
 import { CopySVG } from '@src/assets/svg'
 import { styles } from './styles'
+import CustomButton from '@src/common/components/Button'
 
 const ReferAFriend = () => {
 
 	const code = '70Fz3sxY'
-	const shareText = `Hey 🚗✨
-  I've been using motorWash for super convenient, high-quality car washes right at my doorstep, and I thought you might love it too! No need to wait at a car wash anymore—they come to you and make your car look brand new.
-  
-  Use my referral link to sign up, and you'll get discount. Refer Code: ${code}
-  
-  Trust me, it's a game-changer for keeping your car clean without the hassle! 🚙💧
-
-  Here's the link to join: 🚀 https://apps.apple.com/in/app/`
+	const shareText = `Hey! I’ve been using MotorWash for daily car cleaning, and it’s awesome! Use my referral link and get 50% OFF on your first month. Plus, I get 50% off too! Win-win! 🎉 Sign up now: https://apps.apple.com/in/app/`
 
 	const dispatch = useDispatch()
 
@@ -55,19 +49,21 @@ const ReferAFriend = () => {
 	}
 
 	return (
-		<MainFrame isHeader title='Refer A Friend' isNotifications isBack={false} notificationOnPress={() => { }}>
-			<View style={styles.main}>
+		<MainFrame isHeader={false}>
+			<ScrollView style={styles.main}>
 				<CustomText textType='bold' style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center', marginTop: scaleHeightPX(30) }}>
-					{'Share With Friends'}
+					{'Refer & Save – 50% OFF on MotorWash! '}
 				</CustomText>
 				<CustomText lineHeight style={{ marginTop: scaleHeightPX(16), textAlign: 'center' }}>
-					{'Invite Your Friends To Washwoosh And\n Enjoy 10% Off When They Complete Their First\n Purchase. Your Friend Also Gets 10% Off As A\nWelcome Bonus.'}
+					{'Invite your friends to MotorWash and both of you get 50% OFF on your next billing cycle! Your friend must complete 1 month of service for the discount to apply. No limits—refer more, save more!'}
 				</CustomText>
 				<View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: scaleHeightPX(44) }}>
 					<Image style={{ width: scaleWidthPX(238), height: scaleHeightPX(165) }} source={{ uri: ReferImage }} resizeMode='contain' />
 				</View>
 				<CustomInput label='Referral Code' onChangeText={() => { }} editable={false} value={code} isRightIcon RightIcon={CopySVG} rightIconOnPress={onPressCopy} />
-			</View>
+				<View style={{ marginTop: scaleHeightPX(24) }} />
+				<CustomButton title='Share code with friends' onPress={referToFreiendOnPress} />
+			</ScrollView>
 		</MainFrame>
 	)
 }

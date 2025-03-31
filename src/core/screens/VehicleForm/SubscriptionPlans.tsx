@@ -13,12 +13,10 @@ interface RenderSubscritionPlansProps {
     setIsInteriorCleaning: (value: boolean) => void; isInteriorCleaning: boolean;
     interiorCleaningAmount: number;
     subscriptionPlansData: any[]
-    selectedSubscriptionPlan: any
-    setSelectedSubscriptionPlan: (item: any) => void
 }
 
 export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
-    const { openInformationModal, setIsInteriorCleaning, isInteriorCleaning, interiorCleaningAmount, subscriptionPlansData, selectedSubscriptionPlan, setSelectedSubscriptionPlan } = props
+    const { openInformationModal, setIsInteriorCleaning, isInteriorCleaning, interiorCleaningAmount, subscriptionPlansData } = props
 
     const { colors } = useTheme()
 
@@ -32,11 +30,11 @@ export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
             </View>
             {interiorCleaningAmount > 0 && <View style={styles.middle}>
                 <CheckBox setIsSelected={() => setIsInteriorCleaning(!isInteriorCleaning)} isSelected={isInteriorCleaning} />
-                <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeXS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
+                <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
             </View>}
             <View style={styles.bottom}>
                 {subscriptionPlansData?.map((item: any) => {
-                    return <SubscriptionPlanItem key={item?._id} selectedSubscriptionPlan={selectedSubscriptionPlan} item={item} setSelectedSubscriptionPlan={setSelectedSubscriptionPlan} isInteriorCleaning={isInteriorCleaning} interiorCleaningAmount={interiorCleaningAmount} />
+                    return <SubscriptionPlanItem key={item?._id} item={item} isInteriorCleaning={isInteriorCleaning} interiorCleaningAmount={interiorCleaningAmount} />
                 })}
             </View>
         </View>

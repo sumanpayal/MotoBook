@@ -81,7 +81,7 @@ const AddressList = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address List'>
+		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Service Address' isNotifications={false}>
 			<View style={styles.main}>
 				<FlatList data={allAddressData} renderItem={renderAddressItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListEmptyComponent={NoRecordFound} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} showsVerticalScrollIndicator={false} />
 			</View>

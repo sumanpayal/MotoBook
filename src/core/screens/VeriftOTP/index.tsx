@@ -10,11 +10,12 @@ import { API_RESPONSE } from '@src/common/constants/constants'
 import { postMobileLogin, postVerifyOTP } from '@src/network/login'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native'
-import { VeriftOTPSVG } from '@src/assets/svg'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import CustomOTP from '@src/common/components/OTP'
 import { setUserData } from '@src/common/redux/reducers/currentUser'
+import LottieView from 'lottie-react-native'
+import { VerifyOTPGIF } from '@src/assets/lottie'
 
 const TIMER_TIME = 60 // 1 minute
 
@@ -138,10 +139,10 @@ const VerifyOTP = () => {
 	return (
 		<MainFrame isBack isHeader isNotifications={false} backOnPress={() => navigation.goBack()}>
 			<View style={styles.container}>
-				<VeriftOTPSVG />
+				<LottieView source={VerifyOTPGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
 				<View style={styles.textView}>
-					<CustomText lineHeight textType='semi-bold' style={commonFontStyles.fontSize3XL}>
-						{'Verify'}
+					<CustomText lineHeight textType='bold' style={commonFontStyles.fontSize3XL}>
+						{'Verify Code'}
 					</CustomText>
 					<CustomText lineHeight>{'Enter The Code We Just Sent To Phone No.'}</CustomText>
 					<CustomText lineHeight textType='bold' style={{ color: colors.primary }}>
@@ -161,7 +162,7 @@ const VerifyOTP = () => {
 							{timer > 0 && <CustomText>{`in ${formatTime(timer)}`}</CustomText>}
 						</View>
 					</View>
-					<CustomButton customTextStyles={commonFontStyles.fontRegular} onPress={onPressVerifyOTP} title='Vefify' />
+					<CustomButton onPress={onPressVerifyOTP} title='Verify' />
 				</View>
 			</View>
 		</MainFrame>

@@ -64,10 +64,6 @@ const AddAddress = () => {
 
 	const addressTypesData1 = addressDetails?.addressType ? addressTypesData?.find((item: any) => item?.value === addressDetails?.addressType) : null
 
-	// 	console.log({addressDetails});
-	// 	_id:67e5333c1f7ddcd49cc13e45
-	// user_id:67e527300481f4f184d6aa7c
-
 	const [addressData, setAddressData] = useState<{
 		addressType: any
 		address: string
@@ -80,9 +76,9 @@ const AddAddress = () => {
 		addressType: addressTypesData1,
 		address: addressDetails?.addressType ?? '',
 		landmark: addressDetails?.landmark ?? '',
-		country: addressDetails?.country ?? '',
-		state: addressDetails?.state ?? '',
-		city: addressDetails?.city ?? '',
+		country: addressDetails?.country ?? 'India',
+		state: addressDetails?.state ?? 'Rajasthan',
+		city: addressDetails?.city ?? 'Jaipur',
 		postalCode: addressDetails?.postalCode ?? ''
 	})
 
@@ -338,7 +334,7 @@ const AddAddress = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address Form'>
+		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address Form' isNotifications={false}>
 			<View style={styles.main}>
 				<KeyboardAwareScrollView style={{}} keyboardShouldPersistTaps='handled'>
 					{renderForm()}

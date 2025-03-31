@@ -4,6 +4,6 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
 	main: {
 		flex: 1,
-		marginHorizontal: scaleWidthPX(25)
+		paddingHorizontal: scaleWidthPX(25)
 	}
 })

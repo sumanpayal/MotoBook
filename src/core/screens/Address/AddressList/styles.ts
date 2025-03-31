@@ -5,12 +5,12 @@ export const createStyles = (colors: any) => {
 	return StyleSheet.create({
 		main: {
 			flex: 1,
-			margin: scaleWidthPX(24)
+			margin: scaleWidthPX(16)
 		},
 		add: {
 			position: 'absolute',
 			bottom: scaleWidthPX(24),
-			right: scaleWidthPX(24),
+			right: scaleWidthPX(16),
 			width: scaleWidthPX(60),
 			height: scaleWidthPX(60),
 			justifyContent: 'center',

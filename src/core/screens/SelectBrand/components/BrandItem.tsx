@@ -33,7 +33,7 @@ const selectionModalStyles = (colors: any) =>
 	StyleSheet.create({
 		item: {
 			borderRadius: 15,
-			width: '30%',
+			width: '29%',
 			height: scaleWidthPX(120),
 			justifyContent: 'center',
 			alignItems: 'center',
@@ -49,7 +49,6 @@ const selectionModalStyles = (colors: any) =>
 		imageModal: {
 			width: scaleWidthPX(100),
 			height: scaleHeightPX(58),
-			borderRadius: 15,
-			backgroundColor: colors.backgroundColor
+			borderRadius: 0
 		}
 	})

@@ -1,53 +1,54 @@
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { setupListeners } from '@reduxjs/toolkit/query'
+import React, { useCallback, useEffect, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
-import React, { useEffect, useRef, useState } from 'react'
-import WebView from 'react-native-webview'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import WebView from 'react-native-webview'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 
-export enum IN_APP_BROWSER_TYPE {
-	TERMS = 'TERMS',
-	PRIVACY = 'PRIVACY',
-	HELP_CENTER = 'HELP_CENTER',
-	ABOUT_US = 'ABOUT_US'
+export enum InAppBrowserType {
+    privacy = "privacy",
+    terms = "terms",
+    aboutUs = 'aboutUs',
+    helpCenter = 'helpCenter'
 }
 
 const InAppBrowser = () => {
-	const navigation = useNavigation<any>()
-	const webViewRef = useRef(null)
+    const navigation: any = useNavigation()
+    const dispatch = useDispatch()
 
-	const { params }: any = useRoute()
+    const { params }: any = useRoute()
+    const type: InAppBrowserType = params?.type
+    const title: string = params?.title
 
-	const type: IN_APP_BROWSER_TYPE = params?.type
-	const title = params?.title
+    const [sourceURL, setsourceURL] = useState('')
 
-	const [url, setURL] = useState('')
+    useFocusEffect(useCallback(() => {
+        dispatch(setIsFullScreenLoading(true))
+    }, []))
 
-	const dispatch = useDispatch()
+    useEffect(() => {
+        switch (type) {
+            case InAppBrowserType.privacy:
+                setsourceURL('https://motorwash.in/assets/pdf/PrivacyPolicy.pdf')
+                break
+            case InAppBrowserType.terms:
+                setsourceURL('https://motorwash.in/assets/pdf/TermsAndCondition.pdf')
+                break
+            case InAppBrowserType.helpCenter:
+                setsourceURL('https://www.google.com')
+                break
+            default:
+                setsourceURL('https://motorwash.in/home#about')
+                break
+        }
+    }, [type])
 
-	useEffect(() => {
-		dispatch(setIsFullScreenLoading(true))
-	}, [])
-
-	useEffect(() => {
-		if (type === IN_APP_BROWSER_TYPE.ABOUT_US) {
-			setURL('https://motorwash.in/home#about')
-		} else if (type === IN_APP_BROWSER_TYPE.HELP_CENTER) {
-			setURL('https://motorwash.in/home#help')
-		} else if (type === IN_APP_BROWSER_TYPE.PRIVACY) {
-			setURL('https://motorwash.in/assets/pdf/PrivacyPolicy.pdf')
-		}
-		else {
-			setURL('https://motorwash.in/assets/pdf/TermsAndCondition.pdf')
-		}
-	}, [type])
-
-	return (
-		<MainFrame isHeader isNotifications={false} title={title} backOnPress={() => navigation.goBack()}>
-			<WebView ref={webViewRef} source={{ uri: url }} style={{ flex: 1 }} onLoadEnd={() => dispatch(setIsFullScreenLoading(false))} />
-		</MainFrame>
-	)
+    return (
+        <MainFrame isHeader isNotifications={false} title={title} backOnPress={() => navigation.goBack()}>
+            <WebView style={{ flex: 1, marginTop: scaleHeightPX(16) }} source={{ uri: sourceURL }} onLoadEnd={() => dispatch(setIsFullScreenLoading(false))} />
+        </MainFrame>
+    )
 }
 
 export default InAppBrowser

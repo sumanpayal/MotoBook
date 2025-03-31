@@ -10,7 +10,7 @@ function App(): React.JSX.Element {
 	useEffect(() => {
 		setTimeout(() => {
 			setHideSplash(true)
-		}, 1000)
+		}, 3000)
 	}, [])
 
 	return (

@@ -7,17 +7,19 @@ import CustomText from '@src/common/components/Text'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import CustomButton from '@src/common/components/Button'
-import { IN_APP_BROWSER_TYPE } from '../inAppBrowser'
+import { InAppBrowserType } from '../InAppBrowser'
 
 const Welcome = () => {
 	const { colors } = useTheme()
 
 	const navigation: any = useNavigation()
 
-	const onPressTermsAndConditions = () => { navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.TERMS, title: 'Terms and Conditions' }) }
+	const onPressTermsAndConditions = () => {
+		navigation.navigate('InAppBrowser', { type: InAppBrowserType.terms, title: 'Terms and Conditions' })
+	}
 
 	const onPressPrivacyPolicy = () => {
-		navigation.navigate('InAppBrowser', { type: IN_APP_BROWSER_TYPE.PRIVACY, title: 'Privacy Policy' })
+		navigation.navigate('InAppBrowser', { type: InAppBrowserType.privacy, title: 'Privacy Policy' })
 	}
 
 	const onPressGetStarted = () => {
@@ -37,7 +39,7 @@ const Welcome = () => {
 		<MainFrame isHeader={false}>
 			<View style={styles.main}>
 				<Image source={{ uri: WelcomeBgImage }} style={styles.imageView} resizeMode='contain' />
-				<CustomText lineHeight style={{ ...commonFontStyles.fontSize4XL, color: colors.white, textAlign: 'center' }} textType={'semi-bold'}>
+				<CustomText lineHeight style={{ ...commonFontStyles.fontSize4XL, color: colors.white, textAlign: 'center' }} textType={'bold'}>
 					{'Daily Car Cleaning\nat Your Doorstep'}
 				</CustomText>
 				<View style={styles.detailsOuter}>
@@ -48,7 +50,7 @@ const Welcome = () => {
 					{renderDetails(Welcome3Image, 'No platform fees, no hidden charges')}
 				</View>
 				<View style={styles.bottomView}>
-					<CustomButton title='Get Started' onPress={onPressGetStarted} />
+					<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Get Started' onPress={onPressGetStarted} />
 					<CustomText lineHeight style={{ textAlign: 'center', ...commonFontStyles.fontSizeS }}>
 						{`Clicking "`}
 						<CustomText lineHeight textType='bold'>

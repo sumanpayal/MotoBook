@@ -22,4 +22,5 @@ interface CustomInputProps {
 	isLeftChildren?: boolean
 	placeholder?: string
 	leftChildren?: any
+	labelColor?: any
 }

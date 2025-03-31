@@ -12,14 +12,14 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 export default function CustomInput(props: CustomInputProps) {
 	const { colors } = useTheme()
 
-	const { viewStyle = {}, inputRef, label, editable = true, isRequired = false, secureTextEntry = false, isMultiline = false, isRightIcon = false, keyboardType = 'default', maxLength = 100, RightIcon = DownSVG, handleBlur, handleFocus, rightIconOnPress, isLeftChildren = false, placeholder = '', leftChildren } = props
+	const { viewStyle = {}, inputRef, label, editable = true, isRequired = false, secureTextEntry = false, isMultiline = false, isRightIcon = false, keyboardType = 'default', maxLength = 100, RightIcon = DownSVG, handleBlur, handleFocus, rightIconOnPress, isLeftChildren = false, placeholder = '', leftChildren, labelColor = colors.labelColor } = props
 
 	const styles = inputStyles(colors)
 
 	return (
 		<View style={[styles.container, isMultiline && styles.containerMultiline, viewStyle]}>
 			<View style={{ flex: 1, gap: scaleHeightPX(8) }}>
-				<CustomText style={{ color: colors.labelColor }}>
+				<CustomText style={{ color: labelColor }}>
 					{label}
 					{isRequired ? <CustomText style={{ color: colors.alertRed }}>{' *'}</CustomText> : ''}
 				</CustomText>

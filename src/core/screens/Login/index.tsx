@@ -10,13 +10,17 @@ import { setAlertData } from '@src/common/redux/reducers/alert'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { postMobileLogin } from '@src/network/login'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import { validatePhoneNumber } from '@src/common/utils/inputValidation'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
+import LottieView from 'lottie-react-native'
+import { VerifyOTPGIF } from '@src/assets/lottie'
 
 const Login = () => {
 	const dispatch = useDispatch()
 	const navigation: any = useNavigation()
+
+	const { colors } = useTheme()
 
 	const [mobileNumber, setMobileNumber] = useState('')
 
@@ -76,10 +80,11 @@ const Login = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} isNotifications={false}>
+		<MainFrame isHeader backOnPress={() => navigation.goBack()}>
 			<View style={styles.container}>
-				<CustomInput label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
-				<CustomButton customTextStyles={commonFontStyles.fontSemiBold} onPress={onPressSendOTP} title='Send OTP' />
+				<LottieView source={VerifyOTPGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
+				<CustomInput labelColor={colors.white} label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressSendOTP} title='Send OTP' />
 			</View>
 		</MainFrame>
 	)
@@ -90,9 +95,9 @@ export default Login
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
 		marginHorizontal: scaleWidthPX(25),
-		gap: scaleHeightPX(24)
+		gap: scaleHeightPX(24),
+		marginTop: scaleHeightPX(100)
 	}
 })

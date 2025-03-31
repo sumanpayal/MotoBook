@@ -73,7 +73,8 @@ const VehicleForm = () => {
 		getCarModalDetailsFromAPI(carModal?._id, (res: API_RESPONSE) => {
 			if (res.data) {
 				if (res?.data?.subscriptionPlans) {
-					setSubscriptionPlansData(res?.data?.subscriptionPlans)
+					setSubscriptionPlansData(res?.data?.subscriptionPlans?.length > 0 ? [res?.data?.subscriptionPlans[0]] : [])
+					setSelectedSubscriptionPlan(res?.data?.subscriptionPlans?.length > 0 ? res?.data?.subscriptionPlans[0] : null)
 				}
 				else {
 					setSubscriptionPlansData([])
@@ -276,14 +277,8 @@ const VehicleForm = () => {
 
 	const InputChildren = () => {
 		return (
-			<View style={{ width: scaleWidthPX(36), height: '100%', backgroundColor: '#010C22', borderTopLeftRadius: 15, borderBottomLeftRadius: 15, borderColor: '#010C22', borderWidth: 1, justifyContent: 'center', alignItems: 'center', gap: scaleHeightPX(4) }}>
-				<View style={{ width: scaleWidthPX(24), height: scaleWidthPX(24), justifyContent: 'center', alignItems: 'center' }}>
-					<View style={{ position: 'absolute' }}>
-						<RegistrationNoSVG width={scaleWidthPX(24)} height={scaleWidthPX(24)} />
-					</View>
-					<View style={{ width: scaleWidthPX(5), height: scaleWidthPX(5), backgroundColor: colors.white }} />
-				</View>
-				<CustomText textType='semi-bold' style={commonFontStyles.fontSize2XS}>{'IND'}</CustomText>
+			<View style={{ width: scaleWidthPX(34), height: scaleHeightPX(61), backgroundColor: '#010C22', borderTopLeftRadius: 15, borderBottomLeftRadius: 15, justifyContent: 'center', alignItems: 'center', marginLeft: -2 }}>
+				<RegistrationNoSVG />
 			</View>
 		)
 	}
@@ -312,12 +307,13 @@ const VehicleForm = () => {
 					label='Registration Number'
 					onChangeText={(text: string) => {
 						setRegistrationNumber(text)
-					}}
+					}} 
+					placeholder='Enter Registration Number'
 					value={registrationNumber}
 					maxLength={10}
 				/>
 				<View style={{ gap: scaleHeightPX(8) }}>
-					<CustomDropdown label='Address' onPress={onPressAddress} value={selectedAddress?.address} />
+					<CustomDropdown label='Address' onPress={onPressAddress} value={selectedAddress?.address} placeholder='Select' />
 					<Pressable style={styles.addAddress} onPress={onPressAddAddress}>
 						<AddSVG />
 						<CustomText style={{ color: colors.primary }}>{'Add Address'}</CustomText>
@@ -328,6 +324,7 @@ const VehicleForm = () => {
 					onChangeText={(text: string) => {
 						setReferralCode(text)
 					}}
+					placeholder='Enter Referral Code'
 					value={referralCode}
 				/>
 				<CustomDropdown label='Pick Your Daily Car Cleaning Slot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
@@ -337,8 +334,6 @@ const VehicleForm = () => {
 					isInteriorCleaning={isInteriorCleaning}
 					interiorCleaningAmount={interiorCleaningAmount}
 					subscriptionPlansData={subscriptionPlansData}
-					selectedSubscriptionPlan={selectedSubscriptionPlan}
-					setSelectedSubscriptionPlan={setSelectedSubscriptionPlan}
 				/>
 			</View>
 		)
@@ -350,7 +345,7 @@ const VehicleForm = () => {
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton title='Submut Request' onPress={onPressSave} textChildren={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Submit Request' onPress={onPressSave} childernButton={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 			<RenderModals
 				isColorShow={isColorShow}

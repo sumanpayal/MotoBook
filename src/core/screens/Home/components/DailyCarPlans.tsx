@@ -12,15 +12,21 @@ export const DailyCarPlans = () => {
 	const styles = createStyles(colors)
 	return (
 		<View style={{ gap: scaleHeightPX(16), marginHorizontal: scaleWidthPX(22) }}>
-			<CustomText textType='semi-bold' style={commonFontStyles.fontSizeXL}>
-				{'Explore Daily Car Cleaning Plans'}
-			</CustomText>
+			{renderTitle('Explore Daily Car Cleaning Plans')}
 			<View style={styles.carPlanOuter}>
 				{renderCarType('Hatchback', HatchbackImage, '550')}
 				{renderCarType('Sedan', SedanImage, '650')}
-				{renderCarType('Suv', SuvImage, '750')}
+				{renderCarType('SUV', SuvImage, '750')}
 			</View>
 		</View>
+	)
+}
+
+export const renderTitle = (title: string) => {
+	return (
+		<CustomText textType='bold' style={commonFontStyles.fontSizeXL}>
+			{title}
+		</CustomText>
 	)
 }
 
@@ -32,7 +38,7 @@ const renderCarType = (type: string, image: any, price: any) => {
 			<Image style={styles.carPlanImage} source={{ uri: image }} resizeMode='center' />
 			<View style={styles.carPlanBottom}>
 				<CustomText style={commonFontStyles.fontSizeS}>{type}</CustomText>
-				<CustomText style={{ color: colors.primary, textAlign: 'center', paddingHorizontal: scaleWidthPX(2) }}>
+				<CustomText style={{ color: colors.primary, textAlign: 'center', paddingHorizontal: scaleWidthPX(1) }}>
 					{'@ '}
 					<CustomText textType='bold' style={{ color: colors.primary }}>
 						{`₹${price}`}

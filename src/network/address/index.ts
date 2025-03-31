@@ -1,5 +1,5 @@
 import { API_RESPONSE } from '@src/common/constants/constants'
-import { getApiService, postApiService } from '../apiService'
+import { getApiService, postApiService, putApiService } from '../apiService'
 import { ADDRESS_LIST, ADD_ADDRESS, COLORS_LIST, UPDATE_ADDRESS } from './endpoints'
 
 export const getAddressListAPI = (callBack: (response: API_RESPONSE) => void) => {
@@ -51,7 +51,7 @@ export const postAddAddressAPI = (params: any, callBack: (response: API_RESPONSE
 }
 
 export const postUpdateAddAddressAPI = (address_id: any, params: any, callBack: (response: API_RESPONSE) => void) => {
-	postApiService(UPDATE_ADDRESS(address_id), params)
+	putApiService(UPDATE_ADDRESS(address_id), params)
 		.then(async (res: any) => {
 			if (res?.status === 200) {
 				callBack({

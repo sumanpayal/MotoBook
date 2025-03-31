@@ -38,14 +38,14 @@ export const createStyles = (colors: any) =>
 		},
 		interiorView: {
 			backgroundColor: colors.interiorBg,
-			height: scaleHeightPX(32),
+			height: scaleHeightPX(38),
 			borderRadius: 2,
 			justifyContent: 'center',
-			paddingHorizontal: scaleWidthPX(8),
+			paddingHorizontal: scaleWidthPX(12),
 			marginHorizontal: scaleWidthPX(22)
 		},
 		carousel: {
-			marginTop: scaleHeightPX(24)
+			marginTop: scaleHeightPX(20)
 		},
 		header: {
 			backgroundColor: colors.headerBg,
@@ -67,18 +67,20 @@ export const createStyles = (colors: any) =>
 		carPlanInner: {
 			height: '100%',
 			flex: 0.33,
-			backgroundColor: colors.carInner,
 			borderRadius: 15,
 			paddingTop: scaleHeightPX(16),
-			gap: scaleHeightPX(16)
+			gap: scaleHeightPX(16),
+			borderColor: colors.white,
+			borderWidth: 1
 		},
 		carPlanImage: {
-			width: '90%',
+			width: '80%',
 			height: scaleHeightPX(60),
 			alignSelf: 'center'
 		},
 		carPlanBottom: {
-			backgroundColor: colors.carBottom,
+			borderTopWidth: 1,
+			borderTopColor: colors.white + '4D',
 			justifyContent: 'center',
 			alignItems: 'center',
 			position: 'absolute',
@@ -124,9 +126,9 @@ export const createStyles = (colors: any) =>
 			gap: scaleWidthPX(6)
 		},
 		howItemText: {
-			...commonFontStyles.fontSizeXS,
+			...commonFontStyles.fontSizeS,
 			marginTop: -scaleHeightPX(2),
-			height: scaleHeightPX(34),
+			height: scaleHeightPX(52),
 			width: '80%'
 		},
 		planOuter: {
@@ -140,7 +142,7 @@ export const createStyles = (colors: any) =>
 			alignItems: 'center',
 			backgroundColor: '#182632',
 			height: scaleHeightPX(50),
-			borderRadius: 5,
-			paddingHorizontal: scaleWidthPX(10)
+			paddingHorizontal: scaleWidthPX(12),
+			borderRadius: 5
 		}
 	})

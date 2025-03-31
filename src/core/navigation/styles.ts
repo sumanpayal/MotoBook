@@ -7,11 +7,11 @@ export const createStyles = (colors: any) => StyleSheet.create({
 		height: scaleHeightPX(70),
 		backgroundColor: colors.borderColor,
 		marginHorizontal: scaleWidthPX(16),
-		marginBottom: scaleHeightPX(16),
+		marginBottom: scaleHeightPX(24),
 		borderRadius: 20,
 	},
 	textStyle: {
-		...commonFontStyles.fontSize3XS,
+		...commonFontStyles.fontSize2XS,
 		textAlign: 'center',
 	},
 	labelView: {

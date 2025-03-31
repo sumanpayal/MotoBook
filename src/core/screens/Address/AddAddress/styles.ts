@@ -19,17 +19,17 @@ export const createStyles = (colors: any) => {
 		},
 		scrollView: {
 			flexDirection: 'row',
-			gap: scaleWidthPX(12)
+			gap: scaleWidthPX(10)
 		},
 		saveAddressAs: {
 			gap: scaleHeightPX(8)
 		},
 		addressItem: {
-			borderRadius: 8,
+			borderRadius: 5,
 			backgroundColor: colors.inputBackground,
 			justifyContent: 'center',
 			alignItems: 'center',
-			padding: scaleWidthPX(8)
+			padding: scaleWidthPX(10)
 		}
 	})
 }

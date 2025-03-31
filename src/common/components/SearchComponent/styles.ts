@@ -13,6 +13,7 @@ const styles = (colors: any) =>
 		input: {
 			...commonFontStyles.fontSizeL,
 			...commonFontStyles.fontSemiBold,
+			paddingVertical: scaleHeightPX(16),
 			flex: 1,
 			color: colors.white,
 			textAlign: 'left'

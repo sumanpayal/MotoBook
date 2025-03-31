@@ -16,7 +16,7 @@ import { RootState } from '@src/common/redux/store/store'
 import Welcome from '../screens/Welcome'
 import RequestSubmitted from '../screens/RequestSubmitted'
 import MyCarDetails from '../screens/MyCarDetails'
-import InAppBrowser from '../screens/inAppBrowser'
+import InAppBrowser from '../screens/InAppBrowser'
 
 const Stack = createNativeStackNavigator()
 
