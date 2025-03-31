@@ -9,9 +9,6 @@ export const PlanImage = Image.resolveAssetSource(PlanImg).uri
 import ReferImg from './Refer/Refer.png'
 export const ReferImage = Image.resolveAssetSource(ReferImg).uri
 
-import RequestSubmittedImg from './RequestSubmitted/RequestSubmitted.png'
-export const RequestSubmittedImage = Image.resolveAssetSource(RequestSubmittedImg).uri
-
 import Stage1Img from './Stage1/Stage1.png'
 export const Stage1Image = Image.resolveAssetSource(Stage1Img).uri
 

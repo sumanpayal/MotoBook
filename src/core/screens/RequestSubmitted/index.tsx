@@ -1,12 +1,13 @@
-import { View, Image, StyleSheet, BackHandler } from 'react-native'
+import { View, StyleSheet, BackHandler } from 'react-native'
 import React from 'react'
 import MainFrame from '@src/common/components/Mainframe'
-import { RequestSubmittedImage } from '@src/assets/image'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomText from '@src/common/components/Text'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import CustomButton from '@src/common/components/Button'
+import LottieView from 'lottie-react-native'
+import { Success } from '@src/assets/lottie'
 
 const RequestSubmitted = () => {
 	const navigation: any = useNavigation()
@@ -28,7 +29,7 @@ const RequestSubmitted = () => {
 	return (
 		<MainFrame isHeader={false}>
 			<View style={styles.main}>
-				<Image source={{ uri: RequestSubmittedImage }} style={styles.imageView} resizeMode={'contain'} />
+				<LottieView source={Success} style={styles.imageView} autoPlay loop />
 				<View style={{ width: '92%', gap: scaleHeightPX(28) }}>
 					<CustomText style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center' }} textType={'semi-bold'}>
 						{'Request Submitted'}
@@ -49,8 +50,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	imageView: {
-		marginTop: scaleHeightPX(150),
-		width: scaleWidthPX(287),
-		height: scaleWidthPX(287)
+		width: scaleWidthPX(300),
+		height: scaleWidthPX(400)
 	}
 })
