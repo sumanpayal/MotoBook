@@ -80,7 +80,7 @@ const Login = () => {
 	}
 
 	return (
-		<MainFrame isNotifications={false} isHeader backOnPress={() => navigation.goBack()}>
+		<MainFrame isNotifications={false} isHeader>
 			<View style={styles.container}>
 				<LottieView source={PhoneGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
 				<CustomInput labelColor={colors.white} label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />

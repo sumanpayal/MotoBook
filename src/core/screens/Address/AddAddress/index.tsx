@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, View } from 'react-native'
+import { Pressable, View } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
@@ -279,6 +279,7 @@ const AddAddress = () => {
 					onChangeText={(text: string) => {
 						setAddressDetaills(ADDRESS_KEYS.address, text)
 					}}
+					placeholder='Enter Address'
 					value={addressData?.address}
 					isRequired
 				/>
@@ -287,6 +288,7 @@ const AddAddress = () => {
 					onChangeText={(text: string) => {
 						setAddressDetaills(ADDRESS_KEYS.landmark, text)
 					}}
+					placeholder='Enter Landmark'
 					value={addressData?.landmark}
 					isRequired={false}
 				/>
@@ -297,6 +299,7 @@ const AddAddress = () => {
 							onChangeText={(text: string) => {
 								setAddressDetaills(ADDRESS_KEYS.country, text)
 							}}
+							placeholder='Enter Country'
 							value={addressData?.country}
 							isRequired
 						/>
@@ -307,6 +310,7 @@ const AddAddress = () => {
 							onChangeText={(text: string) => {
 								setAddressDetaills(ADDRESS_KEYS.state, text)
 							}}
+							placeholder='Enter State'
 							value={addressData?.state}
 							isRequired
 						/>
@@ -317,6 +321,7 @@ const AddAddress = () => {
 					onChangeText={(text: string) => {
 						setAddressDetaills(ADDRESS_KEYS.city, text)
 					}}
+					placeholder='Enter District'
 					value={addressData?.city}
 					isRequired
 				/>
@@ -325,6 +330,7 @@ const AddAddress = () => {
 					onChangeText={(text: string) => {
 						setAddressDetaills(ADDRESS_KEYS.postalCode, text)
 					}}
+					placeholder='Enter Pincode'
 					value={addressData?.postalCode}
 					isRequired
 					maxLength={6}
@@ -339,12 +345,12 @@ const AddAddress = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Address Form' isNotifications={false}>
+		<MainFrame isHeader title='Address Form' isNotifications={false}>
 			<View style={styles.main}>
 				<KeyboardAwareScrollView style={{}} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton title='Save Address' onPress={onPressSaveAddress} isLoading={isLoading} />
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Save Address' onPress={onPressSaveAddress} isLoading={isLoading} />
 			</View>
 		</MainFrame>
 	)

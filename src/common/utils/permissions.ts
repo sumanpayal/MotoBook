@@ -8,14 +8,6 @@ import {
   requestMultiple,
 } from 'react-native-permissions';
 
-/**
- * To check camera permission
- * @returns boolean
- * @description
- * This function will check and request the camera permission
- * for both android and ios. If the permission is granted, it will return true
- * otherwise it will return false.
- */
 export const requestCameraPermission = async () => {
   try {
     const permission =
@@ -30,7 +22,7 @@ export const requestCameraPermission = async () => {
       const requestResult = await request(permission);
       if (requestResult === RESULTS.GRANTED) return true;
       else {
-        Alert.alert('permissionDenied', 'cameraPermissionBlocked');
+        Alert.alert('Permission Denied', 'Camera permission is denied');
         return false;
       }
     }
@@ -40,14 +32,6 @@ export const requestCameraPermission = async () => {
   }
 };
 
-/**
- * To check library permission
- * @returns boolean
- * @description
- * This function will check and request the library permission
- * for both android and ios. If the permission is granted, it will return true
- * otherwise it will return false.
- */
 export const requestLibraryPermission = async () => {
   try {
     if (Platform.OS === 'android') {
@@ -71,7 +55,7 @@ export const requestLibraryPermission = async () => {
           response[PERMISSIONS.ANDROID.READ_MEDIA_IMAGES] === RESULTS.BLOCKED
         ) {
           openSettingsAlert({
-            title: 'photoLibraryPermission',
+            title: 'Photo Library Permission',
           });
         }
       } else {
@@ -86,7 +70,7 @@ export const requestLibraryPermission = async () => {
         if (response === RESULTS.GRANTED) return true;
         if (response === RESULTS.DENIED || response === RESULTS.BLOCKED) {
           openSettingsAlert({
-            title: 'photoLibraryPermission',
+            title: 'Photo Library Permission',
           });
         }
       }
@@ -113,12 +97,6 @@ export const requestLibraryPermission = async () => {
   }
 };
 
-/**
- * Displays an alert prompting the user to open the app settings.
- *
- * @param {Object} param - The function parameter.
- * @param {string} param.title - The title of the alert dialog.
- */
 const openSettingsAlert = ({title}: {title: string}) => {
   Alert.alert(title, '', [
     {
@@ -136,14 +114,6 @@ const openSettingsAlert = ({title}: {title: string}) => {
   ]);
 };
 
-/**
- * Requests microphone permission from the user.
- *
- * On Android, it prompts the user with a dialog requesting access to record audio.
- * On iOS, it assumes permission is handled automatically.
- *
- * @returns {Promise<boolean>} - A promise that resolves to `true` if the permission is granted, otherwise `false`.
- */
 export const requestMicrophonePermission = async () => {
   try {
     const permission =
@@ -158,7 +128,7 @@ export const requestMicrophonePermission = async () => {
       const requestResult = await request(permission);
       if (requestResult === RESULTS.GRANTED) return true;
       else {
-        Alert.alert('permissionDenied', 'microphonePermissionBlocked');
+        Alert.alert('Permission Denied', 'Microphone Permission Blocked');
         return false;
       }
     }
@@ -168,13 +138,6 @@ export const requestMicrophonePermission = async () => {
   }
 };
 
-/**
- * Requests location permission from the user.
- * On Android, it prompts the user with a dialog requesting access to fine location.
- * On iOS, it assumes permission is handled automatically.
- *
- * @returns {Promise<boolean>} - A promise that resolves to `true` if the permission is granted, otherwise `false`.
- */
 export const requestLocationPermission = async () => {
   if (Platform.OS === 'android') {
     const granted = await PermissionsAndroid.request(

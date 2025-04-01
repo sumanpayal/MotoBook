@@ -7,4 +7,6 @@ type NoRecordFoundProps = {
 	isImage?: boolean
 	imageSource?: any
 	imageStyle?: ImageStyle
+	isLottieImage?: boolean
+	LottieImage?: any
 }

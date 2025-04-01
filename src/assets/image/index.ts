@@ -6,9 +6,6 @@ export const DefaultProfileImage = Image.resolveAssetSource(DefaultProfile).uri
 import PlanImg from './Plan/Plan.png'
 export const PlanImage = Image.resolveAssetSource(PlanImg).uri
 
-import ReferImg from './Refer/Refer.png'
-export const ReferImage = Image.resolveAssetSource(ReferImg).uri
-
 import Stage1Img from './Stage1/Stage1.png'
 export const Stage1Image = Image.resolveAssetSource(Stage1Img).uri
 
@@ -29,9 +26,6 @@ export const Welcome3Image = Image.resolveAssetSource(Welcome3Img).uri
 
 import WelcomeBgImg from './WelcomeBg/WelcomeBg.png'
 export const WelcomeBgImage = Image.resolveAssetSource(WelcomeBgImg).uri
-
-import NoVehicleImg from './NoVehicle/NoVehicle.png'
-export const NoVehicleImage = Image.resolveAssetSource(NoVehicleImg).uri
 
 import NoSubscriptionImg from './NoSubscription/NoSubscription.png'
 export const NoSubscriptionImage = Image.resolveAssetSource(NoSubscriptionImg).uri

@@ -90,7 +90,7 @@ const SelectBrand = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Select Your Brand' isNotifications={false}>
+		<MainFrame isHeader title='Select Your Brand' isNotifications={false}>
 			<View style={styles.main}>
 				<View style={{ marginVertical: scaleHeightPX(16) }}>
 					<SearchComponent searchText={searchText} handleSearch={setSearchText} clearSearch={() => setSearchText('')} placeholder='Search by brand' />

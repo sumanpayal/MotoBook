@@ -1,5 +1,5 @@
-import { useNavigation, useTheme } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { createStyles } from './styles';
 import { AddCarSVG } from '@src/assets/svg';
@@ -12,14 +12,21 @@ import { DailyCarPlans } from './components/DailyCarPlans';
 import { HowItWorks } from './components/HowItWorks';
 import { InteriorCleaning, PlanDetails } from './components/PlanDetails';
 import CustomCarousel from '@src/common/components/Carousel';
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader';
+import { useDispatch } from 'react-redux';
 
 const HomeScreen = () => {
 	const navigation: any = useNavigation();
+	const dispatch = useDispatch()
 
 	const { colors } = useTheme();
 	const styles = createStyles(colors);
 
 	const [searchText, setSearchText] = useState<string>('');
+
+	useFocusEffect(useCallback(() => {
+		dispatch(setIsFullScreenLoading(false))
+	}, []))
 
 	const renderMyCarsButton = () => {
 		return (

@@ -17,6 +17,9 @@ import Welcome from '../screens/Welcome'
 import RequestSubmitted from '../screens/RequestSubmitted'
 import MyCarDetails from '../screens/MyCarDetails'
 import InAppBrowser from '../screens/InAppBrowser'
+import Notifications from '../screens/Notifications'
+import MyAccount from '../screens/MyAccount'
+import HelpCenter from '../screens/HelpCenter'
 
 const Stack = createNativeStackNavigator()
 
@@ -70,6 +73,9 @@ export const PostLoginStack = () => {
 			<Stack.Screen name='RequestSubmitted' component={RequestSubmitted} />
 			<Stack.Screen name='MyCarDetails' component={MyCarDetails} />
 			<Stack.Screen name='InAppBrowser' component={InAppBrowser} />
+			<Stack.Screen name='Notifications' component={Notifications} />
+			<Stack.Screen name='MyAccount' component={MyAccount} />
+			<Stack.Screen name='HelpCenter' component={HelpCenter} />
 		</Stack.Navigator>
 	)
 }

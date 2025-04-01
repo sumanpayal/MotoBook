@@ -2,14 +2,25 @@ import React from 'react'
 import { Pressable, View } from 'react-native'
 import { navigationStyles } from './styles'
 import CustomText from '../Text'
-import { useTheme } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import { BackSVG, NotificationsSVG } from '@src/assets/svg'
 
 export const HeaderNavigation = (props: HeaderNavigationProps) => {
 	const { colors } = useTheme()
 	const styles = navigationStyles(colors)
 
-	const { backOnPress, title, isBack = true, isNotifications = true, notificationOnPress, isCustom = false, children } = props
+	const { backOnPress, title, isBack = true, isNotifications = true, isCustom = false, children } = props
+
+	const navigation: any = useNavigation()
+
+	const navigationOnNotification = () => {
+		navigation.navigate('Notifications')
+	}
+
+	const navigationOnBack = () => {
+		if (backOnPress) backOnPress()
+		else navigation.goBack()
+	}
 
 	return (
 		<View style={styles.container}>
@@ -19,7 +30,7 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 				) : (
 					<>
 						{isBack && (
-							<Pressable onPress={() => backOnPress && backOnPress()}>
+							<Pressable onPress={navigationOnBack}>
 								<BackSVG />
 							</Pressable>
 						)}
@@ -32,7 +43,7 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 				)}
 			</View>
 			{isNotifications && (
-				<Pressable onPress={() => notificationOnPress && notificationOnPress()}>
+				<Pressable onPress={navigationOnNotification}>
 					<NotificationsSVG />
 				</Pressable>
 			)}

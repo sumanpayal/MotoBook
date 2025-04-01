@@ -137,7 +137,7 @@ const VerifyOTP = () => {
 	}
 
 	return (
-		<MainFrame isBack isHeader isNotifications={false} backOnPress={() => navigation.goBack()}>
+		<MainFrame isBack isHeader isNotifications={false}>
 			<View style={styles.container}>
 				<LottieView source={VerifyOTPGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
 				<View style={styles.textView}>

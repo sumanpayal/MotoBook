@@ -1,6 +1,6 @@
 import { Image, ScrollView, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useNavigation, useRoute, useTheme } from '@react-navigation/native'
+import { useRoute, useTheme } from '@react-navigation/native'
 import { getMySubscriptionDetails } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { useDispatch } from 'react-redux'
@@ -15,7 +15,6 @@ import { VehicleAddress, VehicleDetails } from './VedicleDetails'
 import { BASE_URL } from '@src/network/apiClient'
 
 const MyCarDetails = () => {
-	const navigation: any = useNavigation()
 	const dispatch = useDispatch()
 
 	const { colors } = useTheme()
@@ -53,7 +52,7 @@ const MyCarDetails = () => {
 			<View style={styles.main}>
 				<View style={styles.topView}>
 					<SafeAreaView edges={['top']} />
-					<HeaderNavigation title='Car Details' backOnPress={() => navigation.goBack()} />
+					<HeaderNavigation title='Car Details' />
 					<View style={styles.topInner}>
 						<CarDetailBgSVG />
 						<Image source={{ uri: `${BASE_URL}/${carDetails?.carmodel?.image}` }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />

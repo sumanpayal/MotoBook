@@ -21,6 +21,7 @@ import CustomDropdown from '@src/common/components/Dropdown'
 import { RenderSubscritionPlans } from './SubscriptionPlans'
 import RenderModals from './Modals'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import CustomDate from '@src/common/components/CustomDate'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -30,7 +31,10 @@ const VehicleForm = () => {
 	const styles = createStyle(colors)
 
 	const route = useRoute()
-	const { carCompany, carModal }: any = route?.params
+	// const { carCompany, carModal }: any = route?.params
+
+	const carCompany = null
+	const carModal = null
 
 	const [selectedColor, setSelectedColor] = useState<any | null>(null)
 	const [allAddressList, setAllAddressList] = useState<any>([])
@@ -286,19 +290,19 @@ const VehicleForm = () => {
 	const renderForm = () => {
 		return (
 			<View style={styles.form}>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, gap: scaleWidthPX(16) }}>
-					<View style={{ flex: 0.5 }}>
+				<View style={styles.flexRow}>
+					<View style={styles.flex5}>
 						<CustomInput label='Brand' onChangeText={() => { }} value={carCompany?.name} editable={false} />
 					</View>
-					<View style={{ flex: 0.5 }}>
+					<View style={styles.flex5}>
 						<CustomInput label='Model' onChangeText={() => { }} value={carModal?.name} editable={false} />
 					</View>
 				</View>
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, gap: scaleWidthPX(16) }}>
-					<View style={{ flex: 0.5 }}>
+				<View style={styles.flexRow}>
+					<View style={styles.flex5}>
 						<CustomInput label='Category' onChangeText={() => { }} value={carModal?.car_type_id?.name} editable={false} />
 					</View>
-					<View style={{ flex: 0.5 }}>
+					<View style={styles.flex5}>
 						<CustomDropdown label='Color' onPress={onPressColor} value={selectedColor?.name} />
 					</View>
 				</View>
@@ -307,7 +311,7 @@ const VehicleForm = () => {
 					label='Registration Number'
 					onChangeText={(text: string) => {
 						setRegistrationNumber(text)
-					}} 
+					}}
 					placeholder='Enter Registration Number'
 					value={registrationNumber}
 					maxLength={10}
@@ -327,7 +331,14 @@ const VehicleForm = () => {
 					placeholder='Enter Referral Code'
 					value={referralCode}
 				/>
-				<CustomDropdown label='Pick Your Daily Car Cleaning Slot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
+				<View style={styles.flexRow}>
+					<View style={styles.flex5}>
+						<CustomDate label='Select Start Date' placeholder='YYYY-MM-DD' onPress={() => { }} value={selectedSubscriptionTimeSlot?.name} />
+					</View>
+					<View style={styles.flex5}>
+						<CustomDropdown label='Select TimeSlot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
+					</View>
+				</View>
 				<RenderSubscritionPlans
 					openInformationModal={openInformationModal}
 					setIsInteriorCleaning={setIsInteriorCleaning}
@@ -340,7 +351,7 @@ const VehicleForm = () => {
 	}
 
 	return (
-		<MainFrame isHeader backOnPress={() => navigation.goBack()} title='Vehicle Form' isNotifications={false}>
+		<MainFrame isHeader title='Vehicle Form' isNotifications={false}>
 			<View style={styles.main}>
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}

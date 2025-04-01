@@ -1,6 +1,6 @@
 import { View, FlatList, Pressable, ImageBackground } from 'react-native'
-import React from 'react'
-import { useNavigation, useTheme } from '@react-navigation/native'
+import React, { useCallback } from 'react'
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { setUserData } from '@src/common/redux/reducers/currentUser'
@@ -12,6 +12,7 @@ import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { InAppBrowserType } from '../InAppBrowser'
+import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -65,6 +66,10 @@ const MySettings = () => {
 		}
 	]
 
+	useFocusEffect(useCallback(() => {
+		dispatch(setIsFullScreenLoading(false))
+	}, []))
+
 	const renderItem = ({ item }: { item: any }) => {
 		const Icon = item?.icon
 		return (
@@ -82,6 +87,7 @@ const MySettings = () => {
 		switch (id) {
 			case 0:
 				// my account
+				navigation.navigate('MyAccount')
 				break
 			case 1:
 				// my cars
@@ -93,7 +99,7 @@ const MySettings = () => {
 				break
 			case 3:
 				// help center
-				navigation.navigate('InAppBrowser', { type: InAppBrowserType.helpCenter, title: 'Help Center' })
+				navigation.navigate('HelpCenter')
 				break
 			case 4:
 				// privacy policy

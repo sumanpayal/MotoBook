@@ -1,6 +1,6 @@
 import { FlatList, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useNavigation, useRoute, useTheme } from '@react-navigation/native'
+import { useRoute, useTheme } from '@react-navigation/native'
 import { getMySubscriptionDetails } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { useDispatch } from 'react-redux'
@@ -16,7 +16,6 @@ import moment from 'moment'
 import { VehicleAddress, VehicleDetails } from '../MyCarDetails/VedicleDetails'
 
 const MySubscriptionDetails = () => {
-	const navigation: any = useNavigation()
 	const dispatch = useDispatch()
 
 	const { colors } = useTheme()
@@ -103,7 +102,7 @@ const MySubscriptionDetails = () => {
 		<View style={styles.main}>
 			<View style={styles.topView}>
 				<SafeAreaView edges={['top']} />
-				<HeaderNavigation title='Subscription' backOnPress={() => navigation.goBack()} />
+				<HeaderNavigation title='Subscription' />
 				<View style={styles.topInner}>
 					<View style={styles.package}>
 						<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor }}>
