@@ -14,6 +14,7 @@ import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { InAppBrowserType } from '../InAppBrowser'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { FilePickerModal } from '@src/common/components/FilePickerModal'
+import { DEFAULT_IMAGE_URL } from '@src/common/constants/constants'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -137,7 +138,7 @@ const MySettings = () => {
 				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
 			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
-				<Image source={{ uri: profileImage?.uri }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
+				<Image source={{ uri: profileImage?.uri || DEFAULT_IMAGE_URL }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
 					<EditSVG />
 				</Pressable>
