@@ -1,5 +1,5 @@
-import { View, FlatList, Pressable, ImageBackground } from 'react-native'
-import React, { useCallback } from 'react'
+import { View, FlatList, Pressable, ImageBackground, Image } from 'react-native'
+import React, { useCallback, useState } from 'react'
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { InAppBrowserType } from '../InAppBrowser'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import { FilePickerModal } from '@src/common/components/FilePickerModal'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -20,6 +21,10 @@ const MySettings = () => {
 
 	const { colors } = useTheme()
 	const styles = createStyles(colors)
+
+	const [profileImage, setProfileImage] = useState<any>(null)
+
+	const [openImagePicker, setOpenImagePicker] = useState(false)
 
 	const data = [
 		{
@@ -123,7 +128,7 @@ const MySettings = () => {
 		navigation.navigate('PreLogin')
 	}
 
-	const onPressEditProfileImageOnPress = () => { }
+	const onPressEditProfileImageOnPress = () => { setOpenImagePicker(true) }
 
 	return (
 		<View style={styles.main}>
@@ -131,12 +136,14 @@ const MySettings = () => {
 				<SafeAreaView edges={['top']} />
 				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
-			<View style={styles.profileView}>
+			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
+				<Image source={{ uri: profileImage?.uri }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
 					<EditSVG />
 				</Pressable>
-			</View>
+			</Pressable>
 			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} />
+			<FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => setProfileImage(image)} />
 		</View>
 	)
 }

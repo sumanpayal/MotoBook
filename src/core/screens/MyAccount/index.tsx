@@ -1,4 +1,4 @@
-import { View, Pressable, ImageBackground } from 'react-native'
+import { View, Pressable, ImageBackground, Image } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { useFocusEffect, useTheme } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,6 +17,7 @@ import { RootState } from '@src/common/redux/store/store'
 import { isEmpty } from 'lodash'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isValidEmail } from '@src/common/utils/inputValidation'
+import { FilePickerModal } from '@src/common/components/FilePickerModal'
 
 const MyAccount = () => {
     const dispatch = useDispatch()
@@ -26,6 +27,10 @@ const MyAccount = () => {
 
     const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
 
+    const [profileImage, setProfileImage] = useState<any>(null)
+
+    const [openImagePicker, setOpenImagePicker] = useState(false)
+
     const [name, setName] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
 
@@ -33,7 +38,7 @@ const MyAccount = () => {
         dispatch(setIsFullScreenLoading(false))
     }, []))
 
-    const onPressEditProfileImageOnPress = () => { }
+    const onPressEditProfileImageOnPress = () => { setOpenImagePicker(true) }
 
     const validateForm = () => {
         if (isEmpty(name)) {
@@ -72,11 +77,12 @@ const MyAccount = () => {
                 <SafeAreaView edges={['top']} />
                 <HeaderNavigation title='Edit Profile' isNotifications={false} />
             </ImageBackground>
-            <View style={styles.profileView}>
+            <Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
+                <Image source={{ uri: profileImage?.uri }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
                 <Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
                     <EditSVG />
                 </Pressable>
-            </View>
+            </Pressable>
             <KeyboardAwareScrollView>
                 <View style={{ marginHorizontal: scaleWidthPX(16), gap: scaleHeightPX(24) }}>
                     <CustomInput
@@ -108,6 +114,7 @@ const MyAccount = () => {
                     <CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressSaveProfile} title='Save' />
                 </View>
             </KeyboardAwareScrollView>
+            <FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => setProfileImage(image)} />
         </View>
     )
 }

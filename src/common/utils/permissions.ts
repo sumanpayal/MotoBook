@@ -1,4 +1,4 @@
-import {Alert, Linking, PermissionsAndroid, Platform} from 'react-native';
+import { Alert, Linking, PermissionsAndroid, Platform } from 'react-native';
 import {
   PERMISSIONS,
   RESULTS,
@@ -21,8 +21,12 @@ export const requestCameraPermission = async () => {
     else {
       const requestResult = await request(permission);
       if (requestResult === RESULTS.GRANTED) return true;
+      else if (requestResult === RESULTS.UNAVAILABLE) {
+        Alert.alert('', 'Camera not available');
+        return false;
+      }
       else {
-        Alert.alert('Permission Denied', 'Camera permission is denied');
+        Alert.alert('', 'Camera permission is denied');
         return false;
       }
     }
@@ -86,6 +90,10 @@ export const requestLibraryPermission = async () => {
           requestResult === RESULTS.LIMITED
         )
           return true;
+        else if (requestResult === RESULTS.UNAVAILABLE) {
+          Alert.alert('', 'Photo Library not available');
+          return false;
+        }
         else {
           return false;
         }
@@ -97,7 +105,7 @@ export const requestLibraryPermission = async () => {
   }
 };
 
-const openSettingsAlert = ({title}: {title: string}) => {
+const openSettingsAlert = ({ title }: { title: string }) => {
   Alert.alert(title, '', [
     {
       isPreferred: true,
@@ -109,33 +117,9 @@ const openSettingsAlert = ({title}: {title: string}) => {
       isPreferred: false,
       style: 'destructive',
       text: 'cancel',
-      onPress: () => {},
+      onPress: () => { },
     },
   ]);
-};
-
-export const requestMicrophonePermission = async () => {
-  try {
-    const permission =
-      Platform.OS === 'ios'
-        ? PERMISSIONS.IOS.MICROPHONE
-        : PERMISSIONS.ANDROID.RECORD_AUDIO;
-
-    const result = await check(permission);
-
-    if (result === RESULTS.GRANTED) return true;
-    else {
-      const requestResult = await request(permission);
-      if (requestResult === RESULTS.GRANTED) return true;
-      else {
-        Alert.alert('Permission Denied', 'Microphone Permission Blocked');
-        return false;
-      }
-    }
-  } catch (err) {
-    console.error(err);
-    return false;
-  }
 };
 
 export const requestLocationPermission = async () => {
