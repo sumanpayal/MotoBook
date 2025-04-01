@@ -19,7 +19,7 @@ interface FilePickerModalProps {
     onSelect?: (img: any) => void
 }
 
-const FilePickerModal = (props: FilePickerModalProps) => {
+export const FilePickerModal = (props: FilePickerModalProps) => {
     const { visible, onClose } = props
 
     const { colors } = useTheme()

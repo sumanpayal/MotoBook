@@ -27,6 +27,15 @@ export const createStyle = (colors: any) => {
 			justifyContent: 'center',
 			alignItems: 'center',
 			marginRight: scaleWidthPX(8)
+		},
+		flexRow: {
+			flexDirection: 'row',
+			justifyContent: 'space-between',
+			flex: 1,
+			gap: scaleWidthPX(16)
+		},
+		flex5: {
+			flex: 0.5
 		}
 	})
 }
