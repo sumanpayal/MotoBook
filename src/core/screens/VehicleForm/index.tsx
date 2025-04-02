@@ -31,10 +31,7 @@ const VehicleForm = () => {
 	const styles = createStyle(colors)
 
 	const route = useRoute()
-	// const { carCompany, carModal }: any = route?.params
-
-	const carCompany = null
-	const carModal = null
+	const { carCompany, carModal }: any = route?.params
 
 	const [selectedColor, setSelectedColor] = useState<any | null>(null)
 	const [allAddressList, setAllAddressList] = useState<any>([])
