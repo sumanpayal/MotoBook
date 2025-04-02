@@ -1,4 +1,4 @@
-import { FlatList, Pressable, View } from 'react-native'
+import { FlatList, Linking, Pressable, View } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useFocusEffect, useTheme } from '@react-navigation/native'
@@ -9,8 +9,10 @@ import LottieView from 'lottie-react-native'
 import { HelpCenterGIF } from '@src/assets/lottie'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomText from '@src/common/components/Text'
-import { DownSVG, UpArrowSVG } from '@src/assets/svg'
+import { DownSVG, EmailSVG, PhoneSVG, UpArrowSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
+import { EMAIL_ADDRESS, PHONE_NO } from '@src/common/constants/constants'
+import { setAlertData } from '@src/common/redux/reducers/alert'
 
 const HelpCenter = () => {
     const dispatch = useDispatch()
@@ -72,10 +74,60 @@ const HelpCenter = () => {
         )
     }
 
+    const phoneNoOnPress = () => {
+        let url = `tel:${PHONE_NO}`
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url)
+            }
+            else {
+                dispatch(setAlertData({
+                    isShown: true,
+                    type: 'error',
+                    label: 'Phone number is not available'
+                }))
+            }
+        }).catch(err => console.error(err))
+    }
+
+    const emailOnPress = () => {
+        let url = `mailto:${EMAIL_ADDRESS}`
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url)
+            }
+            else {
+                dispatch(setAlertData({
+                    isShown: true,
+                    type: 'error',
+                    label: 'Email address is not available'
+                }))
+            }
+        }).catch(err => console.error(err))
+    }
+
+    const listFooterComponent = () => {
+        return (
+            <View style={{ marginVertical: scaleHeightPX(24), gap: scaleHeightPX(16) }}>
+                <CustomText lineHeight textType='bold' style={{ ...commonFontStyles.fontSize3XL, color: colors.primary }}>{'Get In Touch'}</CustomText>
+                <View style={{ gap: scaleHeightPX(8) }}>
+                    <Pressable onPress={phoneNoOnPress} style={{ flexDirection: 'row', gap: scaleWidthPX(12), alignItems: 'center' }}>
+                        <PhoneSVG fill={'white'} width={scaleWidthPX(20)} height={scaleHeightPX(20)} />
+                        <CustomText lineHeight style={commonFontStyles.fontSizeL}>{PHONE_NO}</CustomText>
+                    </Pressable>
+                    <Pressable onPress={emailOnPress} style={{ flexDirection: 'row', gap: scaleWidthPX(12), alignItems: 'center' }}>
+                        <EmailSVG fill={'white'} width={scaleWidthPX(20)} height={scaleHeightPX(20)} />
+                        <CustomText lineHeight style={commonFontStyles.fontSizeL}>{EMAIL_ADDRESS}</CustomText>
+                    </Pressable>
+                </View>
+            </View>
+        )
+    }
+
     return (
         <MainFrame isHeader title='Help Center' isNotifications={false}>
             <View style={styles.main}>
-                <FlatList ListHeaderComponent={<LottieView source={HelpCenterGIF} style={{ width: scaleWidthPX(300), height: scaleHeightPX(300), alignSelf: 'center' }} autoPlay loop />} data={data} renderItem={renderItem} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} showsVerticalScrollIndicator={false} />
+                <FlatList ListHeaderComponent={<LottieView source={HelpCenterGIF} style={{ width: scaleWidthPX(200), height: scaleHeightPX(200), alignSelf: 'center' }} autoPlay loop />} data={data} renderItem={renderItem} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListFooterComponent={listFooterComponent} showsVerticalScrollIndicator={false} />
             </View>
         </MainFrame>
     )

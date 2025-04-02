@@ -19,7 +19,7 @@ export const HeaderLeftComponent = () => {
 			<View>
 				<CustomText>{'Good Morning,'}</CustomText>
 				<CustomText textType='semi-bold' style={commonFontStyles.fontSize3XL}>
-					{userData?.fullName || 'Abhishek Goyal'}
+					{userData?.fullName || 'Car Owner'}
 				</CustomText>
 			</View>
 		</View>

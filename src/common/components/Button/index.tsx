@@ -12,7 +12,7 @@ import { ButtonLoader } from '@src/assets/lottie'
 export default function CustomButton(props: CustomButtonProps) {
 	const { colors } = useTheme()
 
-	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, white = colors.backgroundColor, isLoading = false, isFlex = false, isCircleRadius = false, customLabelStyles, childernButton } = props
+	const { title, onPress, disabled = false, showIcon = false, SVGIcon, backgroundColor, buttonType = BUTTON_TYPES.PRIMARY, width, white = colors.backgroundColor, isLoading = false, isFlex = false, isCircleRadius = false, customLabelStyles, childernButton, showAnimation = false, animationChildren } = props
 
 	const buttonStyle: ViewStyle = useMemo(() => {
 		switch (buttonType) {
@@ -83,6 +83,7 @@ export default function CustomButton(props: CustomButtonProps) {
 	) : (
 		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
 			{showIcon && <SVGIcon />}
+			{showAnimation && animationChildren}
 			<View style={{ gap: scaleHeightPX(1), justifyContent: 'center', alignItems: 'center' }}>
 				<CustomText style={{ ...textStyle, ...customLabelStyles }}>{title}</CustomText>
 				{childernButton && childernButton}

@@ -27,9 +27,6 @@ export const Welcome3Image = Image.resolveAssetSource(Welcome3Img).uri
 import WelcomeBgImg from './WelcomeBg/WelcomeBg.png'
 export const WelcomeBgImage = Image.resolveAssetSource(WelcomeBgImg).uri
 
-import NoSubscriptionImg from './NoSubscription/NoSubscription.png'
-export const NoSubscriptionImage = Image.resolveAssetSource(NoSubscriptionImg).uri
-
 import flagImg from './flag/flag.png'
 export const flagImage = Image.resolveAssetSource(flagImg).uri
 
@@ -62,6 +59,3 @@ export const PlanDetails4Image = Image.resolveAssetSource(PlanDetails4Img).uri
 
 import PlanDetails5Img from './PlanDetails5/PlanDetails5.png'
 export const PlanDetails5Image = Image.resolveAssetSource(PlanDetails5Img).uri
-
-import PlanIconImg from './PlanIcon/PlanIcon.png'
-export const PlanIconImage = Image.resolveAssetSource(PlanIconImg).uri

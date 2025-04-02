@@ -9,3 +9,5 @@ export { default as NoVehicleGIF } from './noVehicle.json';
 export { default as ReferFriendGIF } from './referFriend.json';
 export { default as NoNotificationsGIF } from './noNotifications.json';
 export { default as HelpCenterGIF } from './helpCenter.json';
+export { default as NoSubscriptionsGIF } from './noSubscriptions.json';
+export { default as GetStartedGIF } from './getStarted.json';

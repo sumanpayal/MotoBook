@@ -3,19 +3,18 @@ import React, { useCallback, useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import { useFocusEffect, useNavigation, useRoute, useTheme } from '@react-navigation/native'
 import CustomText from '@src/common/components/Text'
-import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { NoRecordFound } from '@src/common/components/NoRecordFound'
 import { createStyles } from './styles'
 import { getMySubscriptionList } from '@src/network/car'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
-import { NoSubscriptionImage } from '@src/assets/image'
 import { CarDetailSVG, PlusSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { BASE_URL } from '@src/network/apiClient'
-import { NoVehicleGIF } from '@src/assets/lottie'
+import { NoSubscriptionsGIF, NoVehicleGIF } from '@src/assets/lottie'
 
 const MySubscriptions = () => {
 	const navigation: any = useNavigation()
@@ -102,7 +101,7 @@ const MySubscriptions = () => {
 	return (
 		<MainFrame isHeader isBack={fromCars} isNotifications={false} title={fromCars ? 'My Cars' : 'My Subscriptions'}>
 			<View style={styles.main}>
-				<FlatList data={allCarsData} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isLottieImage={fromCars} LottieImage={NoVehicleGIF} isImage={!fromCars} imageSource={NoSubscriptionImage} imageStyle={{ width: scaleWidthPX(113), height: scaleHeightPX(97) }} />} contentContainerStyle={allCarsData.length === 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
+				<FlatList data={allCarsData} renderItem={renderCarItem} keyExtractor={(item: any) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(24) }} />} ListEmptyComponent={() => <NoRecordFound noRecordText={fromCars ? 'No Vehicle added' : 'No Active Subscription'} isLottieImage LottieImage={fromCars ? NoVehicleGIF : NoSubscriptionsGIF} />} contentContainerStyle={allCarsData.length === 0 && styles.center} ListHeaderComponent={() => <View style={{ marginTop: scaleHeightPX(24) }} />} ListFooterComponent={() => <View style={{ marginTop: scaleHeightPX(32) }} />} />
 				{renderAddCarButton()}
 			</View>
 		</MainFrame>

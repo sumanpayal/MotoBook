@@ -1,4 +1,4 @@
-import {BUTTON_TYPES} from '@constants/constants';
+import { BUTTON_TYPES } from '@constants/constants';
 import { TextStyle } from 'react-native';
 
 interface CustomButtonProps {
@@ -16,4 +16,6 @@ interface CustomButtonProps {
   isCircleRadius?: boolean
   customLabelStyles?: TextStyle
   childernButton?: React.ReactNode | undefined
+  showAnimation?: boolean;
+  animationChildren?: React.ReactNode | undefined
 }
