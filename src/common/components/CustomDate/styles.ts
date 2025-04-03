@@ -30,5 +30,15 @@ export const inputStyles = (colors: any) =>
             color: colors.white,
             ...commonFontStyles.fontSizeL,
             flex: 1
+        },
+        dateView: {
+            position: 'absolute',
+            backgroundColor: colors.inputBackground,
+            bottom: 0,
+            width: '100%',
+            height: scaleHeightPX(60),
+            borderRadius: 15,
+            justifyContent: 'center',
+            alignItems: 'center'
         }
     })

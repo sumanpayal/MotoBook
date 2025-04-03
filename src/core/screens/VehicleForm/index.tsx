@@ -33,11 +33,16 @@ const VehicleForm = () => {
 	const route = useRoute()
 	const { carCompany, carModal }: any = route?.params
 
+	// const carCompany = null
+	// const carModal = null
+
 	const [selectedColor, setSelectedColor] = useState<any | null>(null)
 	const [allAddressList, setAllAddressList] = useState<any>([])
 	const [selectedAddress, setSelectedAddress] = useState<any | null>(null)
 	const [registrationNumber, setRegistrationNumber] = useState<string>('')
 	const [referralCode, setReferralCode] = useState<string>('')
+
+	const [startDate, setStartDate] = useState<any>(null)
 
 	const [isColorShow, setIsColorShow] = useState<boolean>(false)
 	const [isAddressModalVisible, setIsAddressModalVisible] = useState<boolean>(false)
@@ -330,7 +335,7 @@ const VehicleForm = () => {
 				/>
 				<View style={styles.flexRow}>
 					<View style={styles.flex5}>
-						<CustomDate label='Select Start Date' placeholder='YYYY-MM-DD' onPress={() => { }} value={selectedSubscriptionTimeSlot?.name} />
+						<CustomDate label='Select Start Date' onPress={(value: any) => setStartDate(value)} value={startDate} />
 					</View>
 					<View style={styles.flex5}>
 						<CustomDropdown label='Select TimeSlot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />

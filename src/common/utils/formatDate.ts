@@ -6,21 +6,9 @@ type Format =
   | '24hours'
   | '12hours'
   | 'timeWithoutSeconds'
+  | 'startDateVehicle'
   | 'server';
 
-/**
- * Formats a date object or string into a specified format.
- *
- * @param date - The date to format, either as a Date object or a string.
- * @param format - Optional. The desired format for the output string.
- *   - 'dateTime': Formats as 'DD MMM yyyy HH:mm:ss'
- *   - 'date': Formats as 'DD MMM yyyy'
- *   - '24hours': Formats as 'HH:mm'
- *   - '12hours': Formats as 'hh:mm A'
- *   - 'server': Formats as 'yyyy-MM-DDTHH:mm:ss[z]'
- *   - Default: Formats as 'DD MMM yyyy'
- * @returns The formatted date string according to the specified format.
- */
 export const formatDate = (date: Date | string, format?: Format) => {
   // if (isEmpty(date) || isNumber(date)) return ''
   switch (format) {
@@ -34,6 +22,8 @@ export const formatDate = (date: Date | string, format?: Format) => {
       return moment(date).format('hh:mm A');
     case 'server':
       return moment(date).format('yyyy-MM-DDTHH:mm:ss[z]');
+    case 'startDateVehicle':
+      return moment(date).format('yyyy-MM-DD')
     default:
       return moment(date).format('DD MMM yyyy');
   }
