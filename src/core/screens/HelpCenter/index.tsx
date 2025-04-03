@@ -12,7 +12,6 @@ import CustomText from '@src/common/components/Text'
 import { DownSVG, EmailSVG, PhoneSVG, UpArrowSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { EMAIL_ADDRESS, PHONE_NO } from '@src/common/constants/constants'
-import { setAlertData } from '@src/common/redux/reducers/alert'
 
 const HelpCenter = () => {
     const dispatch = useDispatch()
@@ -76,34 +75,12 @@ const HelpCenter = () => {
 
     const phoneNoOnPress = () => {
         let url = `tel:${PHONE_NO}`
-        Linking.canOpenURL(url).then(supported => {
-            if (supported) {
-                Linking.openURL(url)
-            }
-            else {
-                dispatch(setAlertData({
-                    isShown: true,
-                    type: 'error',
-                    label: 'Phone number is not available'
-                }))
-            }
-        }).catch(err => console.error(err))
+        Linking.openURL(url)
     }
 
     const emailOnPress = () => {
         let url = `mailto:${EMAIL_ADDRESS}`
-        Linking.canOpenURL(url).then(supported => {
-            if (supported) {
-                Linking.openURL(url)
-            }
-            else {
-                dispatch(setAlertData({
-                    isShown: true,
-                    type: 'error',
-                    label: 'Email address is not available'
-                }))
-            }
-        }).catch(err => console.error(err))
+        Linking.openURL(url)
     }
 
     const listFooterComponent = () => {

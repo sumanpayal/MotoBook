@@ -92,7 +92,7 @@ const MySubscriptions = () => {
 
 	const renderAddCarButton = () => {
 		return (
-			<Pressable style={styles.carsButton} onPress={() => navigation.navigate('SelectBrand')}>
+			<Pressable style={[styles.carsButton, { bottom: fromCars ? scaleHeightPX(24) : scaleHeightPX(0), }]} onPress={() => navigation.navigate('SelectBrand')}>
 				<PlusSVG />
 			</Pressable>
 		)
