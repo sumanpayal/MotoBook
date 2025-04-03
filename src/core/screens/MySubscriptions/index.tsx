@@ -73,9 +73,6 @@ const MySubscriptions = () => {
 	}
 
 	const renderCarItem = ({ item }: { item: any }) => {
-		let image = `${BASE_URL}/${item?.carmodel?.image}`
-		console.log({ image });
-
 		return (
 			<Pressable style={styles.item} onPress={() => onPressItem(item)}>
 				<Image source={{ uri: `${BASE_URL}/${item?.carmodel?.image}` }} style={styles.carImage} />

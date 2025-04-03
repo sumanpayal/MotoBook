@@ -19,8 +19,8 @@ export const SubscriptionPlanItem = (props: SubscriptionPlanItemProps) => {
 
 	return (
 		<View style={{ backgroundColor: colors.planBg, paddingVertical: scaleWidthPX(16), borderRadius: 15, height: scaleHeightPX(110), paddingHorizontal: scaleWidthPX(12) }}>
-			<View style={{ position: 'absolute', right: scaleWidthPX(8), top: scaleHeightPX(6) }}>
-				<Image source={{ uri: PlanImage }} style={{ width: scaleWidthPX(175), height: scaleHeightPX(100) }} />
+			<View style={{ position: 'absolute', right: scaleWidthPX(8), top: scaleHeightPX(2) }}>
+				<Image source={{ uri: PlanImage }} style={{ width: scaleWidthPX(175), height: scaleHeightPX(100) }} resizeMode='contain' />
 			</View>
 			<CustomText style={{ color: colors.planText, marginTop: scaleHeightPX(8) }}>{getSubscriptionMonthLabel(item?.duration)}</CustomText>
 			<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor, marginTop: scaleHeightPX(2) }}>

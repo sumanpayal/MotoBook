@@ -70,6 +70,7 @@ const VehicleForm = () => {
 	)
 
 	useEffect(() => {
+		dispatch(setIsFullScreenLoading(true))
 		getSubscriptionTimeSlotsFromAPI()
 		getColorsListFromAPI()
 		getCarModalDetailsAPI()
@@ -77,6 +78,7 @@ const VehicleForm = () => {
 
 	const getCarModalDetailsAPI = () => {
 		getCarModalDetailsFromAPI(carModal?._id, (res: API_RESPONSE) => {
+			dispatch(setIsFullScreenLoading(false))
 			if (res.data) {
 				if (res?.data?.subscriptionPlans) {
 					setSubscriptionPlansData(res?.data?.subscriptionPlans?.length > 0 ? [res?.data?.subscriptionPlans[0]] : [])

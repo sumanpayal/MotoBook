@@ -62,12 +62,15 @@ const SelectBrand = () => {
 
 	const onPressItem = (item: any) => {
 		setSelectedCarCompany(item)
+		dispatch(setIsFullScreenLoading(true))
 		getCarModalsListAPIForCompanyID(item?._id, (res: API_RESPONSE) => {
 			if (res.data) {
 				setCardModalsData(res.data)
 				setIsModalVisible(true)
+				dispatch(setIsFullScreenLoading(false))
 			} else {
 				setSelectedCarCompany(null)
+				dispatch(setIsFullScreenLoading(false))
 			}
 		})
 	}
