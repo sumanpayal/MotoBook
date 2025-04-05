@@ -15,7 +15,7 @@ import { postAddAddressAPI, postUpdateAddAddressAPI } from '@src/network/address
 import { API_RESPONSE } from '@src/common/constants/constants'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { UseLocationSVG } from '@src/assets/svg'
-import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 
 enum ADDRESS_KEYS {
@@ -336,10 +336,11 @@ const AddAddress = () => {
 					maxLength={6}
 					keyboardType='number-pad'
 				/>
-				<Pressable style={{ flexDirection: 'row', gap: scaleWidthPX(16), alignItems: 'center' }} onPress={useMyLocationOnPress}>
+				<Pressable style={{ flexDirection: 'row', gap: scaleWidthPX(16), alignItems: 'center', marginBottom: scaleHeightPX(24) }} onPress={useMyLocationOnPress}>
 					<UseLocationSVG />
 					<CustomText style={commonFontStyles.fontSizeL}>{'Use My Location'}</CustomText>
 				</Pressable>
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Save Address' onPress={onPressSaveAddress} isLoading={isLoading} />
 			</View>
 		)
 	}
@@ -347,10 +348,9 @@ const AddAddress = () => {
 	return (
 		<MainFrame isHeader title='Address Form' isNotifications={false}>
 			<View style={styles.main}>
-				<KeyboardAwareScrollView style={{}} keyboardShouldPersistTaps='handled'>
+				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Save Address' onPress={onPressSaveAddress} isLoading={isLoading} />
 			</View>
 		</MainFrame>
 	)

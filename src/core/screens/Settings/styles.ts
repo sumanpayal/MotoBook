@@ -44,6 +44,9 @@ export const createStyles = (colors: any) => {
 			backgroundColor: colors.white,
 			justifyContent: 'center',
 			alignItems: 'center',
+			position: 'absolute',
+			top: 0,
+			right: scaleWidthPX(8)
 		}
 	})
 }

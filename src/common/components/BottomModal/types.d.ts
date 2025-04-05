@@ -14,4 +14,5 @@ interface BottomModalProps {
 	isLeftIcon?: boolean
 	headerLeftOnPress?: () => void
 	LeftIcon?: any
+	isClose?: boolean
 }

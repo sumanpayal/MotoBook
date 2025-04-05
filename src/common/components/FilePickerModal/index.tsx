@@ -35,6 +35,8 @@ export const FilePickerModal = (props: FilePickerModalProps) => {
             quality: 1,
             includeBase64: true
         });
+        console.log({result});
+        
         if (result?.errorCode) {
             if (result?.errorCode === 'camera_unavailable') {
                 Alert.alert('', 'Camera not available')

@@ -3,18 +3,21 @@ import React, { useCallback, useState } from 'react'
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
-import { setUserData } from '@src/common/redux/reducers/currentUser'
-import { useDispatch } from 'react-redux'
+import { setProfileData, setUserData } from '@src/common/redux/reducers/currentUser'
+import { useDispatch, useSelector } from 'react-redux'
 import { AboutSVG, EditSVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { AccountBgImage } from '@src/assets/image'
+import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { InAppBrowserType } from '../InAppBrowser'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { FilePickerModal } from '@src/common/components/FilePickerModal'
-import { DEFAULT_IMAGE_URL } from '@src/common/constants/constants'
+import { API_RESPONSE } from '@src/common/constants/constants'
+import { setAlertData } from '@src/common/redux/reducers/alert'
+import { getUserProfileDetails, postUpdateUserDetails } from '@src/network/login'
+import { RootState } from '@src/common/redux/store/store'
 
 const MySettings = () => {
 	const navigation: any = useNavigation()
@@ -23,7 +26,7 @@ const MySettings = () => {
 	const { colors } = useTheme()
 	const styles = createStyles(colors)
 
-	const [profileImage, setProfileImage] = useState<any>(null)
+	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
 
 	const [openImagePicker, setOpenImagePicker] = useState(false)
 
@@ -126,7 +129,48 @@ const MySettings = () => {
 
 	const logoutOnPress = () => {
 		dispatch(setUserData(null))
-		navigation.navigate('PreLogin')
+		navigation.reset({
+			index: 0,
+			routes: [{ name: 'PreLogin' }]
+		})
+	}
+
+	const getUserDetails = () => {
+		getUserProfileDetails((res: API_RESPONSE) => {
+			if (res?.data) {
+				dispatch(setProfileData(res?.data))
+			}
+		})
+	}
+
+	const onPressSaveProfile = (image: any) => {
+		// call api
+		dispatch(setIsFullScreenLoading(true))
+		const params = {
+			"email": profileData?.email ?? '',
+			"fullName": profileData?.fullName ?? '',
+			"image": image?.base64
+		}
+		postUpdateUserDetails({}, params, (res: API_RESPONSE) => {
+			dispatch(setIsFullScreenLoading(false))
+			if (res?.data) {
+				dispatch(setAlertData({
+					isShown: true,
+					type: 'success', label: res?.data
+				}))
+				getUserDetails()
+			}
+			else {
+				dispatch(setAlertData({
+					isShown: true,
+					type: 'error', label: res?.error
+				}))
+			}
+		})
+	}
+
+	const getImage = () => {
+		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
 	}
 
 	const onPressEditProfileImageOnPress = () => { setOpenImagePicker(true) }
@@ -138,13 +182,13 @@ const MySettings = () => {
 				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
 			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
-				<Image source={{ uri: profileImage?.uri || DEFAULT_IMAGE_URL }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
+				<Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
 					<EditSVG />
 				</Pressable>
 			</Pressable>
 			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} />
-			<FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => setProfileImage(image)} />
+			<FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => onPressSaveProfile(image)} />
 		</View>
 	)
 }

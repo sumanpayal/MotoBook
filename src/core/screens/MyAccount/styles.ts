@@ -28,7 +28,10 @@ export const createStyles = (colors: any) => {
             height: scaleWidthPX(30),
             backgroundColor: colors.white,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            position: 'absolute',
+            top: 0,
+            right: scaleWidthPX(8)
         }
     })
 }

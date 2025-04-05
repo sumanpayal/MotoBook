@@ -312,11 +312,11 @@ const VehicleForm = () => {
 				</View>
 				<CustomInput
 					leftChildren={<InputChildren />}
-					label='Registration Number'
+					label='Car License Plate Number'
 					onChangeText={(text: string) => {
 						setRegistrationNumber(text)
 					}}
-					placeholder='Enter Registration Number'
+					placeholder='Enter Car License Plate Number'
 					value={registrationNumber}
 					maxLength={10}
 				/>
@@ -328,7 +328,7 @@ const VehicleForm = () => {
 					</Pressable>
 				</View>
 				<CustomInput
-					label='Referral Code'
+					label='Referral Code(Optional)'
 					onChangeText={(text: string) => {
 						setReferralCode(text)
 					}}
@@ -340,7 +340,7 @@ const VehicleForm = () => {
 						<CustomDate label='Select Start Date' onPress={(value: any) => setStartDate(value)} value={startDate} />
 					</View>
 					<View style={styles.flex5}>
-						<CustomDropdown label='Select TimeSlot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
+						<CustomDropdown label='Select Time Slot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />
 					</View>
 				</View>
 				<RenderSubscritionPlans
@@ -350,6 +350,7 @@ const VehicleForm = () => {
 					interiorCleaningAmount={interiorCleaningAmount}
 					subscriptionPlansData={subscriptionPlansData}
 				/>
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Submit Request' onPress={onPressSave} childernButton={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 		)
 	}
@@ -360,7 +361,6 @@ const VehicleForm = () => {
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
 					{renderForm()}
 				</KeyboardAwareScrollView>
-				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Submit Request' onPress={onPressSave} childernButton={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 			<RenderModals
 				isColorShow={isColorShow}

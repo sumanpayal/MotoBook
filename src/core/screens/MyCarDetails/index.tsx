@@ -24,6 +24,9 @@ const MyCarDetails = () => {
 
 	const subscription_id = params?.carDetails?._id || 1
 
+	console.log({params: params?.carDetails});
+	
+
 	const [carDetails, setCarDetails] = useState<any>(null)
 
 	useEffect(() => {
@@ -48,32 +51,34 @@ const MyCarDetails = () => {
 	}
 
 	return (
-		<ScrollView style={styles.container}>
-			<View style={styles.main}>
-				<View style={styles.topView}>
-					<SafeAreaView edges={['top']} />
-					<HeaderNavigation title='Car Details' />
-					<View style={styles.topInner}>
-						<CarDetailBgSVG />
-						<Image source={{ uri: `${BASE_URL}/${carDetails?.carmodel?.image}` }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
+		<View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
+			<SafeAreaView edges={['top']} />
+			<HeaderNavigation title={`${params?.carDetails?.company?.name ?? ''} ${params?.carDetails?.carmodel?.name ?? ''}`} isNotifications={false} />
+			<ScrollView style={styles.container}>
+				<View style={styles.main}>
+					<View style={styles.topView}>
+						<View style={styles.topInner}>
+							<CarDetailBgSVG />
+							<Image source={{ uri: `${BASE_URL}/${carDetails?.carmodel?.image}` }} style={{ width: '100%', height: '100%', position: 'absolute', resizeMode: 'contain' }} />
+						</View>
+					</View>
+					<View style={styles.topBottom}>
+						<View style={styles.package}>
+							<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor, }}>
+								{carDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
+							</CustomText>
+						</View>
+						{VehicleAddress(false, 'Car License Plate Number', carDetails?.carNumber)}
+						<View style={styles.vehicleDetails}>
+							<VehicleDetails label={'Vehicle Name'} value={carDetails?.carmodel?.name} image={carDetails?.carmodel?.image} />
+							<VehicleDetails label={'Vehicle Type'} value={carDetails?.company?.name} image={carDetails?.company?.image} />
+							<VehicleDetails label={'Vehicle Color'} value={carDetails?.color?.name} isColor color={carDetails?.color?.title} />
+						</View>
+						{VehicleAddress(false, 'Vehicle Address', carDetails ? `${carDetails?.address?.landmark}, ${carDetails?.address?.state}, ${carDetails?.address?.city}, ${carDetails?.address?.country}, ${carDetails?.address?.postalCode}` : '')}
 					</View>
 				</View>
-				<View style={styles.topBottom}>
-					<View style={styles.package}>
-						<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor, }}>
-							{carDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
-						</CustomText>
-					</View>
-					{VehicleAddress(false, 'Vehicle Number', carDetails?.carNumber)}
-					<View style={styles.vehicleDetails}>
-						<VehicleDetails label={'Vehicle Name'} value={carDetails?.carmodel?.name} image={carDetails?.carmodel?.image} />
-						<VehicleDetails label={'Vehicle Type'} value={carDetails?.company?.name} image={carDetails?.company?.image} />
-						<VehicleDetails label={'Vehicle Color'} value={carDetails?.color?.name} isColor color={carDetails?.color?.title} />
-					</View>
-					{VehicleAddress(false, 'Vehicle Address', carDetails ? `${carDetails?.address?.landmark}, ${carDetails?.address?.state}, ${carDetails?.address?.city}, ${carDetails?.address?.country}, ${carDetails?.address?.postalCode}` : '')}
-				</View>
-			</View>
-		</ScrollView>
+			</ScrollView>
+		</View>
 	)
 }
 

@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
     },
     bottom: {
         gap: scaleHeightPX(16),
-        marginBottom: scaleHeightPX(32)
+        marginBottom: scaleHeightPX(24)
     }
 })

@@ -28,6 +28,7 @@
 	<array>
   		<string>mailto</string>
 		<string>tel</string>
+		<string>whatsapp</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

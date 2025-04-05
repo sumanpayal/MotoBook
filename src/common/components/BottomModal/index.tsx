@@ -11,7 +11,7 @@ const BottomModal = (props: BottomModalProps) => {
 	const { colors } = useTheme()
 	const styles1 = styles(colors)
 
-	const { children, visible = false, onDrop, containerStyle, isHeader = false, headerTitle = '', headerCloseOnPress, hideOnBackdropPress = true, isLeftIcon = false, LeftIcon, headerLeftOnPress, headerChildren } = props
+	const { children, visible = false, onDrop, containerStyle, isHeader = false, headerTitle = '', headerCloseOnPress, hideOnBackdropPress = true, isLeftIcon = false, LeftIcon, headerLeftOnPress, headerChildren, isClose = true } = props
 
 	return (
 		<Modal transparent visible={visible} animationType='fade' onRequestClose={() => onDrop && onDrop()}>
@@ -29,9 +29,9 @@ const BottomModal = (props: BottomModalProps) => {
 								{headerChildren}
 								<CustomText style={styles1.titleStyle}>{headerTitle}</CustomText>
 							</View>
-							<Pressable onPress={headerCloseOnPress} style={styles1.headerStyleCloseView}>
+							{isClose && <Pressable onPress={() => headerCloseOnPress && headerCloseOnPress()} style={styles1.headerStyleCloseView}>
 								<CloseSVG />
-							</Pressable>
+							</Pressable>}
 						</View>
 					)}
 					{children}

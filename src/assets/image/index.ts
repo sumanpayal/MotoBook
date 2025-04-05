@@ -59,3 +59,7 @@ export const PlanDetails4Image = Image.resolveAssetSource(PlanDetails4Img).uri
 
 import PlanDetails5Img from './PlanDetails5/PlanDetails5.png'
 export const PlanDetails5Image = Image.resolveAssetSource(PlanDetails5Img).uri
+
+import ProfileImage1 from './ProfileImage.jpeg'
+export const ProfileImage = Image.resolveAssetSource(ProfileImage1).uri
+

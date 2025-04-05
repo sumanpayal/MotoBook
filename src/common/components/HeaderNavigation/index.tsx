@@ -4,6 +4,7 @@ import { navigationStyles } from './styles'
 import CustomText from '../Text'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import { BackSVG, NotificationsSVG } from '@src/assets/svg'
+import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const HeaderNavigation = (props: HeaderNavigationProps) => {
 	const { colors } = useTheme()
@@ -44,7 +45,7 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 			</View>
 			{isNotifications && (
 				<Pressable onPress={navigationOnNotification}>
-					<NotificationsSVG />
+					<NotificationsSVG width={scaleWidthPX(30)} height={scaleWidthPX(30)} />
 				</Pressable>
 			)}
 		</View>

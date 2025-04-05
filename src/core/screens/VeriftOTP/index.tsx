@@ -123,7 +123,10 @@ const VerifyOTP = () => {
 			dispatch(setIsFullScreenLoading(false))
 			if (res?.data) {
 				dispatch(setUserData(res?.data?.user))
-				navigation.navigate('PostLogin')
+				navigation.reset({
+					index: 0,
+					routes: [{ name: 'PostLogin' }]
+			   })
 			} else {
 				dispatch(
 					setAlertData({

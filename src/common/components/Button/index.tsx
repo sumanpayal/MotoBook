@@ -82,7 +82,7 @@ export default function CustomButton(props: CustomButtonProps) {
 		</View>
 	) : (
 		<Pressable style={[styles.button, buttonStyle, buttonFlexStyle, borderStyle, { opacity: disabled ? 0.5 : 1 }]} onPress={onPress} disabled={disabled}>
-			{showIcon && <SVGIcon />}
+			<View>{showIcon && <SVGIcon />}</View>
 			{showAnimation && animationChildren}
 			<View style={{ gap: scaleHeightPX(1), justifyContent: 'center', alignItems: 'center' }}>
 				<CustomText style={{ ...textStyle, ...customLabelStyles }}>{title}</CustomText>
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		paddingHorizontal: scaleWidthPX(12),
 		flexDirection: 'row',
-		gap: scaleWidthPX(16)
+		gap: scaleWidthPX(12)
 	}
 })

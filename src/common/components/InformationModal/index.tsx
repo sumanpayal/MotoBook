@@ -15,7 +15,7 @@ type InformationModalProps = {
 const InformationModal = (props: InformationModalProps) => {
 	const { visible, onClose, description, modalProps } = props
 	return (
-		<BottomModal visible={visible} onDrop={onClose} isHeader headerCloseOnPress={onClose} containerStyle={styles.container} {...modalProps} hideOnBackdropPress={false}>
+		<BottomModal visible={visible} onDrop={onClose} isHeader headerCloseOnPress={onClose} {...modalProps} hideOnBackdropPress={false}>
 			<View style={styles.main}>
 				<CustomText textType='medium' style={{ textAlign: 'center' }}>
 					{description}
@@ -28,17 +28,10 @@ const InformationModal = (props: InformationModalProps) => {
 export default InformationModal
 
 const styles = StyleSheet.create({
-	container: {
-		position: 'absolute',
-		top: '40%',
-		borderRadius: 20,
-		alignSelf: 'center',
-		padding: scaleWidthPX(20),
-		width: '90%'
-	},
 	main: {
 		margin: scaleWidthPX(16),
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		backgroundColor: 'red'
 	}
 })

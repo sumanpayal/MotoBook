@@ -1,25 +1,38 @@
-import { useTheme } from '@react-navigation/native'
+import { useNavigation, useTheme } from '@react-navigation/native'
 import CustomText from '@src/common/components/Text'
 import { RootState } from '@src/common/redux/store/store'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { Image, View } from 'react-native'
+import { Image, Pressable, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { createStyles } from '../styles'
 import React from 'react'
-import { DEFAULT_IMAGE_URL } from '@src/common/constants/constants'
+import { ProfileImage } from '@src/assets/image'
 
 export const HeaderLeftComponent = () => {
 	const { colors } = useTheme()
-	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
+
+	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
+
+	const navigation: any = useNavigation()
+
+	const navigateToAccountTab = () => {
+		navigation.navigate('Account')
+	}
+
+	const getImage = () => {
+		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
+	}
 
 	const styles = createStyles(colors)
 	return (
 		<View style={styles.headerLeft}>
-			<Image source={{ uri: DEFAULT_IMAGE_URL }} style={styles.headerLeftImage} resizeMode='cover' />
+			<Pressable onPress={navigateToAccountTab}>
+				<Image source={{ uri: getImage() }} style={styles.headerLeftImage} resizeMode='cover' />
+			</Pressable>
 			<View>
 				<CustomText>{'Good Morning,'}</CustomText>
 				<CustomText textType='semi-bold' style={commonFontStyles.fontSize3XL}>
-					{userData?.fullName || 'Car Owner'}
+					{profileData?.fullName || 'Car Owner'}
 				</CustomText>
 			</View>
 		</View>

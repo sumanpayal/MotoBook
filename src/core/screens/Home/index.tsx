@@ -1,6 +1,6 @@
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Alert, BackHandler, Pressable, ScrollView, View } from 'react-native';
 import { createStyles } from './styles';
 import { AddCarSVG } from '@src/assets/svg';
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle';
@@ -13,7 +13,13 @@ import { HowItWorks } from './components/HowItWorks';
 import { InteriorCleaning, PlanDetails } from './components/PlanDetails';
 import CustomCarousel from '@src/common/components/Carousel';
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import InformationModal from '@src/common/components/InformationModal';
+import { ConfimationModal } from '@src/common/components/ConfimationModal';
+import { getUserProfileDetails } from '@src/network/login';
+import { API_RESPONSE } from '@src/common/constants/constants';
+import { RootState } from '@src/common/redux/store/store';
+import { setProfileData } from '@src/common/redux/reducers/currentUser';
 
 const HomeScreen = () => {
 	const navigation: any = useNavigation();
@@ -22,11 +28,51 @@ const HomeScreen = () => {
 	const { colors } = useTheme();
 	const styles = createStyles(colors);
 
+	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
+
 	const [searchText, setSearchText] = useState<string>('');
 
+	const [backModalVisible, setBackModalVisible] = useState(false)
+
 	useFocusEffect(useCallback(() => {
+		if (!profileData?._id) {
+			getUserDetails()
+		}
 		dispatch(setIsFullScreenLoading(false))
 	}, []))
+
+	useEffect(() => {
+		const backAction = () => {
+			Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+				{
+					text: 'Cancel',
+					onPress: () => null,
+					style: 'cancel',
+				},
+				{ text: 'YES', onPress: () => BackHandler.exitApp() },
+			]);
+			return true;
+		};
+
+		const backHandler = BackHandler.addEventListener(
+			'hardwareBackPress',
+			backAction,
+		);
+		return () => backHandler.remove();
+	}, [])
+
+	const getUserDetails = () => {
+		getUserProfileDetails((res: API_RESPONSE) => {
+			if (res?.data) {
+				dispatch(setProfileData(res?.data))
+			}
+		})
+	}
+
+	const yesOnPress = () => {
+		BackHandler.exitApp()
+		setBackModalVisible(false)
+	}
 
 	const renderMyCarsButton = () => {
 		return (
@@ -61,6 +107,9 @@ const HomeScreen = () => {
 		);
 	};
 
+	console.log({ backModalVisible });
+
+
 	return (
 		<View style={{ flex: 1 }}>
 			{renderHeader()}
@@ -84,6 +133,7 @@ const HomeScreen = () => {
 				</View>
 			</ScrollView>
 			{renderMyCarsButton()}
+			<ConfimationModal visible={backModalVisible} onClose={() => { setBackModalVisible(false) }} noOnPress={() => { setBackModalVisible(false) }} yesOnPress={yesOnPress} />
 		</View>
 	);
 };
