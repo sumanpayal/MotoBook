@@ -5,7 +5,7 @@ import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { setProfileData, setUserData } from '@src/common/redux/reducers/currentUser'
 import { useDispatch, useSelector } from 'react-redux'
-import { AboutSVG, EditSVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
+import { AboutSVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
@@ -169,10 +169,6 @@ const MySettings = () => {
 		})
 	}
 
-	const isDefaultImage = () => {
-		return profileData?.image ? false : true
-	}
-
 	const getImage = () => {
 		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
 	}
@@ -186,9 +182,9 @@ const MySettings = () => {
 				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
 			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
-				<Image source={{ uri: getImage() }} style={{ width: isDefaultImage() ? '145%' : '100%', height: isDefaultImage() ? '145%' : '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
+				<Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
-					<EditSVG />
+					<PlusProfileSVG />
 				</Pressable>
 			</Pressable>
 			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} />

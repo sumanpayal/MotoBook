@@ -40,12 +40,10 @@ export const createStyles = (colors: any) => {
 			borderRadius: 100,
 			width: scaleWidthPX(30),
 			height: scaleWidthPX(30),
-			backgroundColor: colors.white,
 			justifyContent: 'center',
 			alignItems: 'center',
 			position: 'absolute',
-			top: 0,
-			right: scaleWidthPX(8)
+			bottom: -scaleWidthPX(15)
 		}
 	})
 }

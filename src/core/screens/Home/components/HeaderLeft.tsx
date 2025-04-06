@@ -7,10 +7,10 @@ import { useSelector } from 'react-redux'
 import { createStyles } from '../styles'
 import React from 'react'
 import { ProfileImage } from '@src/assets/image'
-import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const HeaderLeftComponent = () => {
 	const { colors } = useTheme()
+	const styles = createStyles(colors)
 
 	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
 
@@ -24,7 +24,6 @@ export const HeaderLeftComponent = () => {
 		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
 	}
 
-	const styles = createStyles(colors)
 	return (
 		<View style={styles.headerLeft}>
 			<Pressable onPress={navigateToAccountTab}>

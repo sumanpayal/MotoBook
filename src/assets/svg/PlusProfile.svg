@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Plus" enable-background="new 0 0 20 20" viewBox="0 0 20 20">
+  <circle cx="10" cy="10" r="9" fill="#ffbf66" class="color95da98 svgShape"></circle>
+  <path fill="#ccac7f" d="M15.28,2.72C16.36,4.21,17,6.03,17,8c0,4.97-4.03,9-9,9c-1.97,0-3.79-0.64-5.28-1.72C4.36,17.53,7,19,10,19
+				c4.97,0,9-4.03,9-9C19,7,17.53,4.36,15.28,2.72z" class="color7fcc7f svgShape"></path>
+  <path fill="#56452d" d="M10,19.5c-5.24,0-9.5-4.26-9.5-9.5S4.76,0.5,10,0.5s9.5,4.26,9.5,9.5S15.24,19.5,10,19.5z M10,1.5
+				c-4.69,0-8.5,3.81-8.5,8.5s3.81,8.5,8.5,8.5s8.5-3.81,8.5-8.5S14.69,1.5,10,1.5z" class="color2d4356 svgShape"></path>
+  <g fill="#000000" class="color000000 svgShape">
+    <path fill="#56452d" d="M10,14.47c-0.28,0-0.5-0.22-0.5-0.5V6.03c0-0.28,0.22-0.5,0.5-0.5s0.5,0.22,0.5,0.5v7.94
+			C10.5,14.25,10.28,14.47,10,14.47z" class="color2d4356 svgShape"></path>
+  </g>
+  <g fill="#000000" class="color000000 svgShape">
+    <path fill="#56452d" d="M13.97,10.5H6.03c-0.28,0-0.5-0.22-0.5-0.5s0.22-0.5,0.5-0.5h7.94c0.28,0,0.5,0.22,0.5,0.5
+			S14.25,10.5,13.97,10.5z" class="color2d4356 svgShape"></path>
+  </g>
+</svg>

@@ -2,7 +2,7 @@ import { View, Pressable, ImageBackground, Image } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { useFocusEffect, useTheme, useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { EditSVG } from '@src/assets/svg'
+import { PlusProfileSVG } from '@src/assets/svg'
 import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -111,10 +111,6 @@ const MyAccount = () => {
         }
     }
 
-    const isDefaultImage = () => {
-        return profileImage?.base64 ? false : profileData?.image ? false : true
-    }
-
     const getImage = () => {
         return profileImage?.base64 ? 'data:image/png;base64,' + profileImage?.base64 : profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
     }
@@ -126,9 +122,9 @@ const MyAccount = () => {
                 <HeaderNavigation title='Edit Profile' isNotifications={false} />
             </ImageBackground>
             <Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
-                <Image source={{ uri: getImage() }} style={{ width: isDefaultImage() ? '145%' : '100%', height: isDefaultImage() ? '145%' : '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
+                <Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
                 <Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
-                    <EditSVG />
+                    <PlusProfileSVG />
                 </Pressable>
             </Pressable>
             <KeyboardAwareScrollView>

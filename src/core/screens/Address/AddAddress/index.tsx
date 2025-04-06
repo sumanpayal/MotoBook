@@ -239,7 +239,8 @@ const AddAddress = () => {
 	const setAddressDetaills = (key: ADDRESS_KEYS, value: any) => {
 		setAddressData({
 			...addressData,
-			[key]: value
+			[key]: value,
+			address: value?.name ?? ''
 		})
 	}
 

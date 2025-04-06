@@ -13,6 +13,7 @@ const currentUser = createSlice({
 		setUserData: (state, action) => {
 			state.userData = action.payload
 			state.isLoggedIn = action.payload == null ? false : true
+			state.profileData = null
 		},
 		setProfileData: (state, action) => {
 			state.profileData = action.payload
