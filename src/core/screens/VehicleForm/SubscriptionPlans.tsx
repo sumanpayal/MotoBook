@@ -28,10 +28,10 @@ export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
                     <InformationSVG />
                 </Pressable>
             </View>
-            {interiorCleaningAmount > 0 && <View style={styles.middle}>
-                <CheckBox setIsSelected={() => setIsInteriorCleaning(!isInteriorCleaning)} isSelected={isInteriorCleaning} />
-                <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeS }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
-            </View>}
+            {interiorCleaningAmount > 0 && <Pressable onPress={() => setIsInteriorCleaning(!isInteriorCleaning)} style={styles.middle}>
+                <CheckBox disabled isSelected={isInteriorCleaning} />
+                <CustomText style={{ color: colors.primary, ...commonFontStyles.fontSizeS, flex: 1 }}>{`Add 3 days of interior cleaning once a month for just ₹${interiorCleaningAmount}`}</CustomText>
+            </Pressable>}
             <View style={styles.bottom}>
                 {subscriptionPlansData?.map((item: any) => {
                     return <SubscriptionPlanItem key={item?._id} item={item} isInteriorCleaning={isInteriorCleaning} interiorCleaningAmount={interiorCleaningAmount} />
