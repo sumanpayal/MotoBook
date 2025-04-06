@@ -28,6 +28,8 @@ const HomeScreen = () => {
 
 	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
 
+	const hasActiveSubscription = profileData?.hasActiveSubscription ?? false
+
 	const [searchText, setSearchText] = useState<string>('');
 
 	useFocusEffect(useCallback(() => {
@@ -116,7 +118,7 @@ const HomeScreen = () => {
 					<DailyCarPlans />
 					<PlanDetails />
 					<InteriorCleaning />
-					<HowItWorks />
+					{!hasActiveSubscription && <HowItWorks />}
 				</View>
 			</ScrollView>
 			{renderMyCarsButton()}

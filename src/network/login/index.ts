@@ -1,6 +1,6 @@
 import { API_RESPONSE, TOKEN, USER } from '@src/common/constants/constants';
 import { getApiService, postApiService, putApiService } from '../apiService';
-import { ADD_DETAIL, GET_USER_PROFILE_DETAILS, MOBILE_LOGIN, UPDATE_PROFILE_DETAILS, VERIFY_OTP } from './endpoints';
+import { ADD_DETAIL, GET_USER_PROFILE_DETAILS, MOBILE_LOGIN, NOTIFICATIONS, UPDATE_PROFILE_DETAILS, VERIFY_OTP } from './endpoints';
 import { storeAnonymousData, storeData } from '@src/common/storage/localStorage';
 
 export const postMobileLogin = (
@@ -126,6 +126,32 @@ export const postUpdateUserDetails = (
             if (res?.status === 200) {
                 callBack({
                     data: res?.message,
+                    error: undefined,
+                });
+            } else {
+                callBack({
+                    data: undefined,
+                    error: res?.message,
+                });
+            }
+        })
+        .catch((err: any) => {
+            console.error(err);
+            callBack({
+                data: undefined,
+                error: err?.message,
+            });
+        });
+};
+
+export const getNotificationsDataFromAPI = (
+    callBack: (res: API_RESPONSE) => void,
+) => {
+    getApiService(NOTIFICATIONS)
+        .then(async (res: any) => {
+            if (res?.status === 200) {
+                callBack({
+                    data: res?.data,
                     error: undefined,
                 });
             } else {

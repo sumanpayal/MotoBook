@@ -12,6 +12,7 @@ import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { NoNotificationsGIF } from '@src/assets/lottie'
 import { createStyles } from './styles'
+import { getNotificationsDataFromAPI } from '@src/network/login'
 
 const Notifications = () => {
     const dispatch = useDispatch()
@@ -23,13 +24,13 @@ const Notifications = () => {
 
     useFocusEffect(
         useCallback(() => {
-            // dispatch(setIsFullScreenLoading(true))
-            // getAddressList()
+            dispatch(setIsFullScreenLoading(true))
+            getNotificationsList()
         }, [])
     )
 
-    const getAddressList = () => {
-        getAddressListAPI((res: API_RESPONSE) => {
+    const getNotificationsList = () => {
+        getNotificationsDataFromAPI((res: API_RESPONSE) => {
             dispatch(setIsFullScreenLoading(false))
             if (res.data) {
                 setAllNotificationsData(res.data)
