@@ -24,13 +24,12 @@ export const createStyles = (colors: any) => {
 		},
 		image: {
 			width: '100%',
-			height: scaleHeightPX(224)
+			height: scaleHeightPX(224),
 		},
 		profileView: {
 			width: scaleWidthPX(126),
 			height: scaleWidthPX(126),
 			borderRadius: 100,
-			backgroundColor: colors.inputBackground,
 			alignSelf: 'center',
 			marginTop: scaleHeightPX(-100),
 			marginBottom: scaleHeightPX(16),

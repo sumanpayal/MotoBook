@@ -15,7 +15,6 @@ export const createStyles = (colors: any) => {
             width: scaleWidthPX(126),
             height: scaleWidthPX(126),
             borderRadius: 100,
-            backgroundColor: colors.inputBackground,
             alignSelf: 'center',
             marginTop: -scaleHeightPX(70),
             marginBottom: scaleHeightPX(16),

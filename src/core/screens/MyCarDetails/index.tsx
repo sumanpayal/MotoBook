@@ -26,7 +26,6 @@ const MyCarDetails = () => {
 
 	console.log({params: params?.carDetails});
 	
-
 	const [carDetails, setCarDetails] = useState<any>(null)
 
 	useEffect(() => {
@@ -35,7 +34,6 @@ const MyCarDetails = () => {
 
 	const getMyCardDetailsFromAPI = () => {
 		getMySubscriptionDetails(subscription_id, (response: API_RESPONSE) => {
-			setCarDetails([])
 			if (response.error) {
 				dispatch(
 					setAlertData({

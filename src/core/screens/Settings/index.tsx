@@ -169,6 +169,10 @@ const MySettings = () => {
 		})
 	}
 
+	const isDefaultImage = () => {
+		return profileData?.image ? false : true
+	}
+
 	const getImage = () => {
 		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
 	}
@@ -177,12 +181,12 @@ const MySettings = () => {
 
 	return (
 		<View style={styles.main}>
-			<ImageBackground source={{ uri: AccountBgImage }} style={styles.image} resizeMode='contain'>
+			<ImageBackground source={{ uri: AccountBgImage }} style={styles.image} resizeMode='cover' imageStyle={{ borderBottomLeftRadius: 60, borderBottomRightRadius: 60 }}>
 				<SafeAreaView edges={['top']} />
 				<HeaderNavigation isBack={false} title='My Profile' />
 			</ImageBackground>
 			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
-				<Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
+				<Image source={{ uri: getImage() }} style={{ width: isDefaultImage() ? '145%' : '100%', height: isDefaultImage() ? '145%' : '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />
 				<Pressable onPress={onPressEditProfileImageOnPress} style={styles.edit}>
 					<EditSVG />
 				</Pressable>

@@ -328,7 +328,7 @@ const VehicleForm = () => {
 					</Pressable>
 				</View>
 				<CustomInput
-					label='Referral Code(Optional)'
+					label='Referral Code (Optional)'
 					onChangeText={(text: string) => {
 						setReferralCode(text)
 					}}

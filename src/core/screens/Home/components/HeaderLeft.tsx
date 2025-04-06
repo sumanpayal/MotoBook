@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { createStyles } from '../styles'
 import React from 'react'
 import { ProfileImage } from '@src/assets/image'
+import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 
 export const HeaderLeftComponent = () => {
 	const { colors } = useTheme()

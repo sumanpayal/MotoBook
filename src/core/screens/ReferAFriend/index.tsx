@@ -49,10 +49,10 @@ const ReferAFriend = () => {
 		})
 	}
 
-	const renderStep = (isIocn: boolean, Icon: any, label: string, step: string = '') => {
+	const renderStep = (Icon: any, label: string) => {
 		return (
 			<View style={{ gap: scaleWidthPX(12), alignItems: 'center', flexDirection: 'row', flex: 1 }}>
-				{isIocn ? <Icon width={scaleWidthPX(30)} height={scaleWidthPX(30)} /> : <View style={{ width: scaleWidthPX(30), height: scaleWidthPX(30), backgroundColor: colors.primary, borderRadius: 100, alignItems: 'center', justifyContent: 'center' }}><CustomText textType='bold'>{step}</CustomText></View>}
+				<Icon width={scaleWidthPX(30)} height={scaleWidthPX(30)} />
 				<CustomText style={{ flex: 1 }} lineHeight>
 					{label}
 				</CustomText>
@@ -64,10 +64,10 @@ const ReferAFriend = () => {
 		return (
 			<View style={{ flex: 1, gap: scaleHeightPX(8), alignItems: 'flex-start' }}>
 				<CustomText textType='bold' style={commonFontStyles.fontSizeXL}>{'How It Works?'}</CustomText>
-				{renderStep(false, Refer1SVG, `Share the MotorWash app with your friends, family, or neighbors.`, '1')}
-				{renderStep(false, Refer2SVG, `Your friends download the MotorWash app`, '2')}
-				{renderStep(false, Refer3SVG, `While submitting their vehicle form, they must enter your referral code`, '3')}
-				{renderStep(true, Refer4SVG, `Once your friend completes 1 month of service, you get 50% OFF on your next billing cycle. No limits—refer more, save more!`, '')}
+				{renderStep(Refer1SVG, `Share the MotorWash app with your friends, family, or neighbors.`)}
+				{renderStep(Refer2SVG, `Your friends download the MotorWash app`)}
+				{renderStep(Refer3SVG, `While submitting their vehicle form, they must enter your referral code`)}
+				{renderStep(Refer4SVG, `Once your friend completes 1 month of service, you get 50% OFF on your next billing cycle. No limits—refer more, save more!`)}
 			</View>
 		)
 	}

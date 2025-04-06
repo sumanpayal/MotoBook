@@ -98,7 +98,6 @@ export const createStyles = (colors: any) =>
 			alignItems: 'center'
 		},
 		headerLeftImage: {
-			backgroundColor: colors.inputBackground,
 			width: scaleWidthPX(40),
 			height: scaleWidthPX(40),
 			borderRadius: 100
