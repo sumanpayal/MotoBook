@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native'
 
 export const createStyles = (colors: any) => StyleSheet.create({
 	tabBarStyle: {
-		height: scaleHeightPX(70),
-		backgroundColor: colors.borderColor,
+		height: scaleHeightPX(74),
+		backgroundColor: colors.backgroundColor,
 		// marginHorizontal: scaleWidthPX(16),
 		// marginBottom: scaleHeightPX(24),
 		// borderRadius: 20,

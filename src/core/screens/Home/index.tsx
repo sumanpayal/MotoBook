@@ -104,7 +104,7 @@ const HomeScreen = () => {
 			{renderHeader()}
 			<ScrollView
 				showsVerticalScrollIndicator={false}
-				style={{ marginBottom: scaleHeightPX(24) }}>
+				style={{ paddingBottom: scaleHeightPX(24) }}>
 				<View style={styles.carousel}>
 					<CustomCarousel
 						data={[

@@ -20,17 +20,20 @@ import InAppBrowser from '../screens/InAppBrowser'
 import Notifications from '../screens/Notifications'
 import MyAccount from '../screens/MyAccount'
 import HelpCenter from '../screens/HelpCenter'
+import { useTheme } from '@react-navigation/native'
 
 const Stack = createNativeStackNavigator()
 
 export default function RootStack() {
 	const userData: any = useSelector((state: RootState) => state.root.currentUser.userData)
+	const { colors } = useTheme()
 	return (
 		<>
 			<Stack.Navigator
 				initialRouteName={userData?._id ? 'PostLogin' : 'PreLogin'}
 				screenOptions={{
-					headerShown: false
+					headerShown: false,
+					navigationBarColor: colors.backgroundColor
 				}}>
 				<Stack.Screen name='PostLogin' component={PostLoginStack} />
 				<Stack.Screen name='PreLogin' component={PreLoginStack} />
