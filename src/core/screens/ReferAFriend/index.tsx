@@ -41,12 +41,8 @@ const ReferAFriend = () => {
 	}
 
 	const referToFreiendOnPress = async () => {
-		let url = `whatsapp://send&text=${shareText}`
-		Linking.canOpenURL(url).then((supported: boolean) => {
-			if (supported) {
-				Linking.openURL(url)
-			}
-		})
+		let url: string = `whatsapp://send?text=${shareText}`
+		Linking.openURL(url)
 	}
 
 	const renderStep = (Icon: any, label: string) => {

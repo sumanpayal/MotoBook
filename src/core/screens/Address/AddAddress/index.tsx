@@ -75,7 +75,7 @@ const AddAddress = () => {
 		postalCode: string
 	}>({
 		addressType: addressTypesData1,
-		address: addressDetails?.addressType ?? '',
+		address: '',
 		landmark: addressDetails?.landmark ?? '',
 		country: addressDetails?.country ?? 'India',
 		state: addressDetails?.state ?? 'Rajasthan',
@@ -239,8 +239,7 @@ const AddAddress = () => {
 	const setAddressDetaills = (key: ADDRESS_KEYS, value: any) => {
 		setAddressData({
 			...addressData,
-			[key]: value,
-			address: value?.name ?? ''
+			[key]: value
 		})
 	}
 
