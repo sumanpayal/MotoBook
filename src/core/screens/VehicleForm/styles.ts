@@ -36,6 +36,16 @@ export const createStyle = (colors: any) => {
 		},
 		flex5: {
 			flex: 0.5
+		},
+		registrationIconBg: {
+			width: scaleWidthPX(34),
+			height: scaleHeightPX(61),
+			backgroundColor: colors.registrationBg,
+			borderTopLeftRadius: 15,
+			borderBottomLeftRadius: 15,
+			justifyContent: 'center',
+			alignItems: 'center',
+			marginLeft: -2
 		}
 	})
 }

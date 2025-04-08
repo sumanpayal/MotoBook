@@ -37,7 +37,9 @@ const COLORS_LIGHT: ExtendedTheme = {
 		carInner: '#1F355F',
 		carBottom: '#465A82',
 		carDetailBg: '#1A2D41',
-		carDetailsBgTop: '#162F48'
+		carDetailsBgTop: '#162F48',
+		registrationBg: '#010C22',
+		buttonText: '#444444'
 	}
 }
 

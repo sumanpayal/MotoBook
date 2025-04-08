@@ -9,7 +9,7 @@ import CustomText from '@src/common/components/Text'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { createStyle } from './styles'
 import { API_RESPONSE } from '@src/common/constants/constants'
-import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { getAddressListAPI, getColorsList } from '@src/network/address'
 import { useDispatch } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
@@ -285,7 +285,7 @@ const VehicleForm = () => {
 
 	const InputChildren = () => {
 		return (
-			<View style={{ width: scaleWidthPX(34), height: scaleHeightPX(61), backgroundColor: '#010C22', borderTopLeftRadius: 15, borderBottomLeftRadius: 15, justifyContent: 'center', alignItems: 'center', marginLeft: -2 }}>
+			<View style={styles.registrationIconBg}>
 				<RegistrationNoSVG />
 			</View>
 		)
@@ -350,7 +350,7 @@ const VehicleForm = () => {
 					interiorCleaningAmount={interiorCleaningAmount}
 					subscriptionPlansData={subscriptionPlansData}
 				/>
-				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Submit Request' onPress={onPressSave} childernButton={<CustomText style={{ ...commonFontStyles.fontSizeS, color: '#444444' }}>{'prices are inclusive of GST'}</CustomText>} />
+				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Submit Request' onPress={onPressSave} childernButton={<CustomText style={{ ...commonFontStyles.fontSizeS, color: colors.buttonText }}>{'prices are inclusive of GST'}</CustomText>} />
 			</View>
 		)
 	}

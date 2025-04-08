@@ -5,12 +5,12 @@ import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { setProfileData, setUserData } from '@src/common/redux/reducers/currentUser'
 import { useDispatch, useSelector } from 'react-redux'
-import { AboutSVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
+import { AboutSVG, CleaningHistorySVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, MyCleanerSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { InAppBrowserType } from '../InAppBrowser'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { FilePickerModal } from '@src/common/components/FilePickerModal'
@@ -50,6 +50,18 @@ const MySettings = () => {
 			color: colors.white
 		},
 		{
+			id: 7,
+			title: 'My Cleaner',
+			icon: MyCleanerSVG,
+			color: colors.white
+		},
+		{
+			id: 8,
+			title: 'Cleaning History',
+			icon: CleaningHistorySVG,
+			color: colors.white
+		},
+		{
 			id: 3,
 			title: 'Help Center',
 			icon: AboutSVG,
@@ -77,14 +89,23 @@ const MySettings = () => {
 
 	useFocusEffect(useCallback(() => {
 		dispatch(setIsFullScreenLoading(false))
+		getUserDetails()
 	}, []))
+
+	const getUserDetails = () => {
+		getUserProfileDetails((res: API_RESPONSE) => {
+			if (res?.data) {
+				dispatch(setProfileData(res?.data))
+			}
+		})
+	}
 
 	const renderItem = ({ item }: { item: any }) => {
 		const Icon = item?.icon
 		return (
 			<Pressable style={styles.item} onPress={() => onPressItem(item?.id)}>
 				<View style={styles.itemInner}>
-					<Icon />
+					<Icon width={scaleWidthPX(24)} height={scaleHeightPX(24)} />
 					<CustomText style={{ ...commonFontStyles.fontSizeL, color: item?.color }}>{item?.title}</CustomText>
 				</View>
 				<RightArrowSVG />
@@ -122,6 +143,14 @@ const MySettings = () => {
 				// logout
 				logoutOnPress()
 				break
+			case 7:
+				// my cleaner
+				navigation.navigate('MyCleaner')
+				break
+			case 8:
+				// cleaner history
+				navigation.navigate('CleanerHistory')
+				break
 			default:
 				break
 		}
@@ -132,14 +161,6 @@ const MySettings = () => {
 		navigation.reset({
 			index: 0,
 			routes: [{ name: 'PreLogin' }]
-		})
-	}
-
-	const getUserDetails = () => {
-		getUserProfileDetails((res: API_RESPONSE) => {
-			if (res?.data) {
-				dispatch(setProfileData(res?.data))
-			}
 		})
 	}
 

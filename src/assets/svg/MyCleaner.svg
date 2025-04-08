@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="Profile">
+  <circle cx="32" cy="32" r="27" fill="#99efcb" class="color99d7ef svgShape"></circle>
+  <circle cx="32" cy="32" r="26" fill="#52cc99" class="color6dcdef svgShape"></circle>
+  <circle cx="32" cy="32" r="23" fill="#ffffff" class="colore0e8ef svgShape"></circle>
+  <path fill="#c1dbd0" d="M55 32a22.884 22.884 0 0 1-7.78 17.22 22.98 22.98 0 0 0-32.44-32.44A22.984 22.984 0 0 1 55 32Z" class="colorc1d0db svgShape"></path>
+  <rect width="16" height="18" x="21.36" y="16" fill="#c1dbd0" rx="8" class="colorc1d0db svgShape"></rect>
+  <path fill="#c1dbd0" d="M46.72 48.07a23.05 23.05 0 0 1-7.88 5.89.035.035 0 0 1-.02.01 23.026 23.026 0 0 1-25.26-8.22 19.991 19.991 0 0 1 33.16 2.32Z" class="colorc1d0db svgShape"></path>
+  <rect width="16" height="18" x="24" y="15" fill="#2eed9d" rx="8" class="color2ebaed svgShape"></rect>
+  <path fill="#52cc99" d="M40 23v2a8.062 8.062 0 0 1-.28 2.1 15.02 15.02 0 0 0-10.66-11.54A7.994 7.994 0 0 1 40 23Z" class="color6dcdef svgShape"></path>
+  <path fill="#2eed9d" d="M49.36 47.07a22.967 22.967 0 0 1-34.72 0 20 20 0 0 1 34.72 0Z" class="color2ebaed svgShape"></path>
+  <path fill="#23dd8f" d="M49.36 47.07a22.967 22.967 0 0 1-34.72 0 17.841 17.841 0 0 1 1.13-1.74 21.007 21.007 0 0 0 32.46 0 17.841 17.841 0 0 1 1.13 1.74Z" class="color23a2dd svgShape"></path>
+  <path fill="#1aa66b" d="M19 44a13.907 13.907 0 0 0 3.08 8.75 22.945 22.945 0 0 1-7.44-5.68 20.005 20.005 0 0 1 4.56-5.42A13.973 13.973 0 0 0 19 44Z" class="color1a7aa6 svgShape"></path>
+  <rect width="16" height="18" x="24" y="15" fill="none" stroke="#354f44" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" rx="8" class="colorStroke3c354f svgStroke"></rect>
+  <path fill="none" stroke="#354f44" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.06 43.72a19.978 19.978 0 0 1 29.08-.86c.27.27.54.56.8.85M16.73 9.73a26.994 26.994 0 1 1-7 7m3.69-4.31c-.35.32-.68.65-1 1m36.33 34.33c-.33.34-.66.67-1 1m-3.37 2.63a23.009 23.009 0 1 1 7-7" class="colorStroke3c354f svgStroke"></path>
+</svg>
