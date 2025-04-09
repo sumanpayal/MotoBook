@@ -1,6 +1,6 @@
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { getApiService, postApiService } from '../apiService'
-import { GET_CAR_MODALS, GET_COMPANIES, MY_SUBSCRIPTION_LIST, MY_SUBSCRIPTION_DETAILS, SUBSCRIPTION_PLANS, SUBSCRIPTION_TIME_SLOTS, POST_SUBSCRIPTION_DETAILS, CAR_MODALS } from './endpoints'
+import { GET_CAR_MODALS, GET_COMPANIES, MY_SUBSCRIPTION_LIST, MY_SUBSCRIPTION_DETAILS, SUBSCRIPTION_PLANS, SUBSCRIPTION_TIME_SLOTS, POST_SUBSCRIPTION_DETAILS, CAR_MODALS, MY_SUBSCRIPTION_CAR_LIST } from './endpoints'
 
 export const getCompaniesListAPI = (callBack: (response: API_RESPONSE) => void) => {
 	getApiService(GET_COMPANIES)
@@ -67,8 +67,8 @@ export const getCarModalDetailsFromAPI = (car_modal_id: any, callBack: (response
 		})
 }
 
-export const getMySubscriptionList = (pageNo: number, callBack: (response: API_RESPONSE) => void) => {
-	getApiService(MY_SUBSCRIPTION_LIST(pageNo))
+export const getMySubscriptionList = (fromCars: boolean, pageNo: number, callBack: (response: API_RESPONSE) => void) => {
+	getApiService(fromCars ? MY_SUBSCRIPTION_CAR_LIST(pageNo) : MY_SUBSCRIPTION_LIST(pageNo))
 		.then(async (res: any) => {
 			if (res?.status === 200) {
 				callBack({

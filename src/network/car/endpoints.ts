@@ -13,3 +13,5 @@ export const SUBSCRIPTION_PLANS = (car_type_id: any) => `/subscription-plans?car
 export const SUBSCRIPTION_TIME_SLOTS = '/subscription/time-slots'
 
 export const POST_SUBSCRIPTION_DETAILS = '/auth/add-car-detail'
+
+export const MY_SUBSCRIPTION_CAR_LIST = (pageNo: number, perPage: number = 100) => `/subscription/car-list?page=${pageNo}&perPage=${perPage}`

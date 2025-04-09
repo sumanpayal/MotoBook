@@ -22,9 +22,7 @@ const MyCarDetails = () => {
 
 	const { params }: any = useRoute()
 
-	const subscription_id = params?.carDetails?._id || 1
-
-	console.log({params: params?.carDetails});
+	const subscription_id = params?.carDetails?._id
 	
 	const [carDetails, setCarDetails] = useState<any>(null)
 

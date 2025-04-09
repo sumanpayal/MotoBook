@@ -36,7 +36,7 @@ const MySubscriptions = () => {
 
 	const getMyCarsList = () => {
 		dispatch(setIsFullScreenLoading(true))
-		getMySubscriptionList(1, (response: API_RESPONSE) => {
+		getMySubscriptionList(fromCars, 1, (response: API_RESPONSE) => {
 			dispatch(setIsFullScreenLoading(false))
 			if (response.error) {
 				dispatch(
