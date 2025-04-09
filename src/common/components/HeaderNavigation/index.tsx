@@ -30,11 +30,13 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 					children
 				) : (
 					<>
-						{isBack && (
-							<Pressable onPress={navigationOnBack}>
-								<BackSVG />
-							</Pressable>
-						)}
+						<View style={styles.backView}>
+							{isBack && (
+								<Pressable onPress={navigationOnBack}>
+									<BackSVG />
+								</Pressable>
+							)}
+						</View>
 						{title && (
 							<CustomText textType='semi-bold' style={styles.titleStyle}>
 								{title}
@@ -43,11 +45,13 @@ export const HeaderNavigation = (props: HeaderNavigationProps) => {
 					</>
 				)}
 			</View>
-			{isNotifications && (
-				<Pressable onPress={navigationOnNotification}>
-					<NotificationsSVG width={scaleWidthPX(30)} height={scaleWidthPX(30)} />
-				</Pressable>
-			)}
+			<View style={styles.rightView}>
+				{isNotifications && (
+					<Pressable onPress={navigationOnNotification}>
+						<NotificationsSVG width={scaleWidthPX(30)} height={scaleWidthPX(30)} />
+					</Pressable>
+				)}
+			</View>
 		</View>
 	)
 }

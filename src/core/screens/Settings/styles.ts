@@ -13,8 +13,6 @@ export const createStyles = (colors: any) => {
 			paddingHorizontal: scaleWidthPX(16),
 			alignItems: 'center',
 			justifyContent: 'space-between',
-			borderBottomWidth: 1,
-			borderBottomColor: colors.borderColor,
 			height: scaleHeightPX(70)
 		},
 		itemInner: {
@@ -44,6 +42,10 @@ export const createStyles = (colors: any) => {
 			alignItems: 'center',
 			position: 'absolute',
 			bottom: -scaleWidthPX(15)
+		},
+		seperator: {
+			height: 1,
+			backgroundColor: colors.borderColor,
 		}
 	})
 }

@@ -40,7 +40,7 @@ const Welcome = () => {
 		<MainFrame isHeader={false}>
 			<View style={styles.main}>
 				<Image source={{ uri: WelcomeBgImage }} style={styles.imageView} resizeMode='contain' />
-				<CustomText lineHeight style={{  }} textType={'bold'}>
+				<CustomText lineHeight style={{ ...commonFontStyles.fontSize4XL, textAlign: 'center' }} textType={'bold'}>
 					{'Daily Car Cleaning\nat Your Doorstep'}
 				</CustomText>
 				<View style={styles.detailsOuter}>

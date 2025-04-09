@@ -10,17 +10,32 @@ export const navigationStyles = (Colors: any) => {
 			paddingHorizontal: scaleWidthPX(16),
 			flexDirection: 'row',
 			alignItems: 'center',
-			paddingTop: scaleHeightPX(4)
+			paddingTop: scaleHeightPX(4),
+			gap: scaleWidthPX(16)
 		},
 		leftView: {
 			flexDirection: 'row',
 			columnGap: scaleWidthPX(16),
-			flex: 0.75,
+			flex: 1,
 			alignItems: 'center'
 		},
 		titleStyle: {
 			...commonFontStyles.fontSizeXL,
-			color: Colors.white
+			color: Colors.white,
+			flex: 1,
+			textAlign: 'center'
+		},
+		rightView: {
+			width: scaleWidthPX(36),
+			height: scaleWidthPX(36),
+			justifyContent: 'center',
+			alignItems: 'center'
+		},
+		backView: {
+			width: scaleWidthPX(36),
+			height: scaleWidthPX(36),
+			justifyContent: 'center',
+			alignItems: 'center'
 		}
 	})
 }

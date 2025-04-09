@@ -1,4 +1,4 @@
-import { Linking, ScrollView, View } from 'react-native'
+import { ScrollView, Share, View } from 'react-native'
 import React, { useCallback } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
@@ -34,15 +34,28 @@ const ReferAFriend = () => {
 		dispatch(
 			setAlertData({
 				isShown: true,
-				type: 'warning',
+				type: 'success',
 				label: 'copied to clipboard'
 			})
 		)
 	}
 
 	const referToFreiendOnPress = async () => {
-		let url: string = `whatsapp://send?text=${shareText}`
-		Linking.openURL(url)
+		// let url: string = `whatsapp://send?text=${shareText}`
+		// Linking.openURL(url)
+		try {
+			await Share.share({
+				message: shareText
+			})
+		} catch (error: any) {
+			dispatch(
+				setAlertData({
+					isShown: true,
+					type: 'error',
+					label: error.message
+				})
+			)
+		}
 	}
 
 	const renderStep = (Icon: any, label: string) => {
@@ -71,13 +84,11 @@ const ReferAFriend = () => {
 	return (
 		<MainFrame isHeader={false}>
 			<ScrollView style={styles.main}>
-				<CustomText textType='bold' style={{ ...commonFontStyles.fontSize3XL, textAlign: 'center', marginTop: scaleHeightPX(30), marginBottom: scaleHeightPX(24) }}>
-					{'Refer A Friend'}
-				</CustomText>
-				{renderSteps()}
-				<View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: scaleHeightPX(20) }}>
+				<View style={{ alignItems: 'center', justifyContent: 'center', marginVertical: scaleHeightPX(24) }}>
 					<LottieView source={ReferFriendGIF} style={{ width: scaleWidthPX(300), height: scaleHeightPX(175) }} autoPlay loop />
 				</View>
+				{renderSteps()}
+				<View style={{ marginTop: scaleHeightPX(36) }} />
 				<CustomInput label='Referral Code' onChangeText={() => { }} editable={false} value={code} isRightIcon RightIcon={CopySVG} rightIconOnPress={onPressCopy} />
 				<View style={{ marginTop: scaleHeightPX(24) }} />
 				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Refer Now' onPress={referToFreiendOnPress} showIcon SVGIcon={() => <WhatsappSVG width={scaleWidthPX(30)} height={scaleWidthPX(30)} />} />

@@ -24,13 +24,25 @@ export const HeaderLeftComponent = () => {
 		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
 	}
 
+	const getGreeting = () => {
+		const currentHour = new Date().getHours();
+
+		if (currentHour >= 0 && currentHour < 12) {
+			return 'Good Morning';
+		} else if (currentHour >= 12 && currentHour < 16) {
+			return 'Good Afternoon';
+		} else {
+			return 'Good Evening';
+		}
+	};
+
 	return (
 		<View style={styles.headerLeft}>
-			<Pressable onPress={navigateToAccountTab}>
+			<Pressable style={{ justifyContent: 'center' }} onPress={navigateToAccountTab}>
 				<Image source={{ uri: getImage() }} style={styles.headerLeftImage} resizeMode='cover' />
 			</Pressable>
 			<View>
-				<CustomText>{'Good Morning,'}</CustomText>
+				<CustomText>{getGreeting()}</CustomText>
 				<CustomText textType='semi-bold' style={commonFontStyles.fontSize3XL}>
 					{profileData?.fullName || 'Car Owner'}
 				</CustomText>

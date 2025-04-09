@@ -33,7 +33,7 @@ export const createStyles = (colors: any) => {
             paddingHorizontal: scaleWidthPX(24)
         },
         seperator: {
-            height: scaleHeightPX(1),
+            height: 1,
             backgroundColor: `${colors.white}4d`,
             width: '96%'
         },

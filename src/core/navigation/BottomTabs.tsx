@@ -10,7 +10,7 @@ import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
 import { ReferAFriendSVG } from '@src/assets/SvgJSX/ReferAFriend'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
-import LinearGradient from 'react-native-linear-gradient'
+import { GradientSVG } from '@src/assets/svg'
 
 const Tab = createBottomTabNavigator()
 
@@ -65,7 +65,9 @@ const BottomTabs = () => {
 					}}
 				/>
 			</Tab.Navigator>
-			<LinearGradient colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.6)', 'rgba(255, 255, 255, 0)']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ height: 1, left: '10%', right: '10%', borderRadius: 100, position: 'absolute', bottom: scaleHeightPX(70) }} />
+			<View style={{ height: scaleHeightPX(2), left: 0, right: 0, borderRadius: 100, position: 'absolute', bottom: scaleHeightPX(72) }}>
+				<GradientSVG />
+			</View>
 		</View>
 	)
 }

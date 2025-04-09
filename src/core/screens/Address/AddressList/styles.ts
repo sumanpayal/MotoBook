@@ -15,7 +15,7 @@ export const createStyles = (colors: any) => {
 			height: scaleWidthPX(60),
 			justifyContent: 'center',
 			alignItems: 'center',
-			borderRadius: 25,
+			borderRadius: 100,
 			backgroundColor: colors.primary
 		},
 		item: {

@@ -9,6 +9,9 @@ import { createStyles } from './styles'
 import { getNotificationsDataFromAPI } from '@src/network/login'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
+import LottieView from 'lottie-react-native'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
+import { IdCardGIF } from '@src/assets/lottie'
 
 const MyCleaner = () => {
     const dispatch = useDispatch()
@@ -62,7 +65,8 @@ const MyCleaner = () => {
         <MainFrame isHeader title='Cleaner Information' isNotifications={false}>
             <View style={styles.main}>
                 <View style={styles.inner}>
-                    <View style={styles.imageBg} />
+                    {/* <View style={styles.imageBg} /> */}
+                    <LottieView source={IdCardGIF} style={{ width: scaleWidthPX(200), height: scaleHeightPX(200), alignSelf: 'center' }} autoPlay loop />
                     <View style={styles.nameOuter}>
                         <CustomText lineHeight textType='bold' style={commonFontStyles.fontSize5XL}>{'Name'}</CustomText>
                         <CustomText lineHeight textType='medium' style={commonFontStyles.fontSizeS}>{'CLEANER'}</CustomText>

@@ -11,3 +11,5 @@ export { default as NoNotificationsGIF } from './noNotifications.json';
 export { default as HelpCenterGIF } from './helpCenter.json';
 export { default as NoSubscriptionsGIF } from './noSubscriptions.json';
 export { default as GetStartedGIF } from './getStarted.json';
+export { default as IdCardGIF } from './idCard.json';
+export { default as CleanerHistoryGIF } from './cleanerHistory.json';

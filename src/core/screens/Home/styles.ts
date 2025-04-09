@@ -13,7 +13,7 @@ export const createStyles = (colors: any) =>
 			height: scaleWidthPX(60),
 			justifyContent: 'center',
 			alignItems: 'center',
-			borderRadius: 25,
+			borderRadius: 100,
 			backgroundColor: colors.primary
 		},
 		userView: {
@@ -94,8 +94,7 @@ export const createStyles = (colors: any) =>
 		},
 		headerLeft: {
 			flexDirection: 'row',
-			gap: scaleWidthPX(16),
-			alignItems: 'center'
+			gap: scaleWidthPX(16)
 		},
 		headerLeftImage: {
 			width: scaleWidthPX(40),

@@ -208,7 +208,7 @@ const MySettings = () => {
 					<PlusProfileSVG />
 				</Pressable>
 			</Pressable>
-			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} />
+			<FlatList data={data} renderItem={renderItem} keyExtractor={(item: any) => `${item?.id}`} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} ItemSeparatorComponent={() => <View style={styles.seperator} />} />
 			<FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => onPressSaveProfile(image)} />
 		</View>
 	)

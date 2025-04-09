@@ -75,7 +75,7 @@ const AddAddress = () => {
 		postalCode: string
 	}>({
 		addressType: addressTypesData1,
-		address: '',
+		address: addressTypesData1?.value,
 		landmark: addressDetails?.landmark ?? '',
 		country: addressDetails?.country ?? 'India',
 		state: addressDetails?.state ?? 'Rajasthan',
@@ -299,6 +299,7 @@ const AddAddress = () => {
 							onChangeText={(text: string) => {
 								setAddressDetaills(ADDRESS_KEYS.country, text)
 							}}
+							editable={false}
 							placeholder='Enter Country'
 							value={addressData?.country}
 							isRequired
@@ -310,6 +311,7 @@ const AddAddress = () => {
 							onChangeText={(text: string) => {
 								setAddressDetaills(ADDRESS_KEYS.state, text)
 							}}
+							editable={false}
 							placeholder='Enter State'
 							value={addressData?.state}
 							isRequired
@@ -321,6 +323,7 @@ const AddAddress = () => {
 					onChangeText={(text: string) => {
 						setAddressDetaills(ADDRESS_KEYS.city, text)
 					}}
+					editable={false}
 					placeholder='Enter District'
 					value={addressData?.city}
 					isRequired
