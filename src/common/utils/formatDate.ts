@@ -7,7 +7,8 @@ type Format =
   | '12hours'
   | 'timeWithoutSeconds'
   | 'startDateVehicle'
-  | 'server';
+  | 'server'
+  | 'yearMonth';
 
 export const formatDate = (date: Date | string, format?: Format) => {
   // if (isEmpty(date) || isNumber(date)) return ''
@@ -16,6 +17,10 @@ export const formatDate = (date: Date | string, format?: Format) => {
       return moment(date).format('DD MMM yyyy');
     case 'dateTime':
       return moment(date).format('DD MMM yyyy HH:mm:ss');
+    case 'yearMonth':
+      return moment(date).format('YYYY-MM');
+    case 'dateTime':
+      return moment(date).format('DD MMM yyyy hh:mm A');
     case '24hours':
       return moment(date).format('HH:mm');
     case '12hours':

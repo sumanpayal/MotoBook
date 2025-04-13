@@ -12,6 +12,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import LottieView from 'lottie-react-native'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { IdCardGIF } from '@src/assets/lottie'
+import { NoRecordFound } from '@src/common/components/NoRecordFound'
 
 const MyCleaner = () => {
     const dispatch = useDispatch()
@@ -64,9 +65,8 @@ const MyCleaner = () => {
     return (
         <MainFrame isHeader title='Cleaner Information' isNotifications={false}>
             <View style={styles.main}>
-                <View style={styles.inner}>
-                    {/* <View style={styles.imageBg} /> */}
-                    <LottieView source={IdCardGIF} style={{ width: scaleWidthPX(200), height: scaleHeightPX(200), alignSelf: 'center' }} autoPlay loop />
+                {myCleanerDetails ? <View style={styles.inner}>
+                    <View style={styles.imageBg} />
                     <View style={styles.nameOuter}>
                         <CustomText lineHeight textType='bold' style={commonFontStyles.fontSize5XL}>{'Name'}</CustomText>
                         <CustomText lineHeight textType='medium' style={commonFontStyles.fontSizeS}>{'CLEANER'}</CustomText>
@@ -78,7 +78,9 @@ const MyCleaner = () => {
                         {renderSeperator()}
                         {renderItem('Join Date', '01-Feb-2025')}
                     </View>
-                </View>
+                </View> :
+                    <NoRecordFound isLottieImage LottieImage={IdCardGIF} />
+                }
             </View>
         </MainFrame>
     )

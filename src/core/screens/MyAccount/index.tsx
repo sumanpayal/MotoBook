@@ -119,7 +119,7 @@ const MyAccount = () => {
         <View style={styles.main}>
             <ImageBackground source={{ uri: AccountBgImage }} style={styles.image} resizeMode='cover' imageStyle={{ borderBottomLeftRadius: 60, borderBottomRightRadius: 60 }}>
                 <SafeAreaView edges={['top']} />
-                <HeaderNavigation title='Edit Profile' isNotifications={false} />
+                <HeaderNavigation title='' isNotifications={false} />
             </ImageBackground>
             <Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
                 <Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />

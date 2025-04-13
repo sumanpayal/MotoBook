@@ -35,7 +35,7 @@ const renderCarType = (type: string, image: any, price: any) => {
 	const styles = createStyles(colors)
 	return (
 		<View style={styles.carPlanInner}>
-			<Image style={styles.carPlanImage} source={{ uri: image }} resizeMode='center' />
+			<Image style={styles.carPlanImage} source={{ uri: image }} resizeMode='cover' />
 			<View style={styles.carPlanBottom}>
 				<CustomText style={commonFontStyles.fontSizeS}>{type}</CustomText>
 				<CustomText style={{ color: colors.primary, textAlign: 'center', paddingHorizontal: scaleWidthPX(1) }}>

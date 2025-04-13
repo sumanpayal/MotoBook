@@ -5,7 +5,7 @@ import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { setProfileData, setUserData } from '@src/common/redux/reducers/currentUser'
 import { useDispatch, useSelector } from 'react-redux'
-import { AboutSVG, CleaningHistorySVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, MyCleanerSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
+import { AboutSVG, CleaningHistorySVG, InvoiceHistorySVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, MyCleanerSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
@@ -59,6 +59,12 @@ const MySettings = () => {
 			id: 8,
 			title: 'Cleaning History',
 			icon: CleaningHistorySVG,
+			color: colors.white
+		},
+		{
+			id: 9,
+			title: 'Invoice History',
+			icon: InvoiceHistorySVG,
 			color: colors.white
 		},
 		{
@@ -151,6 +157,9 @@ const MySettings = () => {
 				// cleaner history
 				navigation.navigate('CleanerHistory')
 				break
+			case 9:
+				// invoice history
+				navigation.navigate('InvoiceHistory')
 			default:
 				break
 		}
@@ -200,7 +209,7 @@ const MySettings = () => {
 		<View style={styles.main}>
 			<ImageBackground source={{ uri: AccountBgImage }} style={styles.image} resizeMode='cover' imageStyle={{ borderBottomLeftRadius: 60, borderBottomRightRadius: 60 }}>
 				<SafeAreaView edges={['top']} />
-				<HeaderNavigation isBack={false} title='My Profile' />
+				<HeaderNavigation isBack={false} title='' />
 			</ImageBackground>
 			<Pressable style={styles.profileView} onPress={onPressEditProfileImageOnPress}>
 				<Image source={{ uri: getImage() }} style={{ width: '100%', height: '100%', position: 'absolute', borderRadius: 100 }} resizeMode='cover' />

@@ -23,6 +23,7 @@ import HelpCenter from '../screens/HelpCenter'
 import { useTheme } from '@react-navigation/native'
 import MyCleaner from '../screens/MyCleaner'
 import CleanerHistory from '../screens/CleanerHistory'
+import InvoiceHistory from '../screens/InvoiceHistory'
 
 const Stack = createNativeStackNavigator()
 
@@ -83,6 +84,7 @@ export const PostLoginStack = () => {
 			<Stack.Screen name='HelpCenter' component={HelpCenter} />
 			<Stack.Screen name='MyCleaner' component={MyCleaner} />
 			<Stack.Screen name='CleanerHistory' component={CleanerHistory} />
+			<Stack.Screen name='InvoiceHistory' component={InvoiceHistory} />
 		</Stack.Navigator>
 	)
 }

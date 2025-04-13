@@ -13,3 +13,4 @@ export { default as NoSubscriptionsGIF } from './noSubscriptions.json';
 export { default as GetStartedGIF } from './getStarted.json';
 export { default as IdCardGIF } from './idCard.json';
 export { default as CleanerHistoryGIF } from './cleanerHistory.json';
+export { default as InvoiceHistoryGIF } from './invoiceHistory.json';

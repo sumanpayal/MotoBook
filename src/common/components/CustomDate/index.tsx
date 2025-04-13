@@ -18,13 +18,14 @@ interface DropdownProps {
     is24Hour?: boolean
     onPress: (value: any) => void
     minimumDate?: Date
+    isFormatted?: boolean
 }
 
 export default function CustomDate(props: DropdownProps) {
     const { colors } = useTheme()
     const styles = inputStyles(colors)
 
-    const { label, value = '', disabled = false, isRequired = false, RightIcon = DownSVG, placeholder = 'YYYY-MM-DD', mode = 'date', is24Hour = false, onPress, minimumDate = new Date() } = props
+    const { label, value = '', disabled = false, isRequired = false, RightIcon = DownSVG, placeholder = 'YYYY-MM-DD', mode = 'date', is24Hour = false, onPress, minimumDate = new Date(), isFormatted = true } = props
 
     const [open, setOpen] = useState(false)
 
@@ -49,7 +50,7 @@ export default function CustomDate(props: DropdownProps) {
                     {isRequired ? <CustomText style={{ color: colors.alertRed }}>{' *'}</CustomText> : ''}
                 </CustomText>
                 <Pressable style={styles.inputView} onPress={shouDateModal} disabled={disabled}>
-                    <CustomText style={{ ...styles.input, color: isValueEmpty() ? colors.inputPlaceholder : colors.white }}>{value ? formatDate(value, 'startDateVehicle') : placeholder}</CustomText>
+                    <CustomText style={{ ...styles.input, color: isValueEmpty() ? colors.inputPlaceholder : colors.white }}>{value ? isFormatted ? formatDate(value, 'startDateVehicle') : value : placeholder}</CustomText>
                     <RightIcon />
                 </Pressable>
                 {open && (
