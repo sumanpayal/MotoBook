@@ -59,7 +59,7 @@ const VerifyOTP = () => {
 
 	const onPressResendOTP = () => {
 		const params = {
-			phoneNumber: mobileNumber
+			phoneNumber: `+91${mobileNumber}`
 		}
 		dispatch(setIsFullScreenLoading(true))
 		postMobileLogin({}, params, (res: API_RESPONSE) => {
@@ -117,7 +117,7 @@ const VerifyOTP = () => {
 	const verifyOTPAPICall = () => {
 		const params = {
 			otp: otp,
-			phoneNumber: mobileNumber
+			phoneNumber: `+91${mobileNumber}`
 		}
 		postVerifyOTP({}, params, (res: API_RESPONSE) => {
 			dispatch(setIsFullScreenLoading(false))

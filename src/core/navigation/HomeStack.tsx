@@ -4,6 +4,7 @@ import ReferAFriend from '../screens/ReferAFriend'
 import HomeScreen from '../screens/Home'
 import MySubscriptions from '../screens/MySubscriptions'
 import MySettings from '../screens/Settings'
+import News from '../screens/News'
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +40,18 @@ export function ReferStack() {
 				headerShown: false
 			}}>
 			<Stack.Screen name='ReferAFriend' component={ReferAFriend} />
+		</Stack.Navigator>
+	)
+}
+
+export function NewsStack() {
+	return (
+		<Stack.Navigator
+			initialRouteName='News'
+			screenOptions={{
+				headerShown: false
+			}}>
+			<Stack.Screen name='News' component={News} />
 		</Stack.Navigator>
 	)
 }

@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { HomeStack, ReferStack, SubscriptionsStack, AccountStack } from './HomeStack'
+import { HomeStack, ReferStack, SubscriptionsStack, AccountStack, NewsStack } from './HomeStack'
 import CustomText from '@src/common/components/Text'
 import { useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
@@ -10,7 +10,8 @@ import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
 import { ReferAFriendSVG } from '@src/assets/SvgJSX/ReferAFriend'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
-import { GradientSVG } from '@src/assets/svg'
+import { GradientSVG, NewsSVG } from '@src/assets/svg'
+import CustomNewsBar from './CustomNewsBar'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,6 +41,17 @@ const BottomTabs = () => {
 						tabBarItemStyle: { height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
 						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<SubscriptionSVG />} focusedImage={<SubscriptionSVG strokeColor={`${colors.primary}`} opacity='1' />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='SUBSCRIPTION' />
+					}}
+				/>
+				<Tab.Screen
+					name='News'
+					component={NewsStack}
+					options={{
+						headerShown: false,
+						tabBarLabelPosition: 'below-icon',
+						tabBarItemStyle: { marginRight: scaleWidthPX(10), height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
+						tabBarIcon: () => <CustomNewsBar />,
+						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='NEWS' />
 					}}
 				/>
 				<Tab.Screen

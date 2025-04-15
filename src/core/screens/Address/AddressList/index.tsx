@@ -53,6 +53,7 @@ const AddressList = () => {
 					<CarDetailSVG />
 				</View>
 				<View style={{ gap: scaleHeightPX(3) }}>
+					{renderSingleItem('Address', item?.address ?? '')}
 					{renderSingleItem('Landmark', item?.landmark)}
 					{renderSingleItem('City', item?.city)}
 					{renderSingleItem('State', item?.state)}

@@ -61,7 +61,7 @@ const Login = () => {
 
 	const postLoginAPICall = async () => {
 		const params = {
-			phoneNumber: mobileNumber
+			phoneNumber: `+91${mobileNumber}`
 		}
 		postMobileLogin({}, params, (res: API_RESPONSE) => {
 			dispatch(setIsFullScreenLoading(false))

@@ -29,8 +29,7 @@ export const selectionModalStyles = (colors: any) =>
 			height: scaleHeightPX(11)
 		},
 		itemLabel: {
-			...commonFontStyles.fontRegular,
-			...commonFontStyles.fontSizeM
+			...commonFontStyles.fontSizeL
 		},
 		itemRight: {
 			paddingVertical: scaleHeightPX(8),

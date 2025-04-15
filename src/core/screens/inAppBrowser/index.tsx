@@ -34,8 +34,11 @@ const InAppBrowser = () => {
             case InAppBrowserType.terms:
                 setsourceURL('https://docs.google.com/gview?embedded=true&url=https://motorwash.in/assets/pdf/TermsAndCondition.pdf')
                 break
-            default:
+            case InAppBrowserType.aboutUs:
                 setsourceURL('https://motorwash.in/home#about')
+                break
+            default:
+                setsourceURL(params?.link)
                 break
         }
     }, [type])

@@ -8,7 +8,8 @@ type Format =
   | 'timeWithoutSeconds'
   | 'startDateVehicle'
   | 'server'
-  | 'yearMonth';
+  | 'yearMonth'
+  | 'newsDateTime';
 
 export const formatDate = (date: Date | string, format?: Format) => {
   // if (isEmpty(date) || isNumber(date)) return ''
@@ -29,6 +30,8 @@ export const formatDate = (date: Date | string, format?: Format) => {
       return moment(date).format('yyyy-MM-DDTHH:mm:ss[z]');
     case 'startDateVehicle':
       return moment(date).format('yyyy-MM-DD')
+      case 'newsDateTime':
+      return moment(date).format('DD MMM yyyy HH:mm:ss');
     default:
       return moment(date).format('DD MMM yyyy');
   }

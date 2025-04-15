@@ -1,14 +1,11 @@
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
+import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
 
 export const createStyles = (colors: any) => StyleSheet.create({
 	tabBarStyle: {
 		height: scaleHeightPX(74),
 		backgroundColor: colors.backgroundColor,
-		// marginHorizontal: scaleWidthPX(16),
-		// marginBottom: scaleHeightPX(24),
-		// borderRadius: 20,
 	},
 	textStyle: {
 		...commonFontStyles.fontSize2XS,
@@ -17,5 +14,21 @@ export const createStyles = (colors: any) => StyleSheet.create({
 	labelView: {
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	tabBar: {
+		height: scaleHeightPX(74),
+		width: scaleWidthPX(74),
+		alignItems: 'center'
+	},
+	centralButtonContainer: {
+		width: scaleWidthPX(60),
+		height: scaleHeightPX(60),
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderWidth: 1,
+		borderColor: colors.primary,
+		borderRadius: 100,
+		position: 'absolute',
+		top: -13,
 	}
 })

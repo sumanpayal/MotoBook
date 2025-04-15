@@ -4,7 +4,7 @@ import MainFrame from '@src/common/components/Mainframe'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import Clipboard from '@react-native-clipboard/clipboard';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import CustomInput from '@src/common/components/Input'
@@ -13,14 +13,14 @@ import { styles } from './styles'
 import CustomButton from '@src/common/components/Button'
 import { ReferFriendGIF } from '@src/assets/lottie'
 import LottieView from 'lottie-react-native'
-import { useFocusEffect, useTheme } from '@react-navigation/native'
+import { useFocusEffect } from '@react-navigation/native'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import { RootState } from '@src/common/redux/store/store'
 
 const ReferAFriend = () => {
+	const profileData: any = useSelector((state: RootState) => state.root.currentUser.profileData)
 
-	const { colors } = useTheme()
-
-	const code = '70Fz3sxY'
+	const code = profileData?.referralCode ?? '70Fz3sxY'
 	const shareText = `Hey! I’ve been using MotorWash for daily car cleaning, and it’s awesome! Just use my referral code ${code} while submitting your vehicle form. Sign up here: https://apps.apple.com/in/app/`
 
 	const dispatch = useDispatch()
@@ -41,8 +41,6 @@ const ReferAFriend = () => {
 	}
 
 	const referToFreiendOnPress = async () => {
-		// let url: string = `whatsapp://send?text=${shareText}`
-		// Linking.openURL(url)
 		try {
 			await Share.share({
 				message: shareText

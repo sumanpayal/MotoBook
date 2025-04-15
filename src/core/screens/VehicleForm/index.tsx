@@ -22,6 +22,7 @@ import { RenderSubscritionPlans } from './SubscriptionPlans'
 import RenderModals from './Modals'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import CustomDate from '@src/common/components/CustomDate'
+import { formatDate } from '@src/common/utils/formatDate'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -120,7 +121,7 @@ const VehicleForm = () => {
 					return {
 						...item,
 						id: index,
-						name: `${item?.start} - ${item?.end}`
+						name: `${item?.start?.split(' ')[0]} - ${item?.end}`
 					}
 				})
 				setSubscriptionTimeSlotsData(data)
@@ -227,7 +228,9 @@ const VehicleForm = () => {
 					end: selectedSubscriptionTimeSlot?.end
 				},
 				color_id: selectedColor?._id,
-				...interiorCleanAmount
+				...interiorCleanAmount,
+				"start_date": formatDate(startDate, 'startDateVehicle'),
+				"referralCode": referralCode
 			}
 			postSubscriptionDetailsAPI(params, (response: API_RESPONSE) => {
 				dispatch(setIsFullScreenLoading(false))

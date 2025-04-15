@@ -75,7 +75,7 @@ const AddAddress = () => {
 		postalCode: string
 	}>({
 		addressType: addressTypesData1,
-		address: addressTypesData1?.value,
+		address: addressDetails?.address ?? '',
 		landmark: addressDetails?.landmark ?? '',
 		country: addressDetails?.country ?? 'India',
 		state: addressDetails?.state ?? 'Rajasthan',
@@ -180,7 +180,8 @@ const AddAddress = () => {
 			landmark: addressData?.landmark,
 			addressType: addressData?.addressType?.value,
 			country: addressData?.country,
-			postalCode: addressData?.postalCode
+			postalCode: addressData?.postalCode,
+			address: addressData?.address
 		}
 		if (isEdit) {
 			postUpdateAddAddressAPI(addressDetails?._id, params, (res: API_RESPONSE) => {

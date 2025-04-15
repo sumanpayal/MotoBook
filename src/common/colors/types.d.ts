@@ -34,7 +34,8 @@ declare module '@react-navigation/native' {
 			carDetailBg: string,
 			carDetailsBgTop: string,
 			registrationBg: string,
-			buttonText: string
+			buttonText: string,
+			carBg: string
 		}
 	}
 	export function useTheme(): ExtendedTheme

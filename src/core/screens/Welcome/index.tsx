@@ -16,7 +16,7 @@ const Welcome = () => {
 	const navigation: any = useNavigation()
 
 	const onPressTermsAndConditions = () => {
-		navigation.navigate('InAppBrowser', { type: InAppBrowserType.terms, title: 'Terms and Conditions' })
+		navigation.navigate('InAppBrowser', { type: InAppBrowserType.terms, title: 'Terms & Conditions' })
 	}
 
 	const onPressPrivacyPolicy = () => {
@@ -51,17 +51,13 @@ const Welcome = () => {
 					{renderDetails(Welcome3Image, 'No platform fees, no hidden charges')}
 				</View>
 				<View style={styles.bottomView}>
-					<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Get Started' onPress={onPressGetStarted} />
 					<CustomText lineHeight style={{ textAlign: 'center', ...commonFontStyles.fontSizeS }}>
-						{`Clicking "`}
-						<CustomText lineHeight textType='bold'>
-							{`Get Started`}
-						</CustomText>
-						<CustomText lineHeight>{`" confirms, you agree to our\n`}</CustomText>
-						<CustomText onPress={onPressTermsAndConditions} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Terms and Conditions`}</CustomText>
-						<CustomText lineHeight>{` and `}</CustomText>
+						{`By tapping on Get started, you agree to the\n`}
+						<CustomText onPress={onPressTermsAndConditions} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Terms & Conditions`}</CustomText>
+						<CustomText style={commonFontStyles.fontSizeS} lineHeight>{` and `}</CustomText>
 						<CustomText onPress={onPressPrivacyPolicy} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Privacy Policy`}</CustomText>
 					</CustomText>
+					<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Get Started' onPress={onPressGetStarted} />
 				</View>
 			</View>
 		</MainFrame>

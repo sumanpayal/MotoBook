@@ -11,7 +11,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
     imageView: {
         width: scaleWidthPX(388),
         height: scaleHeightPX(221),
-        marginTop: scaleHeightPX(110),
+        marginTop: scaleHeightPX(80),
         marginBottom: scaleHeightPX(50)
     },
     detailsOuter: {
@@ -33,7 +33,7 @@ export const createStyles = (colors: any) => StyleSheet.create({
         width: '100%',
         position: 'absolute',
         bottom: scaleHeightPX(24),
-        gap: scaleHeightPX(8)
+        gap: scaleHeightPX(32)
     },
     itemImage: {
         width: scaleWidthPX(50),
