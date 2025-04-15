@@ -51,7 +51,7 @@ const News = () => {
             const parser = new XMLParser();
             const jsonObj = parser.parse(xmlStr);
 
-            return [...jsonObj?.rss?.channel?.item];
+            return jsonObj?.rss?.channel?.item ? [...jsonObj?.rss?.channel?.item] : [];
         } catch (error) {
             console.error('error = ', error);
             return []
