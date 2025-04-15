@@ -9,8 +9,6 @@ import { createStyles } from './styles'
 import { getNotificationsDataFromAPI } from '@src/network/login'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import LottieView from 'lottie-react-native'
-import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { IdCardGIF } from '@src/assets/lottie'
 import { NoRecordFound } from '@src/common/components/NoRecordFound'
 

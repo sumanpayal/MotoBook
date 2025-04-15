@@ -10,7 +10,7 @@ import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
 import { ReferAFriendSVG } from '@src/assets/SvgJSX/ReferAFriend'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
-import { GradientSVG, NewsSVG } from '@src/assets/svg'
+import { GradientSVG } from '@src/assets/svg'
 import CustomNewsBar from './CustomNewsBar'
 
 const Tab = createBottomTabNavigator()

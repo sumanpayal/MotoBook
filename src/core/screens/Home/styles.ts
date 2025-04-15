@@ -1,7 +1,6 @@
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { StyleSheet } from 'react-native'
-import { styles } from '../SelectBrand/styles'
 
 export const createStyles = (colors: any) =>
 	StyleSheet.create({

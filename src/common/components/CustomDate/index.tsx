@@ -29,7 +29,7 @@ export default function CustomDate(props: DropdownProps) {
 
     const [open, setOpen] = useState(false)
 
-    const onChange = (event, selectedDate) => {
+    const onChange = (event: any, selectedDate: any) => {
         setOpen(false);
         onPress(selectedDate);
     };

@@ -1,6 +1,5 @@
 import { View, FlatList } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import { getAddressListAPI } from '@src/network/address'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import MainFrame from '@src/common/components/Mainframe'
 import { useFocusEffect, useTheme } from '@react-navigation/native'
