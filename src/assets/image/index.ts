@@ -66,7 +66,7 @@ export const ProfileImage = Image.resolveAssetSource(ProfileImage1).uri
 import HatchbackLarge from './HatchbackLarge.jpg'
 export const HatchbackLargeImage = Image.resolveAssetSource(HatchbackLarge).uri
 
-import SedanLarge from './SedanLarge.jpg'
+import SedanLarge from './SedanLarge.png'
 export const SedanLargeImage = Image.resolveAssetSource(SedanLarge).uri
 
 import SuvLarge from './SuvLarge.png'
