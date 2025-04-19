@@ -23,6 +23,7 @@ import RenderModals from './Modals'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import CustomDate from '@src/common/components/CustomDate'
 import { formatDate } from '@src/common/utils/formatDate'
+import moment from 'moment'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -113,15 +114,21 @@ const VehicleForm = () => {
 		})
 	}
 
+	const formatTime = (time: any, format: string = 'h A') => {
+		return moment(time, 'hh:mm A').format(format);
+	};
+
 	const getSubscriptionTimeSlotsFromAPI = () => {
 		getSubscriptionTimeSlotsList((res: API_RESPONSE) => {
 			setSelectedSubscriptionTimeSlot(null)
 			if (res.data) {
 				const data = res?.data?.map((item: any, index: number) => {
+					const start = formatTime(item?.start, 'h')
+					const end = formatTime(item?.end)
 					return {
 						...item,
 						id: index,
-						name: `${item?.start?.split(' ')[0]} - ${item?.end}`
+						name: `${start} - ${end}`
 					}
 				})
 				setSubscriptionTimeSlotsData(data)
@@ -136,7 +143,7 @@ const VehicleForm = () => {
 			setSelectedAddress(null)
 			if (res.data) {
 				const data = res?.data?.map((item: any) => {
-					const address = `${item?.landmark}, ${item?.city}, ${item?.state}, ${item?.country}, ${item?.postalCode}`
+					const address = `${item?.address}, ${item?.landmark}, ${item?.city}, ${item?.state}, ${item?.country}, ${item?.postalCode}`
 					return {
 						...item,
 						address

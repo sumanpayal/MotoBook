@@ -32,11 +32,11 @@ const News = () => {
     const getNewsDataList = async () => {
         const response1 = await getNewsData('https://auto.economictimes.indiatimes.com/rss/passenger-vehicle/cars')
 
-        const respons2 = await getNewsData('https://www.indianautosblog.com/feed')
+        const response2 = await getNewsData('https://www.indianautosblog.com/feed')
 
-        const respons3 = await getNewsData('https://gaadiwaadi.com/feed/')
+        const response3 = await getNewsData('https://gaadiwaadi.com/feed/')
 
-        setAllNewsData([...response1, ...respons2, ...respons3])
+        setAllNewsData([...response1, ...response2, ...response3])
 
         dispatch(setIsFullScreenLoading(false))
     }
@@ -58,13 +58,17 @@ const News = () => {
         }
     };
 
+    const getTitleDecoded = (title: any) => {
+        return title?.replace(/&#(\d+);/g, (match: any, dec: any) => String.fromCharCode(dec))
+    }
+
     const renderNewsItem = ({ item }: { item: any }) => {
         return (
             <Pressable style={styles.item} onPress={() => {
                 navigation.navigate('InAppBrowser', { title: 'News Details', link: item?.link })
             }}>
                 <Image style={{ width: '100%', height: 150, marginBottom: scaleHeightPX(8) }} source={{ uri: item?.image?.url || 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg' }} resizeMode='cover' />
-                <CustomText style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{item?.title}</CustomText>
+                <CustomText style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{getTitleDecoded(item?.title)}</CustomText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: scaleWidthPX(16) }}>
                     <CustomText style={{ flex: 1 }}>{item?.pubDate}</CustomText>
                     <Pressable onPress={() => shareOnPress(`${item?.title} \n ${item?.link}`)}>

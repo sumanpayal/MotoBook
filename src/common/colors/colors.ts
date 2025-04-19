@@ -40,7 +40,13 @@ const COLORS_LIGHT: ExtendedTheme = {
 		carDetailsBgTop: '#162F48',
 		registrationBg: '#010C22',
 		buttonText: '#444444',
-		carBg: '#060B10'
+		carBg: '#060B10',
+		noVehicleCardBg: '#89D8FF',
+		requestSubmittedCardBg: '#ADFFE5',
+		subscriptionExpiredCardBg: '#EDD6C4',
+		referAFirendCardBg: '#A999FF',
+		transparentCardBg: '#FF887C',
+		fullMonthServiceCardBg: '#83C3FF'
 	}
 }
 

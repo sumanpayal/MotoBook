@@ -5,7 +5,8 @@ export const createStyles = (colors: any) => {
     return StyleSheet.create({
         main: {
             flex: 1,
-            margin: scaleWidthPX(16)
+            marginHorizontal: scaleWidthPX(16),
+            marginTop: scaleHeightPX(16)
         },
         item: {
             borderRadius: 15,

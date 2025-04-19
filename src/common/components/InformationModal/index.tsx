@@ -12,13 +12,15 @@ type InformationModalProps = {
 	onClose: () => void
 	description?: string
 	modalProps?: BottomModalProps
+	modalIcon?: any
 }
 
 const InformationModal = (props: InformationModalProps) => {
-	const { visible, onClose, description, modalProps } = props
+	const { visible, onClose, description, modalProps, modalIcon } = props
 	return (
 		<BottomModal visible={visible} onDrop={onClose} isHeader headerCloseOnPress={onClose} {...modalProps} hideOnBackdropPress={false}>
 			<View style={styles.main}>
+				{modalIcon && modalIcon}
 				<CustomText textType='medium' style={{ textAlign: 'center' }}>
 					{description}
 				</CustomText>

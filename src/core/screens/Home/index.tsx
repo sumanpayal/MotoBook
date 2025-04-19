@@ -11,13 +11,14 @@ import { HeaderLeftComponent } from './components/HeaderLeft';
 import { DailyCarPlans } from './components/DailyCarPlans';
 import { HowItWorks } from './components/HowItWorks';
 import { InteriorCleaning, PlanDetails } from './components/PlanDetails';
-import CustomCarousel from '@src/common/components/Carousel';
+import CustomCarousel, { CAROUSEL_TYPE } from '@src/common/components/Carousel';
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfileDetails } from '@src/network/login';
 import { API_RESPONSE } from '@src/common/constants/constants';
 import { RootState } from '@src/common/redux/store/store';
 import { setProfileData } from '@src/common/redux/reducers/currentUser';
+import { getMySubscriptionList } from '@src/network/car';
 
 const HomeScreen = () => {
 	const navigation: any = useNavigation();
@@ -31,11 +32,13 @@ const HomeScreen = () => {
 	const hasActiveSubscription = profileData?.hasActiveSubscription ?? false
 
 	const [searchText, setSearchText] = useState<string>('');
+	const [allCarsData, setAllCarsData] = useState<any[]>([]);
 
 	useFocusEffect(useCallback(() => {
 		if (!profileData?._id) {
 			getUserDetails()
 		}
+		getMyCarsList()
 		dispatch(setIsFullScreenLoading(false))
 		const backAction = () => {
 			Alert.alert('Hold on!', 'Are you sure you want to close the app?', [
@@ -57,6 +60,16 @@ const HomeScreen = () => {
 		);
 		return () => backHandler.remove();
 	}, []))
+
+	const getMyCarsList = () => {
+		getMySubscriptionList(true, 1, (response: API_RESPONSE) => {
+			if (response.error) {
+				setAllCarsData([])
+			} else {
+				setAllCarsData(response.data)
+			}
+		})
+	}
 
 	const getUserDetails = () => {
 		getUserProfileDetails((res: API_RESPONSE) => {
@@ -99,6 +112,22 @@ const HomeScreen = () => {
 		);
 	};
 
+	const onPressCarousel = (type: CAROUSEL_TYPE) => {
+		switch (type) {
+			case CAROUSEL_TYPE.NO_VEHICLE:
+				navigation.navigate('SelectBrand')
+				break
+			case CAROUSEL_TYPE.REQUEST_SUBMITTED:
+				break
+			case CAROUSEL_TYPE.SUBSCRIPTION_EXPIRED:
+				break
+			case CAROUSEL_TYPE.OTHERS:
+				break
+			default:
+				break
+		}
+	}
+
 	return (
 		<View style={{ flex: 1 }}>
 			{renderHeader()}
@@ -106,12 +135,7 @@ const HomeScreen = () => {
 				showsVerticalScrollIndicator={false}
 				style={{ paddingBottom: scaleHeightPX(24) }}>
 				<View style={styles.carousel}>
-					<CustomCarousel
-						data={[
-							{ id: 0, color: colors.primary },
-							{ id: 1, color: colors.alertRed },
-							{ id: 2, color: colors.secondary }
-						]}
+					<CustomCarousel cauroselType={profileData?.hasActiveSubscription ? CAROUSEL_TYPE.OTHERS : allCarsData?.length > 0 ? CAROUSEL_TYPE.REQUEST_SUBMITTED : CAROUSEL_TYPE.NO_VEHICLE} onPress={onPressCarousel}
 					/>
 				</View>
 				<View style={styles.container}>

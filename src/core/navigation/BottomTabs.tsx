@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeStack, ReferStack, SubscriptionsStack, AccountStack, NewsStack } from './HomeStack'
@@ -10,17 +10,26 @@ import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
 import { ReferAFriendSVG } from '@src/assets/SvgJSX/ReferAFriend'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
-import { GradientSVG } from '@src/assets/svg'
-import CustomNewsBar from './CustomNewsBar'
+import { GradientSVG, NewsSVG } from '@src/assets/svg'
 
 const Tab = createBottomTabNavigator()
+
+const NoFeedbackButton = (props: any) => (
+	<TouchableOpacity activeOpacity={1} {...props}>
+		{props.children}
+	</TouchableOpacity>
+);
 
 const BottomTabs = () => {
 	const { colors } = useTheme()
 	const styles = createStyles(colors)
 	return (
 		<View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-			<Tab.Navigator initialRouteName='HomeStack' backBehavior='history' screenOptions={{ headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true, tabBarIconStyle: { marginTop: scaleHeightPX(12), marginBottom: scaleHeightPX(4) }, tabBarLabelStyle: styles.textStyle }}>
+			<Tab.Navigator initialRouteName='HomeStack' backBehavior='history' screenOptions={{
+				headerShown: false, tabBarStyle: styles.tabBarStyle, tabBarHideOnKeyboard: true, tabBarIconStyle: {
+					marginTop: scaleHeightPX(12), marginBottom: scaleHeightPX(4),
+				}, tabBarLabelStyle: styles.textStyle
+			}}>
 				<Tab.Screen
 					name='HomeStack'
 					component={HomeStack}
@@ -28,6 +37,7 @@ const BottomTabs = () => {
 						headerShown: false,
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { marginLeft: scaleWidthPX(10), height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
+						tabBarButton: (props) => <NoFeedbackButton {...props} />,
 						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<HomeSVG strokeColor={`${colors.white}`} opacity='0.3' />} focusedImage={<HomeSVG strokeColor={`${colors.primary}`} opacity='1' />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='HOME' />
 					}}
@@ -39,6 +49,7 @@ const BottomTabs = () => {
 						headerShown: false,
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
+						tabBarButton: (props) => <NoFeedbackButton {...props} />,
 						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<SubscriptionSVG />} focusedImage={<SubscriptionSVG strokeColor={`${colors.primary}`} opacity='1' />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='SUBSCRIPTION' />
 					}}
@@ -50,7 +61,8 @@ const BottomTabs = () => {
 						headerShown: false,
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { marginRight: scaleWidthPX(10), height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
-						tabBarIcon: () => <CustomNewsBar />,
+						tabBarButton: (props) => <NoFeedbackButton {...props} />,
+						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<NewsSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} focusedImage={<NewsSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='NEWS' />
 					}}
 				/>
@@ -61,6 +73,7 @@ const BottomTabs = () => {
 						headerShown: false,
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
+						tabBarButton: (props) => <NoFeedbackButton {...props} />,
 						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<ReferAFriendSVG />} focusedImage={<ReferAFriendSVG strokeColor={`${colors.primary}`} />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='REFER A FRIEND' />
 					}}
@@ -72,6 +85,7 @@ const BottomTabs = () => {
 						headerShown: false,
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { marginRight: scaleWidthPX(10), height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
+						tabBarButton: (props) => <NoFeedbackButton {...props} />,
 						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<AccountSVG />} focusedImage={<AccountSVG strokeColor={`${colors.primary}`} />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='ACCOUNT' />
 					}}
@@ -88,7 +102,7 @@ export default BottomTabs
 
 const TabIcon = React.memo((props: any) => {
 	const { focused, normalImage, focusedImage } = props
-	return <View>{focused ? focusedImage : normalImage}</View>
+	return <>{focused ? focusedImage : normalImage}</>
 })
 
 const TabLabel = React.memo((props: any) => {

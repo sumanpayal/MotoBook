@@ -1,5 +1,5 @@
 import { useNavigation, useTheme } from '@react-navigation/native'
-import { HatchbackImage, SedanImage, SuvImage } from '@src/assets/image'
+import { HatchbackImage, HatchbackLargeImage, SedanImage, SedanLargeImage, SuvImage, SuvLargeImage } from '@src/assets/image'
 import CustomText from '@src/common/components/Text'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
@@ -11,21 +11,21 @@ const HATCHBACK_DETAILS = {
 	name: 'Hatchback',
 	price: '549',
 	smallImage: HatchbackImage,
-	largeImage: 'https://stimg.cardekho.com/images/carexteriorimages/630x420/Tata/Altroz/10707/1738305103049/front-left-side-47.jpg'
+	largeImage: HatchbackLargeImage
 }
 
 const SEDAN_DETAILS = {
 	name: 'Sedan',
 	price: '649',
 	smallImage: SedanImage,
-	largeImage: 'https://media.zigcdn.com/media/model/2023/Mar/hyundai-verna-3_360x240.jpg'
+	largeImage: SedanLargeImage
 }
 
 const SUV_DETAILS = {
 	name: 'SUV',
 	price: '749',
 	smallImage: SuvImage,
-	largeImage: 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg'
+	largeImage: SuvLargeImage
 }
 
 export const DailyCarPlans = () => {

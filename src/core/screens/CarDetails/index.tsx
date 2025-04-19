@@ -1,13 +1,13 @@
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Image, Pressable, ScrollView, View } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { createStyles } from './styles';
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle';
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation';
 import { useDispatch } from 'react-redux';
 import { InteriorCleaning, PlanDetails } from '../Home/components/PlanDetails';
 import commonFontStyles from '@src/common/styles/commonFontStyles';
-import { PlusSVG, TickSVG } from '@src/assets/svg';
+import { TickSVG } from '@src/assets/svg';
 import CustomText from '@src/common/components/Text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@src/common/components/Button';
@@ -45,7 +45,7 @@ const CarDetails = () => {
                     </View>
                 </View>
                 <View style={styles.cleaningInner}>
-                    <CustomText textType='bold' style={styles.cleaningHeader}>{'Interior Cleaning*'}</CustomText>
+                    <CustomText textType='bold' style={styles.cleaningHeader}>{'Interior Cleaning'}</CustomText>
                     <View style={{ alignItems: 'center', gap: scaleHeightPX(1) }}>
                         {renderContent('Dashboard')}
                         {renderContent('Seat Clean')}
@@ -58,38 +58,31 @@ const CarDetails = () => {
         )
     }
 
-    const renderAddCarButton = () => {
-        return (
-            <Pressable style={styles.carsButton} onPress={() => navigation.navigate('SelectBrand')}>
-                <PlusSVG />
-            </Pressable>
-        )
-    }
-
     return (
         <View style={{ flex: 1 }}>
-            <View style={{ backgroundColor: colors.backgroundColor }}>
-                <SafeAreaView edges={['top']} />
-                <HeaderNavigation isBack isNotifications={false} />
-                <View style={styles.imageView}>
-                    <Image source={{ uri: carDetails?.largeImage }} style={{ width: '100%', height: '100%' }} resizeMode='cover' />
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+                <View style={{ backgroundColor: colors.backgroundColor }}>
+                    <SafeAreaView edges={['top']} />
+                    <HeaderNavigation isBack isNotifications={false} title='Plan Details' />
+                    <View style={styles.imageView}>
+                        <Image source={{ uri: carDetails?.largeImage }} style={{ width: '100%', height: '100%' }} resizeMode='cover' />
+                    </View>
+                    <View style={styles.nameView}>
+                        <CustomText style={commonFontStyles.fontSize3XL} lineHeight>{carDetails?.name}</CustomText>
+                        <CustomText textType='bold' style={commonFontStyles.fontSizeXL} lineHeight>{`@${carDetails?.price}/Month`}</CustomText>
+                    </View>
                 </View>
-                <View style={styles.nameView}>
-                    <CustomText textType='semi-bold' style={commonFontStyles.fontSize3XL} lineHeight>{carDetails?.name}</CustomText>
-                    <CustomText style={commonFontStyles.fontSizeXL} lineHeight>{`@${carDetails?.price}/Month`}</CustomText>
-                </View>
-            </View>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={{ paddingBottom: scaleHeightPX(24), backgroundColor: colors.carBg, borderTopLeftRadius: 24, borderTopRightRadius: 25 }}>
-                {renderCleaning()}
-                <PlanDetails />
-                <View style={{ height: scaleHeightPX(24) }} />
-                <InteriorCleaning />
-                <View style={{ margin: scaleHeightPX(24) }}>
-                    <CustomButton title='Add Vehicle' onPress={() => navigation.navigate('SelectBrand')} customLabelStyles={commonFontStyles.fontBold} />
+                <View
+                    style={{ paddingBottom: scaleHeightPX(24), backgroundColor: colors.carBg, borderTopLeftRadius: 24, borderTopRightRadius: 25 }}>
+                    {renderCleaning()}
+                    <PlanDetails />
+                    <View style={{ height: scaleHeightPX(24) }} />
+                    <InteriorCleaning />
                 </View>
             </ScrollView>
+            <View style={{ margin: scaleHeightPX(16) }}>
+                <CustomButton title='Add Vehicle' onPress={() => navigation.navigate('SelectBrand')} customLabelStyles={commonFontStyles.fontBold} />
+            </View>
         </View>
     );
 };

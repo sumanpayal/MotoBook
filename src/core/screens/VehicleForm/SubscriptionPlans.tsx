@@ -1,5 +1,4 @@
 import { useTheme } from "@react-navigation/native"
-import { InformationSVG } from "@src/assets/svg"
 import CustomText from "@src/common/components/Text"
 import commonFontStyles from "@src/common/styles/commonFontStyles"
 import { scaleHeightPX, scaleWidthPX } from "@src/common/utils/responsiveStyle"
@@ -7,6 +6,7 @@ import { Pressable, StyleSheet, View } from "react-native"
 import { SubscriptionPlanItem } from "./SubscriptionItem"
 import React from "react"
 import { CheckBox } from "@src/common/components/MultiSelectionModal"
+import { InformationSVG } from "@src/assets/SvgJSX/InformationSVG"
 
 interface RenderSubscritionPlansProps {
     openInformationModal: () => void;
@@ -25,7 +25,7 @@ export const RenderSubscritionPlans = (props: RenderSubscritionPlansProps) => {
             <View style={styles.top}>
                 <CustomText style={commonFontStyles.fontSizeL}>{'Your Daily Car Cleaning Plan Details'}</CustomText>
                 <Pressable onPress={openInformationModal} style={styles.info}>
-                    <InformationSVG />
+                    <InformationSVG fillColor={colors.white} />
                 </Pressable>
             </View>
             {interiorCleaningAmount > 0 && <Pressable onPress={() => setIsInteriorCleaning(!isInteriorCleaning)} style={styles.middle}>

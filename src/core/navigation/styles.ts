@@ -26,9 +26,10 @@ export const createStyles = (colors: any) => StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderWidth: 1,
-		borderColor: colors.primary,
+		borderColor: colors.white + '4d',
 		borderRadius: 100,
 		position: 'absolute',
 		top: -13,
+		backgroundColor: colors.backgroundColor
 	}
 })

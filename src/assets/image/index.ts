@@ -63,3 +63,20 @@ export const PlanDetails5Image = Image.resolveAssetSource(PlanDetails5Img).uri
 import ProfileImage1 from './ProfileImage.png'
 export const ProfileImage = Image.resolveAssetSource(ProfileImage1).uri
 
+import HatchbackLarge from './HatchbackLarge.jpg'
+export const HatchbackLargeImage = Image.resolveAssetSource(HatchbackLarge).uri
+
+import SedanLarge from './SedanLarge.jpg'
+export const SedanLargeImage = Image.resolveAssetSource(SedanLarge).uri
+
+import SuvLarge from './SuvLarge.png'
+export const SuvLargeImage = Image.resolveAssetSource(SuvLarge).uri
+
+import noVehicleCard from './noVehicleCard/noVehicleCard.png'
+export const noVehicleCardImage = Image.resolveAssetSource(noVehicleCard).uri
+
+import requestSubmittedCard from './requestSubmittedCard/requestSubmittedCard.png'
+export const requestSubmittedCardImage = Image.resolveAssetSource(requestSubmittedCard).uri
+
+import subscriptionExpiredCard from './subscriptionExpiredCard/subscriptionExpiredCard.png'
+export const subscriptionExpiredCardImage = Image.resolveAssetSource(subscriptionExpiredCard).uri
