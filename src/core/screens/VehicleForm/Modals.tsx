@@ -5,6 +5,7 @@ import { useTheme } from '@react-navigation/native'
 import { scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import InformationModal from '@src/common/components/InformationModal'
 import { SCREEN_HEIGHT } from '@src/common/utils/deviceInformation'
+import { AlertSVG } from '@src/assets/svg'
 
 interface RenderModalsProps {
     isColorShow: boolean
@@ -44,7 +45,7 @@ const RenderModals = (props: RenderModalsProps) => {
             {isColorShow && <SingleSelectionModal data={colorsList} visible={isColorShow} onClose={() => setIsColorShow(false)} title='Select Color' titleItem='name' idItem='_id' selectedItem={selectedColor} setSelectedItem={onPressSelectColor} children={renderColorsItem} />}
             {isAddressModalVisible && <SingleSelectionModal data={allAddressList} visible={isAddressModalVisible} onClose={() => setIsAddressModalVisible(false)} title='Select Address' titleItem='address' idItem='_id' selectedItem={selectedAddress} setSelectedItem={onPressSelectAddress} />}
             {isTimeSlotsModalVisible && <SingleSelectionModal data={subscriptionTimeSlotsData} visible={isTimeSlotsModalVisible} onClose={() => setIsTimeSlotsModalVisible(false)} title='Select Time Slot' titleItem='name' idItem='id' selectedItem={selectedSubscriptionTimeSlot} setSelectedItem={onPressSelectTimeSlots} />}
-            {isInfoModalOpen && <InformationModal visible={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} description={`You don't need to pay upfront-your subscription fee is collected at the end of each month after you've enjoyed the service. Pay easily via cash or any UPI method.`} modalProps={{ containerStyle: { position: 'absolute', top: SCREEN_HEIGHT / 3, width: '85%', borderRadius: scaleWidthPX(20), } }} />}
+            {isInfoModalOpen && <InformationModal visible={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)} description={`You don't need to pay upfront-your subscription fee is collected at the end of each month after you've enjoyed the service. Pay easily via cash or any UPI method.`} modalProps={{ containerStyle: { position: 'absolute', top: SCREEN_HEIGHT / 4, width: '85%', borderRadius: scaleWidthPX(20), } }} modalIcon={<AlertSVG width={scaleWidthPX(90)} height={scaleWidthPX(90)} />} />}
         </>
     )
 }
