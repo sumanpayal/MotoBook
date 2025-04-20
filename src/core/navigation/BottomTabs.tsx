@@ -10,7 +10,7 @@ import { SubscriptionSVG } from '@src/assets/SvgJSX/Subscription'
 import { AccountSVG } from '@src/assets/SvgJSX/Account'
 import { ReferAFriendSVG } from '@src/assets/SvgJSX/ReferAFriend'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
-import { GradientSVG, NewsSVG } from '@src/assets/svg'
+import { GradientSVG, NewsSVG, NewsDisabledSVG } from '@src/assets/svg'
 
 const Tab = createBottomTabNavigator()
 
@@ -62,7 +62,7 @@ const BottomTabs = () => {
 						tabBarLabelPosition: 'below-icon',
 						tabBarItemStyle: { marginRight: scaleWidthPX(10), height: scaleHeightPX(70), borderBottomColor: colors.primary, borderBottomWidth: scaleHeightPX(0) },
 						tabBarButton: (props) => <NoFeedbackButton {...props} />,
-						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<NewsSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} focusedImage={<NewsSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} />,
+						tabBarIcon: ({ focused }) => <TabIcon focused={focused} normalImage={<NewsDisabledSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} focusedImage={<NewsSVG width={scaleWidthPX(40)} height={scaleWidthPX(40)} />} />,
 						tabBarLabel: ({ focused }) => <TabLabel focused={focused} title='NEWS' />
 					}}
 				/>

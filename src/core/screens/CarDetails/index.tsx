@@ -65,11 +65,11 @@ const CarDetails = () => {
                     <SafeAreaView edges={['top']} />
                     <HeaderNavigation isBack isNotifications={false} title='Plan Details' />
                     <View style={styles.imageView}>
-                        <Image source={{ uri: carDetails?.largeImage }} style={{ width: '100%', height: '100%' }} resizeMode='cover' />
+                        <Image source={{ uri: carDetails?.smallImage }} style={{ width: '100%', height: '100%' }} resizeMode='cover' />
                     </View>
                     <View style={styles.nameView}>
                         <CustomText style={commonFontStyles.fontSize3XL} lineHeight>{carDetails?.name}</CustomText>
-                        <CustomText textType='bold' style={commonFontStyles.fontSizeXL} lineHeight>{`@${carDetails?.price}/Month`}</CustomText>
+                        <CustomText textType='bold' style={{...commonFontStyles.fontSizeXL, color: colors.primary}} lineHeight>{`@₹${carDetails?.price}/Month`}</CustomText>
                     </View>
                 </View>
                 <View

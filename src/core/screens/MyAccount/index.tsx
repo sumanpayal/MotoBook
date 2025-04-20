@@ -113,7 +113,7 @@ const MyAccount = () => {
 
     const getImage = () => {
         return profileImage?.base64 ? 'data:image/png;base64,' + profileImage?.base64 : profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
-    }
+    }    
 
     return (
         <View style={styles.main}>
@@ -149,8 +149,7 @@ const MyAccount = () => {
                         onChangeText={(text: string) => {
 
                         }}
-                        keyboardType='phone-pad' maxLength={10}
-                        placeholder='Enter Phone No'
+                        placeholder='Phone No'
                         value={profileData?.phoneNumber}
                         isRequired={false}
                         editable={false}

@@ -80,3 +80,9 @@ export const requestSubmittedCardImage = Image.resolveAssetSource(requestSubmitt
 
 import subscriptionExpiredCard from './subscriptionExpiredCard/subscriptionExpiredCard.png'
 export const subscriptionExpiredCardImage = Image.resolveAssetSource(subscriptionExpiredCard).uri
+
+import fullMonthOfServiceCard from './fullMonthOfServiceCard/FullMonthOfServiceCard.png'
+export const fullMonthOfServiceCardImage = Image.resolveAssetSource(fullMonthOfServiceCard).uri
+
+import referAFriendCard from './referAFriendCard/referAFriendCard.png'
+export const referAFriendCardImage = Image.resolveAssetSource(referAFriendCard).uri

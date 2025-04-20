@@ -52,7 +52,7 @@ const Welcome = () => {
 				</View>
 				<View style={styles.bottomView}>
 					<CustomText lineHeight style={{ textAlign: 'center', ...commonFontStyles.fontSizeS }}>
-						{`By tapping on Get started, you agree to the\n`}
+						{`By tapping on Get Started, you agree to the\n`}
 						<CustomText onPress={onPressTermsAndConditions} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Terms & Conditions`}</CustomText>
 						<CustomText style={commonFontStyles.fontSizeS} lineHeight>{` and `}</CustomText>
 						<CustomText onPress={onPressPrivacyPolicy} lineHeight style={{ color: colors.primary, textDecorationLine: 'underline' }}>{`Privacy Policy`}</CustomText>

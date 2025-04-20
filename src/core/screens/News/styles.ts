@@ -12,8 +12,8 @@ export const createStyles = (colors: any) => {
             borderRadius: 15,
             paddingHorizontal: scaleWidthPX(20),
             backgroundColor: colors.borderColor,
-            paddingVertical: scaleHeightPX(24),
-            gap: scaleHeightPX(4)
+            paddingVertical: scaleHeightPX(20),
+            gap: scaleHeightPX(2)
         },
         center: {
             flex: 1,

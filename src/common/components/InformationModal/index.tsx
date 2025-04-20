@@ -13,17 +13,27 @@ type InformationModalProps = {
 	description?: string
 	modalProps?: BottomModalProps
 	modalIcon?: any
+	title?: string
+	mainStyle?: any
+	descriptionStyle?: any
 }
 
 const InformationModal = (props: InformationModalProps) => {
-	const { visible, onClose, description, modalProps, modalIcon } = props
+	const { visible, onClose, description, modalProps, modalIcon, title, mainStyle, descriptionStyle } = props
 	return (
 		<BottomModal visible={visible} onDrop={onClose} isHeader headerCloseOnPress={onClose} {...modalProps} hideOnBackdropPress={false}>
-			<View style={styles.main}>
-				{modalIcon && modalIcon}
-				<CustomText textType='medium' style={{ textAlign: 'center' }}>
-					{description}
-				</CustomText>
+			<View style={[styles.main, mainStyle]}>
+				<View style={{ alignItems: 'center', gap: scaleHeightPX(8) }}>
+					{modalIcon && modalIcon}
+					<View style={{ gap: scaleHeightPX(4) }}>
+						{title && <CustomText lineHeight textType='bold' style={{ textAlign: 'center', ...commonFontStyles.fontSizeXL }}>
+							{title}
+						</CustomText>}
+						<CustomText textType='medium' style={{ textAlign: 'center', ...descriptionStyle }}>
+							{description}
+						</CustomText>
+					</View>
+				</View>
 				<CustomButton customLabelStyles={commonFontStyles.fontBold} title='Got It' onPress={onClose} />
 			</View>
 		</BottomModal>

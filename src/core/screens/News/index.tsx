@@ -67,12 +67,12 @@ const News = () => {
             <Pressable style={styles.item} onPress={() => {
                 navigation.navigate('InAppBrowser', { title: 'News Details', link: item?.link })
             }}>
-                <Image style={{ width: '100%', height: 150, marginBottom: scaleHeightPX(8) }} source={{ uri: item?.image?.url || 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg' }} resizeMode='cover' />
-                <CustomText style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{getTitleDecoded(item?.title)}</CustomText>
+                <Image style={{ width: '100%', height: scaleHeightPX(120), marginBottom: scaleHeightPX(6) }} source={{ uri: item?.image?.url || 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg' }} resizeMode='cover' />
+                <CustomText lineHeight style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{getTitleDecoded(item?.title)}</CustomText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: scaleWidthPX(16) }}>
-                    <CustomText style={{ flex: 1 }}>{item?.pubDate}</CustomText>
+                    <CustomText lineHeight style={{ flex: 1 }}>{item?.pubDate?.replace('+0530', '')}</CustomText>
                     <Pressable onPress={() => shareOnPress(`${item?.title} \n ${item?.link}`)}>
-                        <ShareSVG width={scaleWidthPX(24)} height={scaleWidthPX(24)} />
+                        <ShareSVG fill={colors.white} width={scaleWidthPX(24)} height={scaleWidthPX(24)} />
                     </Pressable>
                 </View>
             </Pressable>

@@ -7,25 +7,34 @@ import { Image, Pressable, View } from 'react-native'
 import { createStyles } from '../styles'
 import React from 'react'
 
-const HATCHBACK_DETAILS = {
+export enum CAR_TYPE {
+	HATCHBACK = 1,
+	SEDAN = 2,
+	SUV = 3
+}
+
+export const HATCHBACK_DETAILS = {
 	name: 'Hatchback',
 	price: '549',
 	smallImage: HatchbackImage,
-	largeImage: HatchbackLargeImage
+	largeImage: HatchbackLargeImage,
+	id: CAR_TYPE.HATCHBACK
 }
 
-const SEDAN_DETAILS = {
+export const SEDAN_DETAILS = {
 	name: 'Sedan',
 	price: '649',
 	smallImage: SedanImage,
-	largeImage: SedanLargeImage
+	largeImage: SedanLargeImage,
+	id: CAR_TYPE.SEDAN
 }
 
-const SUV_DETAILS = {
+export const SUV_DETAILS = {
 	name: 'SUV',
 	price: '749',
 	smallImage: SuvImage,
-	largeImage: SuvLargeImage
+	largeImage: SuvLargeImage,
+	id: CAR_TYPE.SUV
 }
 
 export const DailyCarPlans = () => {

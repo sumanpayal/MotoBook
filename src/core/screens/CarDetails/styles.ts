@@ -45,7 +45,8 @@ export const createStyles = (colors: any) =>
             alignItems: 'center'
         },
         cleaningHeader: {
-            marginBottom: scaleHeightPX(8)
+            marginBottom: scaleHeightPX(8),
+            ...commonFontStyles.fontSizeL
         },
         content: {
             flexDirection: 'row',
