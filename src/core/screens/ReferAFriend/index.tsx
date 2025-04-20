@@ -71,10 +71,10 @@ const ReferAFriend = () => {
 		return (
 			<View style={{ flex: 1, gap: scaleHeightPX(8), alignItems: 'flex-start' }}>
 				<CustomText textType='bold' style={commonFontStyles.fontSizeXL}>{'How It Works?'}</CustomText>
-				{renderStep(Refer1SVG, `Share the MotorWash app with your friends, family, or neighbors.`)}
+				{renderStep(Refer1SVG, `Share the MotorWash app with your friends, family, or neighbors`)}
 				{renderStep(Refer2SVG, `Your friends download the MotorWash app`)}
 				{renderStep(Refer3SVG, `While submitting their vehicle form, they must enter your referral code`)}
-				{renderStep(Refer4SVG, `Once your friend completes 1 month of service, you get 50% OFF on your next billing cycle. No limits—refer more, save more!`)}
+				{renderStep(Refer4SVG, `Once your friend completes 1 month of service, you get 50% OFF on your next billing cycle`)}
 			</View>
 		)
 	}
