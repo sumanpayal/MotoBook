@@ -1,16 +1,15 @@
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 import { createStyles } from './styles';
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle';
-import { HeaderNavigation } from '@src/common/components/HeaderNavigation';
 import { useDispatch } from 'react-redux';
 import { InteriorCleaning, PlanDetails } from '../Home/components/PlanDetails';
 import commonFontStyles from '@src/common/styles/commonFontStyles';
 import { TickSVG } from '@src/assets/svg';
 import CustomText from '@src/common/components/Text';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@src/common/components/Button';
+import MainFrame from '@src/common/components/Mainframe';
 
 const CarDetails = () => {
     const navigation: any = useNavigation();
@@ -59,17 +58,15 @@ const CarDetails = () => {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+        <MainFrame isHeader title='Plan Details' isNotifications={false}>
+            <FlatList data={[1]} keyExtractor={(_, index) => index.toString()} ListHeaderComponent={<View>
                 <View style={{ backgroundColor: colors.backgroundColor }}>
-                    <SafeAreaView edges={['top']} />
-                    <HeaderNavigation isBack isNotifications={false} title='Plan Details' />
                     <View style={styles.imageView}>
                         <Image source={{ uri: carDetails?.smallImage }} style={{ width: '100%', height: '100%' }} resizeMode='cover' />
                     </View>
                     <View style={styles.nameView}>
                         <CustomText style={commonFontStyles.fontSize3XL} lineHeight>{carDetails?.name}</CustomText>
-                        <CustomText textType='bold' style={{...commonFontStyles.fontSizeXL, color: colors.primary}} lineHeight>{`@₹${carDetails?.price}/Month`}</CustomText>
+                        <CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.primary }} lineHeight>{`@₹${carDetails?.price}/Month`}</CustomText>
                     </View>
                 </View>
                 <View
@@ -78,12 +75,12 @@ const CarDetails = () => {
                     <PlanDetails />
                     <View style={{ height: scaleHeightPX(24) }} />
                     <InteriorCleaning />
+                    <View style={{ marginHorizontal: scaleHeightPX(16), marginTop: scaleHeightPX(32) }}>
+                        <CustomButton title='Add Vehicle' onPress={() => navigation.navigate('SelectBrand')} customLabelStyles={commonFontStyles.fontBold} />
+                    </View>
                 </View>
-            </ScrollView>
-            <View style={{ margin: scaleHeightPX(16) }}>
-                <CustomButton title='Add Vehicle' onPress={() => navigation.navigate('SelectBrand')} customLabelStyles={commonFontStyles.fontBold} />
-            </View>
-        </View>
+            </View>} renderItem={() => <View />} />
+        </MainFrame>
     );
 };
 

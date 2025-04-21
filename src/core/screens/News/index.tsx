@@ -68,7 +68,7 @@ const News = () => {
                 navigation.navigate('InAppBrowser', { title: 'News Details', link: item?.link })
             }}>
                 <Image style={{ width: '100%', height: scaleHeightPX(120), marginBottom: scaleHeightPX(6) }} source={{ uri: item?.image?.url || 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg' }} resizeMode='cover' />
-                <CustomText lineHeight style={{ ...commonFontStyles.fontSizeL, color: colors.primary }}>{getTitleDecoded(item?.title)}</CustomText>
+                <CustomText textType='semi-bold' lineHeight style={{ ...commonFontStyles.fontSizeL }}>{getTitleDecoded(item?.title)}</CustomText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: scaleWidthPX(16) }}>
                     <CustomText lineHeight style={{ flex: 1 }}>{item?.pubDate?.replace('+0530', '')}</CustomText>
                     <Pressable onPress={() => shareOnPress(`${item?.title} \n ${item?.link}`)}>

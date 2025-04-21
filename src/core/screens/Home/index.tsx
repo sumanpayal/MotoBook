@@ -102,7 +102,6 @@ const HomeScreen = () => {
 	const renderHeader = () => {
 		return (
 			<View style={styles.header}>
-				<SafeAreaView edges={['top']} />
 				<HeaderNavigation
 					isCustom
 					children={renderHeaderLeft()}
