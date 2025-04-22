@@ -75,7 +75,7 @@ const MySubscriptions = () => {
 	const renderCarItem = ({ item }: { item: any }) => {
 		return (
 			<Pressable style={styles.item} onPress={() => onPressItem(item)}>
-				<Image source={{ uri: `${BASE_URL}/${item?.carmodel?.image}` }} style={styles.carImage} />
+				<Image source={{ uri: `${BASE_URL}/${item?.carmodel?.image}` }} style={styles.carImage} resizeMode='cover' />
 				<View style={styles.image}>
 					<CarDetailSVG />
 				</View>

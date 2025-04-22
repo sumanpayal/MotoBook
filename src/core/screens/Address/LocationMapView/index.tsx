@@ -21,13 +21,11 @@ const LocationMapView = () => {
 
         getCurrentPosition(
             position => {
-                console.log({ position });
                 setLocation(position);
             },
             error => {
                 Alert.alert(`Code ${error.code}`, error.message);
                 setLocation(null)
-                console.log({ error });
             },
             {
                 accuracy: {

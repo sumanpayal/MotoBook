@@ -5,6 +5,7 @@ import React from "react"
 import CustomText from "@src/common/components/Text"
 import commonFontStyles from "@src/common/styles/commonFontStyles"
 import { BASE_URL } from "@src/network/apiClient"
+import { scaleHeightPX } from "@src/common/utils/responsiveStyle"
 
 interface VehicleDetailsProps {
     label: any;
@@ -18,12 +19,13 @@ export const VehicleDetails = (props: VehicleDetailsProps) => {
     const { label, value, color = 'red', isColor = false, image } = props
     const { colors } = useTheme()
     const styles = createStyles(colors)
+
     return (
         <View style={styles.vehicleInner}>
             <CustomText style={{ color: colors.labelColor }}>{label}</CustomText>
             {isColor ? <View style={styles.vehicleImage}>
                 <View style={{ ...styles.vehicleColor, backgroundColor: color }} />
-            </View> : <Image source={{ uri: `${BASE_URL}/${image}` }} style={styles.vehicleImage} resizeMode={'center'} />}
+            </View> : <Image source={{ uri: `${BASE_URL}/${image}` }} style={[styles.vehicleImage, { width: '60%', alignSelf: 'center' }]} resizeMode={'cover'} />}
             <CustomText textType='bold'>{value}</CustomText>
         </View>
     )

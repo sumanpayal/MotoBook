@@ -23,7 +23,7 @@ const MyCarDetails = () => {
 	const { params }: any = useRoute()
 
 	const subscription_id = params?.carDetails?._id
-	
+
 	const [carDetails, setCarDetails] = useState<any>(null)
 
 	useEffect(() => {
@@ -61,7 +61,7 @@ const MyCarDetails = () => {
 					<View style={styles.topBottom}>
 						<View style={styles.package}>
 							<CustomText textType='bold' style={{ ...commonFontStyles.fontSizeXL, color: colors.backgroundColor, }}>
-								{carDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
+								{carDetails?.paymentStatus === 'UNPAID' ? 'No Plan Active' : carDetails?.interiorCleaningAmount > 0 ? 'Premium Package' : 'Standard Package'}
 							</CustomText>
 						</View>
 						{VehicleAddress(false, 'Car License Plate Number', carDetails?.carNumber)}

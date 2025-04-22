@@ -107,7 +107,7 @@ const CustomCarousel: React.FC<CarouselProps> = ({ data = [], onPress, cauroselT
 
 	const renderRequestSubmittedCard = () => {
 		return (
-			<Pressable onPress={() => { onPress && onPress(CAROUSEL_TYPE.REQUEST_SUBMITTED) }} style={{ backgroundColor: colors.noVehicleCardBg, width: '90%', alignSelf: 'center', marginBottom: scaleHeightPX(16), marginTop: scaleHeightPX(4), borderRadius: 15, alignItems: 'center', flexDirection: 'row', gap: scaleWidthPX(12), paddingVertical: scaleHeightPX(24), paddingHorizontal: scaleWidthPX(12) }}>
+			<Pressable onPress={() => { onPress && onPress(CAROUSEL_TYPE.REQUEST_SUBMITTED) }} style={{ backgroundColor: colors.requestSubmittedCardBg, width: '90%', alignSelf: 'center', marginBottom: scaleHeightPX(16), marginTop: scaleHeightPX(4), borderRadius: 15, alignItems: 'center', flexDirection: 'row', gap: scaleWidthPX(12), paddingVertical: scaleHeightPX(24), paddingHorizontal: scaleWidthPX(12) }}>
 				<Image source={{ uri: requestSubmittedCardImage }} style={{ width: scaleWidthPX(120), height: scaleWidthPX(120) }} resizeMode='cover' />
 				<View style={{ flex: 1, justifyContent: 'center', paddingRight: scaleHeightPX(24), marginRight: scaleWidthPX(16) }}>
 					<CustomText style={{ color: colors.backgroundColor, ...commonFontStyles.fontSizeXL }} textType='bold' lineHeight>{'Vehicle Form Submitted'}</CustomText>

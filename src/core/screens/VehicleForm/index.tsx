@@ -11,7 +11,7 @@ import { createStyle } from './styles'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { scaleHeightPX } from '@src/common/utils/responsiveStyle'
 import { getAddressListAPI, getColorsList } from '@src/network/address'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isEmpty } from 'lodash'
 import { getCarModalDetailsFromAPI, getSubscriptionTimeSlotsList, postSubscriptionDetailsAPI } from '@src/network/car'
@@ -24,6 +24,8 @@ import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import CustomDate from '@src/common/components/CustomDate'
 import { formatDate } from '@src/common/utils/formatDate'
 import moment from 'moment'
+import { RootState } from '@src/common/redux/store/store'
+import { setIsAddressSet } from '@src/common/redux/reducers/currentUser'
 
 const VehicleForm = () => {
 	const navigation: any = useNavigation()
@@ -31,6 +33,8 @@ const VehicleForm = () => {
 
 	const { colors } = useTheme()
 	const styles = createStyle(colors)
+
+	const isAddressSet: any = useSelector((state: RootState) => state.root.currentUser.isAddressSet)
 
 	const route = useRoute()
 	const { carCompany, carModal }: any = route?.params
@@ -142,13 +146,19 @@ const VehicleForm = () => {
 		getAddressListAPI((res: API_RESPONSE) => {
 			setSelectedAddress(null)
 			if (res.data) {
-				const data = res?.data?.map((item: any) => {
+				const data: any[] = res?.data?.map((item: any) => {
 					const address = `${item?.address}, ${item?.landmark}, ${item?.city}, ${item?.state}, ${item?.country}, ${item?.postalCode}`
 					return {
 						...item,
 						address
 					}
 				})
+				if (isAddressSet !== -1) {
+					if (data.length > 0) {
+						setSelectedAddress(data[data?.length - 1])
+					}
+					dispatch(setIsAddressSet(-1))
+				}
 				setAllAddressList(data)
 			} else {
 				setAllAddressList([])
@@ -161,7 +171,7 @@ const VehicleForm = () => {
 	}
 
 	const onPressAddAddress = () => {
-		navigation.navigate('AddAddress')
+		navigation.navigate('AddAddress', { fromVehicleForm: true })
 	}
 
 	const validateForm = () => {

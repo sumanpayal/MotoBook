@@ -70,9 +70,9 @@ const News = () => {
                 <Image style={{ width: '100%', height: scaleHeightPX(120), marginBottom: scaleHeightPX(6) }} source={{ uri: item?.image?.url || 'https://spn-sta.spinny.com/blog/20220825223325/Luxury-SUVs.jpg' }} resizeMode='cover' />
                 <CustomText textType='semi-bold' lineHeight style={{ ...commonFontStyles.fontSizeL }}>{getTitleDecoded(item?.title)}</CustomText>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: scaleWidthPX(16) }}>
-                    <CustomText lineHeight style={{ flex: 1 }}>{item?.pubDate?.replace('+0530', '')}</CustomText>
+                    <CustomText lineHeight style={{ flex: 1, opacity: 0.5 }}>{item?.pubDate?.replace('+0530', '')}</CustomText>
                     <Pressable onPress={() => shareOnPress(`${item?.title} \n ${item?.link}`)}>
-                        <ShareSVG fill={colors.white} width={scaleWidthPX(24)} height={scaleWidthPX(24)} />
+                        <ShareSVG fill={colors.white} width={scaleWidthPX(20)} height={scaleWidthPX(20)} />
                     </Pressable>
                 </View>
             </Pressable>

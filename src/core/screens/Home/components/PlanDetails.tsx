@@ -40,10 +40,10 @@ export const InteriorCleaning = () => {
 	const styles = createStyles(colors)
 	return (
 		<View style={styles.interiorView}>
-			<CustomText textType='semi-bold'>
-				{'Add 3 Days Of Interior Cleaning '}
-				<CustomText textType='semi-bold' style={{ color: colors.primary }}>
-					{'@ ₹149'}
+			<CustomText textType='bold'>
+				{'Add 3 days of interior cleaning at just'}
+				<CustomText textType='bold' style={{ color: colors.primary }}>
+					{' ₹149/month'}
 				</CustomText>
 			</CustomText>
 		</View>

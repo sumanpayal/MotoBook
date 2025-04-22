@@ -1,11 +1,11 @@
-import { View, FlatList, Pressable, ImageBackground, Image } from 'react-native'
+import { View, FlatList, Pressable, ImageBackground, Image, Linking } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native'
 import { createStyles } from './styles'
 import CustomText from '@src/common/components/Text'
 import { setProfileData, setUserData } from '@src/common/redux/reducers/currentUser'
 import { useDispatch, useSelector } from 'react-redux'
-import { AboutSVG, CleaningHistorySVG, InvoiceHistorySVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, MyCleanerSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
+import { AboutSVG, CarGameSVG, CleaningHistorySVG, InvoiceHistorySVG, LogoutSVG, MyAccountSVG, MyAddressSVG, MyCarsSVG, MyCleanerSVG, PlusProfileSVG, PrivacyPolicySVG, RightArrowSVG, TermsSVG } from '@src/assets/svg'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { AccountBgImage, ProfileImage } from '@src/assets/image'
 import { HeaderNavigation } from '@src/common/components/HeaderNavigation'
@@ -65,6 +65,12 @@ const MySettings = () => {
 			id: 9,
 			title: 'Invoice History',
 			icon: InvoiceHistorySVG,
+			color: colors.white
+		},
+		{
+			id: 10,
+			title: 'Play Car Game',
+			icon: CarGameSVG,
 			color: colors.white
 		},
 		{
@@ -160,6 +166,11 @@ const MySettings = () => {
 			case 9:
 				// invoice history
 				navigation.navigate('InvoiceHistory')
+				break
+			case 10:
+				// play car game
+				Linking.openURL('https://html5gameshq.com/iframed/drift-dudes')
+				break
 			default:
 				break
 		}

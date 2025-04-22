@@ -31,10 +31,10 @@ export const createStyles = (colors: any) =>
 			backgroundColor: colors.primary,
 			height: scaleHeightPX(40),
 			borderRadius: 9,
-			width: '60%',
+			maxWidth: '60%',
 			justifyContent: 'center',
 			alignItems: 'center',
-			paddingHorizontal: scaleWidthPX(16)
+			paddingHorizontal: scaleWidthPX(12)
 		},
 		vehicleCenter: {
 			gap: scaleHeightPX(4),

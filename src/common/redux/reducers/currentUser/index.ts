@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 	userData: null,
 	isLoggedIn: false,
-	profileData: null
+	profileData: null,
+	isAddressSet: -1
 } as CurrentUser
 
 const currentUser = createSlice({
@@ -18,9 +19,12 @@ const currentUser = createSlice({
 		setProfileData: (state, action) => {
 			state.profileData = action.payload
 		},
+		setIsAddressSet: (state, action) => {
+			state.isAddressSet = action.payload
+		}
 	}
 })
 
-export const { setUserData, setProfileData } = currentUser.actions
+export const { setUserData, setProfileData, setIsAddressSet } = currentUser.actions
 
 export default currentUser.reducer

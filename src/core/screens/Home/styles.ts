@@ -37,10 +37,10 @@ export const createStyles = (colors: any) =>
 		},
 		interiorView: {
 			backgroundColor: colors.interiorBg,
-			height: scaleHeightPX(38),
+			// height: scaleHeightPX(38),
 			borderRadius: 2,
 			justifyContent: 'center',
-			paddingHorizontal: scaleWidthPX(12),
+			padding: scaleWidthPX(12),
 			marginHorizontal: scaleWidthPX(22)
 		},
 		carousel: {

@@ -17,6 +17,7 @@ import commonFontStyles from '@src/common/styles/commonFontStyles'
 import { UseLocationSVG } from '@src/assets/svg'
 import { scaleHeightPX, scaleWidthPX } from '@src/common/utils/responsiveStyle'
 import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
+import { setIsAddressSet } from '@src/common/redux/reducers/currentUser'
 
 enum ADDRESS_KEYS {
 	addressType = 'addressType',
@@ -62,6 +63,7 @@ const AddAddress = () => {
 
 	const isEdit = params?.isEdit ?? false
 	const addressDetails = params?.addressDetails ?? null
+	const fromVehicleForm = params?.fromVehicleForm ?? false
 
 	const addressTypesData1 = addressDetails?.addressType ? addressTypesData?.find((item: any) => item?.value === addressDetails?.addressType) : null
 
@@ -212,6 +214,9 @@ const AddAddress = () => {
 		else {
 			postAddAddressAPI(params, (res: API_RESPONSE) => {
 				if (res.data) {
+					if (fromVehicleForm) {
+						dispatch(setIsAddressSet(1))
+					}
 					dispatch(
 						setAlertData({
 							isShown: true,
