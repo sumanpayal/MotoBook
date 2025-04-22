@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-type Format =
+export type DateFormat =
   | 'dateTime'
   | 'date'
   | '24hours'
@@ -12,7 +12,7 @@ type Format =
   | 'newsDateTime'
   | 'timeFormat';
 
-export const formatDate = (date: Date | string, format?: Format) => {
+export const formatDate = (date: Date | string, format?: DateFormat) => {
   // if (isEmpty(date) || isNumber(date)) return ''
   switch (format) {
     case 'date':

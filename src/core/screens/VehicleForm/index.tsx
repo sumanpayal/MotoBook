@@ -357,7 +357,7 @@ const VehicleForm = () => {
 				/>
 				<View style={styles.flexRow}>
 					<View style={styles.flex5}>
-						<CustomDate label='Select Start Date' onPress={(value: any) => setStartDate(value)} value={startDate} />
+						<CustomDate label='Select Start Date' onPress={(value: any) => setStartDate(value)} value={startDate} format='startDateVehicle' />
 					</View>
 					<View style={styles.flex5}>
 						<CustomDropdown label='Select Time Slot' onPress={onPressSubscriptionTimeSlot} value={selectedSubscriptionTimeSlot?.name} />

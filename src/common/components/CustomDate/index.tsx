@@ -5,7 +5,8 @@ import CustomText from '../Text'
 import { DownSVG } from '@src/assets/svg'
 import { inputStyles } from './styles'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { formatDate } from '@src/common/utils/formatDate'
+import { DateFormat, formatDate } from '@src/common/utils/formatDate'
+import MonthPicker from 'react-native-month-year-picker';
 
 interface DropdownProps {
     value: any
@@ -18,14 +19,15 @@ interface DropdownProps {
     is24Hour?: boolean
     onPress: (value: any) => void
     minimumDate?: Date
-    isFormatted?: boolean
+    isMonthSelection?: boolean
+    format?: DateFormat
 }
 
 export default function CustomDate(props: DropdownProps) {
     const { colors } = useTheme()
     const styles = inputStyles(colors)
 
-    const { label, value = '', disabled = false, isRequired = false, RightIcon = DownSVG, placeholder = 'YYYY-MM-DD', mode = 'date', is24Hour = false, onPress, minimumDate = new Date(), isFormatted = true } = props
+    const { label, value = '', disabled = false, isRequired = false, RightIcon = DownSVG, placeholder = 'YYYY-MM-DD', mode = 'date', is24Hour = false, onPress, minimumDate, format = 'startDateVehicle', isMonthSelection = false } = props
 
     const [open, setOpen] = useState(false)
 
@@ -33,6 +35,11 @@ export default function CustomDate(props: DropdownProps) {
         setOpen(false);
         onPress(selectedDate);
     };
+
+    const onValueChange = (event: any, selectedDate: any) => {
+        setOpen(false);
+        onPress(selectedDate ?? value ?? new Date());
+    }
 
     const shouDateModal = () => {
         setOpen(true);
@@ -42,6 +49,9 @@ export default function CustomDate(props: DropdownProps) {
         return value === null || value === undefined || value?.length === 0
     }
 
+    console.log({ date: value });
+
+
     return (
         <View style={styles.container}>
             <View style={styles.main}>
@@ -50,11 +60,15 @@ export default function CustomDate(props: DropdownProps) {
                     {isRequired ? <CustomText style={{ color: colors.alertRed }}>{' *'}</CustomText> : ''}
                 </CustomText>
                 <Pressable style={styles.inputView} onPress={shouDateModal} disabled={disabled}>
-                    <CustomText style={{ ...styles.input, color: isValueEmpty() ? colors.inputPlaceholder : colors.white }}>{value ? isFormatted ? formatDate(value, 'startDateVehicle') : value : placeholder}</CustomText>
+                    <CustomText style={{ ...styles.input, color: isValueEmpty() ? colors.inputPlaceholder : colors.white }}>{value ? formatDate(value, format) : placeholder}</CustomText>
                     <RightIcon />
                 </Pressable>
                 {open && (
-                    <View style={styles.dateView}>
+                    isMonthSelection ? <MonthPicker
+                        onChange={onValueChange}
+                        value={value ?? new Date()}
+                        minimumDate={minimumDate}
+                    /> : <View style={styles.dateView}>
                         <DateTimePicker
                             testID="dateTimePicker"
                             value={value ?? new Date()}

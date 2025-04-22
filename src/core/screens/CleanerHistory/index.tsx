@@ -50,7 +50,7 @@ const CleanerHistory = () => {
         <MainFrame isHeader title='Cleaning History' isNotifications={false}>
             <View style={styles.main}>
                 <View style={{ gap: scaleHeightPX(16), marginBlock: scaleHeightPX(24) }}>
-                    <CustomDate label='Select By Date' onPress={(value: any) => setStartDate(value)} value={startDate} minimumDate={null} />
+                    <CustomDate label='Select By Date' onPress={(value: any) => setStartDate(value)} value={startDate} minimumDate={undefined} format='startDateVehicle' />
                 </View>
                 <FlatList contentContainerStyle={allCleaningHistoryData.length === 0 && { flex: 1, justifyContent: 'center', alignItems: 'center' }} data={allCleaningHistoryData} renderItem={renderCleaningHistoryItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListEmptyComponent={<NoRecordFound isLottieImage LottieImage={CleanerHistoryGIF} />} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} showsVerticalScrollIndicator={false} />
             </View>

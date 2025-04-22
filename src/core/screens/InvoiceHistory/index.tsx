@@ -51,7 +51,7 @@ const InvoiceHistory = () => {
         <MainFrame isHeader title='Invoice History' isNotifications={false}>
             <View style={styles.main}>
                 <View style={{ gap: scaleHeightPX(16), marginBlock: scaleHeightPX(24) }}>
-                    <CustomDate label='Select By Month' onPress={(value: any) => setStartDate(value)} value={formatDate(startDate, 'yearMonth')} minimumDate={undefined} placeholder='YYYY-MM' isFormatted={false} disabled />
+                    <CustomDate label='Select By Month' onPress={(value: any) => setStartDate(value)} value={startDate} placeholder='YYYY-MM' isMonthSelection format='yearMonth' />
                 </View>
                 <FlatList contentContainerStyle={allInvoiceHistoryData.length === 0 && { flex: 1, justifyContent: 'center', alignItems: 'center' }} data={allInvoiceHistoryData} renderItem={renderInvoiceHistoryItem} keyExtractor={(item) => item?._id} ItemSeparatorComponent={() => <View style={{ height: scaleHeightPX(16) }} />} ListEmptyComponent={<NoRecordFound isLottieImage LottieImage={InvoiceHistoryGIF} />} ListFooterComponent={() => <View style={{ marginVertical: scaleHeightPX(24) }} />} showsVerticalScrollIndicator={false} />
             </View>
