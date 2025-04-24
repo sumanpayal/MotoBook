@@ -11,7 +11,6 @@ import { InvoiceHistoryGIF } from '@src/assets/lottie'
 import { createStyles } from './styles'
 import { getNotificationsDataFromAPI } from '@src/network/login'
 import CustomDate from '@src/common/components/CustomDate'
-import { formatDate } from '@src/common/utils/formatDate'
 
 const InvoiceHistory = () => {
     const dispatch = useDispatch()

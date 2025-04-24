@@ -21,7 +21,7 @@ export const HeaderLeftComponent = () => {
 	}
 
 	const getImage = () => {
-		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
+		return profileData?.image ? profileData?.image : ProfileImage
 	}
 
 	const getGreeting = () => {

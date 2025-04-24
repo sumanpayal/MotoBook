@@ -86,3 +86,6 @@ export const fullMonthOfServiceCardImage = Image.resolveAssetSource(fullMonthOfS
 
 import referAFriendCard from './referAFriendCard/referAFriendCard.png'
 export const referAFriendCardImage = Image.resolveAssetSource(referAFriendCard).uri
+
+import phoneIconLogin from './phoneIconLogin.png'
+export const phoneIconLoginImage = Image.resolveAssetSource(phoneIconLogin).uri

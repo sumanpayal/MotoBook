@@ -18,7 +18,7 @@ import { setAlertData } from '@src/common/redux/reducers/alert'
 import { isValidEmail } from '@src/common/utils/inputValidation'
 import { FilePickerModal } from '@src/common/components/FilePickerModal'
 import { API_RESPONSE } from '@src/common/constants/constants'
-import { getUserProfileDetails, postUpdateUserDetails } from '@src/network/login'
+import { getUserProfileDetails, postUpdateUserDetails, postUploadProfileImage } from '@src/network/login'
 import { setProfileData } from '@src/common/redux/reducers/currentUser'
 import { isEmpty } from 'lodash'
 
@@ -87,7 +87,7 @@ const MyAccount = () => {
             const params = {
                 "email": emailAddress,
                 "fullName": fullName,
-                "image": profileImage?.base64 ? profileImage?.base64 : profileData?.image ? profileData?.image : ""
+                "image": profileImage?.url ? profileImage?.url : profileData?.image ? profileData?.image : ""
             }
             postUpdateUserDetails({}, params, (res: API_RESPONSE) => {
                 dispatch(setIsFullScreenLoading(false))
@@ -112,8 +112,31 @@ const MyAccount = () => {
     }
 
     const getImage = () => {
-        return profileImage?.base64 ? 'data:image/png;base64,' + profileImage?.base64 : profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
-    }    
+        return profileImage?.url ? profileImage?.url : profileData?.image ? profileData?.image : ProfileImage
+    }
+
+    const uploadImage = (image: any) => {
+        dispatch(setIsFullScreenLoading(true))
+        const formData = new FormData();
+        formData.append('image', {
+            uri: image.uri,
+            type: image.type,
+            name: image.fileName || 'upload.jpg',
+        });
+        postUploadProfileImage(formData, (res: API_RESPONSE) => {
+            dispatch(setIsFullScreenLoading(false))
+            if (res?.data) {
+                let url = res?.data?.fileUrls
+                setProfileData({ url })
+            }
+            else {
+                dispatch(setAlertData({
+                    isShown: true,
+                    type: 'error', label: res?.error
+                }))
+            }
+        })
+    }
 
     return (
         <View style={styles.main}>
@@ -144,20 +167,11 @@ const MyAccount = () => {
                         isRequired={false}
                         keyboardType='email-address'
                     />
-                    <CustomInput
-                        label='Phone No'
-                        onChangeText={(text: string) => {
-
-                        }}
-                        placeholder='Phone No'
-                        value={profileData?.phoneNumber}
-                        isRequired={false}
-                        editable={false}
-                    />
+                    <CustomInput label='Phone Number' onChangeText={(text: string) => { }} value={profileData?.phoneNumber?.replace('+91', '')} isLeftChildren keyboardType='phone-pad' placeholder='Enter Phone Number' editable={false} />
                     <CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressSaveProfile} title='Save' />
                 </View>
             </KeyboardAwareScrollView>
-            <FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => setProfileImage(image)} />
+            <FilePickerModal visible={openImagePicker} onClose={() => { setOpenImagePicker(false) }} onSelect={(image: any) => uploadImage(image)} />
         </View>
     )
 }

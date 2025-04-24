@@ -1,6 +1,6 @@
 import { API_RESPONSE, TOKEN, USER } from '@src/common/constants/constants';
-import { getApiService, postApiService, putApiService } from '../apiService';
-import { ADD_DETAIL, GET_USER_PROFILE_DETAILS, MOBILE_LOGIN, NOTIFICATIONS, UPDATE_PROFILE_DETAILS, VERIFY_OTP } from './endpoints';
+import { getApiService, postApiService, postApiServiceSalesForce, putApiService } from '../apiService';
+import { ADD_DETAIL, GET_USER_PROFILE_DETAILS, MOBILE_LOGIN, NOTIFICATIONS, UPDATE_PROFILE_DETAILS, UPLOAD_IMAGE, VERIFY_OTP } from './endpoints';
 import { storeAnonymousData, storeData } from '@src/common/storage/localStorage';
 
 export const postMobileLogin = (
@@ -152,6 +152,33 @@ export const getNotificationsDataFromAPI = (
             if (res?.status === 200) {
                 callBack({
                     data: res?.data,
+                    error: undefined,
+                });
+            } else {
+                callBack({
+                    data: undefined,
+                    error: res?.message,
+                });
+            }
+        })
+        .catch((err: any) => {
+            console.error(err);
+            callBack({
+                data: undefined,
+                error: err?.message,
+            });
+        });
+};
+
+export const postUploadProfileImage = (
+    params: any,
+    callBack: (res: API_RESPONSE) => void,
+) => {
+    postApiServiceSalesForce(UPLOAD_IMAGE, params, { headers: { 'Content-Type': 'multipart/form-data', } })
+        .then(async (res: any) => {
+            if (res?.status === 201) {
+                callBack({
+                    data: res,
                     error: undefined,
                 });
             } else {

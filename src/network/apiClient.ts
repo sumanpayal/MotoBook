@@ -15,6 +15,10 @@ const APIClient = axios.create({
   baseURL: BASE_URL,
 });
 
+export const APIClientSalesforce = axios.create({
+  baseURL: 'https://carwashapi.shop',
+});
+
 const getAuthURLs = (config: any) => {
   return config?.url?.indexOf('/auth/mobile-login') === -1 || config?.url?.indexOf('/auth/verify-otp') === -1 || config?.url?.indexOf('/car-models/company') === -1 || config?.url?.indexOf('/companies') === -1
 }

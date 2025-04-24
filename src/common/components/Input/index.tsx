@@ -26,7 +26,7 @@ export default function CustomInput(props: CustomInputProps) {
 				<View style={styles.inputView}>
 					{isLeftChildren && <CountryFlagWithDialCode />}
 					{leftChildren && leftChildren}
-					<TextInput ref={inputRef} style={[styles.input, isMultiline && styles.inputMultiline, { paddingLeft: leftChildren ? scaleWidthPX(2) : scaleWidthPX(16) }]} placeholder={placeholder} placeholderTextColor={colors.inputPlaceholder} onFocus={handleFocus} onBlur={handleBlur} editable={editable} secureTextEntry={secureTextEntry} multiline={isMultiline} keyboardType={keyboardType} maxLength={maxLength} pointerEvents={editable ? 'auto' : 'none'} {...props} />
+					<TextInput ref={inputRef} style={[styles.input, isMultiline && styles.inputMultiline, {gap: isLeftChildren ? 0 : scaleWidthPX(16) }]} placeholder={placeholder} placeholderTextColor={colors.inputPlaceholder} onFocus={handleFocus} onBlur={handleBlur} editable={editable} secureTextEntry={secureTextEntry} multiline={isMultiline} keyboardType={keyboardType} maxLength={maxLength} pointerEvents={editable ? 'auto' : 'none'} {...props} />
 					{isRightIcon && (
 						<Pressable onPress={() => rightIconOnPress && rightIconOnPress()}>
 							<RightIcon />
@@ -39,12 +39,13 @@ export default function CustomInput(props: CustomInputProps) {
 }
 
 const CountryFlagWithDialCode = () => {
+	const { colors } = useTheme()
 	return (
-		<View style={{ flexDirection: 'row', gap: scaleWidthPX(10), alignItems: 'center', paddingLeft: scaleWidthPX(16) }}>
+		<View style={{ flexDirection: 'row', gap: scaleWidthPX(10), alignItems: 'center', paddingLeft: scaleWidthPX(16), height: scaleHeightPX(44) }}>
 			<Image source={{ uri: flagImage }} style={{ width: scaleWidthPX(25), height: scaleHeightPX(16) }} />
-			<CustomText textType='semi-bold' style={commonFontStyles.fontSizeL}>
-				{'+91'}
-			</CustomText>
+			<TextInput style={{
+				height: scaleHeightPX(44), color: colors.white, ...commonFontStyles.fontSizeL, paddingHorizontal: 0,
+			}} placeholder={''} placeholderTextColor={colors.inputPlaceholder} editable={false} pointerEvents={'none'} value='+91' defaultValue='+91' />
 		</View>
 	)
 }

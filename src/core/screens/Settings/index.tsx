@@ -16,7 +16,7 @@ import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { FilePickerModal } from '@src/common/components/FilePickerModal'
 import { API_RESPONSE } from '@src/common/constants/constants'
 import { setAlertData } from '@src/common/redux/reducers/alert'
-import { getUserProfileDetails, postUpdateUserDetails } from '@src/network/login'
+import { getUserProfileDetails, postUpdateUserDetails, postUploadProfileImage } from '@src/network/login'
 import { RootState } from '@src/common/redux/store/store'
 
 const MySettings = () => {
@@ -169,7 +169,7 @@ const MySettings = () => {
 				break
 			case 10:
 				// play car game
-				Linking.openURL('https://html5gameshq.com/iframed/drift-dudes')
+				navigation.navigate('InAppBrowser', { title: 'Play Car Game', link: 'https://games.cdn.famobi.com/html5games/d/drift-dudes/v190/?fg_domain=play.famobi.com&fg_aid=A-O9JYH&fg_uid=4379d17e-2ec5-45ff-a76b-74e4c7634ed0&fg_pid=4e5f1429-8e41-4902-8f28-f0662edb1836&fg_beat=369&original_ref=https%3A%2F%2Fplay.famobi.com%2Fdrift-dudes%2FA-O9JYH' })
 				break
 			default:
 				break
@@ -184,13 +184,36 @@ const MySettings = () => {
 		})
 	}
 
+
 	const onPressSaveProfile = (image: any) => {
 		// call api
 		dispatch(setIsFullScreenLoading(true))
+		const formData = new FormData();
+		formData.append('image', {
+			uri: image.uri,
+			type: image.type,
+			name: image.fileName || 'upload.jpg',
+		});
+		postUploadProfileImage(formData, (res: API_RESPONSE) => {
+			if (res?.data) {
+				let url = res?.data?.fileUrls
+				postImage(url)
+			}
+			else {
+				dispatch(setIsFullScreenLoading(false))
+				dispatch(setAlertData({
+					isShown: true,
+					type: 'error', label: res?.error
+				}))
+			}
+		})
+	}
+
+	const postImage = (imageUrl: any) => {
 		const params = {
 			"email": profileData?.email ?? '',
 			"fullName": profileData?.fullName ?? '',
-			"image": image?.base64
+			"image": imageUrl
 		}
 		postUpdateUserDetails({}, params, (res: API_RESPONSE) => {
 			dispatch(setIsFullScreenLoading(false))
@@ -211,7 +234,7 @@ const MySettings = () => {
 	}
 
 	const getImage = () => {
-		return profileData?.image ? 'data:image/png;base64,' + profileData?.image : ProfileImage
+		return profileData?.image ? profileData?.image : ProfileImage
 	}
 
 	const onPressEditProfileImageOnPress = () => { setOpenImagePicker(true) }

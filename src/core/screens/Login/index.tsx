@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
 import MainFrame from '@src/common/components/Mainframe'
 import CustomInput from '@src/common/components/Input'
@@ -13,8 +13,7 @@ import { setIsFullScreenLoading } from '@src/common/redux/reducers/loader'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import { validatePhoneNumber } from '@src/common/utils/inputValidation'
 import commonFontStyles from '@src/common/styles/commonFontStyles'
-import LottieView from 'lottie-react-native'
-import { PhoneGIF } from '@src/assets/lottie'
+import { phoneIconLoginImage } from '@src/assets/image'
 
 const Login = () => {
 	const dispatch = useDispatch()
@@ -82,7 +81,7 @@ const Login = () => {
 	return (
 		<MainFrame isNotifications={false} isHeader>
 			<View style={styles.container}>
-				<LottieView source={PhoneGIF} style={{ width: '100%', height: scaleHeightPX(150) }} autoPlay loop />
+				<Image source={{ uri: phoneIconLoginImage }} style={{ width: scaleWidthPX(150), height: scaleWidthPX(150) }} resizeMode='cover' />
 				<CustomInput labelColor={colors.white} label='Enter Phone Number' onChangeText={setMobileNumber} value={mobileNumber} isLeftChildren keyboardType='phone-pad' maxLength={10} placeholder='Enter Phone Number' />
 				<CustomButton customLabelStyles={commonFontStyles.fontBold} onPress={onPressSendOTP} title='Send OTP' />
 			</View>

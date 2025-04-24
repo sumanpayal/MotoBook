@@ -15,7 +15,6 @@ export const inputStyles = (colors: any) =>
 			alignItems: 'flex-start'
 		},
 		inputView: {
-			columnGap: scaleWidthPX(16),
 			paddingRight: scaleWidthPX(16),
 			flexDirection: 'row',
 			alignItems: 'center',
